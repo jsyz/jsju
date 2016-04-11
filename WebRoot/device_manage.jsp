@@ -1,4 +1,10 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -23,7 +29,7 @@
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>空白页</title>
+<title>设备管理</title>
 </head>
 <body>
 <div class="xmWraper ">
@@ -39,7 +45,6 @@
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl box-shadow pd-10  bk-gray radius" style="background-color: #FFF;">
-      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onClick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onClick="article_add('新增设备','sb-add.html')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增设备</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
       <div class="mt-20">
         <table class="table table-border table-bordered table-bg table-hover table-sort">
           <thead>
@@ -57,19 +62,26 @@
             </tr>
           </thead>
           <tbody>
-          <s:iterator value="projects" var="project" status="index">
+          <s:iterator value="devices" var="device" status="index">
             <tr class="text-c">
               <td ><input type="checkbox" value="" name="input" ></td>
-              <td>001</td>
-              <td><a onClick="xmsb_show('塔机','xmsbshow.html','10001')" href="javascript:;">塔式起重机</a></td>
-              <td>苏B9TⅡ654</td>
-              <td>2014-11-15</td>
-              <td>2014-11-30 </td>
-              <td>是</td>
-              <td>2016-8-30</td>
-              <td>2015-8-30</td>
+              <td><s:property value="#index.count"/></td>
+              <td><a onClick="xmsb_show('塔机','xmsbshow.html','10001')" href="javascript:;"><s:property value="name"/></a></td>
+              <td><s:property value="propertyCardNumber"/></td>
+              <td><s:property value="installTime"/></td>
+              <td><s:property value="checkTime"/> </td>
+              <td><s:if test = "isDealUsecard == 1">
+              		是
+              		</s:if>
+              		<s:else>
+              		否
+              		</s:else>
+              </td>
+              <td><s:property value="usecardExpireTime"/> </td>
+              <td><s:property value="removeTime"/></td>
               <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','sb-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr>
+             </s:iterator>
             <!-- 
             <tr class="text-c">
               <td ><input type="checkbox" value="" name="input"></td>

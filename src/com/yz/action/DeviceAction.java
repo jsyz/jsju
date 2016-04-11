@@ -1,0 +1,669 @@
+package com.yz.action;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.yz.model.Device;
+import com.yz.model.Usero;
+import com.yz.service.IDeviceService;
+import com.yz.service.IUseroService;
+import com.yz.util.ConvertUtil;
+import com.yz.vo.AjaxMsgVO;
+
+/**
+ * @author Administrator
+ * 
+ */
+@Component("deviceAction")
+@Scope("prototype")
+public class DeviceAction extends ActionSupport implements RequestAware,
+		SessionAware, ServletResponseAware, ServletRequestAware {
+
+	private static final long serialVersionUID = 1L;
+	Map<String, Object> request;
+	Map<String, Object> session;
+	private javax.servlet.http.HttpServletResponse response;
+	private javax.servlet.http.HttpServletRequest req;
+
+	// 分页显示
+	private String[] arg = new String[2];
+	private int page;
+	private final int size = 10;
+	private int pageCount;
+	private int totalCount;
+
+	// 条件
+	private int id;
+	private int con;
+	private String convalue;
+	private int status;// 按状态
+	private int pid;// 按设备id
+
+//	// 登陆
+//	private String username;
+//	private String password;
+
+	private String name;				//设备名称
+	private String propertyCardNumber;//产权证号
+	private String installTime;//安装告知时间
+	private String checkTime;//检测时间
+	private Integer isDealUsecard;//是否办理使用登记证
+	private String usecardExpireTime;//登记证到期时间
+	private String removeTime;//拆卸告知日期
+	// 批量删除
+	private String checkedIDs;
+
+	// service层对象
+	private IDeviceService deviceService;
+
+	// 单个对象
+	private Device device;
+
+	// list对象
+	private List<Device> devices;
+
+//	// 个人资料新旧密码
+//	private String password1;
+//	private String password2;
+
+	/**
+//	 * 用户登陆
+//	 * 
+//	 * @throws Exception
+//	 */
+//	public String login() throws Exception {
+//
+//		if (checkDatebase())// 检查数据库
+//		{
+//			Usero useroTest = new Usero();
+//			useroTest.setNumber("测试人员");
+//			useroTest.setUsername("test");
+//			useroTest.setPassword("test");
+//			useroTest.setUserLimit(1);
+//			useroService.add(useroTest);
+//			session.put("usero", useroTest);
+//			return "loginSucc";
+//		}
+//		if (username == null || username.equals("") || password == null
+//				|| password.equals("")) {
+//			String loginfail = "用户名或密码不能为空";
+//			request.put("loginFail", loginfail);
+//			return "adminLogin";
+//		}
+//		Usero useroLogin = useroService.useroLogin(username, password);
+//		if (useroLogin == null) {
+//			String loginfail = "用户名或密码输入有误";
+//			request.put("loginFail", loginfail);
+//			return "adminLogin";
+//		} else {
+//			// 设置登陆时间
+//			if (session.get("usero") == null) {
+//				//setLoginTime(useroLogin);
+//				session.put("usero", useroLogin);
+//			}
+//			// checkIP();//检查IP地址
+//			return "loginSucc";
+//		}
+//	}
+//
+//	public String welcome() {
+//		// 登陆验证
+//		Usero usero = (Usero) session.get("usero");
+//		if (usero == null) {
+//			return "opsessiongo";
+//		}
+//		Usero useroWelcome = useroService.loadById(usero.getId());
+//		// 欢迎界面
+//		return "welcome";
+//	}
+//
+//	// 设置登陆时间
+	/**
+	 * 
+	 * private void setLoginTime(Usero useroLogin) { // TODO Auto-generated
+	 * method stub if (useroLogin.getBeforeLoginTime() == "" ||
+	 * useroLogin.getBeforeLoginTime() == null) {
+	 * useroLogin.setBeforeLoginTime(DateTimeKit.getLocalTime()); } else {
+	 * useroLogin.setBeforeLoginTime(useroLogin .getCurrentLoginTime()); }
+	 * useroLogin.setCurrentLoginTime(DateTimeKit.getLocalTime());
+	 * useroService.update(useroLogin); }
+	 */
+//	private boolean checkDatebase() {
+//		// TODO Auto-generated method stub
+//		useros = useroService.getUseros();
+//		if (useros.size() == 0) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+
+	private void checkIP() {
+		// TODO Auto-generated method stub
+		// String ip = getIpAddr(req);
+	}
+
+	/*
+	 * 获取IP地址
+	 */
+	public String getIpAddr(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+
+	/**
+	 * 用户注销
+	 */
+//	public String logout() {
+//		session.clear();
+//		return "adminLogin";
+//	}
+
+	/**
+	 * 设备管理
+	 */
+	public String list() throws Exception {
+		// 判断会话是否失效
+		/*Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
+			return "opsessiongo";
+		}*/
+		if (convalue != null && !convalue.equals("")) {
+			convalue = URLDecoder.decode(convalue, "utf-8");
+		}
+		if (page < 1) {
+			page = 1;
+		}
+		// 总记录数
+		totalCount = deviceService.getTotalCount(con, convalue, device);
+		// 总页数
+		pageCount = deviceService.getPageCount(totalCount, size);
+		if (page > pageCount && pageCount != 0) {
+			page = pageCount;
+		}
+		// 所有当前页记录对象
+		devices = deviceService.queryList(con, convalue, device, page, size);
+		return "list";
+	}
+
+	/**
+	 * 跳转到添加页面
+	 * 
+	 * @return
+	 */
+	public String goToAdd() {
+
+		return "add";
+	}
+
+	/**
+	 * 添加设备
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+
+	public String add() throws Exception {
+		// 判断回话是否失效
+		Device Device = (Device) session.get("Device");
+		if (device == null) {
+			return "opsessiongo_child";
+		}
+		deviceService.add(device);
+
+		arg[0] = "deviceAction!list";
+		arg[1] = "设备管理";
+		return "success_child";
+	}
+
+	// 上传照片
+	private File picture;
+	private String pictureContentType;
+	private String pictureFileName;
+
+	// 文件上传
+	public void upload(String fileName, String imageName, File picture)
+			throws Exception {
+		File saved = new File(ServletActionContext.getServletContext()
+				.getRealPath(fileName), imageName);
+		InputStream ins = null;
+		OutputStream ous = null;
+		try {
+			saved.getParentFile().mkdirs();
+			ins = new FileInputStream(picture);
+			ous = new FileOutputStream(saved);
+			byte[] b = new byte[1024];
+			int len = 0;
+			while ((len = ins.read(b)) != -1) {
+				ous.write(b, 0, len);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ous != null)
+				ous.close();
+			if (ins != null)
+				ins.close();
+		}
+	}
+
+	/**
+	 * 删除一
+	 * 
+	 * @return
+	 */
+	public String delete() {
+		// 判断会话是否失效
+		Device device = (Device) session.get("device");
+		if (device == null) {
+			return "opsessiongo";
+		}
+
+		device = deviceService.loadById(id);
+
+		deviceService.delete(device);
+
+		deviceService.deleteById(id);
+		arg[0] = "deviceAction!list";
+		arg[1] = "用户管理";
+		return SUCCESS;
+	}
+
+	/**
+	 * 删除二(批量删除)
+	 * 
+	 * @return
+	 */
+	public String deleteDevices() {
+
+		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
+		for (int i = 0; i < ids.length; i++) {
+			device = deviceService.loadById(ids[i]);
+
+			deviceService.delete(device);
+		}
+		AjaxMsgVO msgVO = new AjaxMsgVO();
+		msgVO.setMessage("批量删除成功.");
+		JSONObject jsonObj = JSONObject.fromObject(msgVO);
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=UTF-8");
+			out = response.getWriter();
+			out.print(jsonObj.toString());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 跳转到修改页面
+	 * 
+	 * @return
+	 */
+	public String load() {
+
+		device = deviceService.loadById(id);
+		return "load";
+	}
+
+	/**
+	 * 修改
+	 * 
+	 * @return
+	 */
+	public String update() throws Exception {
+		// 判断会话是否失效
+		Device device = (Device) session.get("device");
+		if (device == null) {
+			return "opsessiongo_child";
+		}
+
+		deviceService.update(device);
+		arg[0] = "deviceAction!list";
+		arg[1] = "设备管理";
+		return "success_child";
+	}
+
+	/**
+	 * 跳转到修改秒页面
+	 * 
+	 * @return
+	 */
+//	public String loadPassword() throws Exception {
+//		Device device = (Device) session.get("device");
+//		if (device == null) {
+//			return "opsessiongo";
+//		}
+//		password = device.getPassword();
+//		return "password";
+//	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @return
+	 */
+//	public String updatePassword() throws Exception {
+//		// 判断会话是否失效
+//		Device device = (Device) session.get("device");
+//		if (device == null) {
+//			return "opsessiongo";
+//		}
+//		device.setPassword(password);
+//		deviceService.update(device);
+//		arg[0] = "deviceAction!list";
+//		arg[1] = "用户管理";
+//		return SUCCESS;
+//	}
+
+	/**
+	 * 查看信息
+	 * 
+	 * @return
+	 */
+	public String view() {
+		Device device = (Device) session.get("device");
+		if (device == null) {
+			return "opsessiongo";
+		}
+		device = deviceService.loadById(id);
+		return "view";
+	}
+
+	/**
+	 * 设备资料
+	 */
+	public String currentDevice() {
+		Device device = (Device) session.get("device");
+		if (device == null) {
+			return "opsessiongo";
+		}
+		device = deviceService.loadById(device.getId());
+		
+		return "currentDevice";
+	}
+
+	public String updateCurrentDevice() throws Exception {
+		Device device = (Device) session.get("device");
+		if (device == null) {
+			return "opsessiongo";
+		}
+		deviceService.update(device);
+		arg[0] = "deviceAction!currentDevice";
+		arg[1] = "设备资料";
+		return SUCCESS;
+	}
+
+	// get、set-------------------------------------------
+
+	// 获得HttpServletResponse对象
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public void setServletRequest(HttpServletRequest req) {
+		this.req = req;
+	}
+
+	public Map<String, Object> getRequest() {
+		return request;
+	}
+
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getPageCount() {
+		return pageCount;
+	}
+
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public int getCon() {
+		return con;
+	}
+
+	public void setCon(int con) {
+		this.con = con;
+	}
+
+	public String getConvalue() {
+		return convalue;
+	}
+
+	public void setConvalue(String convalue) {
+		this.convalue = convalue;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
+	public String[] getArg() {
+		return arg;
+	}
+
+	public void setArg(String[] arg) {
+		this.arg = arg;
+	}
+
+	public IDeviceService getDeviceService() {
+		return deviceService;
+	}
+
+	@Resource
+	public void setDeviceService(IDeviceService deviceService) {
+		this.deviceService = deviceService;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
+	public List<Device> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(List<Device> devices) {
+		this.devices = devices;
+	}
+
+
+	public javax.servlet.http.HttpServletResponse getResponse() {
+		return response;
+	}
+
+	public void setResponse(javax.servlet.http.HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public javax.servlet.http.HttpServletRequest getReq() {
+		return req;
+	}
+
+	public void setReq(javax.servlet.http.HttpServletRequest req) {
+		this.req = req;
+	}
+
+	public String getCheckedIDs() {
+		return checkedIDs;
+	}
+
+	public void setCheckedIDs(String checkedIDs) {
+		this.checkedIDs = checkedIDs;
+	}
+
+	public File getPicture() {
+		return picture;
+	}
+
+	public void setPicture(File picture) {
+		this.picture = picture;
+	}
+
+	public String getPictureContentType() {
+		return pictureContentType;
+	}
+
+	public void setPictureContentType(String pictureContentType) {
+		this.pictureContentType = pictureContentType;
+	}
+
+	public String getPictureFileName() {
+		return pictureFileName;
+	}
+
+	public void setPictureFileName(String pictureFileName) {
+		this.pictureFileName = pictureFileName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPropertyCardNumber() {
+		return propertyCardNumber;
+	}
+
+	public void setPropertyCardNumber(String propertyCardNumber) {
+		this.propertyCardNumber = propertyCardNumber;
+	}
+
+	public String getInstallTime() {
+		return installTime;
+	}
+
+	public void setInstallTime(String installTime) {
+		this.installTime = installTime;
+	}
+
+	public String getCheckTime() {
+		return checkTime;
+	}
+
+	public void setCheckTime(String checkTime) {
+		this.checkTime = checkTime;
+	}
+
+	public Integer getIsDealUsecard() {
+		return isDealUsecard;
+	}
+
+	public void setIsDealUsecard(Integer isDealUsecard) {
+		this.isDealUsecard = isDealUsecard;
+	}
+
+	public String getUsecardExpireTime() {
+		return usecardExpireTime;
+	}
+
+	public void setUsecardExpireTime(String usecardExpireTime) {
+		this.usecardExpireTime = usecardExpireTime;
+	}
+
+	public String getRemoveTime() {
+		return removeTime;
+	}
+
+	public void setRemoveTime(String removeTime) {
+		this.removeTime = removeTime;
+	}
+
+
+
+}
