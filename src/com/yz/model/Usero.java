@@ -2,7 +2,6 @@ package com.yz.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 /**
  * Usero entity.
@@ -24,6 +26,7 @@ public class Usero implements java.io.Serializable {
 
 	// Fields
 	private Integer id;//用户id
+	private Yxarea yxarea;//权限不为最强权限时,用户会存在所在管辖区域
 	private String username;//用户姓名
 	private String password;//用户密码
 	private String telphone;//联系电话
@@ -40,9 +43,10 @@ public class Usero implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Usero(String username, String password, String telphone,
+	public Usero(Yxarea yxarea,String username, String password, String telphone,
 			String realname, String number, Integer userLimit, String unitname,
 			List<Project> projects) {
+		this.yxarea = yxarea;
 		this.username = username;
 		this.password = password;
 		this.telphone = telphone;
@@ -136,5 +140,18 @@ public class Usero implements java.io.Serializable {
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "aid")
+	public Yxarea getYxarea() {
+		return yxarea;
+	}
+
+	
+	public void setYxarea(Yxarea yxarea) {
+		this.yxarea = yxarea;
+	}
+	
+	
 
 }

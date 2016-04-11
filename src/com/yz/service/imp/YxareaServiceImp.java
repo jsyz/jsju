@@ -111,6 +111,10 @@ public class YxareaServiceImp implements IYxareaService {
 		String[] paramNames=new String[]{"username","password"};
 		Object[] values=new Object[]{username,password};
 		return yxareaDao.queryByNamedParam(queryString,paramNames,values);
+	}
+	public void deleteAllAreas(List<Yxarea> areas) {
+		// TODO Auto-generated method stub
+		yxareaDao.deleteAllAreas(areas);
 	} 
 	
 }

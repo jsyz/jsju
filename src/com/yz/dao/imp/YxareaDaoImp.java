@@ -226,7 +226,12 @@ public class YxareaDaoImp implements IYxareaDao {
 	public Yxarea getYxareaById(Integer upYxareaid) {
 		// TODO Auto-generated method stub
 		return (Yxarea) this.hibernateTemplate.get(Yxarea.class, upYxareaid);
+		
 	}
-
+	public void deleteAllAreas(List<Yxarea> areas) {
+		// TODO Auto-generated method stub
+		this.hibernateTemplate.deleteAll(areas);
+	}
+	
 
 }

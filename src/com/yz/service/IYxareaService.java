@@ -37,4 +37,7 @@ public interface IYxareaService {
 
 	public abstract Yxarea getYxareaByYxareaname(String yxareaname);
 
+	//删除所有区域
+	public abstract void deleteAllAreas(List<Yxarea> areas);
+
 }
