@@ -39,9 +39,9 @@ import com.yz.vo.AjaxMsgVO;
  * @author lq
  * 
  */
-@Component("useroAction")
+@Component("yxareaAction")
 @Scope("prototype")
-public class UseroAction extends ActionSupport implements RequestAware,
+public class YxareaAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 
 	private static final long serialVersionUID = 1L;
@@ -64,162 +64,37 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	private int status;// 按状态
 	private int pid;// 按用户id
 
-	// 登陆
-	private String username;
-	private String password;
-
 	// 批量删除
 	private String checkedIDs;
 
 	// service层对象
-	private IUseroService useroService;
 	private IYxareaService yxareaService;
 
 	// 单个对象
 	private Usero usero;
+	private Yxarea yxarea;
 
 	// list对象
-	private List<Usero> useros;
-	private List<Yxarea> areas;
-
-	// 个人资料新旧密码
-	private String password1;
-	private String password2;
+	private List<Yxarea> yxareas;
 
 	/**
-	 * 用户登陆
-	 * 
-	 * @throws Exception
-	 */
-	public String login() throws Exception {
-
-		if (checkDatebase())// 检查数据库
-		{
-			useroService.add(InitParam.getUsero());
-			session.put("usero", InitParam.getUsero());
-			return "loginSucc";
-		}
-		if (username == null || username.equals("") || password == null
-				|| password.equals("")) {
-			String loginfail = "用户名或密码不能为空";
-			request.put("loginFail", loginfail);
-			return "adminLogin";
-		}
-		Usero useroLogin = useroService.useroLogin(username, password);
-		if (useroLogin == null) {
-			String loginfail = "用户名或密码输入有误";
-			request.put("loginFail", loginfail);
-			return "adminLogin";
-		} else {
-			// 设置登陆时间
-			if (session.get("usero") == null) {
-				//setLoginTime(useroLogin);
-				session.put("usero", useroLogin);
-			}
-			// checkIP();//检查IP地址
-			return "loginSucc";
-		}
-	}
-
-	public String welcome() {
-		// 登陆验证
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}
-		Usero useroWelcome = useroService.loadById(usero.getId());
-		// 欢迎界面
-		return "welcome";
-	}
-
-	// 设置登陆时间
-	
-	/**
-	 * 检查数据库,初始化默认登录及区域
-	 * @throws Exception 
-	 */
-	private boolean checkDatebase() throws Exception {
-		// TODO Auto-generated method stub
-		areas = yxareaService.getYxareas();
-		if(areas==null||areas.size()!=9)
-		{
-			yxareaService.deleteAllAreas(areas);
-			for (int i = 0; i < InitParam.AREAS.length; i++) {
-				Yxarea yxarea = new Yxarea();
-				yxarea.setAreaname(InitParam.AREAS[0]);
-				yxarea.setIndex(i+1);
-				yxareaService.add(yxarea);
-			}
-		}
-		
-		useros = useroService.getUseros();
-		if (useros==null||useros.size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private void checkIP() {
-		// TODO Auto-generated method stub
-		// String ip = getIpAddr(req);
-	}
-
-	/*
-	 * 获取IP地址
-	 */
-	public String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
-
-	/**
-	 * 用户注销
-	 */
-	public String logout() {
-		session.clear();
-		return "adminLogin";
-	}
-
-	/**
-	 * 用户管理
+	 * 区域管理
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		/*Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}*/
-		if (convalue != null && !convalue.equals("")) {
-			convalue = URLDecoder.decode(convalue, "utf-8");
-		}
-		if (page < 1) {
-			page = 1;
-		}
-		// 总记录数
-		totalCount = useroService.getTotalCount(con, convalue, usero);
-		// 总页数
-		pageCount = useroService.getPageCount(totalCount, size);
-		if (page > pageCount && pageCount != 0) {
-			page = pageCount;
-		}
-		// 所有当前页记录对象
-		useros = useroService.queryList(con, convalue, usero, page, size);
+		/*
+		 * Usero usero = (Usero) session.get("usero"); if (yxarea == null) {
+		 * return "opsessiongo"; }
+		 * 
+		 * if (convalue != null && !convalue.equals("")) { convalue =
+		 * URLDecoder.decode(convalue, "utf-8"); } if (page < 1) { page = 1; } //
+		 * 总记录数 totalCount = yxareaService.getTotalCount(con, convalue, usero); //
+		 * 总页数 pageCount = yxareaService.getPageCount(totalCount, size); if
+		 * (page > pageCount && pageCount != 0) { page = pageCount; } //
+		 * 所有当前页记录对象 yxareas = yxareaService.queryList(con, convalue, usero,
+		 * page, size);
+		 */
+		yxareas = yxareaService.getYxareas();
 		return "list";
 	}
 
@@ -229,7 +104,6 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-		areas = yxareaService.getYxareas();
 		return "add";
 	}
 
@@ -246,10 +120,10 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		if (usero == null) {
 			return "opsessiongo_child";
 		}
-		useroService.add(usero);
+		yxareaService.add(yxarea);
 
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
+		arg[0] = "yxareaAction!list";
+		arg[1] = "区域管理";
 		return "success_child";
 	}
 
@@ -296,13 +170,13 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 
-		usero = useroService.loadById(id);
+		yxarea = yxareaService.loadById(id);
 
-		useroService.delete(usero);
+		yxareaService.delete(yxarea);
 
-		useroService.deleteById(id);
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
+		yxareaService.deleteById(id);
+		arg[0] = "yxareaAction!list";
+		arg[1] = "区域管理";
 		return SUCCESS;
 	}
 
@@ -315,9 +189,9 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
-			usero = useroService.loadById(ids[i]);
+			yxarea = yxareaService.loadById(ids[i]);
 
-			useroService.delete(usero);
+			yxareaService.delete(yxarea);
 		}
 		AjaxMsgVO msgVO = new AjaxMsgVO();
 		msgVO.setMessage("批量删除成功.");
@@ -342,7 +216,7 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String load() {
 
-		usero = useroService.loadById(id);
+		yxarea = yxareaService.loadById(id);
 		return "load";
 	}
 
@@ -358,42 +232,10 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			return "opsessiongo_child";
 		}
 
-		useroService.update(usero);
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
+		yxareaService.update(yxarea);
+		arg[0] = "yxareaAction!list";
+		arg[1] = "区域管理";
 		return "success_child";
-	}
-
-	/**
-	 * 跳转到修改秒页面
-	 * 
-	 * @return
-	 */
-	public String loadPassword() throws Exception {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}
-		password = usero.getPassword();
-		return "password";
-	}
-
-	/**
-	 * 修改密码
-	 * 
-	 * @return
-	 */
-	public String updatePassword() throws Exception {
-		// 判断会话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}
-		usero.setPassword(password);
-		useroService.update(usero);
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
-		return SUCCESS;
 	}
 
 	/**
@@ -406,36 +248,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		if (usero == null) {
 			return "opsessiongo";
 		}
-		usero = useroService.loadById(id);
+		yxarea = yxareaService.loadById(id);
 		return "view";
-	}
-
-	/**
-	 * 个人资料
-	 */
-	public String currentUsero() {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}
-		usero = useroService.loadById(usero.getId());
-		;
-		return "currentUsero";
-	}
-
-	public String updateCurrentUsero() throws Exception {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}
-		if (password1 != null && !password1.replace(" ", "").equals("")
-				&& password2 != null && !password2.replace(" ", "").equals("")) {
-			usero.setPassword(password1);
-		}
-		useroService.update(usero);
-		arg[0] = "useroAction!currentUsero";
-		arg[1] = "个人资料";
-		return SUCCESS;
 	}
 
 	// get、set-------------------------------------------
@@ -537,47 +351,6 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		this.arg = arg;
 	}
 
-	public IUseroService getUseroService() {
-		return useroService;
-	}
-
-	@Resource
-	public void setUseroService(IUseroService useroService) {
-		this.useroService = useroService;
-	}
-
-	public Usero getUsero() {
-		return usero;
-	}
-
-	public void setUsero(Usero usero) {
-		this.usero = usero;
-	}
-
-	public List<Usero> getUseros() {
-		return useros;
-	}
-
-	public void setUseros(List<Usero> useros) {
-		this.useros = useros;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public javax.servlet.http.HttpServletResponse getResponse() {
 		return response;
 	}
@@ -626,22 +399,6 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		this.pictureFileName = pictureFileName;
 	}
 
-	public String getPassword1() {
-		return password1;
-	}
-
-	public void setPassword1(String password1) {
-		this.password1 = password1;
-	}
-
-	public String getPassword2() {
-		return password2;
-	}
-
-	public void setPassword2(String password2) {
-		this.password2 = password2;
-	}
-
 	public IYxareaService getYxareaService() {
 		return yxareaService;
 	}
@@ -651,14 +408,28 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		this.yxareaService = yxareaService;
 	}
 
-	public List<Yxarea> getAreas() {
-		return areas;
+	public Usero getUsero() {
+		return usero;
 	}
 
-	public void setAreas(List<Yxarea> areas) {
-		this.areas = areas;
+	public void setUsero(Usero usero) {
+		this.usero = usero;
 	}
-	
-	
-	
+
+	public Yxarea getYxarea() {
+		return yxarea;
+	}
+
+	public void setYxarea(Yxarea yxarea) {
+		this.yxarea = yxarea;
+	}
+
+	public List<Yxarea> getYxareas() {
+		return yxareas;
+	}
+
+	public void setYxareas(List<Yxarea> yxareas) {
+		this.yxareas = yxareas;
+	}
+
 }
