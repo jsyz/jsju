@@ -66,4 +66,6 @@ public interface IYxareaDao {
 	//根据hql批量修改
 	public abstract int updateYxareaByhql(String queryString, Object[] p);
 
+	public abstract void deleteAllAreas(List<Yxarea> areas);
+
 }

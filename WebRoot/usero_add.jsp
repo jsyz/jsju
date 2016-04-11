@@ -60,17 +60,17 @@
 						<span class="c-red">*</span>真实姓名：
 					</label>
 					<span class="form-label col-3"><span
-						class="formControls col-10"> <input type="text"
-								class="input-text" value="" placeholder="" id="input2"
-								name="input2" /> </span> </span>
+						class="formControls col-10"> <s:textfield id="realname"
+								cssClass="input-text radius size-M" cssStyle="width:200px;"
+								name="usero.realname"/>  </span>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-2">
 						<span class="th2">所属片区</span>：
 					</label>
 					<td>
-						<s:select list="#{0:'A',1:'B',2:'B'}" cssClass="input-text"
-							name="person.sex" listKey="key" listValue="value"
+						<s:select list="areas" cssClass="input-text"
+							name="usero.area.id" listKey="key" listValue="value"
 							cssStyle="width:180px"></s:select>
 					</td>
 				</div>

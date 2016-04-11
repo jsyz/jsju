@@ -2,7 +2,6 @@ package com.yz.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +26,7 @@ public class Yxarea implements java.io.Serializable {
 	private String areaname;//片区名称
 	private Integer index;//排列序号
 	private List<Project> projects = new ArrayList<Project>(0);
-
+	private List<Usero> useros = new ArrayList<Usero>(0);
 	// Constructors
 
 	/** default constructor */
@@ -79,5 +78,16 @@ public class Yxarea implements java.io.Serializable {
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "yxarea")
+	public List<Usero> getUseros() {
+		return useros;
+	}
+
+	public void setUseros(List<Usero> useros) {
+		this.useros = useros;
+	}
+	
+	
 
 }
