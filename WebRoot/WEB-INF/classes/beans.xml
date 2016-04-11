@@ -5,7 +5,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:cxf="http://cxf.apache.org/core"
-	xmlns:jaxws="http://cxf.apache.org/jaxws" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -32,7 +32,7 @@
 			<value>classpath:jdbc.properties</value>
 		</property>
 	</bean>
-	
+
 	<bean id="dataSource" destroy-method="close"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
@@ -41,28 +41,34 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<property name="maxWait" value="${jdbc.maxWait}" />
-        <property name="initialSize" value="${jdbc.initialSize}" />
-        <property name="maxActive" value="${jdbc.maxActive}" />
-        <property name="maxIdle" value="${jdbc.maxIdle}" />
-		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/> 
-		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="minEvictableIdleTimeMillis"
+			value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery"
+			value="${jdbc.validationQuery}" />
 		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
-		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
-		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
-		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
-        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
-		
+		<property name="timeBetweenEvictionRunsMillis"
+			value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun"
+			value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="removeAbandoned"
+			value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout"
+			value="${jdbc.removeAbandonedTimeout}" />
+
 	</bean>
-	
-	
+
+
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		 <property name="packagesToScan">
+		<property name="packagesToScan">
 			<list>
 				<value>com.yz.model</value>
-				
+
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -75,8 +81,9 @@
 			</props>
 		</property>
 	</bean>
-	
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
@@ -95,17 +102,32 @@
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="exists" read-only="true" />
-			<tx:method name="add*" propagation="REQUIRED"/>
-			<tx:method name="update*" propagation="REQUIRED"/>
-			<tx:method name="delete*" propagation="REQUIRED"/>
-			<tx:method name="process*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="process*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
-	
-	 	<!-- webservice -->
-	<import resource="classpath:META-INF/cxf/cxf.xml"/>
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
-	
-	
+
+	<!-- webservice -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+
+	<!-- 这里的地址很重要，客户端需要通过这个地址来访问WebService
+		<jaxrs:server id="restServiceContainer" address="/rest">
+		<jaxrs:serviceBeans>
+		<ref bean="userservice"/>
+		<ref bean="sysconfservice"/>
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+		<entry key="json" value="application/json" />
+		<entry key="xml" value="application/xml" />
+		</jaxrs:extensionMappings>
+		<jaxrs:languageMappings>
+		<entry key="en" value="en-gb"/>  
+		</jaxrs:languageMappings>
+		</jaxrs:server>
+	-->
 </beans>

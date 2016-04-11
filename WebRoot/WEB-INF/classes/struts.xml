@@ -12,13 +12,13 @@
 	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
 
 
-	<package name="userRole" extends="struts-default">
+	<package name="usero" extends="struts-default">
 		<global-results>
 			<result name="adminLogin">/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="toolkitAction" class="toolkitAction"></action>
-		<action name="userRoleAction" class="userRoleAction">
+		<action name="useroAction" class="useroAction">
 			<result name="loginSucc">/index.jsp</result>
 
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
@@ -30,13 +30,11 @@
 			<result name="fail">/op_failure.jsp</result>
 			<result name="operror">/op_error.jsp</result>
 
-			<result name="list">/userRole_manage.jsp</result>
-			<result name="add">/userRole_add.jsp</result>
-			<result name="load">/userRole_update.jsp</result>
-			<result name="view">/userRole_view.jsp</result>
-			<result name="password">
-				/userRolepassword_update.jsp
-			</result>
+			<result name="list">/usero_manage.jsp</result>
+			<result name="add">/usero_add.jsp</result>
+			<result name="load">/usero_update.jsp</result>
+			<result name="view">/usero_view.jsp</result>
+			<result name="password">/useropassword_update.jsp</result>
 
 			<result name="currentUserRole">/currentUserRole.jsp</result>
 
@@ -52,8 +50,8 @@
 	</package>
 
 
-	<package name="userRole_json" extends="json-default">
-		<action name="deleteUserRoles" class="userRoleAction"
+	<package name="usero_json" extends="json-default">
+		<action name="deleteUserRoles" class="useroAction"
 			method="deleteUserRoles" />
 	</package>
 

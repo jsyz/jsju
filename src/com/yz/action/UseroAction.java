@@ -26,19 +26,19 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.UserRole;
-import com.yz.service.IUserRoleService;
+import com.yz.model.Usero;
+import com.yz.service.IUseroService;
 import com.yz.util.ConvertUtil;
 import com.yz.util.DateTimeKit;
 import com.yz.vo.AjaxMsgVO;
+
 /**
- * 这是示例action 
  * @author Administrator
- *
+ * 
  */
-@Component("userRoleAction")
+@Component("useroAction")
 @Scope("prototype")
-public class UserRoleAction extends ActionSupport implements RequestAware,
+public class UseroAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 
 	private static final long serialVersionUID = 1L;
@@ -69,13 +69,13 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	private String checkedIDs;
 
 	// service层对象
-	private IUserRoleService userRoleService;
+	private IUseroService useroService;
 
 	// 单个对象
-	private UserRole userRole;
+	private Usero usero;
 
 	// list对象
-	private List<UserRole> userRoles;
+	private List<Usero> useros;
 
 	// 个人资料新旧密码
 	private String password1;
@@ -90,13 +90,13 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 
 		if (checkDatebase())// 检查数据库
 		{
-			UserRole userRoleTest = new UserRole();
-			userRoleTest.setNumber("测试人员");
-			userRoleTest.setUsername("test");
-			userRoleTest.setPassword("test");
-			userRoleTest.setUserLimit(1);
-			userRoleService.add(userRoleTest);
-			session.put("userRoleo", userRoleTest);
+			Usero useroTest = new Usero();
+			useroTest.setNumber("测试人员");
+			useroTest.setUsername("test");
+			useroTest.setPassword("test");
+			useroTest.setUserLimit(1);
+			useroService.add(useroTest);
+			session.put("useroo", useroTest);
 			return "loginSucc";
 		}
 		if (username == null || username.equals("") || password == null
@@ -105,17 +105,16 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "adminLogin";
 		}
-		UserRole userRoleLogin = userRoleService.userRolelogin(username,
-				password);
-		if (userRoleLogin == null) {
+		Usero useroLogin = useroService.useroLogin(username, password);
+		if (useroLogin == null) {
 			String loginfail = "用户名或密码输入有误";
 			request.put("loginFail", loginfail);
 			return "adminLogin";
 		} else {
 			// 设置登陆时间
-			if (session.get("userRoleo") == null) {
-				setLoginTime(userRoleLogin);
-				session.put("userRoleo", userRoleLogin);
+			if (session.get("useroo") == null) {
+				//setLoginTime(useroLogin);
+				session.put("useroo", useroLogin);
 			}
 			// checkIP();//检查IP地址
 			return "loginSucc";
@@ -124,33 +123,30 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 
 	public String welcome() {
 		// 登陆验证
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
-		UserRole userRoleWelcome = userRoleService.loadById(userRoleo.getId());
+		Usero useroWelcome = useroService.loadById(useroo.getId());
 		// 欢迎界面
 		return "welcome";
 	}
 
 	// 设置登陆时间
-	private void setLoginTime(UserRole userRoleLogin) {
-		// TODO Auto-generated method stub
-		if (userRoleLogin.getBeforeLoginTime() == ""
-				|| userRoleLogin.getBeforeLoginTime() == null) {
-			userRoleLogin.setBeforeLoginTime(DateTimeKit.getLocalTime());
-		} else {
-			userRoleLogin.setBeforeLoginTime(userRoleLogin
-					.getCurrentLoginTime());
-		}
-		userRoleLogin.setCurrentLoginTime(DateTimeKit.getLocalTime());
-		userRoleService.update(userRoleLogin);
-	}
-
+	/**
+	 * 
+	 * private void setLoginTime(Usero useroLogin) { // TODO Auto-generated
+	 * method stub if (useroLogin.getBeforeLoginTime() == "" ||
+	 * useroLogin.getBeforeLoginTime() == null) {
+	 * useroLogin.setBeforeLoginTime(DateTimeKit.getLocalTime()); } else {
+	 * useroLogin.setBeforeLoginTime(useroLogin .getCurrentLoginTime()); }
+	 * useroLogin.setCurrentLoginTime(DateTimeKit.getLocalTime());
+	 * useroService.update(useroLogin); }
+	 */
 	private boolean checkDatebase() {
 		// TODO Auto-generated method stub
-		userRoles = userRoleService.getUserRoles();
-		if (userRoles.size() == 0) {
+		useros = useroService.getUseros();
+		if (useros.size() == 0) {
 			return true;
 		} else {
 			return false;
@@ -198,8 +194,8 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
 		if (convalue != null && !convalue.equals("")) {
@@ -209,15 +205,14 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		// 总记录数
-		totalCount = userRoleService.getTotalCount(con, convalue, userRoleo);
+		totalCount = useroService.getTotalCount(con, convalue, useroo);
 		// 总页数
-		pageCount = userRoleService.getPageCount(totalCount, size);
+		pageCount = useroService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		userRoles = userRoleService.queryList(con, convalue, userRoleo, page,
-				size);
+		useros = useroService.queryList(con, convalue, useroo, page, size);
 		return "list";
 	}
 
@@ -240,20 +235,13 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断回话是否失效
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo_child";
 		}
-		if (picture != null && pictureFileName != null
-				&& !pictureFileName.replace(" ", "").equals("")) {
-			String imageName = DateTimeKit.getDateRandom()
-					+ pictureFileName.substring(pictureFileName.indexOf("."));
-			this.upload("/userRole", imageName, picture);
-			userRole.setPhoto("userRole" + "/" + imageName);
-		}
-		userRoleService.add(userRole);
+		useroService.add(usero);
 
-		arg[0] = "userRoleAction!list";
+		arg[0] = "useroAction!list";
 		arg[1] = "用户管理";
 		return "success_child";
 	}
@@ -296,22 +284,17 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		UserRole userRoleo = (UserRole) session.get("userRole");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("usero");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
 
-		userRole = userRoleService.loadById(id);
-		// 删除照片
-		File photofile = new File(ServletActionContext.getServletContext()
-				.getRealPath("/")
-				+ userRole.getPhoto());
-		photofile.delete();
+		usero = useroService.loadById(id);
 
-		userRoleService.delete(userRole);
+		useroService.delete(usero);
 
-		userRoleService.deleteById(id);
-		arg[0] = "userRoleAction!list";
+		useroService.deleteById(id);
+		arg[0] = "useroAction!list";
 		arg[1] = "用户管理";
 		return SUCCESS;
 	}
@@ -321,18 +304,13 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 * 
 	 * @return
 	 */
-	public String deleteUserRoles() {
+	public String deleteUseros() {
 
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
-			userRole = userRoleService.loadById(ids[i]);
-			// 删除照片
-			File photofile = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ userRole.getPhoto());
-			photofile.delete();
+			usero = useroService.loadById(ids[i]);
 
-			userRoleService.delete(userRole);
+			useroService.delete(usero);
 		}
 		AjaxMsgVO msgVO = new AjaxMsgVO();
 		msgVO.setMessage("批量删除成功.");
@@ -357,7 +335,7 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 */
 	public String load() {
 
-		userRole = userRoleService.loadById(id);
+		usero = useroService.loadById(id);
 		return "load";
 	}
 
@@ -368,24 +346,13 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo_child";
 		}
-		if (picture != null && pictureFileName != null
-				&& !pictureFileName.replace(" ", "").equals("")) {
-			String imageName = DateTimeKit.getDateRandom()
-					+ pictureFileName.substring(pictureFileName.indexOf("."));
-			this.upload("/userRole", imageName, picture);
-			File photofile = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ userRole.getPhoto());
-			photofile.delete();
-			userRole.setPhoto("userRole" + "/" + imageName);
-		}
 
-		userRoleService.update(userRole);
-		arg[0] = "userRoleAction!list";
+		useroService.update(usero);
+		arg[0] = "useroAction!list";
 		arg[1] = "用户管理";
 		return "success_child";
 	}
@@ -396,11 +363,11 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String loadPassword() throws Exception {
-		UserRole userRoleo = (UserRole) session.get("userRole");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("usero");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
-		password = userRoleo.getPassword();
+		password = useroo.getPassword();
 		return "password";
 	}
 
@@ -411,13 +378,13 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 */
 	public String updatePassword() throws Exception {
 		// 判断会话是否失效
-		UserRole userRoleo = (UserRole) session.get("userRole");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("usero");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
-		userRoleo.setPassword(password);
-		userRoleService.update(userRoleo);
-		arg[0] = "userRoleAction!list";
+		useroo.setPassword(password);
+		useroService.update(useroo);
+		arg[0] = "useroAction!list";
 		arg[1] = "用户管理";
 		return SUCCESS;
 	}
@@ -428,49 +395,38 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
-		userRole = userRoleService.loadById(id);
+		usero = useroService.loadById(id);
 		return "view";
 	}
 
 	/**
 	 * 个人资料
 	 */
-	public String currentUserRole() {
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+	public String currentUsero() {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo";
 		}
-		userRole = userRoleService.loadById(userRoleo.getId());
+		usero = useroService.loadById(useroo.getId());
 		;
-		return "currentUserRole";
+		return "currentUsero";
 	}
 
-	public String updateCurrentUserRole() throws Exception {
-		UserRole userRoleo = (UserRole) session.get("userRoleo");
-		if (userRoleo == null) {
+	public String updateCurrentUsero() throws Exception {
+		Usero useroo = (Usero) session.get("useroo");
+		if (useroo == null) {
 			return "opsessiongo";
-		}
-		if (picture != null && pictureFileName != null
-				&& !pictureFileName.replace(" ", "").equals("")) {
-			String imageName = DateTimeKit.getDateRandom()
-					+ pictureFileName.substring(pictureFileName.indexOf("."));
-			this.upload("/userRole", imageName, picture);
-			File photofile = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ userRole.getPhoto());
-			photofile.delete();
-			userRole.setPhoto("userRole" + "/" + imageName);
 		}
 		if (password1 != null && !password1.replace(" ", "").equals("")
 				&& password2 != null && !password2.replace(" ", "").equals("")) {
-			userRole.setPassword(password1);
+			usero.setPassword(password1);
 		}
-		userRoleService.update(userRole);
-		arg[0] = "userRoleAction!currentUserRole";
+		useroService.update(usero);
+		arg[0] = "useroAction!currentUsero";
 		arg[1] = "个人资料";
 		return SUCCESS;
 	}
@@ -574,29 +530,29 @@ public class UserRoleAction extends ActionSupport implements RequestAware,
 		this.arg = arg;
 	}
 
-	public IUserRoleService getUserRoleService() {
-		return userRoleService;
+	public IUseroService getUseroService() {
+		return useroService;
 	}
 
 	@Resource
-	public void setUserRoleService(IUserRoleService userRoleService) {
-		this.userRoleService = userRoleService;
+	public void setUseroService(IUseroService useroService) {
+		this.useroService = useroService;
 	}
 
-	public UserRole getUserRole() {
-		return userRole;
+	public Usero getUsero() {
+		return usero;
 	}
 
-	public void setUserRole(UserRole userRole) {
-		this.userRole = userRole;
+	public void setUsero(Usero usero) {
+		this.usero = usero;
 	}
 
-	public List<UserRole> getUserRoles() {
-		return userRoles;
+	public List<Usero> getUseros() {
+		return useros;
 	}
 
-	public void setUserRoles(List<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setUseros(List<Usero> useros) {
+		this.useros = useros;
 	}
 
 	public String getUsername() {
