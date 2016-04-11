@@ -12,6 +12,17 @@ function childPage(title,url){
 	});
 }
 
+
+function addPage2(title,url,w,h){
+	var index = layer.open({
+		type: 2,
+		area: ['800px', '500px'],
+		title: title,
+		content: url
+	});
+	
+}
+
 function addPage(title,url,w,h){
 	layer.open({
     type: 2,

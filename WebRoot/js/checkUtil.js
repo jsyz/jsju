@@ -15,14 +15,13 @@ function checkUnit()
 	}
 }
 
-//userRole_*.jsp
-function checkUserRole()
+//usero_*.jsp
+function checkUsero()
 {
 	var username = $("#username").val();
 	var password = $("#password").val();
-	var userRoleRealname = $("#userRoleRealname").val();
-	var userRoleNumber = $("#userRoleNumber").val();
-	var userRoleTelphone = $("#userRoleTelphone").val();
+	var userRoleRealname = $("#useroRealname").val();
+	var userRoleTelphone = $("#useroTelphone").val();
 	
 	if(username==''||username==null)
 	{

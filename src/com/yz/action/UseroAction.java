@@ -96,7 +96,7 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			useroTest.setPassword("test");
 			useroTest.setUserLimit(1);
 			useroService.add(useroTest);
-			session.put("useroo", useroTest);
+			session.put("usero", useroTest);
 			return "loginSucc";
 		}
 		if (username == null || username.equals("") || password == null
@@ -112,9 +112,9 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			return "adminLogin";
 		} else {
 			// 设置登陆时间
-			if (session.get("useroo") == null) {
+			if (session.get("usero") == null) {
 				//setLoginTime(useroLogin);
-				session.put("useroo", useroLogin);
+				session.put("usero", useroLogin);
 			}
 			// checkIP();//检查IP地址
 			return "loginSucc";
@@ -123,11 +123,11 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 	public String welcome() {
 		// 登陆验证
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
-		Usero useroWelcome = useroService.loadById(useroo.getId());
+		Usero useroWelcome = useroService.loadById(usero.getId());
 		// 欢迎界面
 		return "welcome";
 	}
@@ -194,10 +194,10 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		/*Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
-		}
+		}*/
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
@@ -205,14 +205,14 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		// 总记录数
-		totalCount = useroService.getTotalCount(con, convalue, useroo);
+		totalCount = useroService.getTotalCount(con, convalue, usero);
 		// 总页数
 		pageCount = useroService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		useros = useroService.queryList(con, convalue, useroo, page, size);
+		useros = useroService.queryList(con, convalue, usero, page, size);
 		return "list";
 	}
 
@@ -235,8 +235,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断回话是否失效
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo_child";
 		}
 		useroService.add(usero);
@@ -284,8 +284,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		Usero useroo = (Usero) session.get("usero");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
 
@@ -346,8 +346,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo_child";
 		}
 
@@ -363,11 +363,11 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String loadPassword() throws Exception {
-		Usero useroo = (Usero) session.get("usero");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
-		password = useroo.getPassword();
+		password = usero.getPassword();
 		return "password";
 	}
 
@@ -378,12 +378,12 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String updatePassword() throws Exception {
 		// 判断会话是否失效
-		Usero useroo = (Usero) session.get("usero");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
-		useroo.setPassword(password);
-		useroService.update(useroo);
+		usero.setPassword(password);
+		useroService.update(usero);
 		arg[0] = "useroAction!list";
 		arg[1] = "用户管理";
 		return SUCCESS;
@@ -395,8 +395,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
 		usero = useroService.loadById(id);
@@ -407,18 +407,18 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * 个人资料
 	 */
 	public String currentUsero() {
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
-		usero = useroService.loadById(useroo.getId());
+		usero = useroService.loadById(usero.getId());
 		;
 		return "currentUsero";
 	}
 
 	public String updateCurrentUsero() throws Exception {
-		Usero useroo = (Usero) session.get("useroo");
-		if (useroo == null) {
+		Usero usero = (Usero) session.get("usero");
+		if (usero == null) {
 			return "opsessiongo";
 		}
 		if (password1 != null && !password1.replace(" ", "").equals("")
