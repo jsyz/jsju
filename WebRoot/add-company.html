@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新增单位</title>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+
+</head>
+
+<body>
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-article-add">
+	  <div class="row cl">
+		<label class="form-label col-2"><span class="c-red">*</span>单位名称：</label>
+			<span class="form-label col-3"><span class="formControls col-10">
+            <input type="text" class="input-text" value="" placeholder="" id="input" name="input"/>
+        </span></span></div>
+	  <div class="row cl">
+	    <label class="form-label col-2"><span class="c-red">*</span>项目负责人：</label>
+	    <span class="form-label col-3"><span class="formControls col-10">
+	      <input type="text" class="input-text" value="" placeholder="" id="input2" name="input2" />
+	      </span></span></div>
+	  <div class="row cl">
+	    <label class="form-label col-2"><span class="th2">是否办理进市登记核验</span>：</label>
+	    <td><div class="radio-box">
+            <input type="radio" id="r-3" name="r2" datatype="*" checked="true" />
+            <label for="r-3">是</label>
+          </div>
+          <div class="radio-box">
+            <input type="radio" id="r-4" name="r" />
+            <label for="r-4">否</label>
+          </div>
+	  </td></div>
+      <div class="row cl">
+	    <label class="form-label col-2">联系电话：</label>
+	    <span class="form-label col-3"><span class="formControls col-10">
+	      <input type="text" class="input-text" value="" placeholder="" id="input3" name="input3" />
+      </span></span></div>
+<div class="row cl">
+			<div class="col-10 col-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"> 保存并提交</button>
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>	</form>
+</div>
+</body>
+</html>

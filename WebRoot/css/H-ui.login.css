@@ -9,26 +9,32 @@ Created & Modified by guojunhui.
 body{font-size:14px}
 
 .header,.footer{ position:absolute; left:0; right:0; width:100%; z-index:99}
-.header{
-	top: 0;
-	height: 60px;
-	background-color: #043963;
-	background-repeat: no-repeat;
-	background-position: 0 center;
-}
+.header{top:0; height:60px; background:#426374 url(../images/logo.png) no-repeat 0 center}
 
-.loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../images/admin-login-bg.jpg) no-repeat center}
-.loginBox{
+.loginWraper{
 	position: absolute;
-	width: 617px;
-	height: 330px;
-	left: 50%;
-	top: 50%;
-	margin-left: -309px;
-	margin-top: -184px;
-	padding-top: 50px;
+	width: 100%;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	background-color: #3283AC;
+	background-image: url(../images/bgmain.png);
 	background-repeat: no-repeat;
-	background-image: url(../images/admin-loginform-bg.png);
+	background-position: center bottom;
+}
+.loginBox{
+	/* [disabled]position: absolute; */
+	width: 780px;
+	height: 440px;
+	background: url(../images/admin-loginform-bg.png) no-repeat;
+	left: 20%;
+	top: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150px;
+	margin-bottom: auto;
 }
 @media (max-width:617px) {
 	.loginbox{ width:100%; position:static; margin-top:0; margin-left:0;}
@@ -54,8 +60,57 @@ body{font-size:14px}
 	text-align: center;
 	color: #fff;
 	font-size: 12px;
-	background-color: #043963
+	/* [disabled]background-color:#426374; */
 }
 
 #ie6-warning{background:#fff url(/jscss/demoimg/201006/warning.gif) no-repeat 3px center;position:absolute;top:0;left:0;font-size:12px;color:#333;width:97%;padding: 2px 15px 2px 23px;text-align:left}
 #ie6-warning a {text-decoration:none}
+
+ #login_Container {
+                line-height: 50px;
+            }
+
+#login_Container div {
+                    display: inline-block;
+                    height: 50px;
+                }
+
+                #login_Container .login_input {
+                    width: 159px;
+                    height: 33px;
+                    border: 0;
+                    padding-left: 37px;
+                }
+
+                    #login_Container .login_input .mini-textbox-border {
+	border: 0;
+	height: 33px;
+	line-height: 31px;
+	background-color: transparent;
+                    }
+
+                    #login_Container .login_input .mini-textbox-input {
+                        height: 33px;
+                        line-height: 31px;
+                        background-color: transparent;
+                    }
+
+                    #login_Container .login_input .mini-errorIcon {
+                        margin-top: 7px;
+                    }
+
+                #login_Container .user {
+	background-image: url(../images/user.jpg);
+                }
+
+                #login_Container .pwd {
+	background-image: url(../images/pwd.jpg);
+                }
+
+                #login_Container .login_button {
+	width: 52px;
+	height: 30px;
+	border: 0;
+	background-image: url(../images/button.jpg);
+                }
+        
