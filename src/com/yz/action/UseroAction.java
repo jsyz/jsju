@@ -27,7 +27,9 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Usero;
+import com.yz.model.Yxarea;
 import com.yz.service.IUseroService;
+import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.util.DateTimeKit;
 import com.yz.vo.AjaxMsgVO;
@@ -70,12 +72,14 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 	// service层对象
 	private IUseroService useroService;
+	private IYxareaService yxareaService;
 
 	// 单个对象
 	private Usero usero;
 
 	// list对象
 	private List<Usero> useros;
+	private List<Yxarea> areas;
 
 	// 个人资料新旧密码
 	private String password1;
@@ -90,13 +94,13 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 		if (checkDatebase())// 检查数据库
 		{
-			Usero useroTest = new Usero();
-			useroTest.setNumber("测试人员");
-			useroTest.setUsername("test");
-			useroTest.setPassword("test");
-			useroTest.setUserLimit(1);
-			useroService.add(useroTest);
-			session.put("usero", useroTest);
+			Usero adminUsero = new Usero();
+			adminUsero.setRealname("管理员");
+			adminUsero.setUsername("admin");
+			adminUsero.setPassword("admin");
+			adminUsero.setUserLimit(0);
+			useroService.add(adminUsero);
+			session.put("usero", adminUsero);
 			return "loginSucc";
 		}
 		if (username == null || username.equals("") || password == null
@@ -145,8 +149,14 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	private boolean checkDatebase() {
 		// TODO Auto-generated method stub
+		areas = yxareaService.getYxareas();
+		if(areas==null||areas.size()!=9)
+		{
+			yxareaService.deleteAllAreas(areas);
+		}
+		
 		useros = useroService.getUseros();
-		if (useros.size() == 0) {
+		if (useros==null||useros.size() == 0) {
 			return true;
 		} else {
 			return false;
@@ -222,7 +232,7 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-
+		areas = yxareaService.getYxareas();
 		return "add";
 	}
 
@@ -635,4 +645,23 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		this.password2 = password2;
 	}
 
+	public IYxareaService getYxareaService() {
+		return yxareaService;
+	}
+
+	@Resource
+	public void setYxareaService(IYxareaService yxareaService) {
+		this.yxareaService = yxareaService;
+	}
+
+	public List<Yxarea> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Yxarea> areas) {
+		this.areas = areas;
+	}
+	
+	
+	
 }
