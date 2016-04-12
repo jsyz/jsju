@@ -41,23 +41,40 @@
 		<div class="pd-20">
 
 			<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+				<nav>
+				<a class="btn btn-success radius r mr-5 f-r"
+					style="line-height: 1.6em; margin-top: 3px"
+					href="index.jsp" target="_top" title="返回主菜单">返回主菜单 </a>
+				
+				<a class="btn btn-success radius r mr-5 f-r"
+					style="line-height: 1.6em; margin-top: 3px"
+					href="javascript:location.replace(location.href);" title="刷新当前页"><i
+					class="Hui-iconfont">&#xe68f;</i> </a>
+					<a
+					class="btn btn-success radius r mr-5 f-r"
+					style="line-height: 1.6em; margin-top: 3px"
+					href="javascript:history.go(-1);" title="返回上一页"><i
+					class="Hui-iconfont">&#xe66b;</i> </a>
+					
+				</nav>
 				<p>
 					<i class="Hui-iconfont">&#xe623;</i>人员权限
 				</p>
+
+
 			</div>
 			<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
 				<div class="text-c">
-					<form name="useroListForm" method="post"
-						action="useroAction!list" target="_self">
+					<form name="useroListForm" method="post" action="useroAction!list"
+						target="_self">
 						<s:hidden name="type"></s:hidden>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0"
 							style="line-height: 35px;">
 							<tr height="35">
 								<td width="21%" align="right" style="padding-right: 50px;">
-									<s:select
-										list="#{0:'选择类型',1:'人员姓名',2:'人员编号',3:'身份证号',4:'录入人员姓名'}"
-										cssClass="input-text" name="con" listKey="key"
-										listValue="value" cssStyle="width:180px"></s:select>
+									<s:select list="#{0:'选择类型',1:'用户姓名'}" cssClass="input-text"
+										name="con" listKey="key" listValue="value"
+										cssStyle="width:180px"></s:select>
 								</td>
 								<td width="310px;">
 									<s:textfield name="convalue" id="convalue"
@@ -84,12 +101,12 @@
 					style="background-color: #FFF;">
 					<div class="cl pd-5 bg-1 bk-gray mb-20">
 						<span class="l"><a href="javascript:;"
-							onclick="deleteAllCheckedPersons();"
-							class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-								批量删除</a> <a class="btn btn-primary radius"
+							onclick="deleteAllCheckedUseros();" class="btn btn-danger radius"><i
+								class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a
+							class="btn btn-primary radius"
 							onclick="addPage2('新增用户','useroAction!goToAdd')"
-							href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-								新增用户 </a> </span>
+							href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增用户
+						</a> </span>
 						<span class="r">共有数据：<strong><s:property
 									value="totalCount" /> </strong> 条</span>
 					</div>
@@ -114,7 +131,7 @@
 										权限
 									</th>
 									<th width="70">
-										所属部门
+										职务
 									</th>
 									<th width="103">
 										操作
@@ -125,20 +142,30 @@
 								<s:iterator value="useros" var="usero" status="status">
 									<tr class="text-c va-m">
 										<td>
-											<input name="indexID" class="indexID" type="checkbox"
-												value="<s:property value="id"/>">
+											<s:if test="session.userSession.id!=id">
+												<input name="indexID" class="indexID" type="checkbox"
+													value="<s:property value="id"/>">
+											</s:if>
 										</td>
 										<td>
-											<s:property value="id" />
+											<s:property value="#status.index+1" />
 										</td>
 										<td>
-											<a style="text-decoration: none" class="ml-5"
-												onclick="childPageFull('查看人员','useroAction!view?id=<s:property value="id"/>')"
-												href="javascript:;" title="查看"><s:property
-													value="realname" /> </a>
+											<s:property value="realname" />
 										</td>
 										<td>
-											某片区
+											<s:if test="userLimit==0">所有片区</s:if>
+											<s:else>
+												<s:if test="areaIndex==1">宜城</s:if>
+												<s:elseif test="areaIndex==2">环科园</s:elseif>
+												<s:elseif test="areaIndex==3">开发区</s:elseif>
+												<s:elseif test="userLimit==4">丁蜀</s:elseif>
+												<s:elseif test="areaIndex==5">和桥</s:elseif>
+												<s:elseif test="areaIndex==6">官林</s:elseif>
+												<s:elseif test="userLimit==7">张渚</s:elseif>
+												<s:elseif test="userLimit==8">周铁</s:elseif>
+												<s:elseif test="areaIndex==9">徐舍</s:elseif>
+											</s:else>
 										</td>
 										<td>
 											<s:if test="userLimit==0">A</s:if>
@@ -146,17 +173,21 @@
 											<s:elseif test="userLimit==2">C</s:elseif>
 										</td>
 										<td>
-											<s:property value="unitname" />
+											<s:property value="jobTitle" />
 										</td>
 										<td class="td-manage">
 											<a style="text-decoration: none" class="ml-5"
-												onclick="childPageFull('编辑人员','useroAction!load?id=<s:property value="id"/>&type=<s:property value="type" />')"
+												onclick="addPage2('编辑人员','useroAction!load?id=<s:property value="id"/>')"
 												href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
 											</a>
-											<a style="text-decoration: none" class="ml-5"
-												href="useroAction!delete?id=<s:property value="id" />&type=<s:property value="type" />"
-												onclick="return confirm('你确定删除该信息吗？')" title="删除"><i
-												class="Hui-iconfont">&#xe6e2;</i> </a>
+											<s:if test="session.userSession.id!=id">
+												<a style="text-decoration: none" class="ml-5"
+													href="useroAction!delete?id=<s:property value="id" />"
+													onclick="return confirm('你确定删除该信息吗？')" title="删除"><i
+													class="Hui-iconfont">&#xe6e2;</i> </a>
+											</s:if>
+
+
 										</td>
 									</tr>
 								</s:iterator>
@@ -171,19 +202,19 @@
 									</td>
 									<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 										<a
-											href="javascript:jumpPersonPage('useroAction!list',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="type"/>,<s:property value="queryState"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
+											href="javascript:jumpPersonPage('useroAction!list',1,<s:property value="con"/>,'<s:property value="convalue"/>');"
 											target="rightFrame">首页</a>&nbsp;&nbsp;
 										<a
-											href="javascript:jumpPersonPage('useroAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="type"/>,<s:property value="queryState"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
+											href="javascript:jumpPersonPage('useroAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>');"
 											target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpPersonPage('useroAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="type"/>,<s:property value="queryState"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
+											href="javascript:jumpPersonPage('useroAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>');"
 											target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpPersonPage('useroAction!list',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="type"/>,<s:property value="queryState"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
+											href="javascript:jumpPersonPage('useroAction!list',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>');"
 											target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
 										<input type='button' class="btn btn-primary radius size-S"
-											onclick="jumpPersonPage('useroAction!list',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="type"/>,<s:property value="queryState"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
+											onclick="jumpPersonPage('useroAction!list',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>');"
 											value='转到' />
 										&nbsp; 当前页：
 										<input onpaste="return false"

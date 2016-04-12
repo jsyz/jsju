@@ -61,4 +61,6 @@ public interface IUseroService {
 
 	public abstract Usero getUseroByUseroname(String useroname);
 
+	public abstract int saveAndReturn(Usero usero);
+
 }

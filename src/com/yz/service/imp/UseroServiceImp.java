@@ -83,7 +83,7 @@ public class UseroServiceImp implements IUseroService {
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){
-				queryString += "and mo.username like ? "; 
+				queryString += "and mo.realname like ? "; 
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
@@ -104,7 +104,7 @@ public class UseroServiceImp implements IUseroService {
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){
-				queryString += "and mo.username like ? "; 
+				queryString += "and mo.realname like ? "; 
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
@@ -157,9 +157,13 @@ public class UseroServiceImp implements IUseroService {
 	}
 
 	public Usero useroLogin(String username, String password) {
-		String queryString="from UserRole mo where mo.username=:username and mo.password=:password";
+		String queryString="from Usero mo where mo.username=:username and mo.password=:password";
 		String[] paramNames=new String[]{"username","password"};
 		Object[] values=new Object[]{username,password};
 		return useroDao.queryByNamedParam(queryString,paramNames,values);
+	}
+	public int saveAndReturn(Usero usero) {
+		// TODO Auto-generated method stub
+		return useroDao.savereturn(usero);
 	} 
 }
