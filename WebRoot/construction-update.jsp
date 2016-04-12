@@ -44,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p><i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 文明施工</p>
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+  <form action="constructionAction!update" method="post"> 
     <table class="table table-border table-bordered radius table-bg " style="background-color:#FFF">
     <thead class="text-c">
     <tr>
@@ -54,25 +55,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
     </thead>
       <tbody>
+      
       <tr class="text-c">
         <td class="text-c">1</td>
         <td>冲洗设备是否设置</td>
         <td><div class="formControls col-12">
-				<div class="radio-box">
+		<!--  	<div class="radio-box">
 					<input type="radio" id="r-1" name="r" datatype="*" checked="true">
 					<label for="r-1">是</label>
 				</div>
 				<div class="radio-box">
 					<input type="radio" id="r-2" name="r">
 					<label for="r-2">否</label>
+					
 				</div>
-			</div></td>
+				-->
+				<s:radio list="#{'1':'是','0':'否'}" name="construction.isWashSet" value="1"/>
+			</div> 
+				
+			</td>
       <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
+        
       <tr class="text-c">
         <td class="text-c">2</td>
         <td>场内排水是否畅通</td>
         <td><div class="formControls col-12">
+        <!--  
           <div class="radio-box">
             <input type="radio" id="r-3" name="r1" datatype="*" checked="true">
             <label for="r-3">是</label>
@@ -81,13 +90,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-4" name="r">
             <label for="r-4">否</label>
             </div>
-        </div></td>
+            -->
+            <s:radio list="#{'1':'是','0':'否'}" name="construction.isWaterClear" value="1"/>
+        </div>
+        
+        	
+        </td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
       <tr class="text-c">
         <td class="text-c">3</td>
         <td>电动伸缩门是否符合要求</td>
-        <td><div class="formControls col-12 skin-minimal " >
+        <td><br>
+        <div class="formControls col-12 skin-minimal " >
+        <!--  
              <div class="radio-box">
             <input type="radio" id="r-11" name="r2" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -96,13 +112,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
-        </div></td>
+         -->
+          <s:radio list="#{'1':'是','0':'否'}" name="construction.isDoorConform" value="1"/>
+        </div>
+        
+         
+        <br></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
       <tr class="text-c">
         <td class="text-c">4</td>
         <td>门卫是否符合要求</td>
         <td> <div class="formControls col-12 skin-minimal " >
+        <!--  
           <div class="radio-box">
             <input type="radio" id="r-11" name="r3" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -111,6 +133,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+            -->
+             <s:radio list="#{'1':'是','0':'否'}" name="construction.isGuardConform" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
       </tr>
@@ -118,6 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td class="text-c">5</td>
         <td>围挡及公益广告是否符合要求</td>
         <td><div class="formControls col-12">
+        <!-- 
           <div class="radio-box">
             <input type="radio" id="r-11" name="r5" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -126,6 +151,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+             -->
+              <s:radio list="#{'1':'是','0':'否'}" name="construction.isAdConform" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
@@ -134,6 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td>主要道路是否硬化</td>
         
         <td><div class="">   <div class="radio-box">
+        <!--  
             <input type="radio" id="r-11" name="r6" datatype="*" checked="true">
             <label for="r-11">是</label>
             </div>
@@ -141,6 +169,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+            -->
+            <s:radio list="#{'1':'是','0':'否'}" name="construction.isRoadHarden" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
@@ -148,6 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td class="text-c">7</td>
         <td>主要道路是否通畅</td>
         <td> <div class="formControls col-12 skin-minimal " >
+        <!--  
           <div class="radio-box">
             <input type="radio" id="r-11" name="r7" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -156,6 +187,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+            -->
+            <s:radio list="#{'1':'是','0':'否'}" name="construction.isRoadClear" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
@@ -163,6 +196,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td class="text-c">8</td>
         <td>公示标牌内容是否齐全</td>
         <td><div class="formControls col-12 skin-minimal " >
+        <!-- 
            <div class="radio-box">
             <input type="radio" id="r-11" name="r8" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -171,6 +205,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+            -->
+             <s:radio list="#{'1':'是','0':'否'}" name="construction.isLabelComplete" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
@@ -178,6 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td class="text-c">9</td>
         <td>作业区、工作区和生活区采取隔离措施，布局是否合理</td>
         <td><div class="formControls col-12 skin-minimal " >
+        <!--  
            <div class="radio-box">
             <input type="radio" id="r-11" name="r9" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -186,13 +223,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+            -->
+            <s:radio list="#{'1':'是','0':'否'}" name="construction.isLayoutRational" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
 	<tr class="text-c">
         <td class="text-c">10</td>
         <td>办公区、生活区临时建筑是否满足防火要求</td>
-        <td><div class="formControls col-12 skin-minimal " >
+        <td><br><div class="formControls col-12 skin-minimal " >
+        <!-- 
            <div class="radio-box">
             <input type="radio" id="r-11" name="r10" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -201,13 +241,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
-        </div></td>
+             -->
+             <s:radio list="#{'1':'是','0':'否'}" name="construction.isMeetFire" value="1"/>
+        </div><br></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
         </tr>
       <tr class="text-c">
         <td class="text-c">11</td>
         <td>建筑扬尘防治措施是否到位</td>
         <td><div class="formControls col-12 skin-minimal " >
+        <!--  
            <div class="radio-box">
             <input type="radio" id="r-11" name="r11" datatype="*" checked="true">
             <label for="r-11">是</label>
@@ -216,14 +259,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" id="r-12" name="r">
             <label for="r-12">否</label>
             </div>
+         -->
+          <s:radio list="#{'1':'是','0':'否'}" name="construction.isMeasurePlace" value="1"/>
         </div></td>
         <td class="text-c"><input type="file" value="上传图片"></input></td>
+        
         </tr>
 
-
+		
       </tbody>
+     
     </table>
-    
+    </form>
   </div>
 
   </div>
