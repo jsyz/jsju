@@ -58,13 +58,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
           </thead>
           <tbody>
+           <s:iterator value="promans" var="proman" status="index">
             <tr class="text-c">
               <td ><input type="checkbox" value="" name="input"></td>
-              <td>001</td>
-              <td>项目经理</td>
-              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="javascript:;">张勇</a></td>
+              <td><s:property value="#index.count"/></td>
+              <td><s:property value="jobTitle"/></td>
+              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="promanAction!view">张勇</a></td>
               <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr>
+             </s:iterator>
+             <!--  
             <tr class="text-c">
               <td ><input type="checkbox" value="" name="input"></td>
               <td>002</td>
@@ -93,6 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="javascript:;">吴xx</a></td>
               <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr>
+            -->
           </tbody>
         </table>
     </div>

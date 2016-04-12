@@ -39,54 +39,28 @@
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
+        <form method="post" action="promanAction!add">
       <div class="row cl mb-10">
-        <label class="form-label col-2 text-r " ><span class="c-red">*</span>用户名：</label>
+        <label class="form-label col-2 text-r " ><span class="c-red">*</span>姓名：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input2" name="input2" width="45%" />
-          </span></span><span class="form-label col-2 text-r "><span class="c-red">*</span>姓名：</span><span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input2" name="input2" width="45%" />
+          <input type="text" class="input-text" value="" placeholder="" id="input2" name="proman.name" width="45%" />
+          </span></span><span class="form-label col-2 text-r "><span class="c-red">*</span>职务：</span><span class="form-label col-3"> <span class="formControls col-12">
+          <input type="text" class="input-text" value="" placeholder="" id="input2" name="proman.jobTitle" width="45%" />
         </span></span></div>
       <div class="row cl mb-10">
-        <label class="form-label col-2 text-r " >性别：</label>
-        <span class="form-label col-3">
-          <div class="formControls col-12">
-            <div class="radio-box">
-              <input type="radio" id="r-1" name="r" datatype="*" >
-              <label for="r-1">男</label>
-            </div>
-            <div class="radio-box">
-              <input type="radio" id="r-2" name="r">
-              女
-              <label for="r-2"></label>
-            </div>
-          </div>
-          </span>
-        <label class="form-label col-2 text-r " >所属部门：</label>
+        <label class="form-label col-2 text-r " > 联系电话：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-<input type="text" class="input-text" value="" placeholder="" id="input3" name="input3" width="45%" />        </span></span></div>
-      <div class="row cl mb-10">
-        <label class="form-label col-2 text-r " >职务：</label>
-        <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input3" name="input3" width="45%" />
+          <input type="text" class="input-text" value="" placeholder="" id="input3" name="proman.telphone" width="45%" />
           </span></span>
-        <label class="form-label col-2 text-r " >联系方式：</label>
+        <label class="form-label col-2 text-r " >证书信息：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-<input type="text" class="input-text" value="" placeholder="" id="input3" name="input3" width="45%" />      </span></span></div>
-      <div class="row cl mb-10">
-        <label class="form-label col-2 text-r " ><span class="c-red">*</span>密码：</label>
-        <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input" name="input" width="45%" />
-          </span></span>
-        <label class="form-label col-2 text-r " ><span class="c-red">*</span>确认密码：</label>
-        <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input" name="input" width="45%" />
-        </span></span></div>
-    </div>
+<input type="text" class="input-text" value="" placeholder="" id="input3" name="proman.certificate" width="45%" />      </span></span></div>
     <div class="row cl mb-10">
       <div class="col-10 col-offset-5 pt-10 pb-10">
         <button onClick="article_save();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
         <button onClick="layer_close();" class="btn btn-secondary radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
+      </form>
   </div>
   </div>
   </div>

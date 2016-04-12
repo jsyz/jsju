@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr class="text-c">
               <td ><input type="checkbox" value="" name="input" ></td>
               <td><s:property value="#index.count"/></td>
-              <td><a onClick="xmsb_show('塔机','xmsbshow.html','10001')" href="javascript:;"><s:property value="name"/></a></td>
+              <td><a onClick="xmsb_show('塔机','xmsbshow.html','10001')" href="deviceAction!view"><s:property value="name"/></a></td>
               <td><s:property value="propertyCardNumber"/></td>
               <td><s:property value="installTime"/></td>
               <td><s:property value="checkTime"/> </td>
@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </td>
               <td><s:property value="usecardExpireTime"/> </td>
               <td><s:property value="removeTime"/></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','sb-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','sb-add.html','10001')" href="<s:property  value="deviceAction!load"/>" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="<s:property value="deviceAction!delete"/>" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr>
              </s:iterator>
             <!-- 
