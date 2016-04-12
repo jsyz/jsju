@@ -46,13 +46,17 @@ public class Project implements java.io.Serializable {
 	private String startDate;// 开工日期
 	private String planendDate;// 计划竣工日期
 	private String constructionUnit;// 施工单位?是否就是施工总包单位？
+	private String constructionUnitPrincipal;//施工单位负责人
+	private String constructionUnitPrincipalTelphone;//施工单位联系电话
 	private String supervisionUnit;// 监理单位
+	private String supervisionUnitPrincipal;//监理单位负责人
+	private String supervisionUnitPrincipalTelphone;//监理单位负责人联系电话
 	private String projectManager;// 项目经理
-	private String engineeringDirector;// 工程总监
+	private String engineeringDirector;// 工程总监(与监督员是否一致)
 	private String clearPrincipal;// 清欠负责人
 	private String clearPrincipalTelphone;// 清欠负责人联系电话?
 	private Integer isNewProjectMonth;// 是否本月新开工?为什么显示跨年度？
-	private String constructionPermitDate;// 施工许可证发证日期
+	private String constructionPermitDate;// 施工许可证发证日期(办理？)
 	private String premarks;// 备注（至此需导入列表内容结束）
 	private String supervisor;// 监督员
 	private String engineeringPlace;// 工程地点
@@ -88,6 +92,11 @@ public class Project implements java.io.Serializable {
 	public Project() {
 	}
 
+	/** minimal constructor */
+	public Project(Yxarea yxarea) {
+		this.yxarea = yxarea;
+	}
+
 	/** full constructor */
 	public Project(Yxarea yxarea, Daymanage daymanage,
 			Construction construction, Integer projectType,
@@ -96,7 +105,8 @@ public class Project implements java.io.Serializable {
 			String buildUnitPrincipal, String buildUnittelphone, String name,
 			float buildingArea, float buildingCost, String structureLevel,
 			Integer buildingNumber, String startDate, String planendDate,
-			String constructionUnit, String supervisionUnit,
+			String constructionUnit,String constructionUnitPrincipal,String constructionUnitPrincipalTelphone, String supervisionUnit,
+			String supervisionUnitPrincipal,String supervisionUnitPrincipalTelphone,
 			String projectManager, String engineeringDirector,
 			String clearPrincipal, String clearPrincipalTelphone,
 			Integer isNewProjectMonth, String constructionPermitDate,
@@ -133,7 +143,11 @@ public class Project implements java.io.Serializable {
 		this.startDate = startDate;
 		this.planendDate = planendDate;
 		this.constructionUnit = constructionUnit;
+		this.constructionUnitPrincipal = constructionUnitPrincipal;
+		this.constructionUnitPrincipalTelphone = constructionUnitPrincipalTelphone;
 		this.supervisionUnit = supervisionUnit;
+		this.supervisionUnitPrincipal = supervisionUnitPrincipal;
+		this.supervisionUnitPrincipalTelphone = supervisionUnitPrincipalTelphone;
 		this.projectManager = projectManager;
 		this.engineeringDirector = engineeringDirector;
 		this.clearPrincipal = clearPrincipal;
@@ -168,11 +182,6 @@ public class Project implements java.io.Serializable {
 		this.promans = promans;
 		this.subunits = subunits;
 		this.devices = devices;
-	}
-
-	/** minimal constructor */
-	public Project(Yxarea yxarea) {
-		this.yxarea = yxarea;
 	}
 
 	// Property accessors
@@ -270,6 +279,16 @@ public class Project implements java.io.Serializable {
 	@Column(name = "constructionUnit", length = 50)
 	public String getConstructionUnit() {
 		return this.constructionUnit;
+	}
+
+	@Column(name = "constructionUnitPrincipal", length = 30)
+	public String getConstructionUnitPrincipal() {
+		return constructionUnitPrincipal;
+	}
+
+	@Column(name = "constructionUnitPrincipalTelphone", length = 30)
+	public String getConstructionUnitPrincipalTelphone() {
+		return constructionUnitPrincipalTelphone;
 	}
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -440,6 +459,16 @@ public class Project implements java.io.Serializable {
 		return this.supervisionUnit;
 	}
 
+	@Column(name = "supervisionUnitPrincipal", length = 30)
+	public String getSupervisionUnitPrincipal() {
+		return supervisionUnitPrincipal;
+	}
+
+	@Column(name = "supervisionUnitPrincipalTelphone", length = 30)
+	public String getSupervisionUnitPrincipalTelphone() {
+		return supervisionUnitPrincipalTelphone;
+	}
+
 	@Column(name = "supervisor", length = 50)
 	public String getSupervisor() {
 		return this.supervisor;
@@ -528,6 +557,15 @@ public class Project implements java.io.Serializable {
 
 	public void setConstructionUnit(String constructionUnit) {
 		this.constructionUnit = constructionUnit;
+	}
+
+	public void setConstructionUnitPrincipal(String constructionUnitPrincipal) {
+		this.constructionUnitPrincipal = constructionUnitPrincipal;
+	}
+
+	public void setConstructionUnitPrincipalTelphone(
+			String constructionUnitPrincipalTelphone) {
+		this.constructionUnitPrincipalTelphone = constructionUnitPrincipalTelphone;
 	}
 
 	public void setDaymanage(Daymanage daymanage) {
@@ -667,6 +705,15 @@ public class Project implements java.io.Serializable {
 		this.supervisionUnit = supervisionUnit;
 	}
 
+	public void setSupervisionUnitPrincipal(String supervisionUnitPrincipal) {
+		this.supervisionUnitPrincipal = supervisionUnitPrincipal;
+	}
+
+	public void setSupervisionUnitPrincipalTelphone(
+			String supervisionUnitPrincipalTelphone) {
+		this.supervisionUnitPrincipalTelphone = supervisionUnitPrincipalTelphone;
+	}
+
 	public void setSupervisor(String supervisor) {
 		this.supervisor = supervisor;
 	}
@@ -674,5 +721,7 @@ public class Project implements java.io.Serializable {
 	public void setYxarea(Yxarea yxarea) {
 		this.yxarea = yxarea;
 	}
+	
+	
 
 }

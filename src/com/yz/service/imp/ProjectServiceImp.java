@@ -72,16 +72,15 @@ public class ProjectServiceImp implements IProjectService {
 	/* (non-Javadoc)
 	 * @see com.yz.service.imp.IProjectServiceImp#getTotalCount(int, java.lang.String)
 	 */
-	public int getTotalCount(int con, String convalue, Project project) {
-		String queryString = "select count(*) from Project mo where 1=1 and mo.id!="+project.getId();
+	public int getTotalCount(int con, String convalue, int  areaIndex) {
+		String queryString = "select count(*) from Project mo where 1=1 and mo.yxarea.areaIndex="+areaIndex;
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){
-				queryString += "and mo.unit.name like ? "; 
+				queryString += "and mo.name like ? "; 
 			}
 			if(con==2){
-				queryString += "and mo.realname like ? "; 
-				
+				queryString += "and mo.supervisor like ? "; 
 			}
 			if(con==3){
 				queryString += "and mo.number like ? "; 
@@ -100,8 +99,8 @@ public class ProjectServiceImp implements IProjectService {
 	/* (non-Javadoc)
 	 * @see com.yz.service.imp.IProjectServiceImp#queryList(int, java.lang.String, int, int)
 	 */
-	public List<Project> queryList(int con, String convalue, Project project, int page, int size) {
-		String queryString = "from Project mo where 1=1 and mo.id!="+project.getId();
+	public List<Project> queryList(int con, String convalue, int  areaIndex, int page, int size) {
+		String queryString = "from Project mo where 1=1 and mo.yxarea.areaIndex="+areaIndex;
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){

@@ -39,7 +39,7 @@ request.getContextPath(); String basePath = request.getScheme() + "://"
 			</li>
 			<s:if test="session.userSession.userLimit==0">
 			<li class="mr-5">
-					<a href="index2.jsp" target="_top" title="权限管理"><img src="images/an03.png"
+					<a href="useroAction!index2" target="_top" title="权限管理"><img src="images/an03.png"
 						width="79" height="26"> </a>
 			</li>
 			</s:if>
@@ -60,40 +60,5 @@ request.getContextPath(); String basePath = request.getScheme() + "://"
 			</div>
 		</div>
 		</section>
-
-
-
-
-		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
-		<script type="text/javascript" src="js/H-ui.js"></script>
-		<script type="text/javascript" src="js/H-ui.admin.js"></script>
-		<script type="text/javascript">
-
-/*修改密码*/
-function ypgj(title,url,w,h){
-	layer.open({
-    type: 2,
-    title: title,
-    shadeClose: true,
-    shade: 0.8,
-    area: [w, h],
-    content: url //iframe的url
-}); 
-}
-
- 
-
-</script>
-		<script type="text/javascript">
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s)})();
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
-</script>
 	</body>
 </html>

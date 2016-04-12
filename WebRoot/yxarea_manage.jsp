@@ -68,7 +68,7 @@
 									<s:property value="index"/>
 								</td>
 								<td>
-									<a href="xmlist.html"><s:property value="areaName"/></a>
+									<a href="projectAction!list?areaIndex=<s:property value="index"/>"><s:property value="areaName"/></a>
 								</td>
 								<td>
 									<s:property value="projectNumberTotal"/>

@@ -28,10 +28,10 @@ public interface IProjectService {
 	public abstract int getPageCount(int totalCount, int size);
 
 	//后台管理-获取总记录数
-	public abstract int getTotalCount(int con, String convalue, Project project);
+	public abstract int getTotalCount(int con, String convalue, int areaIndex);
 
 	//后台管理-获取符合条件的记录
-	public abstract List<Project> queryList(int con, String convalue,Project project, int page,
+	public abstract List<Project> queryList(int con, String convalue,int areaIndex, int page,
 			int size);
 
 	public abstract Project getProjectByProjectname(String projectname);

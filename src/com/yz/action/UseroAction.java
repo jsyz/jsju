@@ -104,22 +104,27 @@ public class UseroAction extends ActionSupport implements RequestAware,
 				// setLoginTime(useroLogin);
 				session.put("userSession", useroLogin);
 			}
-
-			System.out.println("userSession:" + session.get("userSession"));
 			// checkIP();//检查IP地址
 			return "loginSucc";
 		}
 	}
 
-	public String welcome() {
+	public String index2() {
 		// 登陆验证
 		Usero userSession = (Usero) session.get("userSession");
 		if (userSession == null) {
 			return "opsessiongo";
 		}
-		Usero useroWelcome = useroService.loadById(usero.getId());
-		// 欢迎界面
-		return "welcome";
+		return "index2";
+	}
+	
+	public String index() {
+		// 登陆验证
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
+		}
+		return "loginSucc";
 	}
 
 	// 设置登陆时间

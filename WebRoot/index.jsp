@@ -43,7 +43,7 @@
 			</li>
 			<s:if test="session.userSession.userLimit==0">
 			<li class="mr-5">
-				<a href="index2.jsp" target="_top" title="权限管理"><img src="images/an03.png"
+				<a href="useroAction!index2" target="_top" title="权限管理"><img src="images/an03.png"
 						width="79" height="26"> </a>
 			</li>
 			</s:if>

@@ -1,14 +1,9 @@
 package com.yz.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -30,6 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Project;
 import com.yz.model.Usero;
 import com.yz.model.Yxarea;
+import com.yz.service.IProjectService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.vo.AjaxMsgVO;
@@ -39,9 +34,9 @@ import com.yz.vo.AreaVO;
  * @author lq
  * 
  */
-@Component("yxareaAction")
+@Component("projectAction")
 @Scope("prototype")
-public class YxareaAction extends ActionSupport implements RequestAware,
+public class ProjectAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 
 	private static final long serialVersionUID = 1L;
@@ -63,39 +58,68 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	private String convalue;
 	private int status;// 按状态
 	private int pid;// 按用户id
+	private int areaIndex;// 区域标示
 
 	// 批量删除
 	private String checkedIDs;
 
 	// service层对象
+	private IProjectService projectService;
 	private IYxareaService yxareaService;
 
 	// 单个对象
-	private Usero usero;
-	private Yxarea yxarea;
+	private Project project;
 	private AreaVO areaVO;
 
 	// list对象
+	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
-	private List<Project> projects;
-
-	// 总计
-	private int allNumberTotal;
-	private float allAreaTotal;
-	private float allCostTotal;
 
 	/**
-	 * 区域管理
+	 * 检查用户名是否存在
+	 */
+	/*
+	 * public String checkUsername() { project =
+	 * projectService.getProjectByProjectname(username); if (project != null) {
+	 * AjaxMsgVO msgVO = new AjaxMsgVO(); msgVO.setMessage("该用户名已经存在,请重新输入.");
+	 * JSONObject jsonObj = JSONObject.fromObject(msgVO); PrintWriter out; try {
+	 * response.setContentType("text/html;charset=UTF-8"); out =
+	 * response.getWriter(); out.print(jsonObj.toString()); out.flush();
+	 * out.close(); } catch (IOException e) { e.printStackTrace(); } } return
+	 * null; }
+	 */
+
+	/**
+	 * 用户管理
 	 */
 	public String list() throws Exception {
-		initAreas();
-		for (int i = 0; i < areaVOs.size(); i++) {
-			allNumberTotal += areaVOs.get(i).getProjectNumberTotal();
-			allAreaTotal += areaVOs.get(i).getBuildingAreaTotal();
-			allCostTotal += areaVOs.get(i).getBuildingCostTotal();
+		// 判断会话是否失效
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
 		}
+		if (convalue != null && !convalue.equals("")) {
+			convalue = URLDecoder.decode(convalue, "utf-8");
+		}
+		if (page < 1) {
+			page = 1;
+		}
+		initAreas();
 
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		// 总记录数
+		totalCount = projectService.getTotalCount(con, convalue, areaIndex);
+		// 总页数
+		pageCount = projectService.getPageCount(totalCount, size);
+		if (page > pageCount && pageCount != 0) {
+			page = pageCount;
+		}
+		// 所有当前页记录对象
+		projects = projectService.queryList(con, convalue, areaIndex, page,
+				size);
 		return "list";
 	}
 
@@ -133,6 +157,10 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
 		return "add";
 	}
 
@@ -142,49 +170,16 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 * @return
 	 * @throws Exception
 	 */
-
-	public String add() throws Exception {
+	public String addUser() throws Exception {
 		// 判断回话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo_child";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
-		yxareaService.add(yxarea);
-
-		arg[0] = "yxareaAction!list";
-		arg[1] = "区域管理";
+		projectService.add(project);
 		return "success_child";
-	}
-
-	// 上传照片
-	private File picture;
-	private String pictureContentType;
-	private String pictureFileName;
-
-	// 文件上传
-	public void upload(String fileName, String imageName, File picture)
-			throws Exception {
-		File saved = new File(ServletActionContext.getServletContext()
-				.getRealPath(fileName), imageName);
-		InputStream ins = null;
-		OutputStream ous = null;
-		try {
-			saved.getParentFile().mkdirs();
-			ins = new FileInputStream(picture);
-			ous = new FileOutputStream(saved);
-			byte[] b = new byte[1024];
-			int len = 0;
-			while ((len = ins.read(b)) != -1) {
-				ous.write(b, 0, len);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (ous != null)
-				ous.close();
-			if (ins != null)
-				ins.close();
-		}
 	}
 
 	/**
@@ -194,18 +189,17 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
 
-		yxarea = yxareaService.loadById(id);
-
-		yxareaService.delete(yxarea);
-
-		yxareaService.deleteById(id);
-		arg[0] = "yxareaAction!list";
-		arg[1] = "区域管理";
+		project = projectService.loadById(id);
+		projectService.delete(project);
+		arg[0] = "projectAction!list";
+		arg[1] = "用户管理";
 		return SUCCESS;
 	}
 
@@ -214,13 +208,12 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 * 
 	 * @return
 	 */
-	public String deleteUseros() {
-
+	public String deleteProjects() {
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
-			yxarea = yxareaService.loadById(ids[i]);
+			project = projectService.loadById(ids[i]);
 
-			yxareaService.delete(yxarea);
+			projectService.delete(project);
 		}
 		AjaxMsgVO msgVO = new AjaxMsgVO();
 		msgVO.setMessage("批量删除成功.");
@@ -244,8 +237,8 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-
-		yxarea = yxareaService.loadById(id);
+		yxareas = yxareaService.getYxareas();
+		project = projectService.loadById(id);
 		return "load";
 	}
 
@@ -256,14 +249,13 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo_child";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
-
-		yxareaService.update(yxarea);
-		arg[0] = "yxareaAction!list";
-		arg[1] = "区域管理";
+		projectService.update(project);
 		return "success_child";
 	}
 
@@ -273,11 +265,11 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
 			return "opsessiongo";
 		}
-		yxarea = yxareaService.loadById(id);
+		project = projectService.loadById(id);
 		return "view";
 	}
 
@@ -380,6 +372,31 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 		this.arg = arg;
 	}
 
+	public IProjectService getProjectService() {
+		return projectService;
+	}
+
+	@Resource
+	public void setProjectService(IProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
 	public javax.servlet.http.HttpServletResponse getResponse() {
 		return response;
 	}
@@ -404,30 +421,6 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 		this.checkedIDs = checkedIDs;
 	}
 
-	public File getPicture() {
-		return picture;
-	}
-
-	public void setPicture(File picture) {
-		this.picture = picture;
-	}
-
-	public String getPictureContentType() {
-		return pictureContentType;
-	}
-
-	public void setPictureContentType(String pictureContentType) {
-		this.pictureContentType = pictureContentType;
-	}
-
-	public String getPictureFileName() {
-		return pictureFileName;
-	}
-
-	public void setPictureFileName(String pictureFileName) {
-		this.pictureFileName = pictureFileName;
-	}
-
 	public IYxareaService getYxareaService() {
 		return yxareaService;
 	}
@@ -435,22 +428,6 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	@Resource
 	public void setYxareaService(IYxareaService yxareaService) {
 		this.yxareaService = yxareaService;
-	}
-
-	public Usero getUsero() {
-		return usero;
-	}
-
-	public void setUsero(Usero usero) {
-		this.usero = usero;
-	}
-
-	public Yxarea getYxarea() {
-		return yxarea;
-	}
-
-	public void setYxarea(Yxarea yxarea) {
-		this.yxarea = yxarea;
 	}
 
 	public List<Yxarea> getYxareas() {
@@ -461,44 +438,28 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 		this.yxareas = yxareas;
 	}
 
+	public int getAreaIndex() {
+		return areaIndex;
+	}
+
+	public void setAreaIndex(int areaIndex) {
+		this.areaIndex = areaIndex;
+	}
+
+	public AreaVO getAreaVO() {
+		return areaVO;
+	}
+
+	public void setAreaVO(AreaVO areaVO) {
+		this.areaVO = areaVO;
+	}
+
 	public List<AreaVO> getAreaVOs() {
 		return areaVOs;
 	}
 
 	public void setAreaVOs(List<AreaVO> areaVOs) {
 		this.areaVOs = areaVOs;
-	}
-
-	public List<Project> getProjects() {
-		return projects;
-	}
-
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
-
-	public int getAllNumberTotal() {
-		return allNumberTotal;
-	}
-
-	public void setAllNumberTotal(int allNumberTotal) {
-		this.allNumberTotal = allNumberTotal;
-	}
-
-	public float getAllAreaTotal() {
-		return allAreaTotal;
-	}
-
-	public void setAllAreaTotal(float allAreaTotal) {
-		this.allAreaTotal = allAreaTotal;
-	}
-
-	public float getAllCostTotal() {
-		return allCostTotal;
-	}
-
-	public void setAllCostTotal(float allCostTotal) {
-		this.allCostTotal = allCostTotal;
 	}
 
 }
