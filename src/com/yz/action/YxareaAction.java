@@ -73,6 +73,7 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	// 单个对象
 	private Usero usero;
 	private Yxarea yxarea;
+	private AreaVO areaVO;
 
 	// list对象
 	private List<Yxarea> yxareas;
@@ -92,9 +93,7 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 
 		yxareas = yxareaService.getYxareas();
 
-		if (yxareas == null || yxareas.size() != 9 || !initAreas(yxareas)) {
-			return "initFail";// 跳转到初始化失败页面
-		}
+		initAreas(yxareas);
 
 		for (int i = 0; i < areaVOs.size(); i++) {
 			allNumberTotal += areaVOs.get(i).getProjectNumberTotal();

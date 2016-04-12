@@ -65,12 +65,10 @@
 		</global-results>
 		<action name="toolkitAction" class="toolkitAction"></action>
 		<action name="yxareaAction" class="yxareaAction">
-			<!-- 暂无 系统提示页面 -->
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 			<result name="success">/op_success.jsp</result>
 			<result name="fail">/op_failure.jsp</result>
 			<result name="operror">/op_error.jsp</result>
-			<result name="initFail">/init_failure.jsp</result>
 
 			<result name="list">/yxarea_manage.jsp</result>
 			<result name="add">/yxarea_add.jsp</result>
