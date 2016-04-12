@@ -1,11 +1,6 @@
 package com.yz.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.List;
@@ -17,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -31,7 +25,6 @@ import com.yz.model.Yxarea;
 import com.yz.service.IUseroService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
-import com.yz.util.DateTimeKit;
 import com.yz.util.InitParam;
 import com.yz.vo.AjaxMsgVO;
 
@@ -63,6 +56,7 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	private String convalue;
 	private int status;// 按状态
 	private int pid;// 按用户id
+	private int command;
 
 	// 登陆
 	private String username;
@@ -80,11 +74,12 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 	// list对象
 	private List<Usero> useros;
-	private List<Yxarea> areas;
+	private List<Yxarea> yxareas;
 
 	// 个人资料新旧密码
 	private String password1;
 	private String password2;
+	private String password3;
 
 	/**
 	 * 用户登陆
@@ -92,13 +87,6 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @throws Exception
 	 */
 	public String login() throws Exception {
-
-		if (checkDatebase())// 检查数据库
-		{
-			useroService.add(InitParam.getUsero());
-			session.put("usero", InitParam.getUsero());
-			return "loginSucc";
-		}
 		if (username == null || username.equals("") || password == null
 				|| password.equals("")) {
 			String loginfail = "用户名或密码不能为空";
@@ -112,10 +100,12 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			return "adminLogin";
 		} else {
 			// 设置登陆时间
-			if (session.get("usero") == null) {
-				//setLoginTime(useroLogin);
-				session.put("usero", useroLogin);
+			if (session.get("userSession") == null) {
+				// setLoginTime(useroLogin);
+				session.put("userSession", useroLogin);
 			}
+
+			System.out.println("userSession:" + session.get("userSession"));
 			// checkIP();//检查IP地址
 			return "loginSucc";
 		}
@@ -123,8 +113,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 
 	public String welcome() {
 		// 登陆验证
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
 			return "opsessiongo";
 		}
 		Usero useroWelcome = useroService.loadById(usero.getId());
@@ -133,31 +123,68 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	}
 
 	// 设置登陆时间
-	
+
 	/**
-	 * 检查数据库,初始化默认登录及区域
-	 * @throws Exception 
+	 * 初始化默认登录及区域
+	 * 
+	 * @throws Exception
 	 */
-	private boolean checkDatebase() throws Exception {
-		// TODO Auto-generated method stub
-		areas = yxareaService.getYxareas();
-		if(areas==null||areas.size()!=9)
-		{
-			yxareaService.deleteAllAreas(areas);
+	public String inits() throws Exception {
+		int backNumber = -1;
+		if (command == 1123) {
 			for (int i = 0; i < InitParam.AREAS.length; i++) {
 				Yxarea yxarea = new Yxarea();
-				yxarea.setAreaname(InitParam.AREAS[0]);
-				yxarea.setIndex(i+1);
+				yxarea.setAreaname(InitParam.AREAS[i]);
+				yxarea.setAreaIndex(i + 1);
 				yxareaService.add(yxarea);
 			}
+
+			Usero usero = new Usero();
+			usero.setUsername("admin");
+			usero.setPassword("admin");
+			usero.setUserLimit(0);
+			usero.setRealname("默认管理员");
+			usero.setJobTitle("无");
+			useroService.add(usero);
+
+			backNumber = 1;
 		}
-		
-		useros = useroService.getUseros();
-		if (useros==null||useros.size() == 0) {
-			return true;
-		} else {
-			return false;
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=UTF-8");
+			out = response.getWriter();
+			out.print(backNumber);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	/**
+	 * 检查用户名是否存在
+	 */
+	public String checkUsername()
+	{
+		usero = useroService.getUseroByUseroname(username);
+		if(usero!=null)
+		{
+			AjaxMsgVO msgVO = new AjaxMsgVO();
+			msgVO.setMessage("该用户名已经存在,请重新输入.");
+			JSONObject jsonObj = JSONObject.fromObject(msgVO);
+			PrintWriter out;
+			try {
+				response.setContentType("text/html;charset=UTF-8");
+				out = response.getWriter();
+				out.print(jsonObj.toString());
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return  null;
 	}
 
 	private void checkIP() {
@@ -201,10 +228,10 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		/*Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
 			return "opsessiongo";
-		}*/
+		}
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
@@ -212,14 +239,14 @@ public class UseroAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		// 总记录数
-		totalCount = useroService.getTotalCount(con, convalue, usero);
+		totalCount = useroService.getTotalCount(con, convalue, userSession);
 		// 总页数
 		pageCount = useroService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		useros = useroService.queryList(con, convalue, usero, page, size);
+		useros = useroService.queryList(con, convalue, userSession, page, size);
 		return "list";
 	}
 
@@ -229,7 +256,7 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-		areas = yxareaService.getYxareas();
+		yxareas = yxareaService.getYxareas();
 		return "add";
 	}
 
@@ -239,49 +266,16 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 * @throws Exception
 	 */
-
-	public String add() throws Exception {
+	public String addUser() throws Exception {
 		// 判断回话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo_child";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
 		useroService.add(usero);
-
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
 		return "success_child";
-	}
-
-	// 上传照片
-	private File picture;
-	private String pictureContentType;
-	private String pictureFileName;
-
-	// 文件上传
-	public void upload(String fileName, String imageName, File picture)
-			throws Exception {
-		File saved = new File(ServletActionContext.getServletContext()
-				.getRealPath(fileName), imageName);
-		InputStream ins = null;
-		OutputStream ous = null;
-		try {
-			saved.getParentFile().mkdirs();
-			ins = new FileInputStream(picture);
-			ous = new FileOutputStream(saved);
-			byte[] b = new byte[1024];
-			int len = 0;
-			while ((len = ins.read(b)) != -1) {
-				ous.write(b, 0, len);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (ous != null)
-				ous.close();
-			if (ins != null)
-				ins.close();
-		}
 	}
 
 	/**
@@ -291,16 +285,15 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
 
 		usero = useroService.loadById(id);
-
 		useroService.delete(usero);
-
-		useroService.deleteById(id);
 		arg[0] = "useroAction!list";
 		arg[1] = "用户管理";
 		return SUCCESS;
@@ -312,7 +305,6 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String deleteUseros() {
-
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
 			usero = useroService.loadById(ids[i]);
@@ -341,7 +333,7 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-
+		yxareas = yxareaService.getYxareas();
 		usero = useroService.loadById(id);
 		return "load";
 	}
@@ -353,14 +345,13 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo_child";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
-
 		useroService.update(usero);
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
 		return "success_child";
 	}
 
@@ -370,11 +361,12 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String loadPassword() throws Exception {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
-		password = usero.getPassword();
 		return "password";
 	}
 
@@ -385,15 +377,26 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 */
 	public String updatePassword() throws Exception {
 		// 判断会话是否失效
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
 		}
-		usero.setPassword(password);
-		useroService.update(usero);
-		arg[0] = "useroAction!list";
-		arg[1] = "用户管理";
-		return SUCCESS;
+		if (!password1.equals(userSession.getPassword())) {
+			String loginfail = "原密码不正确";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
+		}
+		if (!password2.equals(password3)) {
+			String loginfail = "两次密码输入不正确";
+			request.put("loginFail", loginfail);
+			return "opfailure_child";
+		}
+		userSession.setPassword(password2);
+		session.put("userSession", userSession);// 修改session
+		useroService.update(userSession);// 修改数据库
+		return "success_child";
 	}
 
 	/**
@@ -402,8 +405,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
 			return "opsessiongo";
 		}
 		usero = useroService.loadById(id);
@@ -414,8 +417,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	 * 个人资料
 	 */
 	public String currentUsero() {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
 			return "opsessiongo";
 		}
 		usero = useroService.loadById(usero.getId());
@@ -424,8 +427,8 @@ public class UseroAction extends ActionSupport implements RequestAware,
 	}
 
 	public String updateCurrentUsero() throws Exception {
-		Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
 			return "opsessiongo";
 		}
 		if (password1 != null && !password1.replace(" ", "").equals("")
@@ -602,30 +605,6 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		this.checkedIDs = checkedIDs;
 	}
 
-	public File getPicture() {
-		return picture;
-	}
-
-	public void setPicture(File picture) {
-		this.picture = picture;
-	}
-
-	public String getPictureContentType() {
-		return pictureContentType;
-	}
-
-	public void setPictureContentType(String pictureContentType) {
-		this.pictureContentType = pictureContentType;
-	}
-
-	public String getPictureFileName() {
-		return pictureFileName;
-	}
-
-	public void setPictureFileName(String pictureFileName) {
-		this.pictureFileName = pictureFileName;
-	}
-
 	public String getPassword1() {
 		return password1;
 	}
@@ -651,14 +630,28 @@ public class UseroAction extends ActionSupport implements RequestAware,
 		this.yxareaService = yxareaService;
 	}
 
-	public List<Yxarea> getAreas() {
-		return areas;
+	public List<Yxarea> getYxareas() {
+		return yxareas;
 	}
 
-	public void setAreas(List<Yxarea> areas) {
-		this.areas = areas;
+	public void setYxareas(List<Yxarea> yxareas) {
+		this.yxareas = yxareas;
 	}
-	
-	
-	
+
+	public String getPassword3() {
+		return password3;
+	}
+
+	public void setPassword3(String password3) {
+		this.password3 = password3;
+	}
+
+	public int getCommand() {
+		return command;
+	}
+
+	public void setCommand(int command) {
+		this.command = command;
+	}
+
 }

@@ -28,31 +28,16 @@
 		<script type="text/javascript" src="js/H-ui.admin.js"></script>
 		<script type="text/javascript" src="js/pageKit.js"></script>
 		<script type="text/javascript" src="js/checkUtil.js"></script>
-		<title>新增用户</title>
+		<title>修改用户</title>
 	</head>
 
 	<body style="background: #fff;">
 		<div class="pd-20">
-			<form action="useroAction!addUser" method="post"
-				class="form form-horizontal" onsubmit="return checkUsero();">
-				<div class="row cl">
-					<label class="form-label col-2">
-						<span class="c-red">*</span>用户名：
-					</label>
-					<span class="form-label col-3"><span
-						class="formControls col-10"> <s:textfield id="username"
-								cssClass="input-text radius size-M" cssStyle="width:200px;"
-								name="usero.username" /> </span> </span>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-2">
-						<span class="c-red">*</span>密码：
-					</label>
-					<span class="form-label col-3"><span
-						class="formControls col-10"> <s:textfield id="password"
-								cssClass="input-text radius size-M" cssStyle="width:200px;"
-								name="usero.password"></s:textfield> </span> </span>
-				</div>
+			<form action="useroAction!update" method="post"
+				class="form form-horizontal"">
+				<s:hidden name="usero.id"></s:hidden>
+				<s:hidden name="usero.username"></s:hidden>
+				<s:hidden name="usero.password"></s:hidden>
 				<div class="row cl">
 					<label class="form-label col-2">
 						<span class="c-red">*</span>真实姓名：
@@ -103,7 +88,7 @@
 				</div>
 				<div class="row cl">
 					<div class="col-10 col-offset-2">
-					<s:token></s:token>
+						<s:token></s:token>
 						<input type="submit" class="btn btn-primary radius" value="保存并提交" />
 						<input type="button" onClick="childPage_close();"
 							class="btn btn-primary radius" value="取消" />

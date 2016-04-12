@@ -19,9 +19,36 @@ function checkUnit()
 function checkUsero()
 {
 	var username = $("#username").val();
+	var booleanBack = true;
+	$.ajax({   
+	            url:'checkUsername',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式   
+	            async:false,
+	            data:{"username":username},
+	            dataType:'json',
+	            error: function(msg)
+	            { //失败   
+	            	console.log('post失败');   
+	            },   
+	            success: function(msg)
+	            { //成功
+					 if(msg!=null)
+					 {
+					 	alert(msg.message);
+				 		$(document).ready(function(){ 
+				 			$("#username").val('');
+				 		});
+				 		booleanBack =false;
+					 }
+				}
+			});
+	
+	
+	
+	
 	var password = $("#password").val();
-	var userRoleRealname = $("#useroRealname").val();
-	var userRoleTelphone = $("#useroTelphone").val();
+	var userRoleRealname = $("#realname").val();
+	var userRoleTelphone = $("#telphone").val();
 	
 	if(username==''||username==null)
 	{
@@ -47,6 +74,10 @@ function checkUsero()
 			return false;
 		}
 	}	
+	
+	return booleanBack;
+	
+	
 }
 
 

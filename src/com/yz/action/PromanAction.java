@@ -133,31 +133,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 
 	// 设置登陆时间
 	
-	/**
-	 * 检查数据库,初始化默认登录及区域
-	 * @throws Exception 
-	 */
-	private boolean checkDatebase() throws Exception {
-		// TODO Auto-generated method stub
-		areas = yxareaService.getYxareas();
-		if(areas==null||areas.size()!=9)
-		{
-			yxareaService.deleteAllAreas(areas);
-			for (int i = 0; i < InitParam.AREAS.length; i++) {
-				Yxarea yxarea = new Yxarea();
-				yxarea.setAreaname(InitParam.AREAS[0]);
-				yxarea.setIndex(i+1);
-				yxareaService.add(yxarea);
-			}
-		}
-		
-		promans = promanService.getPromans();
-		if (promans==null||promans.size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	private void checkIP() {
 		// TODO Auto-generated method stub

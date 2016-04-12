@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,14 +27,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yz.model.Project;
 import com.yz.model.Usero;
 import com.yz.model.Yxarea;
-import com.yz.service.IUseroService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
-import com.yz.util.DateTimeKit;
-import com.yz.util.InitParam;
 import com.yz.vo.AjaxMsgVO;
+import com.yz.vo.AreaVO;
 
 /**
  * @author lq
@@ -73,29 +73,64 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 	// 单个对象
 	private Usero usero;
 	private Yxarea yxarea;
+	private AreaVO areaVO;
 
 	// list对象
 	private List<Yxarea> yxareas;
+	private List<AreaVO> areaVOs;
+	private List<Project> projects;
+
+	// 总计
+	private int allNumberTotal;
+	private float allAreaTotal;
+	private float allCostTotal;
 
 	/**
 	 * 区域管理
 	 */
 	public String list() throws Exception {
-		// 判断会话是否失效
-		/*
-		 * Usero usero = (Usero) session.get("usero"); if (yxarea == null) {
-		 * return "opsessiongo"; }
-		 * 
-		 * if (convalue != null && !convalue.equals("")) { convalue =
-		 * URLDecoder.decode(convalue, "utf-8"); } if (page < 1) { page = 1; } //
-		 * 总记录数 totalCount = yxareaService.getTotalCount(con, convalue, usero); //
-		 * 总页数 pageCount = yxareaService.getPageCount(totalCount, size); if
-		 * (page > pageCount && pageCount != 0) { page = pageCount; } //
-		 * 所有当前页记录对象 yxareas = yxareaService.queryList(con, convalue, usero,
-		 * page, size);
-		 */
+		areaVOs = new ArrayList<AreaVO>();
+
 		yxareas = yxareaService.getYxareas();
+
+		initAreas(yxareas);
+
+		for (int i = 0; i < areaVOs.size(); i++) {
+			allNumberTotal += areaVOs.get(i).getProjectNumberTotal();
+			allAreaTotal += areaVOs.get(i).getBuildingAreaTotal();
+			allCostTotal += areaVOs.get(i).getBuildingCostTotal();
+		}
+
 		return "list";
+	}
+
+	// 初始化区域
+	private boolean initAreas(List<Yxarea> yxareas) {
+		boolean initSuccess = false;
+		for (Yxarea yxarea : yxareas) {
+			AreaVO areaVO = new AreaVO();
+			areaVO.setId(yxarea.getId());
+			areaVO.setIndex(yxarea.getAreaIndex());
+			areaVO.setAreaName(yxarea.getAreaname());
+			int numberTotal = 0;
+			float areaTotal = 0f;
+			float costTotal = 0f;
+
+			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
+				projects = yxarea.getProjects();
+				numberTotal = projects.size();
+				for (int i = 0; i < projects.size(); i++) {
+					areaTotal += projects.get(i).getBuildingArea();
+					costTotal += projects.get(i).getBuildingCost();
+				}
+			}
+			areaVO.setProjectNumberTotal(numberTotal);
+			areaVO.setBuildingAreaTotal(areaTotal);
+			areaVO.setBuildingCostTotal(costTotal);
+			areaVOs.add(areaVO);
+		}
+		initSuccess = true;
+		return initSuccess;
 	}
 
 	/**
@@ -430,6 +465,46 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 
 	public void setYxareas(List<Yxarea> yxareas) {
 		this.yxareas = yxareas;
+	}
+
+	public List<AreaVO> getAreaVOs() {
+		return areaVOs;
+	}
+
+	public void setAreaVOs(List<AreaVO> areaVOs) {
+		this.areaVOs = areaVOs;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public int getAllNumberTotal() {
+		return allNumberTotal;
+	}
+
+	public void setAllNumberTotal(int allNumberTotal) {
+		this.allNumberTotal = allNumberTotal;
+	}
+
+	public float getAllAreaTotal() {
+		return allAreaTotal;
+	}
+
+	public void setAllAreaTotal(float allAreaTotal) {
+		this.allAreaTotal = allAreaTotal;
+	}
+
+	public float getAllCostTotal() {
+		return allCostTotal;
+	}
+
+	public void setAllCostTotal(float allCostTotal) {
+		this.allCostTotal = allCostTotal;
 	}
 
 }

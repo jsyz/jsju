@@ -62,22 +62,22 @@
 								</th>
 							</tr>
 						</thead>
-						<s:iterator value="yxareas" var="yxarea" status="status">
+						<s:iterator value="areaVOs" var="areaVO" status="status">
 							<tr class="text-c">
 								<td>
 									<s:property value="index"/>
 								</td>
 								<td>
-									<a href="xmlist.html"><s:property value="areaname"/></a>
+									<a href="xmlist.html"><s:property value="areaName"/></a>
 								</td>
 								<td>
-									<s:property value="projects.size()"/>
+									<s:property value="projectNumberTotal"/>
 								</td>
 								<td>
-									80000
+									<s:property value="buildingAreaTotal"/>
 								</td>
 								<td>
-									500000
+									<s:property value="buildingCostTotal"/>
 								</td>
 								<td>
 									2015-10-11
@@ -97,20 +97,20 @@
 									合计：
 								</th>
 								<th class="  f-12" width="9%">
-									542
+									<s:property value="allNumberTotal"/>
 								</th>
 								<th class="  f-12" width="21%">
-									5156568（m
+									<s:property value="allAreaTotal"/>（m
 									<sup>
 										2
 									</sup>
 									）
 								</th>
-								<th class="  f-12" width="15%">
-									1560486（万）
+								<th class="f-12" width="15%">
+									<s:property value="allCostTotal"/>（万）
 								</th>
-								<th class="  f-12" width="25%">
-									2015-10-11
+								<th class="f-12" width="25%">
+									2015-10-11(最新时间)
 								</th>
 							</tr>
 						</thead>

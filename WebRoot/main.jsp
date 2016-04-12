@@ -10,7 +10,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>����ҳ��</title>
+<title></title>
   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@ body {
 
  <div class="center-block"  style=" margin-top:200px; width:1180px;"> <img src="images/main_01.png" width="1180" height="429" border="0"  usemap="#Map">
 <map name="Map">
-  <area shape="rect" coords="21,118,278,314" href="areaAction!list">
+  <area shape="rect" coords="21,118,278,314" href="yxareaAction!list">
 <area shape="rect" coords="311,118,572,314" href="citylist.html">
 <area shape="rect" coords="610,118,866,314" href="query.html">
 <area shape="rect" coords="894,118,1159,314" href="xmlist_gl2.html">

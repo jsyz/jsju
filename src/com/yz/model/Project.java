@@ -27,57 +27,56 @@ import javax.persistence.Table;
 public class Project implements java.io.Serializable {
 
 	// Fields
-	private Integer id;//项目id
-	private Usero usero;//	所属用户
-	private Yxarea yxarea;//所属乡镇分类(0:未选择乡镇,1：宜城，2:环科园,3:开发区，4：丁蜀，5：和桥,6:官林,7:张渚,8:周铁,9:徐舍)
-	private Daymanage daymanage;//日常监管
-	private Construction construction;//文明施工
-	private Integer projectType;//项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
-	private Integer engineeringType;//工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化)
-	private Integer buildingType;//建筑分类(0:住宅,1：公共建筑，2:工业建筑)
-	private Integer graphicProgress;//形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
-	private String buildUnit;//建设单位
-	private String buildUnitPrincipal;//建设单位负责人
-	private String buildUnittelphone;//建设单位负责人联系电话
-	private String name;//项目名称
-	private float buildingArea;//建筑面积
-	private float buildingCost;//建筑造价
-	private String structureLevel;//结构层次
-	private Integer buildingNumber;//单位工程
-	private String startDate;//开工日期
-	private String planendDate;//计划竣工日期
-	private String constructionUnit;//施工单位?是否就是施工总包单位？
-	private String supervisionUnit;//监理单位
-	private String projectManager;//项目经理
-	private String engineeringDirector;//工程总监
-	private String clearPrincipal;//清欠负责人
-	private String clearPrincipalTelphone;//清欠负责人联系电话?
-	private Integer isNewProjectMonth;//是否本月新开工?为什么显示跨年度？
-	private String constructionPermitDate;//施工许可证发证日期
-	private String premarks;//备注（至此需导入列表内容结束）
-	private String supervisor;//监督员
-	private String engineeringPlace;//工程地点
-	private String constructionPermitNumber;//施工许可证证号
-	private String sourcesOfInvestment;//投资来源
-	private String excellenceGoals;//创优目标
-	private String reconnaissanceUnit;//勘察单位
-	private String reconnaissanceUnitPrincipal;//勘察单位负责人
-	private String reconnaissanceUnitPrincipalTelphone;//勘察单位负责人联系电话
-	private String designUnit;//设计单位
-	private String designUnitPrincipal;//设计单位负责人
-	private String designUnitPrincipalTelphone;//设计单位负责人联系电话
-	private String detectionUnit;//检测机构(这些机构是不是都需要负责人和电话??)
-	private String detectionUnitPrincipal;//检测机构负责人
-	private String detectionUnitPrincipalTelphone;//检测机构负责人联系电话
-	private String concreteUnit;//商品砼生产单位
-	private String concreteUnitPrincipal;//商品砼生产单位负责人
-	private String concreteUnitPrincipalTelphone;//商品砼生产单位负责人联系电话
-	private String mortarUnit;//	预拌砂浆生产单位
-	private String mortarUnitPrincipal;//预拌砂浆生产单位负责人
-	private String mortarUnitPrincipalTelphone;//预拌砂浆生产单位负责人联系电话
-	private String constructionDrawingUnit;//施工图审查机构
-	private String constructionDrawingUnitPrincipal;//施工图审查机构负责人
-	private String constructionDrawingUnitPrincipalTelphone;//施工图审查机构联系电话
+	private Integer id;// 项目id
+	private Yxarea yxarea;// 所属乡镇分类(0:未选择乡镇,1：宜城，2:环科园,3:开发区，4：丁蜀，5：和桥,6:官林,7:张渚,8:周铁,9:徐舍)
+	private Daymanage daymanage;// 日常监管
+	private Construction construction;// 文明施工
+	private Integer projectType;// 项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
+	private Integer engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化)
+	private Integer buildingType;// 建筑分类(0:住宅,1：公共建筑，2:工业建筑)
+	private Integer graphicProgress;// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
+	private String buildUnit;// 建设单位
+	private String buildUnitPrincipal;// 建设单位负责人
+	private String buildUnittelphone;// 建设单位负责人联系电话
+	private String name;// 项目名称
+	private float buildingArea;// 建筑面积
+	private float buildingCost;// 建筑造价
+	private String structureLevel;// 结构层次
+	private Integer buildingNumber;// 单位工程
+	private String startDate;// 开工日期
+	private String planendDate;// 计划竣工日期
+	private String constructionUnit;// 施工单位?是否就是施工总包单位？
+	private String supervisionUnit;// 监理单位
+	private String projectManager;// 项目经理
+	private String engineeringDirector;// 工程总监
+	private String clearPrincipal;// 清欠负责人
+	private String clearPrincipalTelphone;// 清欠负责人联系电话?
+	private Integer isNewProjectMonth;// 是否本月新开工?为什么显示跨年度？
+	private String constructionPermitDate;// 施工许可证发证日期
+	private String premarks;// 备注（至此需导入列表内容结束）
+	private String supervisor;// 监督员
+	private String engineeringPlace;// 工程地点
+	private String constructionPermitNumber;// 施工许可证证号
+	private String sourcesOfInvestment;// 投资来源
+	private String excellenceGoals;// 创优目标
+	private String reconnaissanceUnit;// 勘察单位
+	private String reconnaissanceUnitPrincipal;// 勘察单位负责人
+	private String reconnaissanceUnitPrincipalTelphone;// 勘察单位负责人联系电话
+	private String designUnit;// 设计单位
+	private String designUnitPrincipal;// 设计单位负责人
+	private String designUnitPrincipalTelphone;// 设计单位负责人联系电话
+	private String detectionUnit;// 检测机构(这些机构是不是都需要负责人和电话??)
+	private String detectionUnitPrincipal;// 检测机构负责人
+	private String detectionUnitPrincipalTelphone;// 检测机构负责人联系电话
+	private String concreteUnit;// 商品砼生产单位
+	private String concreteUnitPrincipal;// 商品砼生产单位负责人
+	private String concreteUnitPrincipalTelphone;// 商品砼生产单位负责人联系电话
+	private String mortarUnit;// 预拌砂浆生产单位
+	private String mortarUnitPrincipal;// 预拌砂浆生产单位负责人
+	private String mortarUnitPrincipalTelphone;// 预拌砂浆生产单位负责人联系电话
+	private String constructionDrawingUnit;// 施工图审查机构
+	private String constructionDrawingUnitPrincipal;// 施工图审查机构负责人
+	private String constructionDrawingUnitPrincipalTelphone;// 施工图审查机构联系电话
 	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
 	private List<Proman> promans = new ArrayList<Proman>();
 	private List<Subunit> subunits = new ArrayList<Subunit>();
@@ -90,7 +89,7 @@ public class Project implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Project(Usero usero, Yxarea yxarea, Daymanage daymanage,
+	public Project(Yxarea yxarea, Daymanage daymanage,
 			Construction construction, Integer projectType,
 			Integer engineeringType, Integer buildingType,
 			Integer graphicProgress, String buildUnit,
@@ -113,9 +112,9 @@ public class Project implements java.io.Serializable {
 			String mortarUnit, String mortarUnitPrincipal,
 			String mortarUnitPrincipalTelphone, String constructionDrawingUnit,
 			String constructionDrawingUnitPrincipal,
-			String constructionDrawingUnitPrincipalTelphone, List<Spreadsheet> spreadsheets,
-			List<Proman> promans, List<Subunit> subunits, List<Device> devices) {
-		this.usero = usero;
+			String constructionDrawingUnitPrincipalTelphone,
+			List<Spreadsheet> spreadsheets, List<Proman> promans,
+			List<Subunit> subunits, List<Device> devices) {
 		this.yxarea = yxarea;
 		this.daymanage = daymanage;
 		this.construction = construction;
@@ -197,114 +196,114 @@ public class Project implements java.io.Serializable {
 		return this.buildingType;
 	}
 
-	@Column(name = "buildUnit",length = 50)
+	@Column(name = "buildUnit", length = 50)
 	public String getBuildUnit() {
 		return this.buildUnit;
 	}
 
-	@Column(name = "buildUnitPrincipal",length = 30)
+	@Column(name = "buildUnitPrincipal", length = 30)
 	public String getBuildUnitPrincipal() {
 		return this.buildUnitPrincipal;
 	}
 
-	@Column(name = "buildUnittelphone",length = 30)
+	@Column(name = "buildUnittelphone", length = 30)
 	public String getBuildUnittelphone() {
 		return this.buildUnittelphone;
 	}
 
-	@Column(name = "clearPrincipal",length = 30)
+	@Column(name = "clearPrincipal", length = 30)
 	public String getClearPrincipal() {
 		return this.clearPrincipal;
 	}
 
-	@Column(name = "clearPrincipalTelphone",length = 30)
+	@Column(name = "clearPrincipalTelphone", length = 30)
 	public String getClearPrincipalTelphone() {
 		return this.clearPrincipalTelphone;
 	}
 
-	@Column(name = "concreteUnit",length = 50)
+	@Column(name = "concreteUnit", length = 50)
 	public String getConcreteUnit() {
 		return this.concreteUnit;
 	}
 
-	@Column(name = "concreteUnitPrincipal",length = 30)
+	@Column(name = "concreteUnitPrincipal", length = 30)
 	public String getConcreteUnitPrincipal() {
 		return this.concreteUnitPrincipal;
 	}
 
-	@Column(name = "concreteUnitPrincipalTelphone",length = 30)
+	@Column(name = "concreteUnitPrincipalTelphone", length = 30)
 	public String getConcreteUnitPrincipalTelphone() {
 		return this.concreteUnitPrincipalTelphone;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "conid")
 	public Construction getConstruction() {
 		return this.construction;
 	}
 
-	@Column(name = "constructionDrawingUnit",length = 50)
+	@Column(name = "constructionDrawingUnit", length = 50)
 	public String getConstructionDrawingUnit() {
 		return this.constructionDrawingUnit;
 	}
 
-	@Column(name = "constructionDrawingUnitPrincipal",length = 30)
+	@Column(name = "constructionDrawingUnitPrincipal", length = 30)
 	public String getConstructionDrawingUnitPrincipal() {
 		return this.constructionDrawingUnitPrincipal;
 	}
 
-	@Column(name = "constructionDrawingUnitPrincipalTelphone",length = 30)
+	@Column(name = "constructionDrawingUnitPrincipalTelphone", length = 30)
 	public String getConstructionDrawingUnitPrincipalTelphone() {
 		return this.constructionDrawingUnitPrincipalTelphone;
 	}
 
-	@Column(name = "constructionPermitDate",length = 50)
+	@Column(name = "constructionPermitDate", length = 50)
 	public String getConstructionPermitDate() {
 		return this.constructionPermitDate;
 	}
 
-	@Column(name = "constructionPermitNumber",length = 100)
+	@Column(name = "constructionPermitNumber", length = 100)
 	public String getConstructionPermitNumber() {
 		return this.constructionPermitNumber;
 	}
 
-	@Column(name = "constructionUnit",length = 50)
+	@Column(name = "constructionUnit", length = 50)
 	public String getConstructionUnit() {
 		return this.constructionUnit;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "dayid")
 	public Daymanage getDaymanage() {
 		return this.daymanage;
 	}
 
-	@Column(name = "designUnit",length = 50)
+	@Column(name = "designUnit", length = 50)
 	public String getDesignUnit() {
 		return this.designUnit;
 	}
-	
-	@Column(name = "designUnitPrincipal",length = 30)
+
+	@Column(name = "designUnitPrincipal", length = 30)
 	public String getDesignUnitPrincipal() {
 		return this.designUnitPrincipal;
 	}
 
-	@Column(name = "designUnitPrincipalTelphone",length = 30)
+	@Column(name = "designUnitPrincipalTelphone", length = 30)
 	public String getDesignUnitPrincipalTelphone() {
 		return this.designUnitPrincipalTelphone;
 	}
 
-	@Column(name = "detectionUnit",length = 50)
+	@Column(name = "detectionUnit", length = 50)
 	public String getDetectionUnit() {
 		return this.detectionUnit;
 	}
 
-	@Column(name = "detectionUnitPrincipal",length = 30)
+	@Column(name = "detectionUnitPrincipal", length = 30)
 	public String getDetectionUnitPrincipal() {
 		return this.detectionUnitPrincipal;
 	}
 
-	@Column(name = "detectionUnitPrincipalTelphone",length = 30)
+	@Column(name = "detectionUnitPrincipalTelphone", length = 30)
 	public String getDetectionUnitPrincipalTelphone() {
 		return this.detectionUnitPrincipalTelphone;
 	}
@@ -444,12 +443,6 @@ public class Project implements java.io.Serializable {
 	@Column(name = "supervisor", length = 50)
 	public String getSupervisor() {
 		return this.supervisor;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "uid")
-	public Usero getUsero() {
-		return this.usero;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -676,10 +669,6 @@ public class Project implements java.io.Serializable {
 
 	public void setSupervisor(String supervisor) {
 		this.supervisor = supervisor;
-	}
-
-	public void setUsero(Usero usero) {
-		this.usero = usero;
 	}
 
 	public void setYxarea(Yxarea yxarea) {
