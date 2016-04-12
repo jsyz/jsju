@@ -243,10 +243,10 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断会话是否失效
-		Device device = (Device) session.get("device");
-		if (device == null) {
-			return "opsessiongo_child";
-		}
+//		Device device = (Device) session.get("device");
+//		if (device == null) {
+//			return "opsessiongo_child";
+//		}
 		
 		System.out.println("test add device");
 		

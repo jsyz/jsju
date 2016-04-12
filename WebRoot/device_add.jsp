@@ -44,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p><i class="Hui-iconfont">&#xe623;</i> 盛润园林绿化- 设备管理</p>
    </div>
    <form action = "deviceAction!add" method="post">
+   <input hidden name = "device.project.id" value = "8" />
   	<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
       <div class="row cl mb-10">
@@ -68,7 +69,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="row cl mb-10">
         <label class="form-label col-2 text-r " >是否办理使用登记证：</label>
        <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" />
+          
+          <!--  <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" /> -->
+         <s:radio list="#{'1':'是','0':'否'}" name="evice.isDealUsecard" value="1"/>
           </span></span>
         <label class="form-label col-2 text-r " >拆卸告知日期：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
@@ -87,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       
   </div>
-  
+  <s:token/>
   </div>
   </form>
   </div>
@@ -103,4 +106,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/H-ui.js"></script> 
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
 </body>
+
 </html>
