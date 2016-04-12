@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="xmWraper ">
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   removeTime<nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a href="xm-sbgl.html" title="返回" target="_parent" class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
+   <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a href="xm-sbgl.html" title="返回" target="_parent" class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
    <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：宜城片区<span class="pipe">|</span>【项目总数  20　　建筑面积 80000m<sup>2</sup>     　　造价  500000万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
    </div>
    </div>
@@ -43,7 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
    <p><i class="Hui-iconfont">&#xe623;</i> 盛润园林绿化- 设备管理</p>
    </div>
-  <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+   <form action = "deviceAction!add" method="post">
+  	<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
       <div class="row cl mb-10">
      
@@ -81,13 +82,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="row cl mb-10">
       <div class="col-10 col-offset-5 pt-10 pb-10">
-        <button onClick="article_save();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+        <input class="btn btn-primary radius" type="submit" value = "保存"></input>
         <button onClick="layer_close();" class="btn btn-secondary radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
+      
   </div>
   
   </div>
-   </form>
+  </form>
   </div>
   
 </div>

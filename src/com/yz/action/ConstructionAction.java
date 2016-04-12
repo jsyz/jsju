@@ -241,7 +241,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断回话是否失效
-		Construction Construction = (Construction) session.get("Construction");
+		Construction construction = (Construction) session.get("construction");
 		if (construction == null) {
 			return "opsessiongo_child";
 		}

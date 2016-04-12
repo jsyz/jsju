@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl box-shadow pd-10  bk-gray radius" style="background-color: #FFF;">
-      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onClick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius"  href="<s:property value="deviceAction!goToAdd"/>"><i class="Hui-iconfont">&#xe600;</i> 新增设备</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
+      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onClick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius"  href="deviceAction!goToAdd"><i class="Hui-iconfont">&#xe600;</i> 新增设备</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
       <div class="mt-20">
         <table class="table table-border table-bordered table-bg table-hover table-sort">
           <thead>
