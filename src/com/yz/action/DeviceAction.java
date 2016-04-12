@@ -242,11 +242,14 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 
 	public String add() throws Exception {
-		// 判断回话是否失效
-		Device Device = (Device) session.get("Device");
+		// 判断会话是否失效
+		Device device = (Device) session.get("device");
 		if (device == null) {
 			return "opsessiongo_child";
 		}
+		
+		System.out.println("test add device");
+		
 		deviceService.add(device);
 
 		arg[0] = "deviceAction!list";
@@ -303,7 +306,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 
 		deviceService.deleteById(id);
 		arg[0] = "deviceAction!list";
-		arg[1] = "用户管理";
+		arg[1] = "设备管理";
 		return SUCCESS;
 	}
 

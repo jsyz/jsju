@@ -26,18 +26,21 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Construction;
-import com.yz.service.IConstructionService;
+import com.yz.model.Proman;
+import com.yz.model.Yxarea;
+import com.yz.service.IPromanService;
+import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
+import com.yz.util.InitParam;
 import com.yz.vo.AjaxMsgVO;
 
 /**
- * @author Administrator
+ * @author lq
  * 
  */
-@Component("constructionAction")
+@Component("promanAction")
 @Scope("prototype")
-public class ConstructionAction extends ActionSupport implements RequestAware,
+public class PromanAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 
 	private static final long serialVersionUID = 1L;
@@ -58,36 +61,31 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 	private int status;// 按状态
-	private int pid;// 按设备id
+	private int pid;// 按用户id
 
-//	// 登陆
-//	private String username;
-//	private String password;
+	// 登陆
+	private String username;
+	private String password;
 
-	private String name;				//设备名称
-	private String propertyCardNumber;//产权证号
-	private String installTime;//安装告知时间
-	private String checkTime;//检测时间
-	private Integer isDealUsecard;//是否办理使用登记证
-	private String usecardExpireTime;//登记证到期时间
-	private String removeTime;//拆卸告知日期
 	// 批量删除
 	private String checkedIDs;
 
 	// service层对象
-	private IConstructionService constructionService;
+	private IPromanService promanService;
+	private IYxareaService yxareaService;
 
 	// 单个对象
-	private Construction construction;
+	private Proman proman;
 
 	// list对象
-	private List<Construction> constructions;
+	private List<Proman> promans;
+	private List<Yxarea> areas;
 
-//	// 个人资料新旧密码
-//	private String password1;
-//	private String password2;
+	// 个人资料新旧密码
+	private String password1;
+	private String password2;
 
-	/**
+//	/**
 //	 * 用户登陆
 //	 * 
 //	 * @throws Exception
@@ -96,13 +94,8 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //
 //		if (checkDatebase())// 检查数据库
 //		{
-//			Usero useroTest = new Usero();
-//			useroTest.setNumber("测试人员");
-//			useroTest.setUsername("test");
-//			useroTest.setPassword("test");
-//			useroTest.setUserLimit(1);
-//			useroService.add(useroTest);
-//			session.put("usero", useroTest);
+//			promanService.add(InitParam.getProman());
+//			session.put("proman", InitParam.getProman());
 //			return "loginSucc";
 //		}
 //		if (username == null || username.equals("") || password == null
@@ -111,16 +104,16 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //			request.put("loginFail", loginfail);
 //			return "adminLogin";
 //		}
-//		Usero useroLogin = useroService.useroLogin(username, password);
-//		if (useroLogin == null) {
+//		Proman promanLogin = promanService.promanLogin(username, password);
+//		if (promanLogin == null) {
 //			String loginfail = "用户名或密码输入有误";
 //			request.put("loginFail", loginfail);
 //			return "adminLogin";
 //		} else {
 //			// 设置登陆时间
-//			if (session.get("usero") == null) {
-//				//setLoginTime(useroLogin);
-//				session.put("usero", useroLogin);
+//			if (session.get("proman") == null) {
+//				//setLoginTime(promanLogin);
+//				session.put("proman", promanLogin);
 //			}
 //			// checkIP();//检查IP地址
 //			return "loginSucc";
@@ -129,35 +122,17 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //
 //	public String welcome() {
 //		// 登陆验证
-//		Usero usero = (Usero) session.get("usero");
-//		if (usero == null) {
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
 //			return "opsessiongo";
 //		}
-//		Usero useroWelcome = useroService.loadById(usero.getId());
+//		Proman promanWelcome = promanService.loadById(proman.getId());
 //		// 欢迎界面
 //		return "welcome";
 //	}
-//
-//	// 设置登陆时间
-	/**
-	 * 
-	 * private void setLoginTime(Usero useroLogin) { // TODO Auto-generated
-	 * method stub if (useroLogin.getBeforeLoginTime() == "" ||
-	 * useroLogin.getBeforeLoginTime() == null) {
-	 * useroLogin.setBeforeLoginTime(DateTimeKit.getLocalTime()); } else {
-	 * useroLogin.setBeforeLoginTime(useroLogin .getCurrentLoginTime()); }
-	 * useroLogin.setCurrentLoginTime(DateTimeKit.getLocalTime());
-	 * useroService.update(useroLogin); }
-	 */
-//	private boolean checkDatebase() {
-//		// TODO Auto-generated method stub
-//		useros = useroService.getUseros();
-//		if (useros.size() == 0) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
+
+	// 设置登陆时间
+	
 
 	private void checkIP() {
 		// TODO Auto-generated method stub
@@ -190,18 +165,18 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	/**
 	 * 用户注销
 	 */
-//	public String logout() {
-//		session.clear();
-//		return "adminLogin";
-//	}
+	public String logout() {
+		session.clear();
+		return "adminLogin";
+	}
 
 	/**
-	 * 设备管理
+	 * 用户管理
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		/*Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		/*Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo";
 		}*/
 		if (convalue != null && !convalue.equals("")) {
@@ -211,14 +186,14 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		// 总记录数
-		totalCount = constructionService.getTotalCount(con, convalue, construction);
+		totalCount = promanService.getTotalCount(con, convalue, proman);
 		// 总页数
-		pageCount = constructionService.getPageCount(totalCount, size);
+		pageCount = promanService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		constructions = constructionService.queryList(con, convalue, construction, page, size);
+		promans = promanService.queryList(con, convalue, proman, page, size);
 		return "list";
 	}
 
@@ -228,12 +203,12 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-
+		areas = yxareaService.getYxareas();
 		return "add";
 	}
 
 	/**
-	 * 添加设备
+	 * 添加
 	 * 
 	 * @return
 	 * @throws Exception
@@ -241,14 +216,14 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断回话是否失效
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
+		Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo_child";
 		}
-		constructionService.add(construction);
+		promanService.add(proman);
 
-		arg[0] = "constructionAction!list";
-		arg[1] = "设备管理";
+		arg[0] = "promanAction!list";
+		arg[1] = "人员管理";
 		return "success_child";
 	}
 
@@ -290,18 +265,18 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
+		Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo";
 		}
 
-		construction = constructionService.loadById(id);
+		proman = promanService.loadById(id);
 
-		constructionService.delete(construction);
+		promanService.delete(proman);
 
-		constructionService.deleteById(id);
-		arg[0] = "constructionAction!list";
-		arg[1] = "用户管理";
+		promanService.deleteById(id);
+		arg[0] = "promanAction!list";
+		arg[1] = "人员管理";
 		return SUCCESS;
 	}
 
@@ -310,13 +285,13 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * 
 	 * @return
 	 */
-	public String deleteConstructions() {
+	public String deletePromans() {
 
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
-			construction = constructionService.loadById(ids[i]);
+			proman = promanService.loadById(ids[i]);
 
-			constructionService.delete(construction);
+			promanService.delete(proman);
 		}
 		AjaxMsgVO msgVO = new AjaxMsgVO();
 		msgVO.setMessage("批量删除成功.");
@@ -341,7 +316,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 */
 	public String load() {
 
-		construction = constructionService.loadById(id);
+		proman = promanService.loadById(id);
 		return "load";
 	}
 
@@ -352,45 +327,45 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
+		Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo_child";
 		}
 
-		constructionService.update(construction);
-		arg[0] = "constructionAction!list";
-		arg[1] = "设备管理";
+		promanService.update(proman);
+		arg[0] = "promanAction!list";
+		arg[1] = "人员管理";
 		return "success_child";
 	}
 
-	/**
-	 * 跳转到修改秒页面
-	 * 
-	 * @return
-	 */
+//	/**
+//	 * 跳转到修改秒页面
+//	 * 
+//	 * @return
+//	 */
 //	public String loadPassword() throws Exception {
-//		Construction construction = (Construction) session.get("construction");
-//		if (construction == null) {
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
 //			return "opsessiongo";
 //		}
-//		password = construction.getPassword();
+//		password = proman.getPassword();
 //		return "password";
 //	}
-
-	/**
-	 * 修改密码
-	 * 
-	 * @return
-	 */
+//
+//	/**
+//	 * 修改密码
+//	 * 
+//	 * @return
+//	 */
 //	public String updatePassword() throws Exception {
 //		// 判断会话是否失效
-//		Construction construction = (Construction) session.get("construction");
-//		if (construction == null) {
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
 //			return "opsessiongo";
 //		}
-//		construction.setPassword(password);
-//		constructionService.update(construction);
-//		arg[0] = "constructionAction!list";
+//		proman.setPassword(password);
+//		promanService.update(proman);
+//		arg[0] = "promanAction!list";
 //		arg[1] = "用户管理";
 //		return SUCCESS;
 //	}
@@ -401,35 +376,39 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
+		Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo";
 		}
-		construction = constructionService.loadById(id);
+		proman = promanService.loadById(id);
 		return "view";
 	}
 
 	/**
-	 * 设备资料
+	 * 个人资料
 	 */
-	public String currentConstruction() {
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
+	public String currentProman() {
+		Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo";
 		}
-		construction = constructionService.loadById(construction.getId());
-		
-		return "currentConstruction";
+		proman = promanService.loadById(proman.getId());
+		;
+		return "currentProman";
 	}
 
-	public String updateCurrentConstruction() throws Exception {
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
+	public String updateCurrentProman() throws Exception {
+		Proman proman = (Proman) session.get("proman");
+		if (proman == null) {
 			return "opsessiongo";
 		}
-		constructionService.update(construction);
-		arg[0] = "constructionAction!currentConstruction";
-		arg[1] = "设备资料";
+//		if (password1 != null && !password1.replace(" ", "").equals("")
+//				&& password2 != null && !password2.replace(" ", "").equals("")) {
+//			proman.setPassword(password1);
+//		}
+		promanService.update(proman);
+		arg[0] = "promanAction!currentProman";
+		arg[1] = "个人资料";
 		return SUCCESS;
 	}
 
@@ -532,31 +511,46 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		this.arg = arg;
 	}
 
-	public IConstructionService getConstructionService() {
-		return constructionService;
+	public IPromanService getPromanService() {
+		return promanService;
 	}
 
 	@Resource
-	public void setConstructionService(IConstructionService constructionService) {
-		this.constructionService = constructionService;
+	public void setPromanService(IPromanService promanService) {
+		this.promanService = promanService;
 	}
 
-	public Construction getConstruction() {
-		return construction;
+	public Proman getProman() {
+		return proman;
 	}
 
-	public void setConstruction(Construction construction) {
-		this.construction = construction;
+	public void setProman(Proman proman) {
+		this.proman = proman;
 	}
 
-	public List<Construction> getConstructions() {
-		return constructions;
+	public List<Proman> getPromans() {
+		return promans;
 	}
 
-	public void setConstructions(List<Construction> constructions) {
-		this.constructions = constructions;
+	public void setPromans(List<Proman> promans) {
+		this.promans = promans;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public javax.servlet.http.HttpServletResponse getResponse() {
 		return response;
@@ -606,62 +600,39 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		this.pictureFileName = pictureFileName;
 	}
 
-	public String getName() {
-		return name;
+	public String getPassword1() {
+		return password1;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword1(String password1) {
+		this.password1 = password1;
 	}
 
-	public String getPropertyCardNumber() {
-		return propertyCardNumber;
+	public String getPassword2() {
+		return password2;
 	}
 
-	public void setPropertyCardNumber(String propertyCardNumber) {
-		this.propertyCardNumber = propertyCardNumber;
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 
-	public String getInstallTime() {
-		return installTime;
+	public IYxareaService getYxareaService() {
+		return yxareaService;
 	}
 
-	public void setInstallTime(String installTime) {
-		this.installTime = installTime;
+	@Resource
+	public void setYxareaService(IYxareaService yxareaService) {
+		this.yxareaService = yxareaService;
 	}
 
-	public String getCheckTime() {
-		return checkTime;
+	public List<Yxarea> getAreas() {
+		return areas;
 	}
 
-	public void setCheckTime(String checkTime) {
-		this.checkTime = checkTime;
+	public void setAreas(List<Yxarea> areas) {
+		this.areas = areas;
 	}
-
-	public Integer getIsDealUsecard() {
-		return isDealUsecard;
-	}
-
-	public void setIsDealUsecard(Integer isDealUsecard) {
-		this.isDealUsecard = isDealUsecard;
-	}
-
-	public String getUsecardExpireTime() {
-		return usecardExpireTime;
-	}
-
-	public void setUsecardExpireTime(String usecardExpireTime) {
-		this.usecardExpireTime = usecardExpireTime;
-	}
-
-	public String getRemoveTime() {
-		return removeTime;
-	}
-
-	public void setRemoveTime(String removeTime) {
-		this.removeTime = removeTime;
-	}
-
-
-
+	
+	
+	
 }

@@ -88,6 +88,7 @@
 				</div>
 				<div class="row cl">
 					<div class="col-10 col-offset-2">
+						<s:token></s:token>
 						<input type="submit" class="btn btn-primary radius" value="保存并提交" />
 						<input type="button" onClick="childPage_close();"
 							class="btn btn-primary radius" value="取消" />
