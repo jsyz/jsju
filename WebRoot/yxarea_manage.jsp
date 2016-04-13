@@ -57,34 +57,39 @@
 								<th class="c-white  f-14" width="15%">
 									造 价（万）
 								</th>
+								<!-- 
 								<th class="c-white  f-14" width="25%">
 									更新时间
 								</th>
+								 -->
 							</tr>
 						</thead>
 						<s:iterator value="areaVOs" var="areaVO" status="status">
 							<tr class="text-c">
 								<td>
-									<s:property value="index"/>
+									<s:property value="index" />
 								</td>
 								<td>
-									<a href="projectAction!list?areaIndex=<s:property value="index"/>"><s:property value="areaName"/></a>
+									<a
+										href="projectAction!list?areaIndex=<s:property value="index"/>"><s:property
+											value="areaName" /> </a>
 								</td>
 								<td>
-									<s:property value="projectNumberTotal"/>
+									<s:property value="projectNumberTotal" />
 								</td>
 								<td>
-									<s:property value="buildingAreaTotal"/>
+									<s:property value="buildingAreaTotal" />
 								</td>
 								<td>
-									<s:property value="buildingCostTotal"/>
+									<s:property value="buildingCostTotal" />
 								</td>
+								<!--  
 								<td>
 									2015-10-11
 								</td>
+								-->
 							</tr>
 						</s:iterator>
-
 					</table>
 
 				</div>
@@ -97,21 +102,25 @@
 									合计：
 								</th>
 								<th class="  f-12" width="9%">
-									<s:property value="allNumberTotal"/>
+									<s:property value="allNumberTotal" />
 								</th>
 								<th class="  f-12" width="21%">
-									<s:property value="allAreaTotal"/>（m
+									<s:property value="allAreaTotal" />
+									（m
 									<sup>
 										2
 									</sup>
 									）
 								</th>
 								<th class="f-12" width="15%">
-									<s:property value="allCostTotal"/>（万）
+									<s:property value="allCostTotal" />
+									（万）
 								</th>
+								<!--  
 								<th class="f-12" width="25%">
 									2015-10-11(最新时间)
 								</th>
+								-->
 							</tr>
 						</thead>
 					</table>

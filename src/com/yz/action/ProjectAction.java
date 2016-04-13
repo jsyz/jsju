@@ -170,16 +170,18 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	 * @return
 	 * @throws Exception
 	 */
-	public String addUser() throws Exception {
+	public String add() throws Exception {
 		// 判断回话是否失效
 		Usero userSession = (Usero) session.get("userSession");
 		if (userSession == null) {
 			String loginfail = "登陆失效,信息提交失败.";
 			request.put("loginFail", loginfail);
-			return "opfailure_child";
+			return "opsessiongo";
 		}
 		projectService.add(project);
-		return "success_child";
+		arg[0] = "projectAction!list?areaIndex="+areaIndex;
+		arg[1] = "项目管理";
+		return SUCCESS;
 	}
 
 	/**
@@ -193,13 +195,13 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (userSession == null) {
 			String loginfail = "登陆失效,信息提交失败.";
 			request.put("loginFail", loginfail);
-			return "opfailure_child";
+			return "opsessiongo";
 		}
 
 		project = projectService.loadById(id);
 		projectService.delete(project);
-		arg[0] = "projectAction!list";
-		arg[1] = "用户管理";
+		arg[0] = "projectAction!list?areaIndex="+project.getYxarea().getAreaIndex();
+		arg[1] = "项目管理";
 		return SUCCESS;
 	}
 
@@ -237,7 +239,10 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-		yxareas = yxareaService.getYxareas();
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
 		project = projectService.loadById(id);
 		return "load";
 	}
@@ -253,10 +258,27 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (userSession == null) {
 			String loginfail = "登陆失效,信息提交失败.";
 			request.put("loginFail", loginfail);
-			return "opfailure_child";
+			return "opsessiongo";
 		}
 		projectService.update(project);
-		return "success_child";
+		arg[0] = "projectAction!list?areaIndex="+areaIndex;
+		arg[1] = "项目管理";
+		return SUCCESS;
+	}
+	
+	
+	public String updateProject() throws Exception {
+		// 判断会话是否失效
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}
+		projectService.update(project);
+		arg[0] = "projectAction!list?areaIndex="+areaIndex;
+		arg[1] = "项目管理";
+		return SUCCESS;
 	}
 
 	/**
@@ -269,8 +291,30 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (userSession == null) {
 			return "opsessiongo";
 		}
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
 		project = projectService.loadById(id);
 		return "view";
+	}
+	
+	/**
+	 * 项目工作台
+	 * 
+	 * @return
+	 */
+	public String bench() {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
+		}
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(id);
+		return "bench";
 	}
 
 	// get、set-------------------------------------------

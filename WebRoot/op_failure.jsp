@@ -52,9 +52,8 @@
 									<tr bgcolor="#FFFFFF">
 										<td>
 											&nbsp;您已重复提交数据!
-											<a href="javascript:;"
-												onClick="location.href='useroAction!login'"
-												class="btn btn-primary radius" target="_blank">返回登陆界面</a>
+											<a href="useroAction!index"
+												class="btn btn-primary radius" target="_blank">返回主菜单</a>
 										</td>
 									</tr>
 								</tbody>

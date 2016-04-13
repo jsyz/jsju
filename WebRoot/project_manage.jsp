@@ -65,7 +65,7 @@
 						</sup>
 						造价
 						<s:property value="areaVO.buildingCostTotal" />
-						】
+						万 】
 						<a href="yxareaAction!list"><span
 							class="label label-warning radius">片区切换</span> </a>
 					</p>
@@ -79,17 +79,16 @@
 							onClick="deleteAllCheckedProjects();"
 							class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 								批量删除</a> <a class="btn btn-primary radius"
-							onClick="childPageFull('新增项目','projectAction!goToAdd?areaIndex=<s:property value="areaIndex"/>')"
-							href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增项目</a>
-						</span>
+							href="projectAction!goToAdd?areaIndex=<s:property value="areaIndex"/>"><i
+								class="Hui-iconfont">&#xe600;</i> 新增项目</a> </span>
 						<span class="r">共有数据：<strong><s:property
 									value="totalCount" /> </strong> 条</span>
 					</div>
 					<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
 						<div class="text-c">
-							<form name="useroListForm" method="post"
-								action="useroAction!list" target="_self">
-								<s:hidden name="type"></s:hidden>
+							<form name="projectListForm" method="post"
+								action="projectAction!list" target="_self">
+								<s:hidden name="areaIndex"></s:hidden>
 								<table width="100%" border="0" cellspacing="0" cellpadding="0"
 									style="line-height: 35px;">
 									<tr height="35">
@@ -166,19 +165,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<s:if test="%{useros.size()==0}">
-									<td colspan="10" align="center">
+								<s:if test="%{projects.size()==0}">
+									<td colspan="14" align="center">
 										暂无任何项目
 									</td>
 								</s:if>
-								<s:iterator value="useros" var="usero" status="status">
+								<s:iterator value="projects" var="project" status="status">
 									<tr class="text-c">
 										<td>
 											<input name="indexID" class="indexID" type="checkbox"
 												value="<s:property value="id"/>">
 										</td>
 										<td>
-											<s:property value="#status.index" />
+											<s:property value="#status.index+1" />
 										</td>
 										<td class="text-c">
 											<s:if test="projectType==0">房地产开发</s:if>
@@ -188,8 +187,7 @@
 											<s:elseif test="projectType==4">一般项目</s:elseif>
 										</td>
 										<td>
-											<a href="xmshow.html"><s:property value="name" />
-											</a>
+											<a href="projectAction!bench?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"> <s:property value="name" /> </a>
 										</td>
 										<td>
 											<s:property value="buildingArea" />
@@ -220,11 +218,10 @@
 										</td>
 										<td class="f-14 td-manage">
 											<a style="text-decoration: none" class="ml-5"
-												onClick="childPageFull('项目编辑','projectAction!load','10001')"
-												href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
-											</a>
-											<a style="text-decoration: none" class="ml-5"
-												onClick="article_del(this,'10001')" href="javascript:;"
+												href="projectAction!load?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+												title="编辑"><i class="Hui-iconfont">&#xe6df;</i> </a>
+											<a style="text-decoration: none" class="ml-5" onclick="return confirm('你确定删除该项目吗？')"
+												href="projectAction!delete?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
 												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
 										</td>
 									</tr>
@@ -240,19 +237,19 @@
 									</td>
 									<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 										<a
-											href="javascript:jumpCommonPage('projectAction!list',1,<s:property value="con"/>,'<s:property value="convalue"/>');"
+											href="javascript:jumpProjectPage('projectAction!list',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
 											target="rightFrame">首页</a>&nbsp;&nbsp;
 										<a
-											href="javascript:jumpCommonPage('projectAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>');"
+											href="javascript:jumpProjectPage('projectAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
 											target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpCommonPage('projectAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>');"
+											href="javascript:jumpProjectPage('projectAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
 											target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpCommonPage('projectAction!list',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>');"
+											href="javascript:jumpProjectPage('projectAction!list',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
 											target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
 										<input type='button' class="btn btn-primary radius size-S"
-											onclick="jumpCommonPage('projectAction!list',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>');"
+											onclick="jumpProjectPage('projectAction!list',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
 											value='转到' />
 										&nbsp; 当前页：
 										<input onpaste="return false"

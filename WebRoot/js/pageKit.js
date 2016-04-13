@@ -67,6 +67,20 @@ function jumpCommonPage(url,page,con,convalue){
 	window.location=url;
 }
 
+//分页显示
+function jumpProjectPage(url,page,con,convalue,areaIndex){
+	
+	var page=page;
+	if(isNaN(page)){
+		var page2=document.getElementById(page).value;
+		page=parseInt(page2);
+	}
+	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&areaIndex='+areaIndex;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+
 //人员 分页显示
 function jumpPersonPage(url,page,con,convalue,type,queryState,starttime,endtime){
 	

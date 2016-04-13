@@ -82,9 +82,6 @@ public class ProjectServiceImp implements IProjectService {
 			if(con==2){
 				queryString += "and mo.supervisor like ? "; 
 			}
-			if(con==3){
-				queryString += "and mo.number like ? "; 
-			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
 		return projectDao.getUniqueResult(queryString,p);
@@ -104,25 +101,14 @@ public class ProjectServiceImp implements IProjectService {
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){
-				queryString += "and mo.unit.name like ? "; 
+				queryString += "and mo.name like ? "; 
 			}
 			if(con==2){
-				queryString += "and mo.realname like ? "; 
-				
-			}
-			if(con==3){
-				queryString += "and mo.number like ? "; 
+				queryString += "and mo.supervisor like ? "; 
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
 		return projectDao.pageList(queryString,p,page,size);
 	}
-	//用户登录
-	public Project projectlogin(String username, String password) {
-		String queryString="from Project mo where mo.username=:username and mo.password=:password";
-		String[] paramNames=new String[]{"username","password"};
-		Object[] values=new Object[]{username,password};
-		return projectDao.queryByNamedParam(queryString,paramNames,values);
-	} 
 	
 }

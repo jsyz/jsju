@@ -65,9 +65,9 @@
 											<td>
 												恭喜您，操作成功！&nbsp;
 												<span id="jumpTo">5</span>秒后跳转到
-												<strong><u><a class="btn btn-primary radius"
-														href="<s:property value="arg[0]"  />"><s:property
-																value="arg[1]" />页面</a> </u> &nbsp;</strong>
+												<strong><a class="btn btn-primary radius"
+														href="<s:property value="arg[0]"/>"><s:property
+																value="arg[1]" />页面</a> &nbsp;</strong>
 											</td>
 											<script type="text/javascript">countDown(5,'<s:property value="arg[0]"/>');</script>
 										</tr>

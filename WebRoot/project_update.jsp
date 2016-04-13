@@ -31,16 +31,14 @@
 		<script type="text/javascript" src="js/H-ui.admin.js"></script>
 		<script type="text/javascript" src="js/pageKit.js"></script>
 		<script type="text/javascript" src="js/checkUtil.js"></script>
-		<title>新增项目</title>
+		<title>编辑项目</title>
 	</head>
 	<body>
-		<form action="projectAction!add" method="post"
+		<form action="projectAction!updateProject" method="post"
 			class="form form-horizontal" onsubmit="return checkProject();">
-			<input type="hidden" name="project.yxarea.id"
-				value="<s:property value="areaVO.id" />" />
+			<s:hidden name="project.id"></s:hidden>
+			<s:hidden name="project.yxarea.id"></s:hidden>
 			<s:hidden name="areaIndex"></s:hidden>
-			<s:hidden name="project.graphicProgress" value="0"></s:hidden>
-			<s:token></s:token>
 			<div class="xmWraper ">
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -169,7 +167,8 @@
 											<input type="text" class="mini-textbox-input"
 												name="project.startDate"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate">
+												value="<s:property value="project.startDate"/>" id="logmin"
+												class="input-text Wdate">
 										</td>
 										<th class="th2">
 											竣工日期
@@ -178,6 +177,7 @@
 											<span class="mini-textbox-border"><input type="text"
 													class="mini-textbox-input" name="project.planendDate"
 													onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
+													value="<s:property value="project.planendDate"/>"
 													id="logmin" class="input-text Wdate"> </span>
 										</td>
 									</tr>
@@ -194,9 +194,18 @@
 											形象进度
 										</th>
 										<td class="last">
-											<span class="mini-textbox-border"><input
-													placeholder="" value="基础/0%" class="mini-textbox-input"
-													autocomplete="off" type="text"> </span>
+											<span class="mini-textbox-border"> <s:if
+													test="project.engineeringType==0">
+													<s:select list="#{0:'基础',1:'主体',2:'装饰',3:'完工待验',4:'竣工'}"
+														cssClass="select" name="project.graphicProgress"
+														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
+
+												</s:if> <s:else>
+													<s:select
+														list="#{0:'20%',1:'40%',2:'60%',3:'80%',4:'100%'}"
+														cssClass="select" name="project.graphicProgress"
+														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
+												</s:else> </span>
 										</td>
 									</tr>
 									<tr class="odd-row">
@@ -226,6 +235,7 @@
 													class="mini-textbox-input"
 													name="project.constructionPermitDate"
 													onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
+													value="<s:property value="project.constructionPermitDate"/>"
 													id="logmin" class="input-text Wdate"> </span>
 										</td>
 										<th class="th2">
@@ -404,7 +414,25 @@
 											施工分包单位
 										</th>
 										<td colspan="3">
-											<span style="color:red;"> &nbsp;[分包单位在编辑项目中添加]</span>
+											<button type="button" class="btn btn-success radius"
+												id="button" name=""
+												onClick="childPage('新增分包单位','add-company.html')">
+												<i class="Hui-iconfont">&#xe600;</i>新增分包单位
+											</button>
+										</td>
+									</tr>
+									<tr class="odd-row">
+										<th class="th2 first">
+											施工分包单位
+										</th>
+										<td>
+											&nbsp;
+										</td>
+										<td>
+											&nbsp;
+										</td>
+										<td>
+											&nbsp;
 										</td>
 									</tr>
 									<tr>

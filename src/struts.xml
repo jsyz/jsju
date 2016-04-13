@@ -97,7 +97,8 @@
 			<result name="add">/project_add.jsp</result>
 			<result name="load">/project_update.jsp</result>
 			<result name="view">/project_view.jsp</result>
-
+			<result name="bench">/project_bench.jsp</result>
+			
 			<result name="invalid.token">/op_failure.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
