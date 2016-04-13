@@ -208,5 +208,7 @@ public class SubunitAction extends ActionSupport implements RequestAware,
 	public void setSubid(int subid) {
 		this.subid = subid;
 	}
+	
+	
 
 }

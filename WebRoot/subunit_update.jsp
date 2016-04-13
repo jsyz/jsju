@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>新增分包单位</title>
+		<title>修改分包单位</title>
 		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
 			type="text/css" />
@@ -30,9 +30,10 @@
 
 	<body>
 		<div class="pd-20">
-			<form action="subunitAction!add" method="post" class="form form-horizontal"
+			<form action="subunitAction!update" method="post" class="form form-horizontal"
 				id="form-article-add">
-				<input type="hidden" name="subunit.project.id" value="<s:property value="pid"/>"/>
+				<s:hidden name="subunit.id"></s:hidden>
+				<s:hidden name="subunit.project.id"></s:hidden>
 				<div class="row cl">
 					<label class="form-label col-2">
 						<span class="c-red">*</span>分包单位名称：

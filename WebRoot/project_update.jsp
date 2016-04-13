@@ -31,6 +31,7 @@
 		<script type="text/javascript" src="js/H-ui.admin.js"></script>
 		<script type="text/javascript" src="js/pageKit.js"></script>
 		<script type="text/javascript" src="js/checkUtil.js"></script>
+		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<title>编辑项目</title>
 	</head>
 	<body>
@@ -547,71 +548,45 @@
 											</div>
 										</td>
 									</tr>
-									
-									<tr>
-										<th class="th2 first">
-										</th>
-										<td colspan="3">
-											<div class="row">
-												<div class="col-md-2">
-													单位名称
-												</div>
-												<div class="col-md-2">
-													项目负责人
-												</div>
-												<div class="col-md-4">
-													负责人联系电话
-												</div>
-												<div class="col-md-2">
-													是
-												</div>
-												<div class="col-md-2">
-													<a style="text-decoration: none" class="ml-5"
-														onclick="addPage('编辑查证信息','judgeAction!load?jid=<s:property value="id" />','500','300')"
-														href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
-													</a>
-													<a style="text-decoration: none" class="ml-5"
-														href="javascript:;"
-														onclick="deleteJudge(<s:property value="id" />);"
-														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-												</div>
-											</div>
+									<s:if test="%{project.subunits.size()==0}">
+										<td colspan="4" align="center">
+											暂无任何分包单位
 										</td>
-									</tr>
-									
-									
-									<tr>
-										<th class="th2 first">
-										</th>
-										<td colspan="3">
-											<div class="row">
-												<div class="col-md-2">
-													单位名称
+									</s:if>
+									<s:iterator value="project.subunits" var="subunit"
+										status="status">
+										<tr>
+											<th class="th2 first">
+											</th>
+											<td colspan="3">
+												<div class="row">
+													<div class="col-md-2">
+														<s:property value="unitName" />
+													</div>
+													<div class="col-md-2">
+														<s:property value="unitLeader" />
+													</div>
+													<div class="col-md-4">
+														<s:property value="leaderPhone" />
+													</div>
+													<div class="col-md-2">
+														<s:if test="isInCity==0">否</s:if>
+														<s:else>是</s:else>
+													</div>
+													<div class="col-md-2">
+														<a style="text-decoration: none" class="ml-5"
+															onclick="addPage('编辑分包单位','subunitAction!load?subid=<s:property value="id" />','500','300')"
+															href="javascript:;" title="编辑"><i
+															class="Hui-iconfont">&#xe6df;</i> </a>
+														<a style="text-decoration: none" class="ml-5"
+															href="javascript:;"
+															onclick="deleteSubunit(<s:property value="id" />);"
+															title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+													</div>
 												</div>
-												<div class="col-md-2">
-													项目负责人
-												</div>
-												<div class="col-md-4">
-													负责人联系电话
-												</div>
-												<div class="col-md-2">
-													是
-												</div>
-												<div class="col-md-2">
-													<a style="text-decoration: none" class="ml-5"
-														onclick="addPage('编辑查证信息','judgeAction!load?jid=<s:property value="id" />','500','300')"
-														href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
-													</a>
-													<a style="text-decoration: none" class="ml-5"
-														href="javascript:;"
-														onclick="deleteJudge(<s:property value="id" />);"
-														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-												</div>
-											</div>
-
-										</td>
-									</tr>
-
+											</td>
+										</tr>
+									</s:iterator>
 								</tbody>
 							</table>
 						</div>

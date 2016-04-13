@@ -78,7 +78,7 @@
 						</p>
 						<s:if test="project.engineeringType==0">
 							<s:if test="project.graphicProgress==0">
-								<div class="six steps">
+								<div class="five steps">
 									<span class="active step">基础</span>
 									<span class="disabled step">主体</span>
 									<span class="disabled step">装饰</span>
@@ -87,7 +87,7 @@
 								</div>
 							</s:if>
 							<s:elseif test="project.graphicProgress==1">
-								<div class="six steps">
+								<div class="five steps">
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="disabled step">装饰</span>
@@ -96,7 +96,7 @@
 								</div>
 							</s:elseif>
 							<s:elseif test="project.graphicProgress==2">
-								<div class="six steps">
+								<div class="five steps">
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
@@ -105,7 +105,7 @@
 								</div>
 							</s:elseif>
 							<s:elseif test="project.graphicProgress==3">
-								<div class="six steps">
+								<div class="five steps">
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
@@ -114,7 +114,7 @@
 								</div>
 							</s:elseif>
 							<s:elseif test="project.graphicProgress==4">
-								<div class="six steps">
+								<div class="five steps">
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
@@ -279,7 +279,7 @@
 												<s:elseif test="project.graphicProgress==1">主体</s:elseif>
 												<s:elseif test="project.graphicProgress==2">装饰</s:elseif>
 												<s:elseif test="project.graphicProgress==3">完工待验</s:elseif>
-												<s:elseif test="project.graphicProgress==4">竣工%</s:elseif>
+												<s:elseif test="project.graphicProgress==4">竣工</s:elseif>
 
 											</s:if> <s:else>
 												<s:if test="project.graphicProgress==0">20%</s:if>
@@ -583,6 +583,35 @@
 										</div>
 									</td>
 								</tr>
+								<s:if test="%{project.subunits.size()==0}">
+									<td colspan="4" align="center">
+										暂无任何分包单位
+									</td>
+								</s:if>
+								<s:iterator value="project.subunits" var="subunit"
+									status="status">
+								<tr class="odd-row">
+									<th class="th2 first">
+									</th>
+									<td colspan="3">
+										<div class="row">
+											<div class="col-md-4">
+												<s:property value="unitName" />
+											</div>
+											<div class="col-md-2">
+											<s:property value="unitLeader" />
+											</div>
+											<div class="col-md-4">
+												<s:property value="leaderPhone" />
+											</div>
+											<div class="col-md-2">
+													<s:if test="isInCity==0">否</s:if>
+													<s:else>是</s:else>
+											</div>
+										</div>
+									</td>
+								</tr>
+								</s:iterator>
 							</tbody>
 						</table>
 					</div>
