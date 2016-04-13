@@ -352,10 +352,10 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
-			return "opsessiongo_child";
-		}
+//		Construction construction = (Construction) session.get("construction");
+//		if (construction == null) {
+//			return "opsessiongo_child";
+//		}
 
 		constructionService.update(construction);
 		arg[0] = "constructionAction!list";

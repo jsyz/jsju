@@ -1,89 +1,193 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<LINK rel="Bookmark" href="/favicon.ico" >
-<LINK rel="Shortcut Icon" href="/favicon.ico" />
-<!--[if lt IE 9]>
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<LINK rel="Bookmark" href="/favicon.ico">
+		<LINK rel="Shortcut Icon" href="/favicon.ico" />
+		<!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
 <script type="text/javascript" src="lib/PIE_IE678.js"></script>
 <![endif]-->
-<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-<link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="css/city.css" rel="stylesheet" type="text/css" />
-<!--[if IE 6]>
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
+			type="text/css" />
+		<link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet"
+			type="text/css" />
+		<link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+		<link href="css/city.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript"
+			src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+		<script type="text/javascript"
+			src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+		<script type="text/javascript" src="js/H-ui.js"></script>
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/pageKit.js"></script>
+		<script type="text/javascript" src="js/checkUtil.js"></script>
+		<script type="text/javascript" src="js/commonUtil.js"></script>
+		<!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>设备管理</title>
-</head>
-<body>
-<div class="xmWraper ">
-   <div class="xmconbox pd-20">
-   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
-   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：官林<span class="pipe">|</span>【项目总数  32　　建筑面积 4378m<sup>2</sup>     　　造价  5343万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
-   </div>
-   </div>
-   <div class="xmconbox pd-20">
-   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <p><i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 设备管理</p>
-   </div>
-  <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-    <div class="row cl box-shadow pd-10  bk-gray radius" style="background-color: #FFF;">
-      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onClick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius"  href="deviceAction!goToAdd"><i class="Hui-iconfont">&#xe600;</i> 新增设备</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
-      <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-hover table-sort">
-          <thead>
-            <tr class="text-c">
-              <th width="35"><input type="checkbox" name="input" value=""></th>
-              <th width="51">序号</th>
-              <th width="151">设备名称</th>
-              <th width="151">设备产权证号</th>
-              <th width="71">安装告知日期</th>
-              <th width="70">检测日期</th>
-              <th width="68">是否办理使用登记证</th>
-               <th width="68">登记证到期时间</th>
-              <th width="68">拆卸告知日期</th>
-              <th width="103">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-          <s:iterator value="devices" var="device" status="index">
-            <tr class="text-c">
-              <td ><input type="checkbox" value="" name="input" ></td>
-              <td><s:property value="#index.count"/></td>
-              <td><a onClick="xmsb_show('塔机','xmsbshow.html','10001')" href="deviceAction!view"><s:property value="name"/></a></td>
-              <td><s:property value="propertyCardNumber"/></td>
-              <td><s:property value="installTime"/></td>
-              <td><s:property value="checkTime"/> </td>
-              <td><s:if test = "isDealUsecard == 1">
+		<title>设备管理</title>
+	</head>
+	<body>
+		<div class="xmWraper ">
+			<div class="xmconbox pd-20">
+				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<nav>
+					<a class="btn btn-success radius r mr-5 f-r"
+						style="line-height: 1.6em; margin-top: 3px"
+						href="javascript:location.replace(location.href);" title="刷新当前页"><i
+						class="Hui-iconfont">&#xe68f;</i>
+					</a><a class="btn btn-success radius r mr-5 f-r"
+						style="line-height: 1.6em; margin-top: 3px"
+						href="javascript:history.go(-1);" title="返回"><i
+						class="Hui-iconfont">&#xe66b;</i>
+					</a>
+					</nav>
+					<p
+						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
+						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：官林
+						<span class="pipe">|</span>【项目总数 32 建筑面积 4378m
+						<sup>
+							2
+						</sup>
+						造价 5343万 】
+						<a href="citylist.html"><span
+							class="label label-warning radius">片区切换</span>
+						</a>
+					</p>
+				</div>
+			</div>
+			<div class="xmconbox pd-20">
+				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<p>
+						<i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 设备管理
+					</p>
+				</div>
+				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<div class="row cl box-shadow pd-10  bk-gray radius"
+						style="background-color: #FFF;">
+						<div class="cl pd-5 bg-1 bk-gray mb-20">
+							<span class="l"> <a href="javascript:;"
+								onClick="deleteAllCheckedDevices();"
+								class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+									批量删除</a> <a class="btn btn-primary radius"
+								href="deviceAction!goToAdd"><i class="Hui-iconfont">&#xe600;</i>
+									新增设备</a>
+							</span>
+							<span class="r">共有数据：<strong>2</strong> 条</span>
+						</div>
+						<div class="mt-20">
+							<table
+								class="table table-border table-bordered table-bg table-hover table-sort">
+								<thead>
+									<tr class="text-c">
+										<th width="35">
+											<input type="checkbox" name="input" value="">
+										</th>
+										<th width="51">
+											序号
+										</th>
+										<th width="151">
+											设备名称
+										</th>
+										<th width="151">
+											设备产权证号
+										</th>
+										<th width="71">
+											安装告知日期
+										</th>
+										<th width="70">
+											检测日期
+										</th>
+										<th width="68">
+											是否办理使用登记证
+										</th>
+										<th width="68">
+											登记证到期时间
+										</th>
+										<th width="68">
+											拆卸告知日期
+										</th>
+										<th width="103">
+											操作
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<s:iterator value="devices" var="device" status="index">
+										<tr class="text-c">
+											<td>
+												<input name="indexID" class="indexID" type="checkbox"
+													value="<s:property value="id"/>">
+
+											</td>
+											<td>
+												<s:property value="#index.count" />
+											</td>
+											<td>
+												<a
+													onClick="xmsb_show('设备','deviceAction!view?id=<s:property value="id"/>','10001')"
+													href="javascript:;"><s:property value="name" />
+												</a>
+											</td>
+											<td>
+												<s:property value="propertyCardNumber" />
+											</td>
+											<td>
+												<s:property value="installTime" />
+											</td>
+											<td>
+												<s:property value="checkTime" />
+											</td>
+											<td>
+												<s:if test="isDealUsecard == 1">
               		是
               		</s:if>
-              		<s:else>
+												<s:else>
               		否
               		</s:else>
-              </td>
-              <td><s:property value="usecardExpireTime"/> </td>
-              <td><s:property value="removeTime"/></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','sb-add.html','10001')" href="<s:property  value="deviceAction!load"/>" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="<s:property value="deviceAction!delete"/>" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-            </tr>
-             </s:iterator>
-            <!-- 
+											</td>
+											<td>
+												<s:property value="usecardExpireTime" />
+											</td>
+											<td>
+												<s:property value="removeTime" />
+											</td>
+											<td class="f-14 td-manage">
+												<a style="text-decoration: none" class="ml-5"
+													onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>','10001')"
+													href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
+												</a>
+
+												<a style="text-decoration: none" class="ml-5"
+													onClick="return confirm('你确定删除该信息吗？')" title="删除"
+													href="deviceAction!delete?id=<s:property value="id"/>"
+													title="删除"><i class="Hui-iconfont">&#xe6e2;</i>
+												</a>
+											</td>
+										</tr>
+									</s:iterator>
+									<!-- 
             <tr class="text-c">
               <td ><input type="checkbox" value="" name="input"></td>
               <td>002</td>
@@ -96,22 +200,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td>2015-8-30</td>
               <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','sb-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr> -->
-          </tbody>
-        </table>
-    </div>
-    </div>
-    
-  </div>
-  </div>
-  
-</div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
-<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="js/H-ui.js"></script> 
-<script type="text/javascript" src="js/H-ui.admin.js"></script>
-<script type="text/javascript">
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript"
+			src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="js/H-ui.js"></script>
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript">
 $('.table-sort').dataTable({
 	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 	"bStateSave": true,//状态保存
@@ -157,7 +262,7 @@ function xmsb_show(title,url,w,h){
     content: url
 });
 }
-</script> 
+</script>
 
-</body>
+	</body>
 </html>

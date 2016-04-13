@@ -1,4 +1,10 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -23,7 +29,7 @@
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>空白页</title>
+<title>添加人员信息</title>
 </head>
 <body>
 <div class="xmWraper ">
@@ -40,6 +46,7 @@
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
         <form method="post" action="promanAction!add">
+        <input hidden name = "proman.project.id" value = "8" />
       <div class="row cl mb-10">
         <label class="form-label col-2 text-r " ><span class="c-red">*</span>姓名：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
@@ -57,9 +64,10 @@
 <input type="text" class="input-text" value="" placeholder="" id="input3" name="proman.certificate" width="45%" />      </span></span></div>
     <div class="row cl mb-10">
       <div class="col-10 col-offset-5 pt-10 pb-10">
-        <button onClick="article_save();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+           <input class="btn btn-primary radius" type="submit" value = "保存"></input>
         <button onClick="layer_close();" class="btn btn-secondary radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
+      <s:token/>
       </form>
   </div>
   </div>

@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
@@ -25,11 +25,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 <link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 <link href="css/city.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript"
+			src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+		<script type="text/javascript"
+			src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+		<script type="text/javascript" src="js/H-ui.js"></script>
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/pageKit.js"></script>
+		<script type="text/javascript" src="js/checkUtil.js"></script>
+		<script type="text/javascript" src="js/commonUtil.js"></script>
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>空白页</title>
+<title>人员信息</title>
 </head>
 <body>
 <div class="xmWraper ">
@@ -45,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl box-shadow pd-10  bk-gray radius" style="background-color: #FFF;">
-      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="article_add('新增人员','ry-add.html')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增人员</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
+      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onclick="deleteAllCheckedPromans();" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="article_add('新增人员','promanAction!goToAdd')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增人员</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
       <div class="mt-20">
       <table class="table table-border table-bordered table-bg table-hover table-sort">
           <thead>
@@ -60,11 +72,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tbody>
            <s:iterator value="promans" var="proman" status="index">
             <tr class="text-c">
-              <td ><input type="checkbox" value="" name="input"></td>
+              <td ><input name="indexID" class="indexID" type="checkbox"
+													value="<s:property value="id"/>"></td>
               <td><s:property value="#index.count"/></td>
               <td><s:property value="jobTitle"/></td>
-              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="promanAction!view">张勇</a></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+              <td><a onClick="xmsb_show('人员信息','promanAction!view?id=<s:property value="id"/>','10001')" href="javascript:;"><s:property value = "name"/></a></td>
+              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
+				<a style="text-decoration: none" class="ml-5"
+													onClick="return confirm('你确定删除该信息吗？')" title="删除"
+													href="promanAction!delete?id=<s:property value="id"/>"
+													title="删除"><i class="Hui-iconfont">&#xe6e2;</i>
+												</a>
             </tr>
              </s:iterator>
              <!--  

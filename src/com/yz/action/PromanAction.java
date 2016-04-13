@@ -186,14 +186,15 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		// 总记录数
-		totalCount = promanService.getTotalCount(con, convalue, proman);
-		// 总页数
-		pageCount = promanService.getPageCount(totalCount, size);
+		//totalCount = promanService.getTotalCount(con, convalue, proman);
+		//// 总页数
+		//pageCount = promanService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		promans = promanService.queryList(con, convalue, proman, page, size);
+		//promans = promanService.queryList(con, convalue, proman, page, size);
+		promans = promanService.getPromans();
 		return "list";
 	}
 
@@ -216,15 +217,15 @@ public class PromanAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断回话是否失效
-		Proman proman = (Proman) session.get("proman");
-		if (proman == null) {
-			return "opsessiongo_child";
-		}
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
+//			return "opsessiongo_child";
+//		}
 		promanService.add(proman);
 
 		arg[0] = "promanAction!list";
 		arg[1] = "人员管理";
-		return "success_child";
+		return "success";
 	}
 
 	// 上传照片
@@ -265,16 +266,16 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		Proman proman = (Proman) session.get("proman");
-		if (proman == null) {
-			return "opsessiongo";
-		}
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
+//			return "opsessiongo";
+//		}
 
 		proman = promanService.loadById(id);
 
 		promanService.delete(proman);
 
-		promanService.deleteById(id);
+		//promanService.deleteById(id);
 		arg[0] = "promanAction!list";
 		arg[1] = "人员管理";
 		return SUCCESS;
@@ -327,15 +328,15 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Proman proman = (Proman) session.get("proman");
-		if (proman == null) {
-			return "opsessiongo_child";
-		}
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
+//			return "opsessiongo_child";
+//		}
 
 		promanService.update(proman);
 		arg[0] = "promanAction!list";
 		arg[1] = "人员管理";
-		return "success_child";
+		return "success";
 	}
 
 //	/**
@@ -376,10 +377,10 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Proman proman = (Proman) session.get("proman");
-		if (proman == null) {
-			return "opsessiongo";
-		}
+//		Proman proman = (Proman) session.get("proman");
+//		if (proman == null) {
+//			return "opsessiongo";
+//		}
 		proman = promanService.loadById(id);
 		return "view";
 	}
