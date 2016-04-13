@@ -45,8 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
-        <form method="post" action="promanAction!add">
+        <form method="post" action="promanAction!update">
         <input hidden name = "proman.project.id" value = "8" />
+        <s:hidden name="proman.id" id="id"></s:hidden>
       <div class="row cl mb-10">
         <label class="form-label col-2 text-r " ><span class="c-red">*</span>姓名：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
