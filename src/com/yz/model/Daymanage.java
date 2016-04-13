@@ -26,45 +26,46 @@ import javax.persistence.Table;
 public class Daymanage implements java.io.Serializable {
 
 	// Fields
-	private Integer id;//id
-	private Project project;//所属项目
-	private Integer isFiveSigned;//五方责任书是否签订(0:否，1：是)
-	private Integer isMassSafeNotify;//质量安全是否告知(0:否，1：是)
-	private Integer isEducationLaunch;//三级教育开展情况(0:否，1：是)
-	private String launchContent;//开展方式（0：纸质1:图片2：VCR）
-	private String launchImg8;//开展图片8
-	private String launchImg7;//开展图片7
-	private String launchImg6;//开展图片6
-	private String launchImg5;//开展图片5
-	private String launchImg4;//开展图片4
-	private String launchImg3;//开展图片3
-	private String launchImg2;//开展图片2
-	private String launchImg1;//	开展图片1
-	private Integer isDangerArgument;//超过一定规模危险性较大分部分项工程专家论证情况(0:否，1：是)
-	private Integer isNameplateInstall;//永久性铭牌安装落实情况(0:否，1：是)
-	private String installTime;//落实时间
-	private Integer isMortarQualified;//预拌砂浆用量是否达标(0:否，1：是)
-	private Integer isCompleted;//竣工验收情况(0:否，1：是)
-	private String completedTime;//竣工时间
-	private List<Dangerargument> dangerarguments = new ArrayList<Dangerargument>();//论证情况
+	private Integer id;// id
+	private Project project;// 所属项目
+	private Integer isFiveSigned;// 五方责任书是否签订(0:否，1：是)
+	private String signTime;// 签到日期
+	private Integer isMassSafeNotify;// 质量安全是否告知(0:否，1：是)
+	private String notifyTime;// 告知时间
+	private Integer isEducationLaunch;// 三级教育开展情况(0:否，1：是)
+	private String launchContent;// 开展方式（0：纸质1:图片2：VCR）
+	private String launchImg8;// 开展图片8
+	private String launchImg7;// 开展图片7
+	private String launchImg6;// 开展图片6
+	private String launchImg5;// 开展图片5
+	private String launchImg4;// 开展图片4
+	private String launchImg3;// 开展图片3
+	private String launchImg2;// 开展图片2
+	private String launchImg1;// 开展图片1
+	private Integer isDangerArgument;// 超过一定规模危险性较大分部分项工程专家论证情况(0:否，1：是)
+	private Integer isNameplateInstall;// 永久性铭牌安装落实情况(0:否，1：是)
+	private String installTime;// 落实时间
+	private Integer isMortarQualified;// 预拌砂浆用量是否达标(0:否，1：是)
+	private Integer isCompleted;// 竣工验收情况(0:否，1：是)
+	private String completedTime;// 竣工时间
+	private List<Dangerargument> dangerarguments = new ArrayList<Dangerargument>();// 论证情况
 
 	// Constructors
-
-	/** default constructor */
-	public Daymanage() {
-	}
-
-	/** full constructor */
-	public Daymanage(Integer isFiveSigned, Integer isMassSafeNotify,
+	public Daymanage(Integer id, Project project, Integer isFiveSigned,
+			String signTime, Integer isMassSafeNotify, String notifyTime,
 			Integer isEducationLaunch, String launchContent, String launchImg8,
 			String launchImg7, String launchImg6, String launchImg5,
 			String launchImg4, String launchImg3, String launchImg2,
 			String launchImg1, Integer isDangerArgument,
 			Integer isNameplateInstall, String installTime,
 			Integer isMortarQualified, Integer isCompleted,
-			String completedTime, Project projects, List<Dangerargument> dangerarguments) {
+			String completedTime, List<Dangerargument> dangerarguments) {
+		this.id = id;
+		this.project = project;
 		this.isFiveSigned = isFiveSigned;
+		this.signTime = signTime;
 		this.isMassSafeNotify = isMassSafeNotify;
+		this.notifyTime = notifyTime;
 		this.isEducationLaunch = isEducationLaunch;
 		this.launchContent = launchContent;
 		this.launchImg8 = launchImg8;
@@ -81,9 +82,14 @@ public class Daymanage implements java.io.Serializable {
 		this.isMortarQualified = isMortarQualified;
 		this.isCompleted = isCompleted;
 		this.completedTime = completedTime;
-		this.project = project;
 		this.dangerarguments = dangerarguments;
 	}
+
+	/** default constructor */
+	public Daymanage() {
+	}
+
+	/** full constructor */
 
 	// Property accessors
 	@Column(name = "completedTime", length = 50)
@@ -188,9 +194,19 @@ public class Daymanage implements java.io.Serializable {
 		return this.launchImg8;
 	}
 
+	@Column(name = "notifyTime", length = 50)
+	public String getNotifyTime() {
+		return notifyTime;
+	}
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "daymanage")
 	public Project getProject() {
 		return project;
+	}
+
+	@Column(name = "signTime", length = 50)
+	public String getSignTime() {
+		return signTime;
 	}
 
 	public void setCompletedTime(String completedTime) {
@@ -273,10 +289,16 @@ public class Daymanage implements java.io.Serializable {
 		this.launchImg8 = launchImg8;
 	}
 
+	public void setNotifyTime(String notifyTime) {
+		this.notifyTime = notifyTime;
+	}
+
 	public void setProject(Project project) {
 		this.project = project;
 	}
 
-	
+	public void setSignTime(String signTime) {
+		this.signTime = signTime;
+	}
 
 }

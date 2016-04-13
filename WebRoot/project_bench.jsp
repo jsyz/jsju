@@ -66,7 +66,7 @@
 					<area shape="rect" coords="438,202,532,285" href="xm-map.html">
 					<area shape="rect" coords="582,202,660,283" href="xm-ryxx.html">
 					<area shape="rect" coords="39,21,167,151" href="projectAction!view?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
-					<area shape="rect" coords="187,15,320,151" href="xm-rcjg_gl.html">
+					<area shape="rect" coords="187,15,320,151" href="daymanageAction!view?pid=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
 					<area shape="rect" coords="340,16,470,147" href="xm-sbgl.html">
 					<area shape="rect" coords="492,16,620,147" href="xm-wmsg.html">
 					<area shape="rect" coords="647,18,775,153" href="xmpj.html">

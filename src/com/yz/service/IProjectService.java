@@ -36,4 +36,8 @@ public interface IProjectService {
 
 	public abstract Project getProjectByProjectname(String projectname);
 
+	public abstract int addAndReturn(Project project);
+
+	public abstract Project loadByPid(int pid);
+
 }

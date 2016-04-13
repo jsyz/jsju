@@ -40,6 +40,8 @@
 			<s:hidden name="project.id"></s:hidden>
 			<s:hidden name="project.yxarea.id"></s:hidden>
 			<s:hidden name="areaIndex"></s:hidden>
+			<s:hidden name="project.daymanage.id"></s:hidden>
+			<s:hidden name="project.construction.id"></s:hidden>
 			<div class="xmWraper ">
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">

@@ -169,7 +169,7 @@
 											<input type="text" class="mini-textbox-input"
 												name="project.startDate"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate">
+												id="logmin" class="input-text Wdate" />
 										</td>
 										<th class="th2">
 											竣工日期

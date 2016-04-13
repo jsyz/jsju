@@ -1,8 +1,5 @@
 package com.yz.action;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -28,17 +23,15 @@ import com.yz.model.Yxarea;
 import com.yz.service.IDaymanageService;
 import com.yz.service.IProjectService;
 import com.yz.service.IYxareaService;
-import com.yz.util.ConvertUtil;
-import com.yz.vo.AjaxMsgVO;
 import com.yz.vo.AreaVO;
 
 /**
  * @author lq
  * 
  */
-@Component("projectAction")
+@Component("daymanageAction")
 @Scope("prototype")
-public class ProjectAction extends ActionSupport implements RequestAware,
+public class DaymanageAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 
 	private static final long serialVersionUID = 1L;
@@ -66,51 +59,20 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private String checkedIDs;
 
 	// service层对象
-	private IProjectService projectService;
-	private IYxareaService yxareaService;
 	private IDaymanageService daymanageService;
+	private IYxareaService yxareaService;
+	private IProjectService projectService;
 
 	// 单个对象
+	private Daymanage daymanage;
 	private Project project;
 	private AreaVO areaVO;
 
 	// list对象
+	private List<Daymanage> daymanages;
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
-
-	/**
-	 * 项目管理
-	 */
-	public String list() throws Exception {
-		// 判断会话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			return "opsessiongo";
-		}
-		if (convalue != null && !convalue.equals("")) {
-			convalue = URLDecoder.decode(convalue, "utf-8");
-		}
-		if (page < 1) {
-			page = 1;
-		}
-		initAreas();
-
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		// 总记录数
-		totalCount = projectService.getTotalCount(con, convalue, areaIndex);
-		// 总页数
-		pageCount = projectService.getPageCount(totalCount, size);
-		if (page > pageCount && pageCount != 0) {
-			page = pageCount;
-		}
-		// 所有当前页记录对象
-		projects = projectService.queryList(con, convalue, areaIndex, page,
-				size);
-		return "list";
-	}
 
 	// 区域项目统计
 	private void initAreas() {
@@ -145,179 +107,34 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	 * 
 	 * @return
 	 */
-	public String goToAdd() {
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		return "add";
-	}
-
-	/**
-	 * 添加
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String add() throws Exception {
-		// 判断回话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			String loginfail = "登陆失效,信息提交失败.";
-			request.put("loginFail", loginfail);
-			return "opsessiongo";
-		}
-
-		// 新增项目时，同时增加日常监管
-		Daymanage daymanage = new Daymanage();
-		daymanage.setIsFiveSigned(0);
-		daymanage.setIsMassSafeNotify(0);
-		daymanage.setIsCompleted(0);
-		daymanage.setIsDangerArgument(0);
-		daymanage.setIsEducationLaunch(0);
-		daymanage.setIsMortarQualified(0);
-		daymanage.setIsNameplateInstall(0);
-		
-		daymanageService.add(daymanage);
-		project.setDaymanage(daymanage);
-		projectService.add(project);
-
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
-		return SUCCESS;
-	}
-
-	/**
-	 * 删除一
-	 * 
-	 * @return
-	 */
-	public String delete() {
-		// 判断会话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			String loginfail = "登陆失效,信息提交失败.";
-			request.put("loginFail", loginfail);
-			return "opsessiongo";
-		}
-
-		project = projectService.loadById(id);
-		projectService.delete(project);
-		arg[0] = "projectAction!list?areaIndex="
-				+ project.getYxarea().getAreaIndex();
-		arg[1] = "项目管理";
-		return SUCCESS;
-	}
-
-	/**
-	 * 删除二(批量删除)
-	 * 
-	 * @return
-	 */
-	public String deleteProjects() {
-		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
-		for (int i = 0; i < ids.length; i++) {
-			project = projectService.loadById(ids[i]);
-
-			projectService.delete(project);
-		}
-		AjaxMsgVO msgVO = new AjaxMsgVO();
-		msgVO.setMessage("批量删除成功.");
-		JSONObject jsonObj = JSONObject.fromObject(msgVO);
-		PrintWriter out;
-		try {
-			response.setContentType("text/html;charset=UTF-8");
-			out = response.getWriter();
-			out.print(jsonObj.toString());
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
-	 * 跳转到修改页面
-	 * 
-	 * @return
-	 */
-	public String load() {
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		project = projectService.loadById(id);
-		return "load";
-	}
-
-	/**
-	 * 修改
-	 * 
-	 * @return
-	 */
-	public String update() throws Exception {
-		// 判断会话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			String loginfail = "登陆失效,信息提交失败.";
-			request.put("loginFail", loginfail);
-			return "opsessiongo";
-		}
-		projectService.update(project);
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
-		return SUCCESS;
-	}
-
-	public String updateProject() throws Exception {
-		// 判断会话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			String loginfail = "登陆失效,信息提交失败.";
-			request.put("loginFail", loginfail);
-			return "opsessiongo";
-		}
-		projectService.update(project);
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
-		return SUCCESS;
-	}
-
-	/**
-	 * 查看信息
-	 * 
-	 * @return
-	 */
 	public String view() {
+		// 判断会话是否失效
 		Usero userSession = (Usero) session.get("userSession");
 		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
 		initAreas();
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		project = projectService.loadById(id);
+		
+		project = projectService.loadByPid(pid);
+		daymanage = project.getDaymanage();
 		return "view";
 	}
 
-	/**
-	 * 项目工作台
-	 * 
-	 * @return
-	 */
-	public String bench() {
+	public String updateDaymanage() throws Exception {
+		// 判断会话是否失效
 		Usero userSession = (Usero) session.get("userSession");
 		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		project = projectService.loadById(id);
-		return "bench";
+		daymanageService.update(daymanage);
+		return "success_child";
 	}
 
 	// get、set-------------------------------------------
@@ -419,29 +236,29 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		this.arg = arg;
 	}
 
-	public IProjectService getProjectService() {
-		return projectService;
+	public IDaymanageService getDaymanageService() {
+		return daymanageService;
 	}
 
 	@Resource
-	public void setProjectService(IProjectService projectService) {
-		this.projectService = projectService;
+	public void setDaymanageService(IDaymanageService daymanageService) {
+		this.daymanageService = daymanageService;
 	}
 
-	public Project getProject() {
-		return project;
+	public Daymanage getDaymanage() {
+		return daymanage;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setDaymanage(Daymanage daymanage) {
+		this.daymanage = daymanage;
 	}
 
-	public List<Project> getProjects() {
-		return projects;
+	public List<Daymanage> getDaymanages() {
+		return daymanages;
 	}
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setDaymanages(List<Daymanage> daymanages) {
+		this.daymanages = daymanages;
 	}
 
 	public javax.servlet.http.HttpServletResponse getResponse() {
@@ -509,13 +326,31 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		this.areaVOs = areaVOs;
 	}
 
-	public IDaymanageService getDaymanageService() {
-		return daymanageService;
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public IProjectService getProjectService() {
+		return projectService;
 	}
 
 	@Resource
-	public void setDaymanageService(IDaymanageService daymanageService) {
-		this.daymanageService = daymanageService;
+	public void setProjectService(IProjectService projectService) {
+		this.projectService = projectService;
 	}
+	
+	
 
 }

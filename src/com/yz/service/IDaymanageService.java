@@ -37,4 +37,7 @@ public interface IDaymanageService {
 
 	public abstract Daymanage getDaymanageByDaymanagename(String daymanagename);
 
+	public abstract int addAndReturn(Daymanage daymanage);
+
+
 }

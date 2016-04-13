@@ -118,12 +118,5 @@ public class SubunitServiceImp implements ISubunitService {
 		}
 		return subunitDao.pageList(queryString,p,page,size);
 	}
-	//用户登录
-	public Subunit subunitlogin(String username, String password) {
-		String queryString="from Subunit mo where mo.username=:username and mo.password=:password";
-		String[] paramNames=new String[]{"username","password"};
-		Object[] values=new Object[]{username,password};
-		return subunitDao.queryByNamedParam(queryString,paramNames,values);
-	} 
 	
 }
