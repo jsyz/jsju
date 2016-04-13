@@ -43,6 +43,7 @@
 	<body>
 		<form action="daymanageAction!updateDaymanage" method="post"
 			class="form form-horizontal">
+			<s:hidden name="daymanage.id"></s:hidden>
 			<div class="xmWraper ">
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -125,7 +126,7 @@
 										<span class="formControls col-4">签订日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="dangerargument.argTime"
+												name="daymanage.signTime" value="<s:property value="daymanage.signTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" /> 
 												</span>
@@ -150,7 +151,7 @@
 										<span class="formControls col-4">告知日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="dangerargument.notifyTime"
+												name="daymanage.notifyTime" value="<s:property value="daymanage.notifyTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" />  </span>
 									</td>
@@ -341,7 +342,7 @@
 									</td>
 									<td>
 										<div class="formControls col-12">
-											<s:radio theme="simple" id="isFiveSigned"
+											<s:radio theme="simple" id="isNameplateInstall"
 												cssStyle="width:36px" cssClass="check-box"
 												list='#{0:"未落实",1:"已落实"}'
 												name="daymanage.isNameplateInstall" />
@@ -353,7 +354,7 @@
 										
 										<input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="dangerargument.installTime"
+												name="daymanage.installTime" value="<s:property value="daymanage.installTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" />
 												
@@ -369,7 +370,7 @@
 									</td>
 									<td>
 										<div class="formControls col-12">
-											<s:radio theme="simple" id="isFiveSigned"
+											<s:radio theme="simple" id="isMortarQualified"
 												cssStyle="width:36px" cssClass="check-box"
 												list='#{0:"否",1:"是"}' name="daymanage.isMortarQualified" />
 										</div>
@@ -388,7 +389,7 @@
 									<td>
 										<div class="formControls col-12">
 											<div class="formControls col-12">
-												<s:radio theme="simple" id="isFiveSigned"
+												<s:radio theme="simple" id="isCompleted"
 													cssStyle="width:36px" cssClass="check-box"
 													list='#{0:"否",1:"是"}' name="daymanage.isCompleted" />
 											</div>
@@ -397,7 +398,7 @@
 										<span class="formControls col-4">竣工日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="dangerargument.completedTime"
+												name="daymanage.completedTime" value="<s:property value="daymanage.completedTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" /></span>
 									</td>

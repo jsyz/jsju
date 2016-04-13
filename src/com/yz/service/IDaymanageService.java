@@ -39,5 +39,7 @@ public interface IDaymanageService {
 
 	public abstract int addAndReturn(Daymanage daymanage);
 
+	public abstract Daymanage loadByDayid(Integer id);
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.yz.dao.IDaymanageDao;
 import com.yz.model.Daymanage;
+import com.yz.model.Project;
 import com.yz.service.IDaymanageService;
 
 @Component("daymanageService")
@@ -161,6 +162,15 @@ public class DaymanageServiceImp implements IDaymanageService {
 		// TODO Auto-generated method stub
 		return daymanageDao.savereturn(daymanage);
 	}
+
+	public Daymanage loadByDayid(Integer id) {
+		// TODO Auto-generated method stub
+		String queryString = "from Daymanage mo where mo.id=:id";
+		String[] paramNames = new String[] { "id" };
+		Object[] values = new Object[] { id };
+		return daymanageDao.queryByNamedParam(queryString, paramNames, values);
+	}
+	
 
 
 }

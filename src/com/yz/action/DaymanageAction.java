@@ -121,7 +121,7 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 		}
 		
 		project = projectService.loadByPid(pid);
-		daymanage = project.getDaymanage();
+		daymanage = daymanageService.loadByDayid(project.getDaymanage().getId());
 		return "view";
 	}
 
@@ -133,6 +133,9 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
+		System.out.println("hello ");
+		System.out.println(daymanage);
+		
 		daymanageService.update(daymanage);
 		return "success_child";
 	}
