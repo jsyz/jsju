@@ -213,14 +213,15 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		// 总记录数
-		totalCount = deviceService.getTotalCount(con, convalue, device);
+		//totalCount = deviceService.getTotalCount(con, convalue, device);
 		// 总页数
-		pageCount = deviceService.getPageCount(totalCount, size);
+		//pageCount = deviceService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		devices = deviceService.queryList(con, convalue, device, page, size);
+		//devices = deviceService.queryList(con, convalue, device, page, size);
+		devices = deviceService.getDevices();
 		return "list";
 	}
 
@@ -248,13 +249,12 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 //			return "opsessiongo_child";
 //		}
 		
-		System.out.println("test add device");
 		
 		deviceService.add(device);
 
 		arg[0] = "deviceAction!list";
 		arg[1] = "设备管理";
-		return "success_child";
+		return "success";
 	}
 
 	// 上传照片
@@ -295,16 +295,15 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-		Device device = (Device) session.get("device");
-		if (device == null) {
-			return "opsessiongo";
-		}
-
+//		Device device = (Device) session.get("device");
+//		if (device == null) {
+//			return "opsessiongo";
+//		}
 		device = deviceService.loadById(id);
 
 		deviceService.delete(device);
 
-		deviceService.deleteById(id);
+		//deviceService.deleteById(id);
 		arg[0] = "deviceAction!list";
 		arg[1] = "设备管理";
 		return SUCCESS;
@@ -345,7 +344,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-
+		
 		device = deviceService.loadById(id);
 		return "load";
 	}
@@ -357,11 +356,13 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-		Device device = (Device) session.get("device");
-		if (device == null) {
-			return "opsessiongo_child";
-		}
-
+//		Device device = (Device) session.get("device");
+//		if (device == null) {
+//			return "opsessiongo_child";
+//		}
+		
+		
+		
 		deviceService.update(device);
 		arg[0] = "deviceAction!list";
 		arg[1] = "设备管理";
@@ -406,10 +407,13 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Device device = (Device) session.get("device");
-		if (device == null) {
-			return "opsessiongo";
-		}
+//		Device device = (Device) session.get("device");
+//		if (device == null) {
+//			return "opsessiongo";
+//		}
+		
+		
+		
 		device = deviceService.loadById(id);
 		return "view";
 	}

@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
@@ -44,8 +44,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p><i class="Hui-iconfont">&#xe623;</i> 盛润园林绿化- 设备管理</p>
    </div>
    <form method="post" action="deviceAction!update">
+   <s:hidden name="device.id" id="id"></s:hidden>
+   <input hidden name = "device.project.id" value = "8" />
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
+    
       <div class="row cl mb-10">
         <label class="form-label col-2 text-r " ><span class="c-red">*</span>设备名称：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
@@ -67,7 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="row cl mb-10">
         <label class="form-label col-2 text-r " >是否办理使用登记证：</label>
        <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" />
+          <!--  <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" />-->
+          <s:radio list="#{'1':'是','0':'否'}" name="evice.isDealUsecard" value="1"/>
           </span></span>
         <label class="form-label col-2 text-r " >拆卸告知日期：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
@@ -81,10 +85,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="row cl mb-10">
       <div class="col-10 col-offset-5 pt-10 pb-10">
-        <button onClick="article_save();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+       <input class="btn btn-primary radius" type="submit" value = "保存"></input>
         <button onClick="layer_close();" class="btn btn-secondary radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
   </div>
+    <s:token/>
   </div>
      </form>
   </div>
