@@ -68,6 +68,8 @@
 					<area shape="rect" coords="39,21,167,151" href="projectAction!view?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
 					<area shape="rect" coords="187,15,320,151" href="daymanageAction!view?pid=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
 					<area shape="rect" coords="340,16,470,147" href="xm-sbgl.html">
+					<area shape="rect" coords="187,15,320,151" href="xm-rcjg_gl.html">
+					<area shape="rect" coords="340,16,470,147" href="deviceAction!list?project_id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
 					<area shape="rect" coords="492,16,620,147" href="xm-wmsg.html">
 					<area shape="rect" coords="647,18,775,153" href="xmpj.html">
 					<area shape="rect" coords="798,22,925,153" href="xm-da.html">
