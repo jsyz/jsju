@@ -65,13 +65,14 @@
 					</nav>
 					<p
 						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
-						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：官林
-						<span class="pipe">|</span>【项目总数 32 建筑面积 4378m
+						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：<s:property value="areaVO.areaName"/>
+						<span class="pipe">|</span>【项目总数 <s:property value="areaVO.projectNumberTotal" /> 建筑面积 <s:property value="areaVO.buildingAreaTotal" />
 						<sup>
 							2
 						</sup>
-						造价 5343万 】
-						<a href="citylist.html"><span
+						造价
+						<s:property value="areaVO.buildingCostTotal" />万 】
+						<a href="yxareaAction!list"><span
 							class="label label-warning radius">片区切换</span>
 						</a>
 					</p>
@@ -80,7 +81,7 @@
 			<div class="xmconbox pd-20">
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<p>
-						<i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 设备管理
+						<i class="Hui-iconfont">&#xe623;</i> <s:property value= "project.name"/>- 设备管理
 					</p>
 				</div>
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -91,10 +92,10 @@
 								onClick="deleteAllCheckedDevices();"
 								class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 									批量删除</a> <a class="btn btn-primary radius"
-								href="deviceAction!goToAdd"><i class="Hui-iconfont">&#xe600;</i>
+								href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i class="Hui-iconfont">&#xe600;</i>
 									新增设备</a>
 							</span>
-							<span class="r">共有数据：<strong>2</strong> 条</span>
+							<span class="r">共有数据：<strong><s:property value="totalCount"/></strong> 条</span>
 						</div>
 						<div class="mt-20">
 							<table
@@ -175,7 +176,7 @@
 											</td>
 											<td class="f-14 td-manage">
 												<a style="text-decoration: none" class="ml-5"
-													onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>','10001')"
+													onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 													href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
 												</a>
 

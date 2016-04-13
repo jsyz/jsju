@@ -28,12 +28,13 @@ public interface IDeviceService {
 	public abstract int getPageCount(int totalCount, int size);
 
 	// 后台管理-获取总记录数
-	public abstract int getTotalCount(int con, String convalue, Device device);
 
 	// 后台管理-获取符合条件的记录
 	public abstract List<Device> queryList(int con, String convalue,
-			Device device, int page, int size);
+			int projectId, int page, int size);
 
 	public abstract Device getDeviceByDevicename(String devicename);
+
+	public abstract int getTotalCount(int con, String convalue, int areaIndex);
 
 }

@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +28,16 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Device;
+import com.yz.model.Project;
 import com.yz.model.Usero;
+import com.yz.model.Yxarea;
 import com.yz.service.IDeviceService;
+import com.yz.service.IProjectService;
 import com.yz.service.IUseroService;
+import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.vo.AjaxMsgVO;
+import com.yz.vo.AreaVO;
 
 /**
  * @author Administrator
@@ -54,14 +60,15 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	private final int size = 10;
 	private int pageCount;
 	private int totalCount;
-
+	
 	// 条件
 	private int id;
 	private int con;
 	private String convalue;
 	private int status;// 按状态
 	private int pid;// 按设备id
-
+	private int areaIndex;
+	private int projectId;
 //	// 登陆
 //	private String username;
 //	private String password;
@@ -78,16 +85,46 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 
 	// service层对象
 	private IDeviceService deviceService;
-
+	private IProjectService projectService;
+	private IYxareaService  yxareaService;
 	// 单个对象
 	private Device device;
-
+	private Project project;
+	private AreaVO areaVO;
 	// list对象
 	private List<Device> devices;
 
+	// list对象
+	private List<Project> projects;
+	private List<Yxarea> yxareas;
+	private List<AreaVO> areaVOs;
 //	// 个人资料新旧密码
 //	private String password1;
 //	private String password2;
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public List<Yxarea> getYxareas() {
+		return yxareas;
+	}
+
+	public void setYxareas(List<Yxarea> yxareas) {
+		this.yxareas = yxareas;
+	}
+
+	public List<AreaVO> getAreaVOs() {
+		return areaVOs;
+	}
+
+	public void setAreaVOs(List<AreaVO> areaVOs) {
+		this.areaVOs = areaVOs;
+	}
 
 	/**
 //	 * 用户登陆
@@ -212,26 +249,71 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		if (page < 1) {
 			page = 1;
 		}
+		
+		initAreas();
+		
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(projectId);
+		//System.out.println("the device list projectId is"+projectId);
+		
 		// 总记录数
-		//totalCount = deviceService.getTotalCount(con, convalue, device);
+		totalCount = deviceService.getTotalCount(con, convalue , projectId);
 		// 总页数
-		//pageCount = deviceService.getPageCount(totalCount, size);
+		pageCount = deviceService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		//devices = deviceService.queryList(con, convalue, device, page, size);
-		devices = deviceService.getDevices();
+		
+		
+		
+		devices = deviceService.queryList(con, convalue, projectId, page, size);
+		//devices = deviceService.getDevices();
 		return "list";
 	}
-
+	
+	
+	private void initAreas() {
+		areaVOs = new ArrayList<AreaVO>();
+		yxareas = yxareaService.getYxareas();
+		for (Yxarea yxarea : yxareas) {
+			AreaVO areaVO = new AreaVO();
+			areaVO.setId(yxarea.getId());
+			areaVO.setIndex(yxarea.getAreaIndex());
+			areaVO.setAreaName(yxarea.getAreaname());
+			int numberTotal = 0;
+			float areaTotal = 0f;
+			float costTotal = 0f;
+			
+			
+			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
+				projects = yxarea.getProjects();
+				numberTotal = projects.size();
+				for (int i = 0; i < projects.size(); i++) {
+					areaTotal += projects.get(i).getBuildingArea();
+					costTotal += projects.get(i).getBuildingCost();
+				}
+			}
+			areaVO.setProjectNumberTotal(numberTotal);
+			areaVO.setBuildingAreaTotal(areaTotal);
+			areaVO.setBuildingCostTotal(costTotal);
+			areaVOs.add(areaVO);
+		}
+	}
+	
 	/**
 	 * 跳转到添加页面
 	 * 
 	 * @return
 	 */
 	public String goToAdd() {
-
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(projectId);
 		return "add";
 	}
 
@@ -344,6 +426,12 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(projectId);
+		
 		
 		device = deviceService.loadById(id);
 		return "load";
@@ -360,7 +448,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 //		if (device == null) {
 //			return "opsessiongo_child";
 //		}
-		
+
 		
 		
 		deviceService.update(device);
@@ -669,6 +757,54 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 
 	public void setRemoveTime(String removeTime) {
 		this.removeTime = removeTime;
+	}
+
+	public int getAreaIndex() {
+		return areaIndex;
+	}
+
+	public void setAreaIndex(int areaIndex) {
+		this.areaIndex = areaIndex;
+	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public IProjectService getProjectService() {
+		return projectService;
+	}
+	@Resource
+	public void setProjectService(IProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public IYxareaService getYxareaService() {
+		return yxareaService;
+	}
+	@Resource
+	public void setYxareaService(IYxareaService yxareaService) {
+		this.yxareaService = yxareaService;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public AreaVO getAreaVO() {
+		return areaVO;
+	}
+
+	public void setAreaVO(AreaVO areaVO) {
+		this.areaVO = areaVO;
 	}
 
 

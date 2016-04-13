@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yz.model.Project;
 import com.yz.model.Proman;
 import com.yz.model.Yxarea;
+import com.yz.service.IProjectService;
 import com.yz.service.IPromanService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.util.InitParam;
 import com.yz.vo.AjaxMsgVO;
+import com.yz.vo.AreaVO;
 
 /**
  * @author lq
@@ -62,10 +66,8 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	private String convalue;
 	private int status;// 按状态
 	private int pid;// 按用户id
-
-	// 登陆
-	private String username;
-	private String password;
+	private int areaIndex;
+	private int projectId;
 
 	// 批量删除
 	private String checkedIDs;
@@ -73,17 +75,18 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	// service层对象
 	private IPromanService promanService;
 	private IYxareaService yxareaService;
+	private IProjectService projectService;
 
 	// 单个对象
 	private Proman proman;
-
+	private Project project;
+	private AreaVO areaVO;
 	// list对象
 	private List<Proman> promans;
-	private List<Yxarea> areas;
+	private List<Project> projects;
+	private List<Yxarea> yxareas;
+	private List<AreaVO> areaVOs;
 
-	// 个人资料新旧密码
-	private String password1;
-	private String password2;
 
 //	/**
 //	 * 用户登陆
@@ -162,14 +165,34 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		return ip;
 	}
 
-	/**
-	 * 用户注销
-	 */
-	public String logout() {
-		session.clear();
-		return "adminLogin";
+	private void initAreas() {
+		areaVOs = new ArrayList<AreaVO>();
+		yxareas = yxareaService.getYxareas();
+		for (Yxarea yxarea : yxareas) {
+			AreaVO areaVO = new AreaVO();
+			areaVO.setId(yxarea.getId());
+			areaVO.setIndex(yxarea.getAreaIndex());
+			areaVO.setAreaName(yxarea.getAreaname());
+			int numberTotal = 0;
+			float areaTotal = 0f;
+			float costTotal = 0f;
+			
+			
+			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
+				projects = yxarea.getProjects();
+				numberTotal = projects.size();
+				for (int i = 0; i < projects.size(); i++) {
+					areaTotal += projects.get(i).getBuildingArea();
+					costTotal += projects.get(i).getBuildingCost();
+				}
+			}
+			areaVO.setProjectNumberTotal(numberTotal);
+			areaVO.setBuildingAreaTotal(areaTotal);
+			areaVO.setBuildingCostTotal(costTotal);
+			areaVOs.add(areaVO);
+		}
 	}
-
+	
 	/**
 	 * 用户管理
 	 */
@@ -185,16 +208,24 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		if (page < 1) {
 			page = 1;
 		}
+		
+		initAreas();
+		
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(projectId);
+		
 		// 总记录数
-		//totalCount = promanService.getTotalCount(con, convalue, proman);
+		totalCount = promanService.getTotalCount(con, convalue, projectId);
 		//// 总页数
-		//pageCount = promanService.getPageCount(totalCount, size);
+		pageCount = promanService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		//promans = promanService.queryList(con, convalue, proman, page, size);
-		promans = promanService.getPromans();
+		promans = promanService.queryList(con, convalue, projectId, page, size);
+		//promans = promanService.getPromans();
 		return "list";
 	}
 
@@ -204,7 +235,11 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-		areas = yxareaService.getYxareas();
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(projectId);
 		return "add";
 	}
 
@@ -316,7 +351,11 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+		project = projectService.loadById(projectId);
 		proman = promanService.loadById(id);
 		return "load";
 	}
@@ -537,22 +576,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		this.promans = promans;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public javax.servlet.http.HttpServletResponse getResponse() {
 		return response;
 	}
@@ -601,21 +624,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		this.pictureFileName = pictureFileName;
 	}
 
-	public String getPassword1() {
-		return password1;
-	}
-
-	public void setPassword1(String password1) {
-		this.password1 = password1;
-	}
-
-	public String getPassword2() {
-		return password2;
-	}
-
-	public void setPassword2(String password2) {
-		this.password2 = password2;
-	}
 
 	public IYxareaService getYxareaService() {
 		return yxareaService;
@@ -626,13 +634,70 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		this.yxareaService = yxareaService;
 	}
 
-	public List<Yxarea> getAreas() {
-		return areas;
+	public int getAreaIndex() {
+		return areaIndex;
 	}
 
-	public void setAreas(List<Yxarea> areas) {
-		this.areas = areas;
+	public void setAreaIndex(int areaIndex) {
+		this.areaIndex = areaIndex;
 	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public IProjectService getProjectService() {
+		return projectService;
+	}
+	@Resource
+	public void setProjectService(IProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public AreaVO getAreaVO() {
+		return areaVO;
+	}
+
+	public void setAreaVO(AreaVO areaVO) {
+		this.areaVO = areaVO;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public List<Yxarea> getYxareas() {
+		return yxareas;
+	}
+
+	public void setYxareas(List<Yxarea> yxareas) {
+		this.yxareas = yxareas;
+	}
+
+	public List<AreaVO> getAreaVOs() {
+		return areaVOs;
+	}
+
+	public void setAreaVOs(List<AreaVO> areaVOs) {
+		this.areaVOs = areaVOs;
+	}
+
 	
 	
 	

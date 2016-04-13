@@ -28,11 +28,11 @@ public interface IPromanService {
 	public abstract int getPageCount(int totalCount, int size);
 
 	// 后台管理-获取总记录数
-	public abstract int getTotalCount(int con, String convalue, Proman proman);
+	public abstract int getTotalCount(int con, String convalue, int projectId);
 
 	// 后台管理-获取符合条件的记录
 	public abstract List<Proman> queryList(int con, String convalue,
-			Proman proman, int page, int size);
+			int projectId, int page, int size);
 
 	public abstract Proman getPromanByPromanname(String promanname);
 

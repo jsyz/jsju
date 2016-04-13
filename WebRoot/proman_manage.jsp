@@ -48,16 +48,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
    <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="xmshow.html" title="返回" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
-   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：官林<span class="pipe">|</span>【项目总数  32　　建筑面积 4378m<sup>2</sup>     　　造价  5343万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
+   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：<s:property value="areaVO.areaName"/><span class="pipe">|</span>【项目总数  <s:property value="areaVO.projectNumberTotal" />　　建筑面积 <s:property value="areaVO.buildingAreaTotal" />m<sup>2</sup>     　　造价  <s:property value="areaVO.buildingCostTotal" />万 】<a href="yxareaAction!list"><span class="label label-warning radius">片区切换</span></a></p>
    </div>
    </div>
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <p><i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 人员信息</p>
+   <p><i class="Hui-iconfont">&#xe623;</i> <s:property value= "project.name"/>- 人员信息</p>
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl box-shadow pd-10  bk-gray radius" style="background-color: #FFF;">
-      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onclick="deleteAllCheckedPromans();" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="article_add('新增人员','promanAction!goToAdd')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增人员</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
+      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onclick="deleteAllCheckedPromans();" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增人员</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
       <div class="mt-20">
       <table class="table table-border table-bordered table-bg table-hover table-sort">
           <thead>
@@ -76,8 +76,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													value="<s:property value="id"/>"></td>
               <td><s:property value="#index.count"/></td>
               <td><s:property value="jobTitle"/></td>
-              <td><a onClick="xmsb_show('人员信息','promanAction!view?id=<s:property value="id"/>','10001')" href="javascript:;"><s:property value = "name"/></a></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
+              <td><a onClick="xmsb_show('人员信息','promanAction!view?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')" href="javascript:;"><s:property value = "name"/></a></td>
+              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
 				<a style="text-decoration: none" class="ml-5"
 													onClick="return confirm('你确定删除该信息吗？')" title="删除"
 													href="promanAction!delete?id=<s:property value="id"/>"

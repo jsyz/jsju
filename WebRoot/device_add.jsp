@@ -36,15 +36,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
    <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a href="xm-sbgl.html" title="返回" target="_parent" class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
-   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：宜城片区<span class="pipe">|</span>【项目总数  20　　建筑面积 80000m<sup>2</sup>     　　造价  500000万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
+   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：<s:property value="areaVO.areaName"/><span class="pipe">|</span>【项目总数  <s:property value="areaVO.projectNumberTotal" />　　建筑面积 <s:property value="areaVO.buildingAreaTotal" />m<sup>2</sup>     　　造价 <s:property value="areaVO.buildingCostTotal" />万 】<a href="yxareaAction!list"><span class="label label-warning radius">片区切换</span></a></p>
    </div>
    </div>
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <p><i class="Hui-iconfont">&#xe623;</i> 盛润园林绿化- 设备管理</p>
+   <p><i class="Hui-iconfont">&#xe623;</i> <s:property value= "project.name"/>- 设备管理</p>
    </div>
    <form action = "deviceAction!add" method="post">
-   <input hidden name = "device.project.id" value = "8" />
+   <input hidden name = "device.project.id" value = "<s:property value="projectId"/>" />
   	<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
       <div class="row cl mb-10">
