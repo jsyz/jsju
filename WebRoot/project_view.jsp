@@ -467,14 +467,6 @@
 												value="project.constructionUnitPrincipalTelphone" /> </span>
 									</td>
 								</tr>
-								<tr class="odd-row">
-									<th class="th2 first">
-										施工分包单位
-									</th>
-									<td colspan="3">
-										&nbsp;
-									</td>
-								</tr>
 								<tr>
 									<th class="th2 first">
 										监理单位
@@ -568,6 +560,27 @@
 									<td colspan="3">
 										<span class="mini-textbox-border"> <s:property
 												value="project.premarks" /> </span>
+									</td>
+								</tr>
+								<tr class="odd-row">
+									<th class="th2 first">
+										施工分包单位
+									</th>
+									<td colspan="3">
+										<div class="row">
+											<div class="col-md-4">
+												单位名称
+											</div>
+											<div class="col-md-2">
+												项目负责人
+											</div>
+											<div class="col-md-4">
+												负责人联系电话
+											</div>
+											<div class="col-md-2">
+												是否办理进市登记
+											</div>
+										</div>
 									</td>
 								</tr>
 							</tbody>

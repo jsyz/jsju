@@ -8,7 +8,6 @@ $(document).ready(function() {
 
 }); 
 
-$(document).ready()
 
 function getCheckVal()
 {

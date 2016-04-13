@@ -399,14 +399,6 @@
 													name="project.constructionUnitPrincipalTelphone" /> </span>
 										</td>
 									</tr>
-									<tr class="odd-row">
-										<th class="th2 first">
-											施工分包单位
-										</th>
-										<td colspan="3">
-											<span style="color:red;"> &nbsp;[分包单位在编辑项目中添加]</span>
-										</td>
-									</tr>
 									<tr>
 										<th class="th2 first">
 											监理单位
@@ -515,6 +507,14 @@
 										<td colspan="3">
 											<span class="mini-textbox-border"><s:textfield
 													cssClass="mini-textbox-input" name="project.premarks" /> </span>
+										</td>
+									</tr>
+									<tr class="odd-row">
+										<th class="th2 first">
+											施工分包单位
+										</th>
+										<td colspan="3">
+											<span style="color: red;"> &nbsp;[分包单位在编辑项目中添加]</span>
 										</td>
 									</tr>
 								</tbody>

@@ -409,32 +409,6 @@
 													name="project.constructionUnitPrincipalTelphone" /> </span>
 										</td>
 									</tr>
-									<tr class="odd-row">
-										<th class="th2 first">
-											施工分包单位
-										</th>
-										<td colspan="3">
-											<button type="button" class="btn btn-success radius"
-												id="button" name=""
-												onClick="childPage('新增分包单位','add-company.html')">
-												<i class="Hui-iconfont">&#xe600;</i>新增分包单位
-											</button>
-										</td>
-									</tr>
-									<tr class="odd-row">
-										<th class="th2 first">
-											施工分包单位
-										</th>
-										<td>
-											&nbsp;
-										</td>
-										<td>
-											&nbsp;
-										</td>
-										<td>
-											&nbsp;
-										</td>
-									</tr>
 									<tr>
 										<th class="th2 first">
 											监理单位
@@ -545,6 +519,99 @@
 													cssClass="mini-textbox-input" name="project.premarks" /> </span>
 										</td>
 									</tr>
+									<tr class="odd-row">
+										<th class="th2 first">
+											施工分包单位
+										</th>
+										<td colspan="3">
+											<div class="row">
+												<div class="col-md-2">
+													单位名称
+												</div>
+												<div class="col-md-2">
+													项目负责人
+												</div>
+												<div class="col-md-4">
+													负责人联系电话
+												</div>
+												<div class="col-md-2">
+													是否办理进市登记
+												</div>
+												<div class="col-md-2">
+													<button type="button" class="btn btn-success radius"
+														id="button" name=""
+														onClick="addPage('新增分包单位','subunitAction!goToAdd?pid=<s:property value="project.id"/>','650','300')">
+														<i class="Hui-iconfont">&#xe600;</i>新增分包单位
+													</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+									
+									<tr>
+										<th class="th2 first">
+										</th>
+										<td colspan="3">
+											<div class="row">
+												<div class="col-md-2">
+													单位名称
+												</div>
+												<div class="col-md-2">
+													项目负责人
+												</div>
+												<div class="col-md-4">
+													负责人联系电话
+												</div>
+												<div class="col-md-2">
+													是
+												</div>
+												<div class="col-md-2">
+													<a style="text-decoration: none" class="ml-5"
+														onclick="addPage('编辑查证信息','judgeAction!load?jid=<s:property value="id" />','500','300')"
+														href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
+													</a>
+													<a style="text-decoration: none" class="ml-5"
+														href="javascript:;"
+														onclick="deleteJudge(<s:property value="id" />);"
+														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									
+									
+									<tr>
+										<th class="th2 first">
+										</th>
+										<td colspan="3">
+											<div class="row">
+												<div class="col-md-2">
+													单位名称
+												</div>
+												<div class="col-md-2">
+													项目负责人
+												</div>
+												<div class="col-md-4">
+													负责人联系电话
+												</div>
+												<div class="col-md-2">
+													是
+												</div>
+												<div class="col-md-2">
+													<a style="text-decoration: none" class="ml-5"
+														onclick="addPage('编辑查证信息','judgeAction!load?jid=<s:property value="id" />','500','300')"
+														href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
+													</a>
+													<a style="text-decoration: none" class="ml-5"
+														href="javascript:;"
+														onclick="deleteJudge(<s:property value="id" />);"
+														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+												</div>
+											</div>
+
+										</td>
+									</tr>
+
 								</tbody>
 							</table>
 						</div>
