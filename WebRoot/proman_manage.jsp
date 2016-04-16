@@ -57,8 +57,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl box-shadow pd-10  bk-gray radius" style="background-color: #FFF;">
-      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onclick="deleteAllCheckedPromans();" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增人员</a></span> <span class="r">共有数据：<strong>2</strong> 条</span></div>
+      <div class="cl pd-5 bg-1 bk-gray mb-20"> <span class="l"> <a href="javascript:;" onclick="deleteAllCheckedPromans();" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增人员</a></span> <span class="r">共有数据：<strong><strong><s:property value="totalCount"/></strong> 条</span></div>
       <div class="mt-20">
+      	<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+						<div class="text-c">
+							<form name="promanListForm" method="post"
+								action="promanAction!list" target="_self">
+								<s:hidden name="areaIndex"></s:hidden>
+								<s:hidden name="projectId"></s:hidden>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0"
+									style="line-height: 35px;">
+									<tr height="35">
+										<td width="21%" align="right" style="padding-right: 50px;">
+											<s:select list="#{0:'选择类型',1:'姓名',2:'职务'}"
+												cssClass="input-text" name="con" listKey="key"
+												listValue="value" cssStyle="width:180px"></s:select>
+										</td>
+										<td width="310px;">
+											<s:textfield name="convalue" id="convalue"
+												cssClass="input-text"></s:textfield>
+										</td>
+										<td align="left" style="padding-left: 172px;">
+											<button type="submit" class="btn btn-success" id="button2"
+												name="" onClick="">
+												<i class="Hui-iconfont">&#xe665;</i> 查询
+											</button>
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
       <table class="table table-border table-bordered table-bg table-hover table-sort">
           <thead>
             <tr class="text-c">
@@ -131,14 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/H-ui.js"></script> 
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
 <script type="text/javascript">
-$('.table-sort').dataTable({
-  "aaSorting": [[ 1, "desc" ]],//默认第几个排序
-  "bStateSave": true,//状态保存
-  "aoColumnDefs": [
-    //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-    {"orderable":false,"aTargets":[0,2,3,4,5]}// 制定列不参与排序
-  ]
-});
+
 
 /*资讯-添加*/
 function article_add(title,url,w,h){

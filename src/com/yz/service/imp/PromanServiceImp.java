@@ -85,10 +85,10 @@ public class PromanServiceImp implements IPromanService {
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){
-				queryString += "and mo.unit.name like ? "; 
+				queryString += "and mo.name like ? "; 
 			}
 			if(con==2){
-				queryString += "and mo.realname like ? "; 
+				queryString += "and mo.jobTitle like ? "; 
 				
 			}
 			if(con==3){
@@ -108,10 +108,10 @@ public class PromanServiceImp implements IPromanService {
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			if(con==1){
-				queryString += "and mo.unit.name like ? "; 
+				queryString += "and mo.name like ? "; 
 			}
 			if(con==2){
-				queryString += "and mo.realname like ? "; 
+				queryString += "and mo.jobTitle like ? "; 
 				
 			}
 			if(con==3){

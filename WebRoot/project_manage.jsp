@@ -89,6 +89,7 @@
 							<form name="projectListForm" method="post"
 								action="projectAction!list" target="_self">
 								<s:hidden name="areaIndex"></s:hidden>
+								
 								<table width="100%" border="0" cellspacing="0" cellpadding="0"
 									style="line-height: 35px;">
 									<tr height="35">

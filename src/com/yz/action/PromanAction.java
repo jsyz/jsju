@@ -258,7 +258,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 //		}
 		promanService.add(proman);
 
-		arg[0] = "promanAction!list";
+		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
 		arg[1] = "人员管理";
 		return "success";
 	}
@@ -311,7 +311,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		promanService.delete(proman);
 
 		//promanService.deleteById(id);
-		arg[0] = "promanAction!list";
+		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
 		arg[1] = "人员管理";
 		return SUCCESS;
 	}
@@ -373,7 +373,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 //		}
 
 		promanService.update(proman);
-		arg[0] = "promanAction!list";
+		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
 		arg[1] = "人员管理";
 		return "success";
 	}

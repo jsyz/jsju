@@ -97,6 +97,35 @@
 							</span>
 							<span class="r">共有数据：<strong><s:property value="totalCount"/></strong> 条</span>
 						</div>
+						<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+						<div class="text-c">
+							<form name="deviceListForm" method="post"
+								action="deviceAction!list" target="_self">
+								<s:hidden name="areaIndex"></s:hidden>
+								<s:hidden name="projectId"></s:hidden>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0"
+									style="line-height: 35px;">
+									<tr height="35">
+										<td width="21%" align="right" style="padding-right: 50px;">
+											<s:select list="#{0:'选择类型',1:'设备名称',2:'设备产权证号'}"
+												cssClass="input-text" name="con" listKey="key"
+												listValue="value" cssStyle="width:180px"></s:select>
+										</td>
+										<td width="310px;">
+											<s:textfield name="convalue" id="convalue"
+												cssClass="input-text"></s:textfield>
+										</td>
+										<td align="left" style="padding-left: 172px;">
+											<button type="submit" class="btn btn-success" id="button2"
+												name="" onClick="">
+												<i class="Hui-iconfont">&#xe665;</i> 查询
+											</button>
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
 						<div class="mt-20">
 							<table
 								class="table table-border table-bordered table-bg table-hover table-sort">
@@ -218,14 +247,7 @@
 		<script type="text/javascript" src="js/H-ui.js"></script>
 		<script type="text/javascript" src="js/H-ui.admin.js"></script>
 		<script type="text/javascript">
-$('.table-sort').dataTable({
-	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-	"bStateSave": true,//状态保存
-	"aoColumnDefs": [
-	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,2,4,5,6,7,8]}// 制定列不参与排序
-	]
-});
+
 
 /*资讯-添加*/
 function article_add(title,url,w,h){

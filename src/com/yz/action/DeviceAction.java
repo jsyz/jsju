@@ -334,7 +334,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		
 		deviceService.add(device);
 
-		arg[0] = "deviceAction!list";
+		arg[0] = "deviceAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
 		arg[1] = "设备管理";
 		return "success";
 	}
@@ -386,7 +386,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		deviceService.delete(device);
 
 		//deviceService.deleteById(id);
-		arg[0] = "deviceAction!list";
+		arg[0] = "deviceAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
 		arg[1] = "设备管理";
 		return SUCCESS;
 	}
@@ -452,7 +452,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		
 		
 		deviceService.update(device);
-		arg[0] = "deviceAction!list";
+		arg[0] = "deviceAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
 		arg[1] = "设备管理";
 		return "success_child";
 	}
