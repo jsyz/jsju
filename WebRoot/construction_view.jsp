@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta name="renderer" content="webkit|ie-comp|ie-stand"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -36,14 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
    <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
-   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：官林<span class="pipe">|</span>【项目总数  32　　建筑面积 4378m<sup>2</sup>     　　造价  5343万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
+   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：<s:property value="areaVO.areaName"/><span class="pipe">|</span>【项目总数  <s:property value="areaVO.projectNumberTotal" />　　建筑面积 <s:property value="areaVO.buildingAreaTotal" /><sup>2</sup>     　　造价  <s:property value="areaVO.buildingCostTotal" />万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
    </div>
    </div>
     <form action="constructionAction!update" method="post"> 
     <s:hidden name="construction.id" id="id"></s:hidden>
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <p><i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 文明施工</p>
+   <p><i class="Hui-iconfont">&#xe623;</i> <s:property value= "project.name"/>- 文明施工</p>
     <input class="btn btn-primary radius" type="submit" value = "保存"></input>
         <button onClick="layer_close();" class="btn btn-secondary radius" type="button">&nbsp;&nbsp;返回&nbsp;&nbsp;</button>
    </div>

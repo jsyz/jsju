@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +28,14 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Construction;
+import com.yz.model.Project;
+import com.yz.model.Yxarea;
 import com.yz.service.IConstructionService;
+import com.yz.service.IProjectService;
+import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.vo.AjaxMsgVO;
+import com.yz.vo.AreaVO;
 
 /**
  * @author Administrator
@@ -59,7 +65,8 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	private String convalue;
 	private int status;// 按状态
 	private int pid;// 按设备id
-
+	private int areaIndex;
+	private int projectId;
 //	// 登陆
 //	private String username;
 //	private String password;
@@ -76,12 +83,17 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 
 	// service层对象
 	private IConstructionService constructionService;
-
+	private IProjectService projectService;
+	private IYxareaService  yxareaService;
 	// 单个对象
 	private Construction construction;
-
+	private Project project;
+	private AreaVO areaVO;
 	// list对象
 	private List<Construction> constructions;
+	private List<Project> projects;
+	private List<Yxarea> yxareas;
+	private List<AreaVO> areaVOs;
 
 //	// 个人资料新旧密码
 //	private String password1;
@@ -159,6 +171,33 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //		}
 //	}
 
+	private void initAreas() {
+		areaVOs = new ArrayList<AreaVO>();
+		yxareas = yxareaService.getYxareas();
+		for (Yxarea yxarea : yxareas) {
+			AreaVO areaVO = new AreaVO();
+			areaVO.setId(yxarea.getId());
+			areaVO.setIndex(yxarea.getAreaIndex());
+			areaVO.setAreaName(yxarea.getAreaname());
+			int numberTotal = 0;
+			float areaTotal = 0f;
+			float costTotal = 0f;
+
+			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
+				projects = yxarea.getProjects();
+				numberTotal = projects.size();
+				for (int i = 0; i < projects.size(); i++) {
+					areaTotal += projects.get(i).getBuildingArea();
+					costTotal += projects.get(i).getBuildingCost();
+				}
+			}
+			areaVO.setProjectNumberTotal(numberTotal);
+			areaVO.setBuildingAreaTotal(areaTotal);
+			areaVO.setBuildingCostTotal(costTotal);
+			areaVOs.add(areaVO);
+		}
+	}
+	
 	private void checkIP() {
 		// TODO Auto-generated method stub
 		// String ip = getIpAddr(req);
@@ -241,10 +280,18 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 
 	public String add() throws Exception {
 		// 判断回话是否失效
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
-			return "opsessiongo_child";
+//		Construction construction = (Construction) session.get("construction");
+//		if (construction == null) {
+//			return "opsessiongo_child";
+//		}
+		
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
 		}
+		
+		project = projectService.loadByPid(pid);
+		
 		constructionService.add(construction);
 
 		arg[0] = "constructionAction!list";
@@ -401,12 +448,24 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
-			return "opsessiongo";
+//		Construction construction = (Construction) session.get("construction");
+//		if (construction == null) {
+//			return "opsessiongo";
+//		}
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		construction = constructionService.loadById(id);
-		return "view";
+		
+		project = projectService.loadByPid(pid);
+		
+		if(project.getConstruction() != null){
+			construction = project.getConstruction();
+			return "view";
+		}else{
+			return "add";
+		}
+		
 	}
 
 	/**
@@ -660,6 +719,78 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 
 	public void setRemoveTime(String removeTime) {
 		this.removeTime = removeTime;
+	}
+
+	public int getAreaIndex() {
+		return areaIndex;
+	}
+
+	public void setAreaIndex(int areaIndex) {
+		this.areaIndex = areaIndex;
+	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public IProjectService getProjectService() {
+		return projectService;
+	}
+	@Resource
+	public void setProjectService(IProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public IYxareaService getYxareaService() {
+		return yxareaService;
+	}
+	@Resource
+	public void setYxareaService(IYxareaService yxareaService) {
+		this.yxareaService = yxareaService;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public AreaVO getAreaVO() {
+		return areaVO;
+	}
+
+	public void setAreaVO(AreaVO areaVO) {
+		this.areaVO = areaVO;
+	}
+
+	public List<Yxarea> getYxareas() {
+		return yxareas;
+	}
+
+	public void setYxareas(List<Yxarea> yxareas) {
+		this.yxareas = yxareas;
+	}
+
+	public List<AreaVO> getAreaVOs() {
+		return areaVOs;
+	}
+
+	public void setAreaVOs(List<AreaVO> areaVOs) {
+		this.areaVOs = areaVOs;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 
