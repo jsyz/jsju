@@ -53,7 +53,6 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	private String convalue;
 	private int status;// 按状态
 	private int pid;// 按用户id
-	private int areaIndex;// 区域标示
 
 	// 批量删除
 	private String checkedIDs;
@@ -66,43 +65,12 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	// 单个对象
 	private Daymanage daymanage;
 	private Project project;
-	private AreaVO areaVO;
 
 	// list对象
 	private List<Daymanage> daymanages;
 	private List<Project> projects;
-	private List<Yxarea> yxareas;
-	private List<AreaVO> areaVOs;
-	
+
 	private List<String> launchContents;// 页面显示被选中 信息提取情况
-
-	// 区域项目统计
-	private void initAreas() {
-		areaVOs = new ArrayList<AreaVO>();
-		yxareas = yxareaService.getYxareas();
-		for (Yxarea yxarea : yxareas) {
-			AreaVO areaVO = new AreaVO();
-			areaVO.setId(yxarea.getId());
-			areaVO.setIndex(yxarea.getAreaIndex());
-			areaVO.setAreaName(yxarea.getAreaname());
-			int numberTotal = 0;
-			float areaTotal = 0f;
-			float costTotal = 0f;
-
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
-				}
-			}
-			areaVO.setProjectNumberTotal(numberTotal);
-			areaVO.setBuildingAreaTotal(areaTotal);
-			areaVO.setBuildingCostTotal(costTotal);
-			areaVOs.add(areaVO);
-		}
-	}
 
 	/**
 	 * 跳转到添加页面
@@ -117,11 +85,6 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		
 		project = projectService.loadByPid(pid);
 		daymanage = project.getDaymanage();
 		if (daymanage != null) {
@@ -138,22 +101,20 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		//修改项目完成进度 
-		if(daymanage.getIsCompleted()==1)
-		{
+		// 修改项目完成进度
+		if (daymanage.getIsCompleted() == 1) {
 			project = projectService.loadByPid(pid);
-			if(project.getGraphicProgress()!=4)
-			{
+			if (project.getGraphicProgress() != 4) {
 				project.setGraphicProgress(4);
 				projectService.update(project);
 			}
 		}
 		daymanageService.update(daymanage);
-		arg[0] = "projectAction!bench?id="+pid+"&areaIndex"+areaIndex;
+		arg[0] = "projectAction!bench?id=" + pid +"areaIndex="+((AreaVO)session.get("areaVO")).getIndex();
 		arg[1] = "项目工作台";
 		return SUCCESS;
 	}
-	
+
 	// 页面显示被选中 三级教育情况 {'纸质','图片','VCR'}显示格式
 	private void handleInfoExtractionMsg(String launchContent) {
 		// TODO Auto-generated method stub
@@ -322,38 +283,6 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	@Resource
 	public void setYxareaService(IYxareaService yxareaService) {
 		this.yxareaService = yxareaService;
-	}
-
-	public List<Yxarea> getYxareas() {
-		return yxareas;
-	}
-
-	public void setYxareas(List<Yxarea> yxareas) {
-		this.yxareas = yxareas;
-	}
-
-	public int getAreaIndex() {
-		return areaIndex;
-	}
-
-	public void setAreaIndex(int areaIndex) {
-		this.areaIndex = areaIndex;
-	}
-
-	public AreaVO getAreaVO() {
-		return areaVO;
-	}
-
-	public void setAreaVO(AreaVO areaVO) {
-		this.areaVO = areaVO;
-	}
-
-	public List<AreaVO> getAreaVOs() {
-		return areaVOs;
-	}
-
-	public void setAreaVOs(List<AreaVO> areaVOs) {
-		this.areaVOs = areaVOs;
 	}
 
 	public Project getProject() {

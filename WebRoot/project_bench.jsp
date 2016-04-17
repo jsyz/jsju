@@ -41,15 +41,15 @@
 						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
 						<s:property value="areaVO.areaName" />
 						<span class="pipe">|</span>【项目总数
-						<s:property value="areaVO.projectNumberTotal" />
+						<s:property value="#session.areaVO.projectNumberTotal" />
 						建筑面积
-						<s:property value="areaVO.buildingAreaTotal" />
+						<s:property value="#session.areaVO.buildingAreaTotal" />
 						m
 						<sup>
 							2
 						</sup>
 						造价
-						<s:property value="areaVO.buildingCostTotal" />
+						<s:property value="#session.areaVO.buildingCostTotal" />
 						万 】
 						<a href="yxareaAction!list"><span
 							class="label label-warning radius">片区切换</span> </a>
@@ -65,8 +65,8 @@
 					<area shape="rect" coords="295,202,378,285" href="xm-jk.html">
 					<area shape="rect" coords="438,202,532,285" href="xm-map.html">
 					<area shape="rect" coords="582,202,660,283" href="promanAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
-					<area shape="rect" coords="39,21,167,151" href="projectAction!view?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
-					<area shape="rect" coords="187,15,320,151" href="daymanageAction!view?pid=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
+					<area shape="rect" coords="39,21,167,151" href="projectAction!view?id=<s:property value="project.id"/>">
+					<area shape="rect" coords="187,15,320,151" href="daymanageAction!view?pid=<s:property value="project.id"/>">
 					<area shape="rect" coords="340,16,470,147" href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"">
 					<area shape="rect" coords="187,15,320,151" href="xm-rcjg_gl.html">
 					<area shape="rect" coords="340,16,470,147" href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">

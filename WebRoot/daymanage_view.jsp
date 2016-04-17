@@ -43,14 +43,6 @@
 			<s:hidden name="pid"></s:hidden>
 			<s:hidden name="areaIndex"></s:hidden>
 			<s:hidden name="daymanage.id"></s:hidden>
-			<s:hidden name="daymanage.launchImg1"></s:hidden>
-			<s:hidden name="daymanage.launchImg2"></s:hidden>
-			<s:hidden name="daymanage.launchImg3"></s:hidden>
-			<s:hidden name="daymanage.launchImg4"></s:hidden>
-			<s:hidden name="daymanage.launchImg5"></s:hidden>
-			<s:hidden name="daymanage.launchImg6"></s:hidden>
-			<s:hidden name="daymanage.launchImg7"></s:hidden>
-			<s:hidden name="daymanage.launchImg8"></s:hidden>
 			<div class="xmWraper ">
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -72,15 +64,15 @@
 							<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
 							<s:property value="areaVO.areaName" />
 							<span class="pipe">|</span>【项目总数
-							<s:property value="areaVO.projectNumberTotal" />
+							<s:property value="#session.areaVO.projectNumberTotal" />
 							建筑面积
-							<s:property value="areaVO.buildingAreaTotal" />
+							<s:property value="#session.areaVO.buildingAreaTotal" />
 							m
 							<sup>
 								2
 							</sup>
 							造价
-							<s:property value="areaVO.buildingCostTotal" />
+							<s:property value="#session.areaVO.buildingCostTotal" />
 							万 】
 							<a href="yxareaAction!list"><span
 								class="label label-warning radius">片区切换</span> </a>
@@ -181,12 +173,13 @@
 									<td>
 										<div class="skin-minimal ">
 											<s:checkboxlist theme="simple" cssStyle="width:36px"
-												name="daymanage.launchContent" list="{'纸质','图片','VCR'}" value="launchContents" />
+												name="daymanage.launchContent" list="{'纸质','图片','VCR'}"
+												value="launchContents" />
 											<button type="button" class="btn btn-success radius"
-											id="button" name=""
-											onClick="addPage('新增教育图片','educationpicAction!goToAdd?dayid=<s:property value="daymanage.id"/>','650','300')">
-											新增教育图片
-										</button>
+												id="button" name=""
+												onClick="addPage('新增教育图片','educationpicAction!goToAdd?dayid=<s:property value="daymanage.id"/>','650','300')">
+												新增教育图片
+											</button>
 										</div>
 									</td>
 								</tr>
@@ -221,7 +214,10 @@
 														<s:property value="picName" />
 													</td>
 													<td width="20%">
-														<a href="javascript:void(0);" onClick="addPage('查看教育图片','educationpicAction!view?id=<s:property value="id"/>','650','300')"><img width="45px;" height="35px;" src="images/picture.png"></img></a>
+														<a href="javascript:void(0);"
+															onClick="addPage('查看教育图片','educationpicAction!view?id=<s:property value="id"/>','650','300')"><img
+																width="45px;" height="35px;" src="images/picture.png"></img>
+														</a>
 													</td>
 													<td width="20%">
 														<a style="text-decoration: none" class="ml-5"
@@ -247,11 +243,9 @@
 										合计：3次
 									</td>
 									<td>
-										<button type="button" class="btn btn-success radius"
-											id="button"
-											onClick="javascript:window.location.href='xm-rcjg-rcxc.html'">
-											详细内容
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=1,2"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -443,6 +437,7 @@
 										竣工验收情况
 									</td>
 									<td>
+										p
 										<div class="formControls col-12">
 											<div class="formControls col-12">
 												<s:radio theme="simple" id="isCompleted"

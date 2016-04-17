@@ -9,14 +9,15 @@ public class TestMain {
 	private static String infoExtractionMsg;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//System.out.println("系统管理".contains("超级"));
-//		System.out.println(NumberUtils.isNumber("adfadf"));
-		String msg = "提取手机信息,提取银行卡信息,提取DNA,提取指纹,提取鞋印";
-			
-		handleInfoExtractionMsg(msg);
+		String str = "1,3,4,";
 		
-		System.out.println(infoExtractionMsg);
 		
+		
+		String sstr[] = str.split(",");
+		
+		for (int i = 0; i < sstr.length; i++) {
+			System.out.println(sstr[i]+" sdf");
+		}
 	}
 	
 	private static void handleInfoExtractionMsg(String infoExtraction) {

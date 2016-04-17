@@ -54,15 +54,15 @@
 						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
 						<s:property value="areaVO.areaName" />
 						<span class="pipe">|</span>【项目总数
-						<s:property value="areaVO.projectNumberTotal" />
+						<s:property value="#session.areaVO.projectNumberTotal" />
 						建筑面积
-						<s:property value="areaVO.buildingAreaTotal" />
+						<s:property value="#session.areaVO.buildingAreaTotal" />
 						m
 						<sup>
 							2
 						</sup>
 						造价
-						<s:property value="areaVO.buildingCostTotal" />
+						<s:property value="#session.areaVO.buildingCostTotal" />
 						万 】
 						<a href="yxareaAction!list" target="_parent"><span
 							class="label label-warning radius">片区切换</span> </a>

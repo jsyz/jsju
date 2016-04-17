@@ -21,24 +21,25 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Daymanage;
 import com.yz.model.Project;
+import com.yz.model.Spreadsheet;
 import com.yz.model.Usero;
 import com.yz.model.Yxarea;
-import com.yz.service.IDaymanageService;
 import com.yz.service.IProjectService;
+import com.yz.service.ISpreadsheetService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.vo.AjaxMsgVO;
 import com.yz.vo.AreaVO;
+import com.yz.vo.SheetVO;
 
 /**
- * @author lq
+ * @author lq 表格
  * 
  */
-@Component("projectAction")
+@Component("spreadsheetAction")
 @Scope("prototype")
-public class ProjectAction extends ActionSupport implements RequestAware,
+public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 
 	private static final long serialVersionUID = 1L;
@@ -59,28 +60,35 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 	private int status;// 按状态
-	private int pid;// 按用户id
+	private int pid;// 按项目id
 	private int areaIndex;// 区域标示
+	private String sheetTypeStr;// 表格类型可能为多个
+	private Integer[] sheetTypes;
+	private String pageName;// 跳转到页面名称
 
 	// 批量删除
 	private String checkedIDs;
 
 	// service层对象
-	private IProjectService projectService;
+	private ISpreadsheetService spreadsheetService;
 	private IYxareaService yxareaService;
-	private IDaymanageService daymanageService;
+	private IProjectService projectService;
 
 	// 单个对象
+	private Spreadsheet spreadsheet;
 	private Project project;
 	private AreaVO areaVO;
+	private SheetVO sheetVO;
 
 	// list对象
+	private List<Spreadsheet> spreadsheets;
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
+	private List<SheetVO> sheetVOs;
 
 	/**
-	 * 项目管理
+	 * 表格管理
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
@@ -99,44 +107,110 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
+
+		handleSheetTypes(sheetTypeStr);
+
+		if (sheetTypes.length > 0) {
+			handleSheetVOs(sheetTypes);
+		}
+		//获得当前项目
+		project = projectService.loadById(pid);
 		// 总记录数
-		totalCount = projectService.getTotalCount(con, convalue, areaIndex);
+		totalCount = spreadsheetService.getTotalCount(con, convalue, pid,
+				sheetTypes);
 		// 总页数
-		pageCount = projectService.getPageCount(totalCount, size);
+		pageCount = spreadsheetService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		projects = projectService.queryList(con, convalue, areaIndex, page,
-				size);
+		spreadsheets = spreadsheetService.queryList(con, convalue, pid,
+				sheetTypes, page, size);
+
 		return "list";
 	}
 
-	// 区域项目统计
-	private void initAreas() {
-		areaVOs = new ArrayList<AreaVO>();
-		yxareas = yxareaService.getYxareas();
-		for (Yxarea yxarea : yxareas) {
-			AreaVO areaVO = new AreaVO();
-			areaVO.setId(yxarea.getId());
-			areaVO.setIndex(yxarea.getAreaIndex());
-			areaVO.setAreaName(yxarea.getAreaname());
-			int numberTotal = 0;
-			float areaTotal = 0f;
-			float costTotal = 0f;
-
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
-				}
+	private void handleSheetTypes(String sheetTypeString) {
+		// TODO Auto-generated method stub
+		System.out.println(sheetTypeString);
+		List<Integer> types = new ArrayList<Integer>();
+		if (sheetTypeString != null) {
+			String strs[] = sheetTypeString.split(",");
+			for (int i = 0; i < strs.length; i++) {
+				types.add(Integer.parseInt(strs[i]));
 			}
-			areaVO.setProjectNumberTotal(numberTotal);
-			areaVO.setBuildingAreaTotal(areaTotal);
-			areaVO.setBuildingCostTotal(costTotal);
-			areaVOs.add(areaVO);
+		}
+		sheetTypes = (Integer[]) types.toArray(new Integer[types.size()]);
+	}
+
+	private void handleSheetVOs(Integer[] types) {
+		// TODO Auto-generated method stub
+		sheetVOs = new ArrayList<SheetVO>();
+		for (int i = 0; i < types.length; i++) {
+			switch (types[i]) {
+			case 1:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				sheetVO.setSheetName("工程质量行为资料监督抽查记录");
+				pageName = "日常监管-行为监督抽查";
+				break;
+			case 2:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				sheetVO.setSheetName("施工单位安全生产行为监督检查表");
+				break;
+			case 3:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 4:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 5:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 6:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 7:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 8:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 9:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 10:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 11:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 12:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 13:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			case 14:
+				sheetVO = new SheetVO();
+				sheetVO.setSheetType(types[i]);
+				break;
+			default:
+				break;
+			}
+
 		}
 	}
 
@@ -168,22 +242,11 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 
-		// 新增项目时，同时增加日常监管
-		Daymanage daymanage = new Daymanage();
-		daymanage.setIsFiveSigned(0);
-		daymanage.setIsMassSafeNotify(0);
-		daymanage.setIsCompleted(0);
-		daymanage.setIsDangerArgument(0);
-		daymanage.setIsEducationLaunch(0);
-		daymanage.setIsMortarQualified(0);
-		daymanage.setIsNameplateInstall(0);
-		
-		daymanageService.add(daymanage);
-		project.setDaymanage(daymanage);
-		projectService.add(project);
+		spreadsheetService.add(spreadsheet);
 
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
+		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypes="
+				+ sheetTypes;
+		arg[1] = "表格管理";
 		return SUCCESS;
 	}
 
@@ -201,11 +264,11 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 
-		project = projectService.loadById(id);
-		projectService.delete(project);
-		arg[0] = "projectAction!list?areaIndex="
-				+ project.getYxarea().getAreaIndex();
-		arg[1] = "项目管理";
+		spreadsheet = spreadsheetService.loadById(id);
+		spreadsheetService.delete(spreadsheet);
+		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypes="
+				+ sheetTypes;
+		arg[1] = "表格管理";
 		return SUCCESS;
 	}
 
@@ -214,12 +277,12 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	 * 
 	 * @return
 	 */
-	public String deleteProjects() {
+	public String deleteSpreadsheets() {
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
-			project = projectService.loadById(ids[i]);
+			spreadsheet = spreadsheetService.loadById(ids[i]);
 
-			projectService.delete(project);
+			spreadsheetService.delete(spreadsheet);
 		}
 		AjaxMsgVO msgVO = new AjaxMsgVO();
 		msgVO.setMessage("批量删除成功.");
@@ -247,15 +310,59 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		project = projectService.loadById(id);
+		spreadsheet = spreadsheetService.loadById(id);
 		return "load";
 	}
 
+	// 区域项目统计
+	private void initAreas() {
+		areaVOs = new ArrayList<AreaVO>();
+		yxareas = yxareaService.getYxareas();
+		for (Yxarea yxarea : yxareas) {
+			AreaVO areaVO = new AreaVO();
+			areaVO.setId(yxarea.getId());
+			areaVO.setIndex(yxarea.getAreaIndex());
+			areaVO.setAreaName(yxarea.getAreaname());
+			int numberTotal = 0;
+			float areaTotal = 0f;
+			float costTotal = 0f;
+
+			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
+				projects = yxarea.getProjects();
+				numberTotal = projects.size();
+				for (int i = 0; i < projects.size(); i++) {
+					areaTotal += projects.get(i).getBuildingArea();
+					costTotal += projects.get(i).getBuildingCost();
+				}
+			}
+			areaVO.setProjectNumberTotal(numberTotal);
+			areaVO.setBuildingAreaTotal(areaTotal);
+			areaVO.setBuildingCostTotal(costTotal);
+			areaVOs.add(areaVO);
+		}
+	}
+
 	/**
-	 * 修改
+	 * 跳转到展示页面
 	 * 
 	 * @return
 	 */
+	public String view() {
+		// 判断会话是否失效
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}
+		initAreas();
+		if (areaIndex > 0 && areaIndex < 10) {
+			areaVO = areaVOs.get(areaIndex - 1);
+		}
+
+		return "view";
+	}
+
 	public String update() throws Exception {
 		// 判断会话是否失效
 		Usero userSession = (Usero) session.get("userSession");
@@ -264,59 +371,11 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		projectService.update(project);
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
+		spreadsheetService.update(spreadsheet);
+		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypes="
+				+ sheetTypes;
+		arg[1] = "表格管理";
 		return SUCCESS;
-	}
-
-	public String updateProject() throws Exception {
-		// 判断会话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			String loginfail = "登陆失效,信息提交失败.";
-			request.put("loginFail", loginfail);
-			return "opsessiongo";
-		}
-		projectService.update(project);
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
-		return SUCCESS;
-	}
-
-	/**
-	 * 查看信息
-	 * 
-	 * @return
-	 */
-	public String view() {
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			return "opsessiongo";
-		}
-		project = projectService.loadById(id);
-		return "view";
-	}
-
-	/**
-	 * 项目工作台
-	 * 
-	 * @return
-	 */
-	public String bench() {
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			return "opsessiongo";
-		}
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		
-		session.put("areaVO", areaVO);
-		
-		project = projectService.loadById(id);
-		return "bench";
 	}
 
 	// get、set-------------------------------------------
@@ -418,29 +477,29 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		this.arg = arg;
 	}
 
-	public IProjectService getProjectService() {
-		return projectService;
+	public ISpreadsheetService getSpreadsheetService() {
+		return spreadsheetService;
 	}
 
 	@Resource
-	public void setProjectService(IProjectService projectService) {
-		this.projectService = projectService;
+	public void setSpreadsheetService(ISpreadsheetService spreadsheetService) {
+		this.spreadsheetService = spreadsheetService;
 	}
 
-	public Project getProject() {
-		return project;
+	public Spreadsheet getSpreadsheet() {
+		return spreadsheet;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setSpreadsheet(Spreadsheet spreadsheet) {
+		this.spreadsheet = spreadsheet;
 	}
 
-	public List<Project> getProjects() {
-		return projects;
+	public List<Spreadsheet> getSpreadsheets() {
+		return spreadsheets;
 	}
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setSpreadsheets(List<Spreadsheet> spreadsheets) {
+		this.spreadsheets = spreadsheets;
 	}
 
 	public javax.servlet.http.HttpServletResponse getResponse() {
@@ -508,13 +567,69 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		this.areaVOs = areaVOs;
 	}
 
-	public IDaymanageService getDaymanageService() {
-		return daymanageService;
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public IProjectService getProjectService() {
+		return projectService;
 	}
 
 	@Resource
-	public void setDaymanageService(IDaymanageService daymanageService) {
-		this.daymanageService = daymanageService;
+	public void setProjectService(IProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public String getSheetTypeStr() {
+		return sheetTypeStr;
+	}
+
+	public void setSheetTypeStr(String sheetTypeStr) {
+		this.sheetTypeStr = sheetTypeStr;
+	}
+
+	public Integer[] getSheetTypes() {
+		return sheetTypes;
+	}
+
+	public void setSheetTypes(Integer[] sheetTypes) {
+		this.sheetTypes = sheetTypes;
+	}
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+	public SheetVO getSheetVO() {
+		return sheetVO;
+	}
+
+	public void setSheetVO(SheetVO sheetVO) {
+		this.sheetVO = sheetVO;
+	}
+
+	public List<SheetVO> getSheetVOs() {
+		return sheetVOs;
+	}
+
+	public void setSheetVOs(List<SheetVO> sheetVOs) {
+		this.sheetVOs = sheetVOs;
 	}
 
 }

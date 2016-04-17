@@ -124,6 +124,49 @@ public class SpreadsheetServiceImp implements ISpreadsheetService {
 		String[] paramNames=new String[]{"username","password"};
 		Object[] values=new Object[]{username,password};
 		return spreadsheetDao.queryByNamedParam(queryString,paramNames,values);
+	}
+	public int getTotalCount(int con, String convalue, int pid,  Integer[] sheetTypes) {
+		String queryString = "select count(*) from Spreadsheet mo where 1=1 and mo.project.id="+pid;
+		Object[] p = null;
+		if(con!=0&&convalue!=null&&!convalue.equals("")){
+			if(con==1){
+				queryString += " and mo.sheetName like ? "; 
+			}
+			p = new Object[]{'%'+convalue+'%'};
+		}
+		if(sheetTypes!=null&&sheetTypes.length>0)
+		{
+			String queryStr = "";
+			for (int i = 0; i < sheetTypes.length; i++) {
+				queryStr += sheetTypes[i]+",";
+			}
+			queryStr = queryStr.substring(0, queryStr.length()-1);
+			queryString +=" and mo.sheetType in("+queryStr+")";
+		}
+		System.out.println(queryString);
+		return spreadsheetDao.getUniqueResult(queryString,p);
+	}
+	public List<Spreadsheet> queryList(int con, String convalue, int pid,
+			Integer[] sheetTypes, int page, int size) {
+		String queryString = "from Spreadsheet mo where 1=1 and mo.project.id="+pid;
+		Object[] p = null;
+		if(con!=0&&convalue!=null&&!convalue.equals("")){
+			if(con==1){
+				queryString += "and mo.sheetName like ? "; 
+			}
+			p = new Object[]{'%'+convalue+'%'};
+		}
+		if(sheetTypes!=null&&sheetTypes.length>0)
+		{
+			String queryStr = "";
+			for (int i = 0; i < sheetTypes.length; i++) {
+				queryStr += sheetTypes[i]+",";
+			}
+			queryStr = queryStr.substring(0, queryStr.length()-1);
+			queryString +=" and mo.sheetType in("+queryStr+")";
+		}
+		System.out.println(queryString);
+		return spreadsheetDao.pageList(queryString,p,page,size);
 	} 
 	
 }

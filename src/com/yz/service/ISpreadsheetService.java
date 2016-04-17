@@ -36,4 +36,10 @@ public interface ISpreadsheetService {
 
 	public abstract Spreadsheet getSpreadsheetBySpreadsheetname(String spreadsheetname);
 
+	public abstract int getTotalCount(int con, String convalue, int pid,
+			Integer[] sheetTypes);
+
+	public abstract List<Spreadsheet> queryList(int con, String convalue,
+			int pid, Integer[] sheetTypes, int page, int size);
+
 }
