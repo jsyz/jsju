@@ -41,5 +41,7 @@ public interface IDaymanageService {
 
 	public abstract Daymanage loadByDayid(Integer id);
 
+	public abstract Daymanage loadByProjectId(int pid);
+
 
 }

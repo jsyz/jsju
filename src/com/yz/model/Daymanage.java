@@ -49,6 +49,11 @@ public class Daymanage implements java.io.Serializable {
 	private Integer isCompleted;// 竣工验收情况(0:否，1：是)
 	private String completedTime;// 竣工时间
 	private List<Dangerargument> dangerarguments = new ArrayList<Dangerargument>();// 论证情况
+	private List<Educationpic> educationpics = new ArrayList<Educationpic>();// 教育图片
+
+	/** default constructor */
+	public Daymanage() {
+	}
 
 	// Constructors
 	public Daymanage(Integer id, Project project, Integer isFiveSigned,
@@ -59,7 +64,8 @@ public class Daymanage implements java.io.Serializable {
 			String launchImg1, Integer isDangerArgument,
 			Integer isNameplateInstall, String installTime,
 			Integer isMortarQualified, Integer isCompleted,
-			String completedTime, List<Dangerargument> dangerarguments) {
+			String completedTime, List<Dangerargument> dangerarguments,
+			List<Educationpic> educationpics) {
 		this.id = id;
 		this.project = project;
 		this.isFiveSigned = isFiveSigned;
@@ -83,10 +89,7 @@ public class Daymanage implements java.io.Serializable {
 		this.isCompleted = isCompleted;
 		this.completedTime = completedTime;
 		this.dangerarguments = dangerarguments;
-	}
-
-	/** default constructor */
-	public Daymanage() {
+		this.educationpics = educationpics;
 	}
 
 	/** full constructor */
@@ -100,6 +103,11 @@ public class Daymanage implements java.io.Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "daymanage")
 	public List<Dangerargument> getDangerarguments() {
 		return dangerarguments;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "daymanage")
+	public List<Educationpic> getEducationpics() {
+		return educationpics;
 	}
 
 	@Id
@@ -217,6 +225,10 @@ public class Daymanage implements java.io.Serializable {
 		this.dangerarguments = dangerarguments;
 	}
 
+	public void setEducationpics(List<Educationpic> educationpics) {
+		this.educationpics = educationpics;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -299,6 +311,14 @@ public class Daymanage implements java.io.Serializable {
 
 	public void setSignTime(String signTime) {
 		this.signTime = signTime;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "id:" + this.id + ",isFiveSigned:" + this.isFiveSigned
+				+ ",signTime:" + this.signTime + ",isMassSafeNotify:"
+				+ this.isMassSafeNotify;
 	}
 
 }

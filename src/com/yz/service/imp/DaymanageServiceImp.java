@@ -170,6 +170,14 @@ public class DaymanageServiceImp implements IDaymanageService {
 		Object[] values = new Object[] { id };
 		return daymanageDao.queryByNamedParam(queryString, paramNames, values);
 	}
+
+	public Daymanage loadByProjectId(int pid) {
+		// TODO Auto-generated method stub
+		String queryString = "from Daymanage mo where mo.project.id=:pid";
+		String[] paramNames = new String[] { "pid" };
+		Object[] values = new Object[] { pid };
+		return daymanageDao.queryByNamedParam(queryString, paramNames, values);
+	}
 	
 
 

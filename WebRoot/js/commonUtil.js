@@ -195,3 +195,27 @@ function deleteDangerargument(danid)
 					});
 		}
 }
+
+
+function deleteEducationpic(edid)
+{
+		if(confirm('你确定删除该教育图片吗？'))
+		{
+			$.ajax({   
+			            url:'deleteEducationpic',//这里是你的action或者servlert的路径地址   
+			            type:'post', //数据发送方式   
+			            async:false,
+			            data: {"edid":edid},
+			            dataType:'json',
+			            error: function(msg)
+			            { //失败   
+			            	console.log('删除失败.');   
+			            },   
+			            success: function(msg)
+			            { //成功
+			            	alert(msg.message);
+			            	location.replace(location.href);
+						}
+					});
+		}
+}

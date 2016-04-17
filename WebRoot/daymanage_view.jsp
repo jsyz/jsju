@@ -36,21 +36,28 @@
 		<script type="text/javascript" src="js/checkUtil.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<title>日常监管</title>
-		<script type="text/javascript">
-			var a = <s:property value="project.daymanage.id"/>;
-		</script>
 	</head>
 	<body>
 		<form action="daymanageAction!updateDaymanage" method="post"
 			class="form form-horizontal">
+			<s:hidden name="pid"></s:hidden>
+			<s:hidden name="areaIndex"></s:hidden>
 			<s:hidden name="daymanage.id"></s:hidden>
+			<s:hidden name="daymanage.launchImg1"></s:hidden>
+			<s:hidden name="daymanage.launchImg2"></s:hidden>
+			<s:hidden name="daymanage.launchImg3"></s:hidden>
+			<s:hidden name="daymanage.launchImg4"></s:hidden>
+			<s:hidden name="daymanage.launchImg5"></s:hidden>
+			<s:hidden name="daymanage.launchImg6"></s:hidden>
+			<s:hidden name="daymanage.launchImg7"></s:hidden>
+			<s:hidden name="daymanage.launchImg8"></s:hidden>
 			<div class="xmWraper ">
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 						<nav>
-						<a class="btn btn-success radius r mr-5 f-r"
+						<input type="submit" value="保存"
 							style="line-height: 1.6em; margin-top: 3px"
-							href="daymanageAction!updateDaymanage" title="返回主菜单">保存</a>
+							class="btn btn-success radius r mr-5 f-r" />
 						<a class="btn btn-success radius r mr-5 f-r"
 							style="line-height: 1.6em; margin-top: 3px"
 							href="javascript:location.replace(location.href);" title="刷新当前页"><i
@@ -126,10 +133,10 @@
 										<span class="formControls col-4">签订日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="daymanage.signTime" value="<s:property value="daymanage.signTime"/>"
+												name="daymanage.signTime"
+												value="<s:property value="daymanage.signTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" /> 
-												</span>
+												id="logmin" class="input-text Wdate" /> </span>
 
 									</td>
 								</tr>
@@ -151,9 +158,10 @@
 										<span class="formControls col-4">告知日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="daymanage.notifyTime" value="<s:property value="daymanage.notifyTime"/>"
+												name="daymanage.notifyTime"
+												value="<s:property value="daymanage.notifyTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" />  </span>
+												id="logmin" class="input-text Wdate" /> </span>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -173,8 +181,59 @@
 									<td>
 										<div class="skin-minimal ">
 											<s:checkboxlist theme="simple" cssStyle="width:36px"
-												name="daymanage.launchContent" list="{'纸质','图片','VCR'}" />
+												name="daymanage.launchContent" list="{'纸质','图片','VCR'}" value="launchContents" />
+											<button type="button" class="btn btn-success radius"
+											id="button" name=""
+											onClick="addPage('新增教育图片','educationpicAction!goToAdd?dayid=<s:property value="daymanage.id"/>','650','300')">
+											新增教育图片
+										</button>
 										</div>
+									</td>
+								</tr>
+								<tr class="text-c">
+									<td class="text-c">
+										&nbsp;
+									</td>
+									<td colspan="5">
+										<table
+											class="table table-bordered table-striped table-hover col-12">
+											<tr>
+												<td>
+													图片名称
+												</td>
+												<td>
+													查看图片
+												</td>
+												<td>
+													操作
+												</td>
+
+											</tr>
+											<s:if test="%{daymanage.educationpics.size()==0}">
+												<td colspan="3" align="center">
+													暂无教育图片
+												</td>
+											</s:if>
+											<s:iterator value="daymanage.educationpics"
+												var="educationpic" status="status">
+												<tr>
+													<td width="20%">
+														<s:property value="picName" />
+													</td>
+													<td width="20%">
+														<a href="javascript:void(0);" onClick="addPage('查看教育图片','educationpicAction!view?id=<s:property value="id"/>','650','300')"><img width="45px;" height="35px;" src="images/picture.png"></img></a>
+													</td>
+													<td width="20%">
+														<a style="text-decoration: none" class="ml-5"
+															href="javascript:;"
+															onclick="deleteEducationpic(<s:property value="id" />);"
+															title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+													</td>
+												</tr>
+											</s:iterator>
+
+										</table>
+
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -189,7 +248,7 @@
 									</td>
 									<td>
 										<button type="button" class="btn btn-success radius"
-											id="button" name=""
+											id="button"
 											onClick="javascript:window.location.href='xm-rcjg-rcxc.html'">
 											详细内容
 										</button>
@@ -290,7 +349,7 @@
 										合计：3次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
+										<button type="button" class="btn btn-success radius"
 											id="button" name=""
 											onClick="javascript:window.location.href='xm-rcjg-rcxc.html'">
 											详细列表
@@ -308,7 +367,7 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
+										<button type="button" class="btn btn-success radius"
 											id="button" name=""
 											onClick="javascript:window.location.href='xm-rcjg-jczg_gl.html'">
 											详细列表
@@ -326,7 +385,7 @@
 										合计：3次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
+										<button type="button" class="btn btn-success radius"
 											id="button" name=""
 											onClick="javascript:window.location.href='xm-rcjg-cc_gl.html'">
 											详细列表
@@ -350,15 +409,12 @@
 									</td>
 									<td>
 										<span class="formControls col-4">落实日期：</span>
-										<span class="formControls col-8"> 
-										
-										<input type="text"
+										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="daymanage.installTime" value="<s:property value="daymanage.installTime"/>"
+												name="daymanage.installTime"
+												value="<s:property value="daymanage.installTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" />
-												
-												</span>
+												id="logmin" class="input-text Wdate" /> </span>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -398,9 +454,10 @@
 										<span class="formControls col-4">竣工日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
-												name="daymanage.completedTime" value="<s:property value="daymanage.completedTime"/>"
+												name="daymanage.completedTime"
+												value="<s:property value="daymanage.completedTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" /></span>
+												id="logmin" class="input-text Wdate" /> </span>
 									</td>
 								</tr>
 							</tbody>

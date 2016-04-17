@@ -73,6 +73,8 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
+	
+	private List<String> launchContents;// 页面显示被选中 信息提取情况
 
 	// 区域项目统计
 	private void initAreas() {
@@ -121,7 +123,10 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 		}
 		
 		project = projectService.loadByPid(pid);
-		daymanage = daymanageService.loadByDayid(project.getDaymanage().getId());
+		daymanage = project.getDaymanage();
+		if (daymanage != null) {
+			handleInfoExtractionMsg(daymanage.getLaunchContent());
+		}
 		return "view";
 	}
 
@@ -133,11 +138,33 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		System.out.println("hello ");
-		System.out.println(daymanage);
-		
+		//修改项目完成进度 
+		if(daymanage.getIsCompleted()==1)
+		{
+			project = projectService.loadByPid(pid);
+			if(project.getGraphicProgress()!=4)
+			{
+				project.setGraphicProgress(4);
+				projectService.update(project);
+			}
+		}
 		daymanageService.update(daymanage);
-		return "success_child";
+		arg[0] = "projectAction!bench?id="+pid+"&areaIndex"+areaIndex;
+		arg[1] = "项目工作台";
+		return SUCCESS;
+	}
+	
+	// 页面显示被选中 三级教育情况 {'纸质','图片','VCR'}显示格式
+	private void handleInfoExtractionMsg(String launchContent) {
+		// TODO Auto-generated method stub
+		launchContents = new ArrayList<String>();
+		if (launchContent != null && launchContent.length() > 0
+				&& launchContent.contains(",")) {
+			String[] launchContentspres = launchContent.split(",");
+			for (int i = 0; i < launchContentspres.length; i++) {
+				launchContents.add(launchContentspres[i].replace(" ", ""));
+			}
+		}
 	}
 
 	// get、set-------------------------------------------
@@ -353,7 +380,13 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	public void setProjectService(IProjectService projectService) {
 		this.projectService = projectService;
 	}
-	
-	
+
+	public List<String> getLaunchContents() {
+		return launchContents;
+	}
+
+	public void setLaunchContents(List<String> launchContents) {
+		this.launchContents = launchContents;
+	}
 
 }
