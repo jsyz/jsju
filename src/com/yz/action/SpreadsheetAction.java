@@ -65,6 +65,7 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 	private String sheetTypeStr;// 表格类型可能为多个
 	private Integer[] sheetTypes;
 	private String pageName;// 跳转到页面名称
+	private Integer sheetType;
 
 	// 批量删除
 	private String checkedIDs;
@@ -102,18 +103,14 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		if (page < 1) {
 			page = 1;
 		}
-		initAreas();
-
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
 
 		handleSheetTypes(sheetTypeStr);
 
 		if (sheetTypes.length > 0) {
 			handleSheetVOs(sheetTypes);
+			System.out.println("size:" + sheetVOs.size());
 		}
-		//获得当前项目
+		// 获得当前项目
 		project = projectService.loadById(pid);
 		// 总记录数
 		totalCount = spreadsheetService.getTotalCount(con, convalue, pid,
@@ -147,69 +144,57 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		// TODO Auto-generated method stub
 		sheetVOs = new ArrayList<SheetVO>();
 		for (int i = 0; i < types.length; i++) {
+			SheetVO sheet = new SheetVO();
 			switch (types[i]) {
 			case 1:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
-				sheetVO.setSheetName("工程质量行为资料监督抽查记录");
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("工程质量行为资料监督抽查记录");
 				pageName = "日常监管-行为监督抽查";
 				break;
 			case 2:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
-				sheetVO.setSheetName("施工单位安全生产行为监督检查表");
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("施工单位安全生产行为监督检查表");
 				break;
 			case 3:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 4:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 5:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 6:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 7:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 8:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 9:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 10:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 11:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 12:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 13:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			case 14:
-				sheetVO = new SheetVO();
-				sheetVO.setSheetType(types[i]);
+				sheet.setSheetType(types[i]);
 				break;
 			default:
 				break;
 			}
+			sheetVOs.add(sheet);
 
 		}
 	}
@@ -220,9 +205,57 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
+
+		// 获得当前项目
+		project = projectService.loadById(pid);
+		switch (sheetType) {
+		case 0:
+			break;
+		case 1:
+			pageName = "日常监管-行为监督抽查-工程质量行为资料监督抽查记录";
+			return "add_1";
+		case 2:
+			
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			
+			break;
+		case 5:
+
+			break;
+		case 6:
+			
+			break;
+		case 7:
+			
+			break;
+		case 8:
+			
+			break;
+		case 9:
+			
+			break;
+		case 10:
+				
+			break;
+		case 11:
+			
+			break;
+		case 12:
+			
+			break;
+		case 13:
+			
+			break;
+		case 14:
+			
+			break;
+			
+		default:
+			break;
 		}
 		return "add";
 	}
@@ -306,40 +339,8 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
 		spreadsheet = spreadsheetService.loadById(id);
 		return "load";
-	}
-
-	// 区域项目统计
-	private void initAreas() {
-		areaVOs = new ArrayList<AreaVO>();
-		yxareas = yxareaService.getYxareas();
-		for (Yxarea yxarea : yxareas) {
-			AreaVO areaVO = new AreaVO();
-			areaVO.setId(yxarea.getId());
-			areaVO.setIndex(yxarea.getAreaIndex());
-			areaVO.setAreaName(yxarea.getAreaname());
-			int numberTotal = 0;
-			float areaTotal = 0f;
-			float costTotal = 0f;
-
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
-				}
-			}
-			areaVO.setProjectNumberTotal(numberTotal);
-			areaVO.setBuildingAreaTotal(areaTotal);
-			areaVO.setBuildingCostTotal(costTotal);
-			areaVOs.add(areaVO);
-		}
 	}
 
 	/**
@@ -354,10 +355,6 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			String loginfail = "登陆失效,信息提交失败.";
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
-		}
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
 		}
 
 		return "view";
@@ -630,6 +627,14 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 
 	public void setSheetVOs(List<SheetVO> sheetVOs) {
 		this.sheetVOs = sheetVOs;
+	}
+
+	public Integer getSheetType() {
+		return sheetType;
+	}
+
+	public void setSheetType(Integer sheetType) {
+		this.sheetType = sheetType;
 	}
 
 }

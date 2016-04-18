@@ -1,322 +1,407 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<LINK rel="Bookmark" href="/favicon.ico" >
-<LINK rel="Shortcut Icon" href="/favicon.ico" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
-<![endif]-->
-<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-<link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="css/city.css" rel="stylesheet" type="text/css" />
-<!--[if IE 6]>
-<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
-<title>空白页</title>
-</head>
-<body>
-<div class="xmWraper ">
-   <div class="xmconbox pd-20">
-   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a href="xm-rcjg-rcxc.html" title="返回" class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
-   <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b; 当前片区：官林<span class="pipe">|</span>【项目总数  32　　建筑面积 4378m<sup>2</sup>     　　造价  5343万 】<a href="citylist.html"><span class="label label-warning radius">片区切换</span></a></p>
-   </div>
-   </div>
-   <div class="xmconbox pd-20">
-   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <p><i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 日常监管 - 日常巡查</p>
-   </div>
-  <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-    <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
-    <!--表格内容-->
-<div class="row cl">
-     <div class="col-12 mb-0  f-16" style="border-bottom: solid 2px #2DABF7; line-height: 43px;">日常巡查信息
-   
-     
-  </div>
-      <div class="row cl mb-10">
-        <span class="btn-upload form-group mt-10 ">
-        <a href="" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe652;</i> 打印表格</a>
-        </span> 
-      </div>
-<div class=Section1 style='layout-grid:15.6pt'>
-
-<p class=MsoNormal align=center style='margin-top:18.0pt;text-align:center'><span
-style='font-size:18.0pt;mso-bidi-font-size:10.0pt;font-family:黑体;mso-hansi-font-family:
-宋体;letter-spacing:2.0pt'>工程监督抽查（巡查）记录<span lang=EN-US><o:p></o:p></span></span></p>
-
-<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:.5pt solid windowtext;
- mso-border-insidev:.5pt solid windowtext'>
- <tr style='height:35.95pt'>
-  <td width=77 style='width:57.45pt;border:solid windowtext 1.0pt;mso-border-top-alt:
-  .75pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;mso-border-right-alt:
-  .5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 5.4pt 0cm 5.4pt;
-  height:35.95pt'>
-  <p class=MsoNormal><span style='font-family:宋体'>工程名称<span lang=EN-US><span
-  style='mso-spacerun:yes'>
-  </span><o:p></o:p></span></span></p>
-  </td>
-  <td width=262 colspan=4 style='width:196.5pt;border:solid windowtext 1.0pt;
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt;
-  height:35.95pt'>
-  <p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
-  </td>
-  <td width=74 colspan=2 style='width:55.5pt;border:solid windowtext 1.0pt;
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt;
-  height:35.95pt'>
-  <p class=MsoNormal><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
-  mso-hansi-font-family:"Times New Roman"'>建设单位</span></p>
-  </td>
-  <td width=201 colspan=2 style='width:150.45pt;border:solid windowtext 1.0pt;
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-top-alt:
-  .75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.5pt;mso-border-right-alt:
-  .75pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:
-  0cm 5.4pt 0cm 5.4pt;height:35.95pt'>
-  <p class=MsoNormal style='text-indent:5.25pt;mso-char-indent-count:.5'><span
-  lang=EN-US><o:p>&nbsp;</o:p></span></p>
-  </td>
- </tr>
- <tr style='height:34.1pt'>
-  <td width=77 style='width:57.45pt;border:solid windowtext 1.0pt;border-top:
-  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt;
-  height:34.1pt'>
-  <p class=MsoNormal><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
-  mso-hansi-font-family:"Times New Roman"'>施工单位</span></p>
-  </td>
-  <td width=262 colspan=4 style='width:196.5pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.1pt'>
-  <p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
-  </td>
-  <td width=74 colspan=2 style='width:55.5pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.1pt'>
-  <p class=MsoBodyText style='margin-top:6.0pt;margin-right:0cm;margin-bottom:
-  6.0pt;margin-left:0cm;line-height:normal;word-break:break-all'><span
-  style='font-family:宋体;letter-spacing:0pt'>监理单位<span lang=EN-US><o:p></o:p></span></span></p>
-  </td>
-  <td width=201 colspan=2 style='width:150.45pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .75pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:34.1pt'>
-  <p class=MsoNormal style='text-indent:5.25pt;mso-char-indent-count:.5'><span
-  lang=EN-US><o:p>&nbsp;</o:p></span></p>
-  </td>
- </tr>
- <tr style='height:31.45pt'>
-  <td width=613 colspan=9 style='width:459.9pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:
-  .5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;mso-border-right-alt:
-  .75pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:
-  0cm 5.4pt 0cm 5.4pt;height:31.45pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  style='font-family:宋体'>抽<span lang=EN-US><span
-  style='mso-spacerun:yes'>&nbsp; </span></span>查 （ 巡<span lang=EN-US><span
-  style='mso-spacerun:yes'>&nbsp; </span></span>查 ）<span lang=EN-US><span
-  style='mso-spacerun:yes'>&nbsp; </span></span>记<span lang=EN-US><span
-  style='mso-spacerun:yes'>&nbsp; </span></span>录<span lang=EN-US><o:p></o:p></span></span></p>
-  </td>
- </tr>
- <tr style='height:392.4pt'>
-  <td width=613 colspan=9 style='width:459.9pt;border-top:none;border-left:
-  solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
-  mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .75pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:392.4pt'>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><u><span
-  lang=EN-US style='font-family:宋体'><o:p><span style='text-decoration:none'>&nbsp;</span></o:p></span></u></p>
-  <p class=MsoNormal align=right style='text-align:right;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  </td>
- </tr>
- <tr style='height:48.55pt'>
-  <td width=613 colspan=9 style='width:459.9pt;border:solid windowtext 1.0pt;
-  mso-border-top-alt:.5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;
-  mso-border-right-alt:.75pt;mso-border-color-alt:windowtext;mso-border-style-alt:
-  solid;padding:0cm 5.4pt 0cm 5.4pt;height:48.55pt'>
-  <p class=MsoNormal style='word-break:break-all'><span lang=EN-US
-  style='font-family:宋体'><span style='mso-spacerun:yes'>&nbsp;</span></span><span
-  style='font-family:宋体;color:black'>监督员：　　</span><span lang=EN-US
-  style='font-family:宋体'><span
-  style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span><span
-  style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
-  style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-  style='font-family:宋体'>年<span lang=EN-US><span
-  style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span>月<span lang=EN-US><span
-  style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span>日　　　<span
-  lang=EN-US><o:p></o:p></span></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-lastrow:yes;height:44.7pt'>
-  <td width=102 colspan=2 style='width:76.65pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:
-  .5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;mso-border-right-alt:
-  .75pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:
-  0cm 5.4pt 0cm 5.4pt;height:44.7pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  style='font-family:宋体'>建设单位代表<span lang=EN-US><o:p></o:p></span></span></p>
-  </td>
-  <td width=102 style='width:76.65pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .75pt;
-  mso-border-top-alt:.5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;
-  mso-border-right-alt:.75pt;mso-border-color-alt:windowtext;mso-border-style-alt:
-  solid;padding:0cm 5.4pt 0cm 5.4pt;height:44.7pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  </td>
-  <td width=102 style='width:76.65pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .75pt;
-  mso-border-top-alt:.5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;
-  mso-border-right-alt:.75pt;mso-border-color-alt:windowtext;mso-border-style-alt:
-  solid;padding:0cm 5.4pt 0cm 5.4pt;height:44.7pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  style='font-family:宋体'>监理单位代表<span lang=EN-US><o:p></o:p></span></span></p>
-  </td>
-  <td width=102 colspan=2 style='width:76.65pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .75pt;
-  mso-border-top-alt:.5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;
-  mso-border-right-alt:.75pt;mso-border-color-alt:windowtext;mso-border-style-alt:
-  solid;padding:0cm 5.4pt 0cm 5.4pt;height:44.7pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  </td>
-  <td width=102 colspan=2 style='width:76.65pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .75pt;
-  mso-border-top-alt:.5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;
-  mso-border-right-alt:.75pt;mso-border-color-alt:windowtext;mso-border-style-alt:
-  solid;padding:0cm 5.4pt 0cm 5.4pt;height:44.7pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  style='font-family:宋体'>施工单位代表<span lang=EN-US><o:p></o:p></span></span></p>
-  </td>
-  <td width=102 style='width:76.65pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .75pt;
-  mso-border-top-alt:.5pt;mso-border-left-alt:.75pt;mso-border-bottom-alt:.5pt;
-  mso-border-right-alt:.75pt;mso-border-color-alt:windowtext;mso-border-style-alt:
-  solid;padding:0cm 5.4pt 0cm 5.4pt;height:44.7pt'>
-  <p class=MsoNormal align=center style='text-align:center;word-break:break-all'><span
-  lang=EN-US style='font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-  </td>
- </tr>
- <![if !supportMisalignedColumns]>
- <tr height=0>
-  <td width=77 style='border:none'></td>
-  <td width=26 style='border:none'></td>
-  <td width=102 style='border:none'></td>
-  <td width=102 style='border:none'></td>
-  <td width=32 style='border:none'></td>
-  <td width=70 style='border:none'></td>
-  <td width=4 style='border:none'></td>
-  <td width=98 style='border:none'></td>
-  <td width=102 style='border:none'></td>
- </tr>
- <![endif]>
-</table>
-
-<p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
-
-</div>
-      <div class="row cl">
-		<label class="form-label col-1">图片上传：</label>
-			<div class="formControls col-11">
-				<div class="uploader-thum-container">
-					<div id="fileList" class="uploader-list"></div>
-					<div id="filePicker">选择图片</div>     
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
+			type="text/css" />
+		<link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet"
+			type="text/css" />
+		<link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+		<link href="css/city.css" rel="stylesheet" type="text/css" />
+		<title>工程质量行为资料监督抽查记录</title>
+	</head>
+	<body>
+		<div class="xmWraper ">
+			<div class="xmconbox pd-20">
+				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<a class="btn btn-success radius r mr-5 f-r"
+						style="line-height: 1.6em; margin-top: 3px"
+						href="javascript:location.replace(location.href);" title="刷新当前页"><i
+						class="Hui-iconfont">&#xe68f;</i> </a>
+					<a class="btn btn-success radius r mr-5 f-r"
+						style="line-height: 1.6em; margin-top: 3px"
+						href="javascript:history.go(-1);" title="返回上一页"><i
+						class="Hui-iconfont">&#xe66b;</i> </a>
+					</nav>
+					<p
+						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
+						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
+						<s:property value="areaVO.areaName" />
+						<span class="pipe">|</span>【项目总数
+						<s:property value="#session.areaVO.projectNumberTotal" />
+						建筑面积
+						<s:property value="#session.areaVO.buildingAreaTotal" />
+						m
+						<sup>
+							2
+						</sup>
+						造价
+						<s:property value="#session.areaVO.buildingCostTotal" />
+						万 】
+						<a href="yxareaAction!list" target="_parent"><span
+							class="label label-warning radius">片区切换</span> </a>
+					</p>
 				</div>
 			</div>
-	  </div>
+			<div class="xmconbox pd-20">
+				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<p>
+						<i class="Hui-iconfont">&#xe623;</i>
+						<s:property value="project.name" />
+						-
+						<s:property value="pageName" />
+					</p>
+				</div>
+				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<div class="row cl bk-gray radius pd-10"
+						style="background-color: #FFF">
+						<!--表格内容-->
+						<div class="row cl">
+							<div class="col-12 mb-0  f-16"
+								style="border-bottom: solid 2px #2DABF7; line-height: 43px;">
+								日常巡查信息
+							</div>
+							<div class="row cl mb-10">
+								<span class="btn-upload form-group mt-10 "> <a href=""
+									class="btn btn-primary radius upload-btn"><i
+										class="Hui-iconfont">&#xe652;</i> 打印表格</a> </span>
+							</div>
+							<div class=Section1 style='layout-grid: 15.6pt'>
+
+								<p class=MsoNormal align=center
+									style='margin-top: 18.0pt; text-align: center'>
+									<span
+										style='font-size: 18.0pt; mso-bidi-font-size: 10.0pt; font-family: 黑体; mso-hansi-font-family: 宋体; letter-spacing: 2.0pt'>工程监督抽查（巡查）记录<span><o:p></o:p>
+									</span> </span>
+								</p>
+
+								<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+									style='border-collapse: collapse; border: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext'>
+									<tr style='height: 35.95pt'>
+										<td width=77
+											style='width: 57.45pt; border: solid windowtext 1.0pt; mso-border-top-alt: .75pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .5pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 35.95pt'>
+											<p class=MsoNormal>
+												<span style='font-family: 宋体'>工程名称<span ><span
+														style='mso-spacerun: yes'> </span> <o:p></o:p> </span> </span>
+											</p>
+										</td>
+										<td width=262 colspan=4
+											style='width: 196.5pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .75pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 35.95pt'>
+											<p class=MsoNormal>
+												<span ><o:p>&nbsp;</o:p> </span>
+											</p>
+										</td>
+										<td width=74 colspan=2
+											style='width: 55.5pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .75pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 35.95pt'>
+											<p class=MsoNormal>
+												<span
+													style='font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>建设单位</span>
+											</p>
+										</td>
+										<td width=201 colspan=2
+											style='width: 150.45pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: .75pt; mso-border-left-alt: .5pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 35.95pt'>
+											<p class=MsoNormal
+												style='text-indent: 5.25pt; mso-char-indent-count: .5'>
+												<span ><o:p>&nbsp;</o:p> </span>
+											</p>
+										</td>
+									</tr>
+									<tr style='height: 34.1pt'>
+										<td width=77
+											style='width: 57.45pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .75pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 34.1pt'>
+											<p class=MsoNormal>
+												<span
+													style='font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>施工单位</span>
+											</p>
+										</td>
+										<td width=262 colspan=4
+											style='width: 196.5pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 34.1pt'>
+											<p class=MsoNormal>
+												<span ><o:p>&nbsp;</o:p> </span>
+											</p>
+										</td>
+										<td width=74 colspan=2
+											style='width: 55.5pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 34.1pt'>
+											<p class=MsoBodyText
+												style='margin-top: 6.0pt; margin-right: 0cm; margin-bottom: 6.0pt; margin-left: 0cm; line-height: normal; word-break: break-all'>
+												<span style='font-family: 宋体; letter-spacing: 0pt'>监理单位<span
+													><o:p></o:p> </span> </span>
+											</p>
+										</td>
+										<td width=201 colspan=2
+											style='width: 150.45pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext .75pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 34.1pt'>
+											<p class=MsoNormal
+												style='text-indent: 5.25pt; mso-char-indent-count: .5'>
+												<span ><o:p>&nbsp;</o:p> </span>
+											</p>
+										</td>
+									</tr>
+									<tr style='height: 31.45pt'>
+										<td width=613 colspan=9
+											style='width: 459.9pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 31.45pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span style='font-family: 宋体'>抽<span ><span
+														style='mso-spacerun: yes'>&nbsp; </span> </span>查 （ 巡<span
+													><span style='mso-spacerun: yes'>&nbsp;
+													</span> </span>查 ）<span ><span style='mso-spacerun: yes'>&nbsp;
+													</span> </span>记<span ><span style='mso-spacerun: yes'>&nbsp;
+													</span> </span>录<span ><o:p></o:p> </span> </span>
+											</p>
+										</td>
+									</tr>
+									<tr style='height: 392.4pt'>
+										<td width=613 colspan=9
+											style='width: 459.9pt; border-top: none; border-left: solid windowtext 1.0pt; border-bottom: none; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext .75pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 392.4pt'>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<u><span  style='font-family: 宋体'><o:p>
+															<span style='text-decoration: none'>&nbsp;</span>
+														</o:p> </span> </u>
+											</p>
+											<p class=MsoNormal align=right
+												style='text-align: right; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=right style='text-align: right'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal align=right style='text-align: right'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+										</td>
+									</tr>
+									<tr style='height: 48.55pt'>
+										<td width=613 colspan=9
+											style='width: 459.9pt; border: solid windowtext 1.0pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 48.55pt'>
+											<p class=MsoNormal style='word-break: break-all'>
+												<span  style='font-family: 宋体'><span
+													style='mso-spacerun: yes'>&nbsp;</span> </span><span
+													style='font-family: 宋体; color: black'>监督员： </span><span
+													 style='font-family: 宋体'><span
+													style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+													style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+												</span><span style='font-family: 宋体'>年<span ><span
+														style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp; </span> </span>月<span
+													><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;
+													</span> </span>日 <span ><o:p></o:p> </span> </span>
+											</p>
+										</td>
+									</tr>
+									<tr style='mso-yfti-lastrow: yes; height: 44.7pt'>
+										<td width=102 colspan=2
+											style='width: 76.65pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 44.7pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span style='font-family: 宋体'>建设单位代表<span ><o:p></o:p>
+												</span> </span>
+											</p>
+										</td>
+										<td width=102
+											style='width: 76.65pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .75pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 44.7pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+										</td>
+										<td width=102
+											style='width: 76.65pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .75pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 44.7pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span style='font-family: 宋体'>监理单位代表<span ><o:p></o:p>
+												</span> </span>
+											</p>
+										</td>
+										<td width=102 colspan=2
+											style='width: 76.65pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .75pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 44.7pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+										</td>
+										<td width=102 colspan=2
+											style='width: 76.65pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .75pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 44.7pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span style='font-family: 宋体'>施工单位代表<span ><o:p></o:p>
+												</span> </span>
+											</p>
+										</td>
+										<td width=102
+											style='width: 76.65pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .75pt; mso-border-top-alt: .5pt; mso-border-left-alt: .75pt; mso-border-bottom-alt: .5pt; mso-border-right-alt: .75pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; padding: 0cm 5.4pt 0cm 5.4pt; height: 44.7pt'>
+											<p class=MsoNormal align=center
+												style='text-align: center; word-break: break-all'>
+												<span  style='font-family: 宋体'><o:p>&nbsp;</o:p>
+												</span>
+											</p>
+										</td>
+									</tr>
+									<![if !supportMisalignedColumns]>
+									<tr height=0>
+										<td width=77 style='border: none'></td>
+										<td width=26 style='border: none'></td>
+										<td width=102 style='border: none'></td>
+										<td width=102 style='border: none'></td>
+										<td width=32 style='border: none'></td>
+										<td width=70 style='border: none'></td>
+										<td width=4 style='border: none'></td>
+										<td width=98 style='border: none'></td>
+										<td width=102 style='border: none'></td>
+									</tr>
+									<![endif]>
+								</table>
+
+								<p class=MsoNormal>
+									<span ><o:p>&nbsp;</o:p> </span>
+								</p>
+
+							</div>
+							<div class="row cl">
+								<label class="form-label col-1">
+									图片上传：
+								</label>
+								<div class="formControls col-11">
+									<div class="uploader-thum-container">
+										<div id="fileList" class="uploader-list"></div>
+										<div id="filePicker">
+											选择图片
+										</div>
+									</div>
+								</div>
+							</div>
 
 
-<img src="images/003.jpg" width="600px" height="800px">
-            <div class="row cl mb-10">
-            <label class="form-label col-1"> </label>
-        <span class="btn-upload form-group mt-10 ">
+							<img src="images/003.jpg" width="600px" height="800px">
+							<div class="row cl mb-10">
+								<label class="form-label col-1">
+								</label>
+								<span class="btn-upload form-group mt-10 "> <a href=""
+									class="btn btn-primary radius upload-btn"><i
+										class="Hui-iconfont">&#xe652;</i> 打印图片</a> </span>
+							</div>
+							<div class="row cl mb-10">
+								<div class="col-10 col-offset-5 pt-10 pb-10">
+									<button onClick="article_save();"
+										class="btn btn-primary radius" type="button">
+										<i class="Hui-iconfont">&#xe632;</i> 保存
+									</button>
+									<button onClick="layer_close();"
+										class="btn btn-secondary radius" type="button">
+										&nbsp;&nbsp;取消&nbsp;&nbsp;
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
-
-
-        <a href="" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe652;</i> 打印图片</a>
-       
-        </span> 
-      </div>
-      <div class="row cl mb-10">
-        <div class="col-10 col-offset-5 pt-10 pb-10">
-        <button onClick="article_save();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-        <button onClick="layer_close();" class="btn btn-secondary radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-      </div>
-</div>
-  </div>
-  </div>
-  
-</div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
-<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script> 
-<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script> 
-<script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.min.js"></script> 
-<script type="text/javascript" src="js/H-ui.js"></script> 
-<script type="text/javascript" src="js/H-ui.admin.js"></script>
-<script type="text/javascript">
+				</div>
+				<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+				<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+				<script type="text/javascript"
+					src="lib/My97DatePicker/WdatePicker.js"></script>
+				<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
+				<script type="text/javascript"
+					src="lib/Validform/5.3.2/Validform.min.js"></script>
+				<script type="text/javascript"
+					src="lib/webuploader/0.1.5/webuploader.min.js"></script>
+				<script type="text/javascript" src="js/H-ui.js"></script>
+				<script type="text/javascript" src="js/H-ui.admin.js"></script>
+				<script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
@@ -1003,5 +1088,5 @@ $(function(){
 	var ue = UE.getEditor('editor');
 });
 </script>
-</body>
+	</body>
 </html>

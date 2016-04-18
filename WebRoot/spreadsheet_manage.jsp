@@ -75,28 +75,28 @@
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<p>
 						<i class="Hui-iconfont">&#xe623;</i>
-						<s:property value="project.name" />-<s:property value="pageName" />
+						<s:property value="project.name" />
+						-
+						<s:property value="pageName" />
 					</p>
 				</div>
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<div class="row cl box-shadow pd-10  bk-gray radius"
 						style="background-color: #FFF;">
 						<div class="cl pd-5 bg-1 bk-gray mb-20">
-							<span class="l">
-							
-							 <a href="javascript:;"
+							<span class="l"> <a href="javascript:;"
 								onclick="deleteAllCheckedSpreadsheets();"
 								class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-									批量删除</a> 
-									
+									批量删除</a> <s:iterator value="sheetVOs" var="sheetVO" status="status">
 									
 									<a class="btn btn-primary radius"
-								onclick="article_add('新增日常巡查','rcxc-add.html')"
-								href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-									新增巡查记录</a> 
-									
-									
-									</span>
+										onclick="childPageFull('新增<s:property value="sheetName"/>','spreadsheetAction!goToAdd?pid=<s:property value="pid"/>&sheetType=<s:property value="sheetType"/>')"
+										href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
+										新增<s:property value="sheetName"/></a>
+										
+								</s:iterator> 
+								
+								</span>
 
 							<span class="r">共有数据：<strong><s:property
 										value="totalCount" /> </strong> 条</span>

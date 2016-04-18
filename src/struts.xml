@@ -262,6 +262,11 @@
 
 			<result name="list">/spreadsheet_manage.jsp</result>
 			<result name="add">/spreadsheet_add.jsp</result>
+			
+			<result name="add_1">/sheet_1.jsp</result>
+			
+			
+			
 			<result name="load">/spreadsheet_update.jsp</result>
 			<result name="view">/spreadsheet_view.jsp</result>
 
