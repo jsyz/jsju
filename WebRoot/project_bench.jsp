@@ -29,6 +29,10 @@
 					<nav>
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
+						href="projectAction!list?areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+						target="_self" title="返回项目列表">返回项目列表 </a>
+					<a class="btn btn-success radius r mr-5 f-r"
+						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
 						class="Hui-iconfont">&#xe68f;</i> </a><a
 						class="btn btn-success radius r mr-5 f-r"
@@ -58,19 +62,25 @@
 			</div>
 			<div class="xmbox">
 				<h1 class="text-c c-white text-shadow pb-20">
-					<s:property  value="project.name"/>
+					<s:property value="project.name" />
 				</h1>
 				<img src="images/xm.png" width="965" height="355" usemap="#Map">
 				<map name="Map">
 					<area shape="rect" coords="295,202,378,285" href="xm-jk.html">
 					<area shape="rect" coords="438,202,532,285" href="xm-map.html">
-					<area shape="rect" coords="582,202,660,283" href="promanAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
-					<area shape="rect" coords="39,21,167,151" href="projectAction!view?id=<s:property value="project.id"/>">
-					<area shape="rect" coords="187,15,320,151" href="daymanageAction!view?pid=<s:property value="project.id"/>">
-					<area shape="rect" coords="340,16,470,147" href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"">
+					<area shape="rect" coords="582,202,660,283"
+						href="promanAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
+					<area shape="rect" coords="39,21,167,151"
+						href="projectAction!view?id=<s:property value="project.id"/>">
+					<area shape="rect" coords="187,15,320,151"
+						href="daymanageAction!view?pid=<s:property value="project.id"/>">
+					<area shape="rect" coords="340,16,470,147"
+						href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"">
 					<area shape="rect" coords="187,15,320,151" href="xm-rcjg_gl.html">
-					<area shape="rect" coords="340,16,470,147" href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
-					<area shape="rect" coords="492,16,620,147" href="constructionAction!view?pid=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
+					<area shape="rect" coords="340,16,470,147"
+						href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
+					<area shape="rect" coords="492,16,620,147"
+						href="constructionAction!view?pid=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
 					<area shape="rect" coords="647,18,775,153" href="xmpj.html">
 					<area shape="rect" coords="798,22,925,153" href="xm-da.html">
 				</map>

@@ -81,6 +81,21 @@ function jumpProjectPage(url,page,con,convalue,areaIndex){
 	window.location=url;
 }
 
+
+//电子表格分页显示
+function jumpSheetPage(url,page,con,convalue,pid,sheetTypeStr){
+	
+	var page=page;
+	if(isNaN(page)){
+		var page2=document.getElementById(page).value;
+		page=parseInt(page2);
+	}
+	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&pid='+pid+'&sheetTypeStr='+sheetTypeStr;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+
 //人员 分页显示
 function jumpPersonPage(url,page,con,convalue,type,queryState,starttime,endtime){
 	

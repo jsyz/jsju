@@ -1,6 +1,11 @@
 package com.yz.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -13,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -29,6 +35,7 @@ import com.yz.service.IProjectService;
 import com.yz.service.ISpreadsheetService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
+import com.yz.util.DateTimeKit;
 import com.yz.vo.AjaxMsgVO;
 import com.yz.vo.AreaVO;
 import com.yz.vo.SheetVO;
@@ -66,6 +73,7 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 	private Integer[] sheetTypes;
 	private String pageName;// 跳转到页面名称
 	private Integer sheetType;
+	private String sheetName;// 表格名称
 
 	// 批量删除
 	private String checkedIDs;
@@ -146,6 +154,7 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		for (int i = 0; i < types.length; i++) {
 			SheetVO sheet = new SheetVO();
 			switch (types[i]) {
+			// 1,2同一个页面
 			case 1:
 				sheet.setSheetType(types[i]);
 				sheet.setSheetName("工程质量行为资料监督抽查记录");
@@ -155,11 +164,15 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 				sheet.setSheetType(types[i]);
 				sheet.setSheetName("施工单位安全生产行为监督检查表");
 				break;
+			//3,4同一页面
 			case 3:
 				sheet.setSheetType(types[i]);
+				sheet.setSheetName("工程质量监督抽查（巡查）记录");
+				pageName = "日常监管-日常巡查";
 				break;
 			case 4:
 				sheet.setSheetType(types[i]);
+				sheet.setSheetName("建设工程安全生产监督抽查记录表");
 				break;
 			case 5:
 				sheet.setSheetType(types[i]);
@@ -208,52 +221,56 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 
 		// 获得当前项目
 		project = projectService.loadById(pid);
+		System.out.println("sheetTypeStr:" + sheetTypeStr);
 		switch (sheetType) {
 		case 0:
 			break;
 		case 1:
 			pageName = "日常监管-行为监督抽查-工程质量行为资料监督抽查记录";
-			return "add_1";
+			sheetName = "工程质量行为资料监督抽查记录";
 		case 2:
-			
+			pageName = "日常监管-行为监督抽查-施工单位安全生产行为监督检查表";
+			sheetName = "施工单位安全生产行为监督检查表";
 			break;
 		case 3:
-			
+			pageName = "日常监管-日常巡查-工程质量监督抽查（巡查）记录";
+			sheetName = "工程质量监督抽查（巡查）记录";
 			break;
 		case 4:
-			
+			pageName = "日常监管-日常巡查-施工单位安全生产行为监督检查表";
+			sheetName = "建设工程安全生产监督抽查记录表";
 			break;
 		case 5:
-
+			
 			break;
 		case 6:
-			
+
 			break;
 		case 7:
-			
+
 			break;
 		case 8:
-			
+
 			break;
 		case 9:
-			
+
 			break;
 		case 10:
-				
+
 			break;
 		case 11:
-			
+
 			break;
 		case 12:
-			
+
 			break;
 		case 13:
-			
+
 			break;
 		case 14:
-			
+
 			break;
-			
+
 		default:
 			break;
 		}
@@ -274,13 +291,52 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-
+		if (picture1 != null && picture1FileName != null
+				&& !picture1FileName.replace(" ", "").equals("")) {
+			String imageName = DateTimeKit.getDateRandom()
+					+ picture1FileName.substring(picture1FileName.indexOf("."));
+			this.upload("/sheet" + spreadsheet.getSheetType(), imageName,
+					picture1);
+			spreadsheet.setSheetImg("/sheet" + spreadsheet.getSheetType() + "/"
+					+ imageName);
+		}
 		spreadsheetService.add(spreadsheet);
-
-		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypes="
-				+ sheetTypes;
+		System.out.println("sheetTypes:" + sheetTypes);
+		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
+				+ sheetTypeStr;
 		arg[1] = "表格管理";
 		return SUCCESS;
+	}
+
+	// 图片
+	private File picture1;
+	private String picture1ContentType;
+	private String picture1FileName;
+
+	// 文件上传
+	public void upload(String fileName, String imageName, File picture)
+			throws Exception {
+		File saved = new File(ServletActionContext.getServletContext()
+				.getRealPath(fileName), imageName);
+		InputStream ins = null;
+		OutputStream ous = null;
+		try {
+			saved.getParentFile().mkdirs();
+			ins = new FileInputStream(picture);
+			ous = new FileOutputStream(saved);
+			byte[] b = new byte[1024];
+			int len = 0;
+			while ((len = ins.read(b)) != -1) {
+				ous.write(b, 0, len);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ous != null)
+				ous.close();
+			if (ins != null)
+				ins.close();
+		}
 	}
 
 	/**
@@ -298,9 +354,16 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		}
 
 		spreadsheet = spreadsheetService.loadById(id);
+		if (spreadsheet.getSheetImg() != null
+				&& !spreadsheet.getSheetImg().replace(" ", "").equals("")) {
+			File photofile = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ spreadsheet.getSheetImg());
+			photofile.delete();
+		}
 		spreadsheetService.delete(spreadsheet);
-		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypes="
-				+ sheetTypes;
+		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
+				+ sheetTypeStr;
 		arg[1] = "表格管理";
 		return SUCCESS;
 	}
@@ -314,7 +377,13 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		int[] ids = ConvertUtil.StringtoInt(checkedIDs);
 		for (int i = 0; i < ids.length; i++) {
 			spreadsheet = spreadsheetService.loadById(ids[i]);
-
+			if (spreadsheet.getSheetImg() != null
+					&& !spreadsheet.getSheetImg().replace(" ", "").equals("")) {
+				File photofile = new File(ServletActionContext
+						.getServletContext().getRealPath("/")
+						+ spreadsheet.getSheetImg());
+				photofile.delete();
+			}
 			spreadsheetService.delete(spreadsheet);
 		}
 		AjaxMsgVO msgVO = new AjaxMsgVO();
@@ -356,7 +425,7 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-
+		spreadsheet = spreadsheetService.loadById(id);
 		return "view";
 	}
 
@@ -635,6 +704,38 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 
 	public void setSheetType(Integer sheetType) {
 		this.sheetType = sheetType;
+	}
+
+	public String getSheetName() {
+		return sheetName;
+	}
+
+	public void setSheetName(String sheetName) {
+		this.sheetName = sheetName;
+	}
+
+	public File getPicture1() {
+		return picture1;
+	}
+
+	public void setPicture1(File picture1) {
+		this.picture1 = picture1;
+	}
+
+	public String getPicture1ContentType() {
+		return picture1ContentType;
+	}
+
+	public void setPicture1ContentType(String picture1ContentType) {
+		this.picture1ContentType = picture1ContentType;
+	}
+
+	public String getPicture1FileName() {
+		return picture1FileName;
+	}
+
+	public void setPicture1FileName(String picture1FileName) {
+		this.picture1FileName = picture1FileName;
 	}
 
 }

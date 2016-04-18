@@ -47,6 +47,10 @@
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 						<nav>
+						<a class="btn btn-success radius r mr-5 f-r"
+							style="line-height: 1.6em; margin-top: 3px"
+							href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+							target="_self" title="返回项目工作台">返回项目工作台 </a>
 						<input type="submit" value="保存"
 							style="line-height: 1.6em; margin-top: 3px"
 							class="btn btn-success radius r mr-5 f-r" />
@@ -214,10 +218,16 @@
 														<s:property value="picName" />
 													</td>
 													<td width="20%">
-														<a href="javascript:void(0);"
-															onClick="addPage('查看教育图片','educationpicAction!view?id=<s:property value="id"/>','650','300')"><img
-																width="45px;" height="35px;" src="images/picture.png"></img>
-														</a>
+														<s:if test="picDir!=null&&picDir!=''">
+															<a href="javascript:void(0);"
+																onClick="addPage('查看教育图片','educationpicAction!view?id=<s:property value="id"/>','650','300')"><img
+																	width="45px;" height="35px;" src="images/picture.png"></img>
+															</a>
+														</s:if>
+														<s:else>
+															暂无教育图片
+														</s:else>
+
 													</td>
 													<td width="20%">
 														<a style="text-decoration: none" class="ml-5"
@@ -240,7 +250,9 @@
 										行为监督抽查
 									</td>
 									<td>
-										合计：3次
+										合计：
+										<s:property value="behaviorsheetNumber" />
+										次
 									</td>
 									<td>
 										<a
@@ -340,14 +352,14 @@
 										日常巡查
 									</td>
 									<td>
-										合计：3次
+										合计：
+										<s:property value="daysheetNumber" />
+										次
 									</td>
 									<td>
-										<button type="button" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xm-rcjg-rcxc.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=3,4"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -358,14 +370,14 @@
 										检查及整改情况
 									</td>
 									<td>
-										合计：1次
+										合计：
+										<s:property value="checksheetNumber" />
+										次
 									</td>
 									<td>
-										<button type="button" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xm-rcjg-jczg_gl.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=5"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">

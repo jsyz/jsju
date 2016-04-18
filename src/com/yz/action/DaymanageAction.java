@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Daymanage;
 import com.yz.model.Project;
+import com.yz.model.Spreadsheet;
 import com.yz.model.Usero;
-import com.yz.model.Yxarea;
 import com.yz.service.IDaymanageService;
 import com.yz.service.IProjectService;
 import com.yz.service.IYxareaService;
@@ -69,11 +69,16 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	// list对象
 	private List<Daymanage> daymanages;
 	private List<Project> projects;
+	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();// 总记录数
+	private int behaviorsheetNumber;// 行为监督抽查
+	private int daysheetNumber;// 日常巡查
+	private int checksheetNumber;// 检查及整改情况
+	private int choucesheetNumber;// 抽测抽查
 
 	private List<String> launchContents;// 页面显示被选中 信息提取情况
 
 	/**
-	 * 跳转到添加页面
+	 * 跳转到试图页面
 	 * 
 	 * @return
 	 */
@@ -86,11 +91,40 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 		project = projectService.loadByPid(pid);
+
+		spreadsheets = project.getSpreadsheets();
+
+		if (spreadsheets != null && spreadsheets.size() > 0) {
+			handleSheetNumber(spreadsheets);
+		}
+
 		daymanage = project.getDaymanage();
 		if (daymanage != null) {
 			handleInfoExtractionMsg(daymanage.getLaunchContent());
 		}
 		return "view";
+	}
+
+	private void handleSheetNumber(List<Spreadsheet> sheets) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < sheets.size(); i++) {
+			Spreadsheet sheet = sheets.get(i);
+			switch (sheet.getSheetType()) {
+			case 0:
+			case 1:
+			case 2:
+				behaviorsheetNumber = behaviorsheetNumber + 1;
+				break;
+			case 3:
+			case 4:
+				daysheetNumber = daysheetNumber + 1;
+				break;
+			default:
+				break;
+			}
+
+		}
+
 	}
 
 	public String updateDaymanage() throws Exception {
@@ -110,7 +144,8 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			}
 		}
 		daymanageService.update(daymanage);
-		arg[0] = "projectAction!bench?id=" + pid +"areaIndex="+((AreaVO)session.get("areaVO")).getIndex();
+		arg[0] = "projectAction!bench?id=" + pid + "&areaIndex="
+				+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "项目工作台";
 		return SUCCESS;
 	}
@@ -316,6 +351,46 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 
 	public void setLaunchContents(List<String> launchContents) {
 		this.launchContents = launchContents;
+	}
+
+	public List<Spreadsheet> getSpreadsheets() {
+		return spreadsheets;
+	}
+
+	public void setSpreadsheets(List<Spreadsheet> spreadsheets) {
+		this.spreadsheets = spreadsheets;
+	}
+
+	public int getBehaviorsheetNumber() {
+		return behaviorsheetNumber;
+	}
+
+	public void setBehaviorsheetNumber(int behaviorsheetNumber) {
+		this.behaviorsheetNumber = behaviorsheetNumber;
+	}
+
+	public int getDaysheetNumber() {
+		return daysheetNumber;
+	}
+
+	public void setDaysheetNumber(int daysheetNumber) {
+		this.daysheetNumber = daysheetNumber;
+	}
+
+	public int getChecksheetNumber() {
+		return checksheetNumber;
+	}
+
+	public void setChecksheetNumber(int checksheetNumber) {
+		this.checksheetNumber = checksheetNumber;
+	}
+
+	public int getChoucesheetNumber() {
+		return choucesheetNumber;
+	}
+
+	public void setChoucesheetNumber(int choucesheetNumber) {
+		this.choucesheetNumber = choucesheetNumber;
 	}
 
 }
