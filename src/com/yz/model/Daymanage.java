@@ -34,14 +34,6 @@ public class Daymanage implements java.io.Serializable {
 	private String notifyTime;// 告知时间
 	private Integer isEducationLaunch;// 三级教育开展情况(0:否，1：是)
 	private String launchContent;// 开展方式（0：纸质1:图片2：VCR）
-	private String launchImg8;// 开展图片8
-	private String launchImg7;// 开展图片7
-	private String launchImg6;// 开展图片6
-	private String launchImg5;// 开展图片5
-	private String launchImg4;// 开展图片4
-	private String launchImg3;// 开展图片3
-	private String launchImg2;// 开展图片2
-	private String launchImg1;// 开展图片1
 	private Integer isDangerArgument;// 超过一定规模危险性较大分部分项工程专家论证情况(0:否，1：是)
 	private Integer isNameplateInstall;// 永久性铭牌安装落实情况(0:否，1：是)
 	private String installTime;// 落实时间
@@ -59,11 +51,8 @@ public class Daymanage implements java.io.Serializable {
 	public Daymanage(Integer id, Project project, Integer isFiveSigned,
 			String signTime, Integer isMassSafeNotify, String notifyTime,
 			Integer isEducationLaunch, String launchContent, String launchImg8,
-			String launchImg7, String launchImg6, String launchImg5,
-			String launchImg4, String launchImg3, String launchImg2,
-			String launchImg1, Integer isDangerArgument,
-			Integer isNameplateInstall, String installTime,
-			Integer isMortarQualified, Integer isCompleted,
+			Integer isDangerArgument, Integer isNameplateInstall,
+			String installTime, Integer isMortarQualified, Integer isCompleted,
 			String completedTime, List<Dangerargument> dangerarguments,
 			List<Educationpic> educationpics) {
 		this.id = id;
@@ -74,14 +63,6 @@ public class Daymanage implements java.io.Serializable {
 		this.notifyTime = notifyTime;
 		this.isEducationLaunch = isEducationLaunch;
 		this.launchContent = launchContent;
-		this.launchImg8 = launchImg8;
-		this.launchImg7 = launchImg7;
-		this.launchImg6 = launchImg6;
-		this.launchImg5 = launchImg5;
-		this.launchImg4 = launchImg4;
-		this.launchImg3 = launchImg3;
-		this.launchImg2 = launchImg2;
-		this.launchImg1 = launchImg1;
 		this.isDangerArgument = isDangerArgument;
 		this.isNameplateInstall = isNameplateInstall;
 		this.installTime = installTime;
@@ -162,46 +143,6 @@ public class Daymanage implements java.io.Serializable {
 		return this.launchContent;
 	}
 
-	@Column(name = "launchImg1", length = 50)
-	public String getLaunchImg1() {
-		return this.launchImg1;
-	}
-
-	@Column(name = "launchImg2", length = 50)
-	public String getLaunchImg2() {
-		return this.launchImg2;
-	}
-
-	@Column(name = "launchImg3", length = 50)
-	public String getLaunchImg3() {
-		return this.launchImg3;
-	}
-
-	@Column(name = "launchImg4", length = 50)
-	public String getLaunchImg4() {
-		return this.launchImg4;
-	}
-
-	@Column(name = "launchImg5", length = 50)
-	public String getLaunchImg5() {
-		return this.launchImg5;
-	}
-
-	@Column(name = "launchImg6", length = 50)
-	public String getLaunchImg6() {
-		return this.launchImg6;
-	}
-
-	@Column(name = "launchImg7", length = 50)
-	public String getLaunchImg7() {
-		return this.launchImg7;
-	}
-
-	@Column(name = "launchImg8", length = 50)
-	public String getLaunchImg8() {
-		return this.launchImg8;
-	}
-
 	@Column(name = "notifyTime", length = 50)
 	public String getNotifyTime() {
 		return notifyTime;
@@ -267,38 +208,6 @@ public class Daymanage implements java.io.Serializable {
 
 	public void setLaunchContent(String launchContent) {
 		this.launchContent = launchContent;
-	}
-
-	public void setLaunchImg1(String launchImg1) {
-		this.launchImg1 = launchImg1;
-	}
-
-	public void setLaunchImg2(String launchImg2) {
-		this.launchImg2 = launchImg2;
-	}
-
-	public void setLaunchImg3(String launchImg3) {
-		this.launchImg3 = launchImg3;
-	}
-
-	public void setLaunchImg4(String launchImg4) {
-		this.launchImg4 = launchImg4;
-	}
-
-	public void setLaunchImg5(String launchImg5) {
-		this.launchImg5 = launchImg5;
-	}
-
-	public void setLaunchImg6(String launchImg6) {
-		this.launchImg6 = launchImg6;
-	}
-
-	public void setLaunchImg7(String launchImg7) {
-		this.launchImg7 = launchImg7;
-	}
-
-	public void setLaunchImg8(String launchImg8) {
-		this.launchImg8 = launchImg8;
 	}
 
 	public void setNotifyTime(String notifyTime) {

@@ -437,7 +437,6 @@
 										竣工验收情况
 									</td>
 									<td>
-										p
 										<div class="formControls col-12">
 											<div class="formControls col-12">
 												<s:radio theme="simple" id="isCompleted"
