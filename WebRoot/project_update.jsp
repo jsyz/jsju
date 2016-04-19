@@ -35,7 +35,7 @@
 		<title>编辑项目</title>
 	</head>
 	<body>
-		<form action="projectAction!updateProject" method="post"
+		<form action="projectAction!update" method="post"
 			class="form form-horizontal" onsubmit="return checkProject();">
 			<s:hidden name="project.id"></s:hidden>
 			<s:hidden name="project.yxarea.id"></s:hidden>

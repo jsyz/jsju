@@ -109,7 +109,7 @@
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
-									<span class="disabled step">完工待验</span>
+									<span class="active step">完工待验</span>
 									<span class="disabled step">竣工</span>
 								</div>
 							</s:elseif>
@@ -303,7 +303,7 @@
 									</th>
 									<td class="last">
 										<span class="mini-textbox-border"> <s:property
-												value="project.structureLevel" /> </span>
+												value="project.buildingNumber" /> </span>
 									</td>
 								</tr>
 								<tr>

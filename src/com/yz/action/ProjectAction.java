@@ -284,25 +284,14 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
+		System.out.println(project.getDaymanage().getInstallTime());
 		projectService.update(project);
+		System.out.println(project.getDaymanage().getInstallTime());
 		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
 		arg[1] = "项目管理";
 		return SUCCESS;
 	}
 
-	public String updateProject() throws Exception {
-		// 判断会话是否失效
-		Usero userSession = (Usero) session.get("userSession");
-		if (userSession == null) {
-			String loginfail = "登陆失效,信息提交失败.";
-			request.put("loginFail", loginfail);
-			return "opsessiongo";
-		}
-		projectService.update(project);
-		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
-		arg[1] = "项目管理";
-		return SUCCESS;
-	}
 
 	/**
 	 * 查看信息

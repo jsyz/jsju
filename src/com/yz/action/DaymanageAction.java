@@ -52,7 +52,7 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 	private int status;// 按状态
-	private int pid;// 按用户id
+	private int pid;// 按项目id
 
 	// 批量删除
 	private String checkedIDs;
