@@ -21,10 +21,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yz.model.Construction;
 import com.yz.model.Daymanage;
 import com.yz.model.Project;
 import com.yz.model.Usero;
 import com.yz.model.Yxarea;
+import com.yz.service.IConstructionService;
 import com.yz.service.IDaymanageService;
 import com.yz.service.IProjectService;
 import com.yz.service.IYxareaService;
@@ -69,6 +71,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private IProjectService projectService;
 	private IYxareaService yxareaService;
 	private IDaymanageService daymanageService;
+	private IConstructionService constructionService;
 
 	// 单个对象
 	private Project project;
@@ -179,7 +182,24 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		daymanage.setIsNameplateInstall(0);
 		
 		daymanageService.add(daymanage);
+		
+		//新增项目时，同时增加文明施工
+		Construction construction = new Construction();
+		construction.setIsWashSet(0);
+		construction.setIsWaterClear(0);
+		construction.setIsDoorConform(0);
+		construction.setIsGuardConform(0);
+		construction.setIsAdConform(0);
+		construction.setIsRoadHarden(0);
+		construction.setIsRoadClear(0);
+		construction.setIsLabelComplete(0);
+		construction.setIsLayoutRational(0);
+		construction.setIsMeetFire(0);
+		construction.setIsMeasurePlace(0);
+		constructionService.add(construction);
+		
 		project.setDaymanage(daymanage);
+		project.setConstruction(construction);
 		projectService.add(project);
 
 		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
@@ -515,6 +535,14 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	@Resource
 	public void setDaymanageService(IDaymanageService daymanageService) {
 		this.daymanageService = daymanageService;
+	}
+
+	public IConstructionService getConstructionService() {
+		return constructionService;
+	}
+	@Resource
+	public void setConstructionService(IConstructionService constructionService) {
+		this.constructionService = constructionService;
 	}
 
 }

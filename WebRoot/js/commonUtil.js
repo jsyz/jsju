@@ -220,6 +220,29 @@ function deleteEducationpic(edid)
 		}
 }
 
+function deleteConstructionpic(row,cid)
+{	
+		 alert(cid.value); 
+		if(confirm('你确定删除该图片吗？'))
+		{
+			$.ajax({   
+			            url:'deleteConstructionpic',//这里是你的action或者servlert的路径地址   
+			            type:'post', //数据发送方式   
+			            async:false,
+			            data: {"pic_row":row,"cid":cid},
+			            dataType:'json',
+			            error: function(msg)
+			            { //失败   
+			            	console.log('删除失败.');   
+			            },   
+			            success: function(msg)
+			            { //成功
+			            	alert(msg.message);
+			            	location.replace(location.href);
+						}
+					});
+		}
+}
 
 function deleteAllCheckedSpreadsheets()
 {
