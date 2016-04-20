@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Construction;
 import com.yz.model.Project;
+import com.yz.model.Usero;
 import com.yz.model.Yxarea;
 import com.yz.service.IConstructionService;
 import com.yz.service.IProjectService;
@@ -185,9 +186,11 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //			return "opsessiongo_child";
 //		}
 		
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
 		}
 		
 		project = projectService.loadByPid(pid);
@@ -549,32 +552,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //		}
 //	}
 
-	private void initAreas() {
-		areaVOs = new ArrayList<AreaVO>();
-		yxareas = yxareaService.getYxareas();
-		for (Yxarea yxarea : yxareas) {
-			AreaVO areaVO = new AreaVO();
-			areaVO.setId(yxarea.getId());
-			areaVO.setIndex(yxarea.getAreaIndex());
-			areaVO.setAreaName(yxarea.getAreaname());
-			int numberTotal = 0;
-			float areaTotal = 0f;
-			float costTotal = 0f;
 
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
-				}
-			}
-			areaVO.setProjectNumberTotal(numberTotal);
-			areaVO.setBuildingAreaTotal(areaTotal);
-			areaVO.setBuildingCostTotal(costTotal);
-			areaVOs.add(areaVO);
-		}
-	}
 
 
 	/**
@@ -582,10 +560,12 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		/*Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
 			return "opsessiongo";
-		}*/
+		}
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
@@ -610,7 +590,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-
+		
 		construction = constructionService.loadById(id);
 		return "load";
 	}
@@ -793,9 +773,10 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 			this.savePics(pictures[i], pictureFileNames[i],i,construction);
 		
 		constructionService.update(construction);
-		arg[0] = "constructionAction!list";
+		arg[0] = "constructionAction!view?pid="+pid+"&areaIndex="
+		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "文明施工";
-		return "success_child";
+		return SUCCESS;
 	}
 
 	public String loadPic() throws Exception {
@@ -807,15 +788,19 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String deleteConstructionpic() throws Exception{
-		construction = constructionService.loadById(cid);
+		
+		construction = constructionService.loadByCid(cid);
 		
 		switch(pic_row){
 			case 1:
 				File photofile1 = new File(ServletActionContext.getServletContext()
 						.getRealPath("/")
 						+ construction.getWashSetImg());
+				System.out.println(ServletActionContext.getServletContext()
+						.getRealPath("/")
+						+ construction.getWashSetImg());
 				photofile1.delete();
-				construction.setWashSetImg("");
+				construction.setWashSetImg(null);
 				break;
 			case 2:
 				File photofile2 = new File(ServletActionContext.getServletContext()
@@ -893,7 +878,20 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //				+ construction.getWashSetImg());
 //		photofile.delete();
 		
-		
+		constructionService.update(construction);
+		AjaxMsgVO msgVO = new AjaxMsgVO();
+		msgVO.setMessage("删除成功.");
+		JSONObject jsonObj = JSONObject.fromObject(msgVO);
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=UTF-8");
+			out = response.getWriter();
+			out.print(jsonObj.toString());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -967,7 +965,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		constructionService.update(construction);
 		arg[0] = "constructionAction!currentConstruction";
 		arg[1] = "设备资料";
-		return SUCCESS;
+		return "success";
 	}
 
 	// 文件上传
@@ -1006,20 +1004,121 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //		if (construction == null) {
 //			return "opsessiongo";
 //		}
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}		
 		project = projectService.loadByPid(pid);
 		
 		if(project.getConstruction() != null){
 			construction = project.getConstruction();
+				//checkImg(construction.getId());
 			return "view";
 		}else{
 			return "view";
 		}
 		
+	}
+
+	public void checkImg(int cid) {
+		// TODO Auto-generated method stub
+		int flag = 0;
+		construction = constructionService.loadByCid(cid);
+		
+			File photofile1 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			System.out.println(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile1.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+			File photofile2 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile2.exists()){
+				construction.setWaterClearImg("");
+				flag ++;
+			}
+				
+			File photofile3 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile3.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile4 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile4.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile5 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile5.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile6 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile6.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile7 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile7.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile8 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile8.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile9 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile9.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile10 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile10.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile11 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile11.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			if(flag != 0)
+				constructionService.update(construction);
 	}
 
 	public File getPicture1() {

@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Project;
 import com.yz.model.Proman;
+import com.yz.model.Usero;
 import com.yz.model.Yxarea;
 import com.yz.service.IProjectService;
 import com.yz.service.IPromanService;
@@ -165,33 +166,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		return ip;
 	}
 
-	private void initAreas() {
-		areaVOs = new ArrayList<AreaVO>();
-		yxareas = yxareaService.getYxareas();
-		for (Yxarea yxarea : yxareas) {
-			AreaVO areaVO = new AreaVO();
-			areaVO.setId(yxarea.getId());
-			areaVO.setIndex(yxarea.getAreaIndex());
-			areaVO.setAreaName(yxarea.getAreaname());
-			int numberTotal = 0;
-			float areaTotal = 0f;
-			float costTotal = 0f;
-			
-			
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
-				}
-			}
-			areaVO.setProjectNumberTotal(numberTotal);
-			areaVO.setBuildingAreaTotal(areaTotal);
-			areaVO.setBuildingCostTotal(costTotal);
-			areaVOs.add(areaVO);
-		}
-	}
+
 	
 	/**
 	 * 用户管理
@@ -209,10 +184,11 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			page = 1;
 		}
 		
-		initAreas();
-		
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
 		}
 		project = projectService.loadById(projectId);
 		
@@ -235,9 +211,11 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String goToAdd() {
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
 		}
 		project = projectService.loadById(projectId);
 		return "add";
@@ -258,7 +236,8 @@ public class PromanAction extends ActionSupport implements RequestAware,
 //		}
 		promanService.add(proman);
 
-		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
+		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="
+		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "人员管理";
 		return "success";
 	}
@@ -311,7 +290,8 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		promanService.delete(proman);
 
 		//promanService.deleteById(id);
-		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
+		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="
+		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "人员管理";
 		return SUCCESS;
 	}
@@ -351,9 +331,11 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
 		}
 		project = projectService.loadById(projectId);
 		proman = promanService.loadById(id);
@@ -373,7 +355,8 @@ public class PromanAction extends ActionSupport implements RequestAware,
 //		}
 
 		promanService.update(proman);
-		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
+		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="
+		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "人员管理";
 		return "success";
 	}
