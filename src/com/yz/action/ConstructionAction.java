@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Construction;
 import com.yz.model.Project;
+import com.yz.model.Usero;
 import com.yz.model.Yxarea;
 import com.yz.service.IConstructionService;
 import com.yz.service.IProjectService;
@@ -185,9 +186,11 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //			return "opsessiongo_child";
 //		}
 		
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
 		}
 		
 		project = projectService.loadByPid(pid);
@@ -549,32 +552,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //		}
 //	}
 
-	private void initAreas() {
-		areaVOs = new ArrayList<AreaVO>();
-		yxareas = yxareaService.getYxareas();
-		for (Yxarea yxarea : yxareas) {
-			AreaVO areaVO = new AreaVO();
-			areaVO.setId(yxarea.getId());
-			areaVO.setIndex(yxarea.getAreaIndex());
-			areaVO.setAreaName(yxarea.getAreaname());
-			int numberTotal = 0;
-			float areaTotal = 0f;
-			float costTotal = 0f;
 
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
-				}
-			}
-			areaVO.setProjectNumberTotal(numberTotal);
-			areaVO.setBuildingAreaTotal(areaTotal);
-			areaVO.setBuildingCostTotal(costTotal);
-			areaVOs.add(areaVO);
-		}
-	}
 
 
 	/**
@@ -582,10 +560,12 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		/*Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
 			return "opsessiongo";
-		}*/
+		}
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
@@ -610,7 +590,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String load() {
-
+		
 		construction = constructionService.loadById(id);
 		return "load";
 	}
@@ -793,9 +773,10 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 			this.savePics(pictures[i], pictureFileNames[i],i,construction);
 		
 		constructionService.update(construction);
-		arg[0] = "constructionAction!list";
+		arg[0] = "constructionAction!view?pid="+pid+"&areaIndex="
+		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "文明施工";
-		return "success_child";
+		return "SUCCESS";
 	}
 
 	public String loadPic() throws Exception {
@@ -1010,11 +991,12 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //		if (construction == null) {
 //			return "opsessiongo";
 //		}
-		initAreas();
-		if (areaIndex > 0 && areaIndex < 10) {
-			areaVO = areaVOs.get(areaIndex - 1);
-		}
-		
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}		
 		project = projectService.loadByPid(pid);
 		
 		if(project.getConstruction() != null){
