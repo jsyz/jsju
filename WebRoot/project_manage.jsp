@@ -178,7 +178,7 @@
 												value="<s:property value="id"/>">
 										</td>
 										<td>
-											<s:property value="#status.index+1" />
+												<s:property value="#status.index+1+(page-1)*10" />
 										</td>
 										<td class="text-c">
 											<s:if test="projectType==0">房地产开发</s:if>

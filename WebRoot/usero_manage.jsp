@@ -43,8 +43,8 @@
 			<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 				<nav>
 				<a class="btn btn-success radius r mr-5 f-r"
-					style="line-height: 1.6em; margin-top: 3px" href="useroAction!index"
-					target="_top" title="返回主菜单">返回主菜单 </a>
+					style="line-height: 1.6em; margin-top: 3px"
+					href="useroAction!index" target="_top" title="返回主菜单">返回主菜单 </a>
 				<a class="btn btn-success radius r mr-5 f-r"
 					style="line-height: 1.6em; margin-top: 3px"
 					href="javascript:location.replace(location.href);" title="刷新当前页"><i
@@ -142,7 +142,7 @@
 											</s:if>
 										</td>
 										<td>
-											<s:property value="#status.index+1" />
+											<s:property value="#status.index+1+(page-1)*10" />
 										</td>
 										<td>
 											<s:property value="realname" />
