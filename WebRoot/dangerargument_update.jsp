@@ -56,7 +56,7 @@
 					<span class="form-label col-3"><span
 						class="formControls col-10"> <input type="text" style="width:200px;"
 								class="input-text radius size-M Wdate" name="dangerargument.argTime"
-								onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
+								onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" value="<s:property value="dangerargument.argTime"/>"
 								id="logmin" class="input-text Wdate" /> </span> </span>
 				</div>
 				<div class="row cl">
@@ -66,7 +66,7 @@
 					<span class="form-label col-3"><span
 						class="formControls col-10"> <input type="text" style="width:200px;"
 								class="input-text radius size-M Wdate" name="dangerargument.implTime"
-								onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
+								onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" value="<s:property value="dangerargument.implTime"/>"
 								id="logmin" class="input-text Wdate" /> </span> </span>
 				</div>
 				<div class="row cl">
@@ -76,7 +76,7 @@
 					<span class="form-label col-3"><span
 						class="formControls col-10"> <input type="text" style="width:200px;"
 								class="input-text radius size-M Wdate" name="dangerargument.finishTime"
-								onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
+								onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" value="<s:property value="dangerargument.finishTime"/>"
 								id="logmin" class="input-text Wdate" /> </span> </span>
 				</div>
 				<div class="row cl">

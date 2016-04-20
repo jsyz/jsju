@@ -1,5 +1,7 @@
 package com.yz.util;
 
+import java.util.Arrays;
+
 
 public class TestMain {
 
@@ -8,16 +10,15 @@ public class TestMain {
 	 */
 	private static String infoExtractionMsg;
 	public static void main(String[] args) {
+		
+		int[] sheetTypes = {7};
 		// TODO Auto-generated method stub
-		String str = "1,3,4,";
-		
-		
-		
-		String sstr[] = str.split(",");
-		
-		for (int i = 0; i < sstr.length; i++) {
-			System.out.println(sstr[i]+" sdf");
+		Arrays.sort(sheetTypes); //排序数组
+
+		if(Arrays.binarySearch(sheetTypes,7) >= 0){ //若找不到，则当前企业不在任何填报期内
+			System.out.println("have");
 		}
+		
 	}
 	
 	private static void handleInfoExtractionMsg(String infoExtraction) {

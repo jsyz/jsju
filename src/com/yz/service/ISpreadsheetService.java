@@ -42,4 +42,7 @@ public interface ISpreadsheetService {
 	public abstract List<Spreadsheet> queryList(int con, String convalue,
 			int pid, Integer[] sheetTypes, int page, int size);
 
+	public abstract List<Spreadsheet> queryListByArrayRange(int pid,
+			Integer[] arrayRange);
+
 }

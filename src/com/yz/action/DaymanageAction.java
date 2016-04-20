@@ -119,6 +119,20 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			case 4:
 				daysheetNumber = daysheetNumber + 1;
 				break;
+			case 5:
+			case 6:
+				behaviorsheetNumber = behaviorsheetNumber + 1;
+				break;
+			case 7:
+				checksheetNumber = checksheetNumber + 1;
+				break;
+			case 8:
+			case 9:
+			case 10:
+			case 11:
+			case 12:
+				choucesheetNumber = choucesheetNumber + 1;
+				break;
 			default:
 				break;
 			}
@@ -136,7 +150,8 @@ public class DaymanageAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 		// 修改项目完成进度
-		if (daymanage.getIsCompleted() == 1) {
+		if (daymanage.getIsCompleted() != null
+				&& daymanage.getIsCompleted() == 1) {
 			project = projectService.loadByPid(pid);
 			if (project.getGraphicProgress() != 4) {
 				project.setGraphicProgress(4);

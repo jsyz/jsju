@@ -153,6 +153,20 @@
 										<th width="151">
 											上传时间
 										</th>
+										<s:if test="viewChangedConent==1">
+											<th width="151">
+												检查日期
+											</th>
+											<th width="151">
+												整改到期时间
+											</th>
+											<th width="103">
+												是否闭合
+											</th>
+											<th width="103">
+												闭合时间
+											</th>
+										</s:if>
 										<th width="103">
 											操作
 										</th>
@@ -160,7 +174,7 @@
 								</thead>
 								<tbody>
 									<s:if test="%{spreadsheets.size()==0}">
-										<td colspan="6" align="center">
+										<td colspan="10" align="center">
 											暂无记录
 										</td>
 									</s:if>
@@ -191,7 +205,27 @@
 											<td>
 												<s:property value="updateTime" />
 											</td>
+											<s:if test="viewChangedConent==1">
+												<td>
+													<s:property value="checkTime" />
+												</td>
+												<td>
+													<s:property value="expireTime" />
+												</td>
+												<td class="f-14 td-manage">
+													<s:if test="isClose==1">是</s:if>
+													<s:else>否</s:else>												
+												</td>
+												<td class="f-14 td-manage">
+													<s:property value="closeTime" />
+												</td>
+											</s:if>
 											<td class="f-14 td-manage">
+												<s:if test="viewChangedConent==1">
+													<a style="text-decoration: none" class="ml-5"
+														href="spreadsheetAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&sheetTypeStr=<s:property value="sheetTypeStr"/>" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
+													</a>
+												</s:if>
 												<a style="text-decoration: none" class="ml-5"
 													onclick="return confirm('你确定删除该记录吗？')"
 													href="spreadsheetAction!delete?id=<s:property value="id"/>&pid=<s:property value="pid"/>&sheetTypeStr=<s:property value="sheetTypeStr"/>"
@@ -244,6 +278,5 @@
 			</div>
 
 		</div>
-
 	</body>
 </html>

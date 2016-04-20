@@ -256,7 +256,7 @@
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=1,2"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=1,2,5,6"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -376,7 +376,7 @@
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=5"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=7"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -388,14 +388,14 @@
 										抽测抽查
 									</td>
 									<td>
-										合计：3次
+										合计：
+										<s:property value="choucesheetNumber" />
+										次
 									</td>
 									<td>
-										<button type="button" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xm-rcjg-cc_gl.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=8,9,10,11,12"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">

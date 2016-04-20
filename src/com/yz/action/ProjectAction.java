@@ -33,6 +33,7 @@ import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
 import com.yz.vo.AjaxMsgVO;
 import com.yz.vo.AreaVO;
+import com.yz.vo.ProjectEvaluateSheet;
 
 /**
  * @author lq
@@ -76,11 +77,14 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	// 单个对象
 	private Project project;
 	private AreaVO areaVO;
+	
 
 	// list对象
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
+	
+
 
 	/**
 	 * 项目管理
@@ -284,9 +288,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		System.out.println(project.getDaymanage().getInstallTime());
 		projectService.update(project);
-		System.out.println(project.getDaymanage().getInstallTime());
 		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
 		arg[1] = "项目管理";
 		return SUCCESS;
@@ -327,6 +329,15 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		project = projectService.loadById(id);
 		return "bench";
 	}
+	
+	/**
+	 * 项目评价
+	 */
+	public String toProjectEvaluate()
+	{
+		
+		return "evaluate";
+	}	
 
 	// get、set-------------------------------------------
 
@@ -534,4 +545,5 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		this.constructionService = constructionService;
 	}
 
+	
 }

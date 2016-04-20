@@ -1,4 +1,13 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@
+taglib uri="/struts-tags" prefix="s"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -15,7 +24,7 @@
 			type="text/css" />
 		<link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 		<link href="css/city.css" rel="stylesheet" type="text/css" />
-		<title>空白页</title>
+		<title>档案管理</title>
 	</head>
 	<body>
 		<div class="xmconbox pd-20">
@@ -23,32 +32,45 @@
 				<nav>
 				<a class="btn btn-success radius r mr-5 f-r"
 					style="line-height: 1.6em; margin-top: 3px"
+					href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+					target="_self" title="返回项目工作台">返回项目工作台 </a>
+				<a class="btn btn-success radius r mr-5 f-r"
+					style="line-height: 1.6em; margin-top: 3px"
 					href="javascript:location.replace(location.href);" title="刷新当前页"><i
-					class="Hui-iconfont">&#xe68f;</i>
-				</a><a class="btn btn-success radius r mr-5 f-r"
+					class="Hui-iconfont">&#xe68f;</i> </a>
+
+				<a class="btn btn-success radius r mr-5 f-r"
 					style="line-height: 1.6em; margin-top: 3px"
 					href="javascript:history.go(-1);" title="返回"><i
-					class="Hui-iconfont">&#xe66b;</i>
-				</a>
+					class="Hui-iconfont">&#xe66b;</i> </a>
 				</nav>
 				<p
 					style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
-					<i class="Hui-iconfont">&#xe64b;</i>当前片区：官林
-					<span class="pipe">|</span>【项目总数 32 建筑面积 4378m
+					<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
+					<s:property value="areaVO.areaName" />
+					<span class="pipe">|</span>【项目总数
+					<s:property value="#session.areaVO.projectNumberTotal" />
+					建筑面积
+					<s:property value="#session.areaVO.buildingAreaTotal" />
+					m
 					<sup>
 						2
 					</sup>
-					造价 5343万 】
-					<a href="citylist.html"><span
-						class="label label-warning radius">片区切换</span>
-					</a>
+					造价
+					<s:property value="#session.areaVO.buildingCostTotal" />
+					万 】
+					<a href="yxareaAction!list"><span
+						class="label label-warning radius">片区切换</span> </a>
 				</p>
 			</div>
 		</div>
 		<div class="xmconbox pd-20">
 			<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 				<p>
-					<i class="Hui-iconfont">&#xe623;</i> 省滆湖渔管办二大队执法基地- 档案管理
+					<i class="Hui-iconfont">&#xe623;</i>
+					<s:property value="project.name" />
+					-
+					<s:property value="pageName" />
 				</p>
 			</div>
 			<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -85,14 +107,14 @@
 										工程质量监督工作计划
 									</td>
 									<td>
-										合计：1次
+										合计：
+										<s:property value="archivesSheet.sheet19" />
+										次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-z1.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=19"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -103,14 +125,14 @@
 										工程质量行为资料监督抽查记录
 									</td>
 									<td>
-										合计：1次
+										合计：
+										<s:property value="archivesSheet.sheet20" />
+										次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-z2.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=20"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -121,14 +143,14 @@
 										工程质量监督抽查（巡查）记录
 									</td>
 									<td>
-										合计：1次
+										合计：
+										<s:property value="archivesSheet.sheet21" />
+										次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-z3.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=21"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -142,11 +164,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button2" name=""
-											onClick="javascript:window.location.href='xmda-z4.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=8,9,10,11,12"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -160,11 +180,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button3" name=""
-											onClick="javascript:window.location.href='xmda-z5.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -178,11 +196,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href='xmda-z6.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -196,11 +212,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -214,11 +228,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -232,11 +244,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -250,11 +260,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -268,11 +276,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -286,11 +292,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -304,11 +308,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -322,11 +324,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -340,11 +340,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -358,11 +356,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -376,11 +372,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -394,11 +388,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 							</tbody>
@@ -435,11 +427,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-a1.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -453,11 +443,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-a2.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -471,11 +459,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-a3.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -489,11 +475,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button2" name=""
-											onClick="javascript:window.location.href='xmda-a4.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -507,11 +491,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button3" name=""
-											onClick="javascript:window.location.href='xmda-a5.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -525,11 +507,9 @@
 										合计：1次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href='xmda-a6.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -543,11 +523,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href='xmda-bljl.html'">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -561,11 +539,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -579,11 +555,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -597,11 +571,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button2" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -615,11 +587,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button3" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -633,11 +603,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -651,11 +619,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -669,11 +635,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -687,11 +651,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -705,11 +667,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 								<tr class="text-c">
@@ -723,11 +683,9 @@
 										合计：0次
 									</td>
 									<td>
-										<button type="submit" class="btn btn-success radius"
-											id="button4" name=""
-											onClick="javascript:window.location.href=''">
-											详细列表
-										</button>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
 							</tbody>
@@ -736,7 +694,6 @@
 				</div>
 			</div>
 		</div>
-
 		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
 		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
