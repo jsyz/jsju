@@ -776,7 +776,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		arg[0] = "constructionAction!view?pid="+pid+"&areaIndex="
 		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "文明施工";
-		return "SUCCESS";
+		return SUCCESS;
 	}
 
 	public String loadPic() throws Exception {
@@ -800,7 +800,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 						.getRealPath("/")
 						+ construction.getWashSetImg());
 				photofile1.delete();
-				construction.setWashSetImg("");
+				construction.setWashSetImg(null);
 				break;
 			case 2:
 				File photofile2 = new File(ServletActionContext.getServletContext()
@@ -879,6 +879,19 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //		photofile.delete();
 		
 		constructionService.update(construction);
+		AjaxMsgVO msgVO = new AjaxMsgVO();
+		msgVO.setMessage("删除成功.");
+		JSONObject jsonObj = JSONObject.fromObject(msgVO);
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=UTF-8");
+			out = response.getWriter();
+			out.print(jsonObj.toString());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -952,7 +965,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		constructionService.update(construction);
 		arg[0] = "constructionAction!currentConstruction";
 		arg[1] = "设备资料";
-		return SUCCESS;
+		return "success";
 	}
 
 	// 文件上传
@@ -1001,7 +1014,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		
 		if(project.getConstruction() != null){
 			construction = project.getConstruction();
-				checkImg(construction.getId());
+				//checkImg(construction.getId());
 			return "view";
 		}else{
 			return "view";
