@@ -20,9 +20,9 @@ public class TestMain {
 		}
 	}
 	
-	private static void handleInfoExtractionMsg(String infoExtraction) {
+	/*private static void handleInfoExtractionMsg(String infoExtraction) {
 		// TODO Auto-generated method stub
-		if(infoExtraction!=null&&infoExtraction.length()>0&&infoExtraction.contains(","))
+		if(infoExtraction!=null&&infoExtraction.length()>0&& infoExtraction.contains(",") )
 		{
 			String[] infoExtractions = infoExtraction.split(",");
 			infoExtractionMsg = "{'";
@@ -37,5 +37,5 @@ public class TestMain {
 		}
 		
 	}
-
+*/
 }

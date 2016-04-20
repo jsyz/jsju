@@ -68,7 +68,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	private int status;// 按状态
 	private int pid;// 按用户id
 	private int areaIndex;
-	private int projectId;
 
 	// 批量删除
 	private String checkedIDs;
@@ -138,33 +137,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	// 设置登陆时间
 	
 
-	private void checkIP() {
-		// TODO Auto-generated method stub
-		// String ip = getIpAddr(req);
-	}
-
-	/*
-	 * 获取IP地址
-	 */
-	public String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
 
 
 	
@@ -190,17 +162,17 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		project = projectService.loadById(projectId);
+		project = projectService.loadById(pid);
 		
 		// 总记录数
-		totalCount = promanService.getTotalCount(con, convalue, projectId);
+		totalCount = promanService.getTotalCount(con, convalue, pid);
 		//// 总页数
 		pageCount = promanService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		promans = promanService.queryList(con, convalue, projectId, page, size);
+		promans = promanService.queryList(con, convalue, pid, page, size);
 		//promans = promanService.getPromans();
 		return "list";
 	}
@@ -217,7 +189,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		project = projectService.loadById(projectId);
+		project = projectService.loadById(pid);
 		return "add";
 	}
 
@@ -229,14 +201,15 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 */
 
 	public String add() throws Exception {
-		// 判断回话是否失效
-//		Proman proman = (Proman) session.get("proman");
-//		if (proman == null) {
-//			return "opsessiongo_child";
-//		}
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}
 		promanService.add(proman);
 
-		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="
+		arg[0] = "promanAction!list?pid="+pid+"&areaIndex="
 		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "人员管理";
 		return "success";
@@ -290,7 +263,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		promanService.delete(proman);
 
 		//promanService.deleteById(id);
-		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="
+		arg[0] = "promanAction!list?pid="+pid+"&areaIndex="
 		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "人员管理";
 		return SUCCESS;
@@ -337,7 +310,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		project = projectService.loadById(projectId);
+		project = projectService.loadById(pid);
 		proman = promanService.loadById(id);
 		return "load";
 	}
@@ -355,7 +328,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 //		}
 
 		promanService.update(proman);
-		arg[0] = "promanAction!list?projectId="+projectId+"&areaIndex="
+		arg[0] = "promanAction!list?pid="+pid+"&areaIndex="
 		+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "人员管理";
 		return "success";
@@ -623,14 +596,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 
 	public void setAreaIndex(int areaIndex) {
 		this.areaIndex = areaIndex;
-	}
-
-	public int getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
 	}
 
 	public IProjectService getProjectService() {

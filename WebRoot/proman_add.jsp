@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="xmWraper ">
    <div class="xmconbox pd-20">
    <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-   <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a href="xm-ryxx.html" title="返回" target="_parent" class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
+   <nav><a class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新当前页" ><i class="Hui-iconfont">&#xe68f;</i></a><a href="javascript:history.go(-1);" title="返回" target="_parent" class="btn btn-success radius r mr-5 f-r" style="line-height:1.6em;margin-top:3px" ><i class="Hui-iconfont">&#xe66b;</i></a></nav>
    <p style="line-height:35px; margin-bottom:0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);"><i class="Hui-iconfont">&#xe64b;</i> 当前片区：<s:property value="#session.areaVO.areaName"/><span class="pipe">|</span>【项目总数  <s:property value="#session.areaVO.projectNumberTotal" />　　建筑面积 <s:property value="#session.areaVO.buildingAreaTotal" />m<sup>2</sup>     　　造价 <s:property value="#session.areaVO.buildingCostTotal" />万 】<a href="yxareaAction!list"><span class="label label-warning radius">片区切换</span></a></p>
    </div>
    </div>
@@ -46,7 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
         <form method="post" action="promanAction!add">
-        <input hidden name = "proman.project.id" value = "<s:property value="projectId"/>" />
+        <input hidden name = "proman.project.id" value = "<s:property value="pid"/>" />
+        <s:hidden name="pid" />
       <div class="row cl mb-10">
         <label class="form-label col-2 text-r " ><span class="c-red">*</span>姓名：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
