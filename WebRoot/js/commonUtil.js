@@ -220,16 +220,15 @@ function deleteEducationpic(edid)
 		}
 }
 
-function deleteConstructionpic(row,cid)
+function deleteConstructionpic(row,conid)
 {	
-		 alert(cid.value); 
 		if(confirm('你确定删除该图片吗？'))
 		{
 			$.ajax({   
 			            url:'deleteConstructionpic',//这里是你的action或者servlert的路径地址   
 			            type:'post', //数据发送方式   
 			            async:false,
-			            data: {"pic_row":row,"cid":cid},
+			            data: {"pic_row":row,"cid":conid},
 			            dataType:'json',
 			            error: function(msg)
 			            { //失败   

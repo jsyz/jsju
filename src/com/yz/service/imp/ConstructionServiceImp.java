@@ -124,6 +124,13 @@ public class ConstructionServiceImp implements IConstructionService {
 		String[] paramNames=new String[]{"username","password"};
 		Object[] values=new Object[]{username,password};
 		return constructionDao.queryByNamedParam(queryString,paramNames,values);
+	}
+	public Construction loadByCid(int cid) {
+		// TODO Auto-generated method stub
+		String queryString="from Construction mo where mo.id=:cid";
+		String[] paramNames=new String[]{"cid"};
+		Object[] values=new Object[]{cid};
+		return constructionDao.queryByNamedParam(queryString,paramNames,values);
 	} 
 	
 }

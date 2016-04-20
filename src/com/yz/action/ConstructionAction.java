@@ -807,11 +807,15 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String deleteConstructionpic() throws Exception{
-		construction = constructionService.loadById(cid);
+		
+		construction = constructionService.loadByCid(cid);
 		
 		switch(pic_row){
 			case 1:
 				File photofile1 = new File(ServletActionContext.getServletContext()
+						.getRealPath("/")
+						+ construction.getWashSetImg());
+				System.out.println(ServletActionContext.getServletContext()
 						.getRealPath("/")
 						+ construction.getWashSetImg());
 				photofile1.delete();
@@ -893,7 +897,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 //				+ construction.getWashSetImg());
 //		photofile.delete();
 		
-		
+		constructionService.update(construction);
 		return null;
 	}
 	
@@ -1015,11 +1019,111 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		
 		if(project.getConstruction() != null){
 			construction = project.getConstruction();
+				checkImg(construction.getId());
 			return "view";
 		}else{
 			return "view";
 		}
 		
+	}
+
+	public void checkImg(int cid) {
+		// TODO Auto-generated method stub
+		int flag = 0;
+		construction = constructionService.loadByCid(cid);
+		
+			File photofile1 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			System.out.println(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile1.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+			File photofile2 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile2.exists()){
+				construction.setWaterClearImg("");
+				flag ++;
+			}
+				
+			File photofile3 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile3.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile4 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile4.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile5 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile5.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile6 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile6.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile7 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile7.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile8 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile8.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile9 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile9.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile10 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile10.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			File photofile11 = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ construction.getWashSetImg());
+			if(!photofile11.exists()){
+				construction.setWashSetImg("");
+				flag ++;
+			}
+				
+			if(flag != 0)
+				constructionService.update(construction);
 	}
 
 	public File getPicture1() {

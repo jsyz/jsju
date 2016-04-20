@@ -37,4 +37,6 @@ public interface IConstructionService {
 
 	public abstract Construction getConstructionByConstructionname(String constructionname);
 
+	public abstract Construction loadByCid(int cid);
+
 }
