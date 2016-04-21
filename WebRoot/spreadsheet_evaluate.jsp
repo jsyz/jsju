@@ -114,11 +114,11 @@ taglib uri="/struts-tags" prefix="s"%>
 									工程质量不良行为记录表
 								</td>
 								<td>
-									合计：<s:property value="projectEvaluateSheet.badBehaviorNumber"/>次
+									合计：<s:property value="sheetNumber.sheet13"/>次
 								</td>
 								<td>
 									<a
-										href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+										href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=2&sheetTypeStr=13"
 										class="btn btn-success radius">详细内容</a>
 								</td>
 							</tr>
@@ -130,11 +130,11 @@ taglib uri="/struts-tags" prefix="s"%>
 									项目经理扣分情况记录表
 								</td>
 								<td>
-									合计：<s:property value="projectEvaluateSheet.managerPointNumber"/>次
+									合计：<s:property value="sheetNumber.sheet14"/>次
 								</td>
 								<td>
 									<a
-										href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=14"
+										href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=2&sheetTypeStr=14"
 										class="btn btn-success radius">详细内容</a>
 								</td>
 							</tr>
@@ -146,11 +146,11 @@ taglib uri="/struts-tags" prefix="s"%>
 									行政处罚情况记录表
 								</td>
 								<td>
-									合计：<s:property value="projectEvaluateSheet.administrativeSanctionNumber"/>次
+									合计：<s:property value="sheetNumber.sheet15"/>次
 								</td>
 								<td>
 									<a
-										href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=15"
+										href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=2&sheetTypeStr=15"
 										class="btn btn-success radius">详细内容</a>
 								</td>
 							</tr>
@@ -162,11 +162,11 @@ taglib uri="/struts-tags" prefix="s"%>
 									奖惩情况记录表
 								</td>
 								<td>
-									合计：<s:property value="projectEvaluateSheet.rewardsAndPenaltiesNumber"/>次
+									合计：<s:property value="sheetNumber.sheet16"/>次
 								</td>
 								<td>
 									<a
-										href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=16"
+										href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=2&sheetTypeStr=16"
 										class="btn btn-success radius">详细内容</a>
 								</td>
 							</tr>
@@ -178,11 +178,11 @@ taglib uri="/struts-tags" prefix="s"%>
 									民工工资投诉处理记录表
 								</td>
 								<td>
-									合计：<s:property value="projectEvaluateSheet.workerWageNumber"/>次
+									合计：<s:property value="sheetNumber.sheet17"/>次
 								</td>
 								<td>
 									<a
-										href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=17"
+										href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=2&sheetTypeStr=17"
 										class="btn btn-success radius">详细内容</a>
 								</td>
 							</tr>
@@ -194,11 +194,11 @@ taglib uri="/struts-tags" prefix="s"%>
 									安全生产事故情况记录表
 								</td>
 								<td>
-									合计：<s:property value="projectEvaluateSheet.safeProductionNumber"/>次
+									合计：<s:property value="sheetNumber.sheet18"/>次
 								</td>
 								<td>
 									<a
-										href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=18"
+										href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=2&sheetTypeStr=18"
 										class="btn btn-success radius">详细内容</a>
 								</td>
 							</tr>

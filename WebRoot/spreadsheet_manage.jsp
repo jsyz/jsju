@@ -95,10 +95,9 @@
 									批量删除</a> <s:iterator value="sheetVOs" var="sheetVO" status="status">
 
 									<a class="btn btn-primary radius"
-										href="spreadsheetAction!goToAdd?sheetType=<s:property value="sheetType"/>&pid=<s:property value="pid"/>&sheetTypeStr=<s:property value="sheetTypeStr"/>"><i
+										href="spreadsheetAction!goToAdd?sheetType=<s:property value="sheetType"/>&pid=<s:property value="pid"/>&pageType=<s:property value="pageType"/>&sheetTypeStr=<s:property value="sheetTypeStr"/>"><i
 										class="Hui-iconfont">&#xe600;</i> 新增<s:property
 											value="sheetName" /> </a>
-
 								</s:iterator> </span>
 
 							<span class="r">共有数据：<strong><s:property
@@ -228,7 +227,7 @@
 												</s:if>
 												<a style="text-decoration: none" class="ml-5"
 													onclick="return confirm('你确定删除该记录吗？')"
-													href="spreadsheetAction!delete?id=<s:property value="id"/>&pid=<s:property value="pid"/>&sheetTypeStr=<s:property value="sheetTypeStr"/>"
+													href="spreadsheetAction!delete?id=<s:property value="id"/>&pid=<s:property value="pid"/>&sheetTypeStr=<s:property value="sheetTypeStr"/>&pageType=<s:property value="pageType"/>"
 													title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
 											</td>
 										</tr>

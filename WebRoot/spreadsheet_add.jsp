@@ -68,7 +68,7 @@
 						<i class="Hui-iconfont">&#xe623;</i>
 						<s:property value="project.name" />
 						-
-						<s:property value="pageName" />
+						<s:property value="sheetName" />
 					</p>
 				</div>
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -80,6 +80,7 @@
 							enctype="multipart/form-data">
 							<s:hidden name="pid"></s:hidden>
 							<s:hidden name="sheetTypeStr"></s:hidden>
+							<s:hidden name="pageType"></s:hidden>
 							<input name="spreadsheet.project.id"
 								value="<s:property value="pid" />" type="hidden" />
 							<input name="spreadsheet.sheetName"

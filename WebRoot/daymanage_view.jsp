@@ -256,7 +256,7 @@
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=1,2,5,6"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=1&sheetTypeStr=1,2,5,6"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -358,7 +358,7 @@
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=3,4"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=1&sheetTypeStr=3,4"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -376,7 +376,7 @@
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=7"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=1&sheetTypeStr=7"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -394,7 +394,7 @@
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=8,9,10,11,12"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&pageType=1&sheetTypeStr=8,9,10,11,12"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>

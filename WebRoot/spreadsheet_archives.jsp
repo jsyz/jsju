@@ -108,7 +108,7 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 									<td>
 										合计：
-										<s:property value="archivesSheet.sheet19" />
+										<s:property value="sheetNumber.sheet19" />
 										次
 									</td>
 									<td>
@@ -126,12 +126,12 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 									<td>
 										合计：
-										<s:property value="archivesSheet.sheet20" />
+										<s:property value="sheetNumber.sheet1" />
 										次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=20"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=1"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -144,12 +144,12 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 									<td>
 										合计：
-										<s:property value="archivesSheet.sheet21" />
+										<s:property value="sheetNumber.sheet3" />
 										次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=21"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=3"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -161,7 +161,7 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程实体质量抽测记录
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.entityQualityNumber" />次
 									</td>
 									<td>
 										<a
@@ -177,11 +177,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程质量监督抽检通知书
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet22" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=22"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -193,11 +193,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程质量整改完成报告
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet23" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=23"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -209,11 +209,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程局部停工（暂停）通知书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet24" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=24"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -225,11 +225,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程复工申请报告
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="archivesSheet.sheet25" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=25"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -241,11 +241,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程复工通知书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet26" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=26"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -257,7 +257,7 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程质量不良行为记录表
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.badBehaviorNumber" />次
 									</td>
 									<td>
 										<a
@@ -273,11 +273,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程质量事故处理监督记录
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet27" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=27"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -289,11 +289,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程质量申请行政处罚报告
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet27" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=28"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -305,11 +305,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										单位（子单位）工程质量竣工验收监督记录
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet29" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=29"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -321,11 +321,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程质量监督报告
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet30" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=30"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -337,11 +337,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										工程质量监督人员情况一览表
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet31" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=31"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -353,11 +353,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										其它资料
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet32" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=32"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -366,14 +366,14 @@ taglib uri="/struts-tags" prefix="s"%>
 										17
 									</td>
 									<td>
-										终止施工申请书
+										中止施工申请书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet33" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=33"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -385,11 +385,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										恢复施工安全监督申请书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet34" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=34"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -424,11 +424,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全监督通知书
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet35" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=35"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -440,11 +440,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全生产监督告知书
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet36" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=36"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -456,11 +456,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全监督交底记录
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet37" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=37"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -472,11 +472,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设单位安全生产行为监督检查表
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet6" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=6"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -488,11 +488,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										监理单位安全生产行为监督检查表
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet5" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=5"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -504,11 +504,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										施工单位安全生产行为监督检查表
 									</td>
 									<td>
-										合计：1次
+										合计：<s:property value="sheetNumber.sheet2" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=2"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -520,11 +520,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全生产监督抽查记录表
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet4" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=4"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -536,11 +536,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全生产约谈记录
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet38" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=38"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -552,11 +552,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程施工安全隐患整改通知书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet39" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=39"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -568,11 +568,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程施工安全隐患整改完成报告书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet40" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=40"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -581,14 +581,14 @@ taglib uri="/struts-tags" prefix="s"%>
 										11
 									</td>
 									<td>
-										建设工程施工复工申请报告书
+										建设工程施工复工申请书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet41" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=41"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -600,11 +600,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程施工复工通知书
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet42" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=42"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -616,11 +616,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程施工阶段安全自检评定表
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet43" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=43"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -632,11 +632,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										行政处罚记录表
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet15" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=15"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -648,11 +648,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全事故快报表
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet44" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=44"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -664,11 +664,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										建设工程安全监督报告
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet45" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=45"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
@@ -680,11 +680,11 @@ taglib uri="/struts-tags" prefix="s"%>
 										其它资料
 									</td>
 									<td>
-										合计：0次
+										合计：<s:property value="sheetNumber.sheet46" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=13"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=46"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
