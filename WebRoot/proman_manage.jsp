@@ -15,13 +15,6 @@
 		<meta name="viewport"
 			content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<LINK rel="Bookmark" href="/favicon.ico">
-		<LINK rel="Shortcut Icon" href="/favicon.ico" />
-		<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
-<![endif]-->
 		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
@@ -51,11 +44,19 @@
 					<nav>
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
+						href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+						target="_self" title="返回项目工作台">返回项目工作台 </a>
+					<input type="submit" value="保存"
+						style="line-height: 1.6em; margin-top: 3px"
+						class="btn btn-success radius r mr-5 f-r" />
+					<a class="btn btn-success radius r mr-5 f-r"
+						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
 						class="Hui-iconfont">&#xe68f;</i> </a><a
 						class="btn btn-success radius r mr-5 f-r"
-						style="line-height: 1.6em; margin-top: 3px" href="xmshow.html"
-						title="返回"><i class="Hui-iconfont">&#xe66b;</i> </a>
+						style="line-height: 1.6em; margin-top: 3px"
+						href="javascript:history.go(-1);" title="返回"><i
+						class="Hui-iconfont">&#xe66b;</i> </a>
 					</nav>
 					<p
 						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">

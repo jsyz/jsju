@@ -54,6 +54,10 @@
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<nav>
 					<a class="btn btn-success radius r mr-5 f-r"
+							style="line-height: 1.6em; margin-top: 3px"
+							href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+							target="_self" title="返回项目工作台">返回项目工作台 </a>
+					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
 						class="Hui-iconfont">&#xe68f;</i>
