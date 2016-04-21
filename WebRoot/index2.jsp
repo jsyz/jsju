@@ -31,6 +31,11 @@ request.getContextPath(); String basePath = request.getScheme() + "://"
 			<li class="mr-10">
 				你好，${session.userSession.realname}！
 			</li>
+			<li class="mr-10">
+				<a href="useroAction!index" class="btn btn-link  radius r mr-5 f-r"
+					title="返回主菜单">返回主菜单
+				</a>
+			</li>
 			<li class="mr-5">
 				<a href="javascript:;"
 					onClick="ypgj('修改密码','useroAction!loadPassword','500px','300px')"

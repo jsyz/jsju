@@ -67,7 +67,7 @@
 				<img src="images/xm.png" width="965" height="355" usemap="#Map">
 				<map name="Map">
 					<area shape="rect" coords="295,202,378,285" href="xm-jk.html">
-					<area shape="rect" coords="438,202,532,285" href="xm-map.html">
+					<area shape="rect" coords="438,202,532,285" href="map.html">
 					<area shape="rect" coords="582,202,660,283"
 						href="promanAction!list?projectId=<s:property value="project.id"/>">
 					<area shape="rect" coords="39,21,167,151"
