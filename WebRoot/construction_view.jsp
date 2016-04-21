@@ -62,9 +62,33 @@
 							style="line-height: 1.6em; margin-top: 3px"
 							href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
 							target="_self" title="返回项目工作台">返回项目工作台 </a>
-						<input type="submit" value="保存"
-							style="line-height: 1.6em; margin-top: 3px"
-							class="btn btn-success radius r mr-5 f-r" />
+							
+							
+						<s:if test="#session.userSession.userLimit==0">
+							<input type="submit" value="保存"
+								style="line-height: 1.6em; margin-top: 3px"
+								class="btn btn-success radius r mr-5 f-r" />
+						</s:if>
+
+						<s:elseif test="#session.userSession.userLimit==1">
+							<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
+								<input type="submit" value="保存"
+									style="line-height: 1.6em; margin-top: 3px"
+									class="btn btn-success radius r mr-5 f-r" />
+							</s:if>
+						</s:elseif>
+
+						<s:elseif test="#session.userSession.userLimit==2">
+							<s:if test="#session.userSession.id==project.uid">
+								<input type="submit" value="保存"
+									style="line-height: 1.6em; margin-top: 3px"
+									class="btn btn-success radius r mr-5 f-r" />
+							</s:if>
+						</s:elseif>
+							
+							
+							
+							
 						<a class="btn btn-success radius r mr-5 f-r"
 							style="line-height: 1.6em; margin-top: 3px"
 							href="javascript:location.replace(location.href);" title="刷新当前页"><i

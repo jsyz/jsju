@@ -54,82 +54,108 @@
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<nav>
 					<a class="btn btn-success radius r mr-5 f-r"
-							style="line-height: 1.6em; margin-top: 3px"
-							href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
-							target="_self" title="返回项目工作台">返回项目工作台 </a>
+						style="line-height: 1.6em; margin-top: 3px"
+						href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+						target="_self" title="返回项目工作台">返回项目工作台 </a>
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
-						class="Hui-iconfont">&#xe68f;</i>
-					</a><a class="btn btn-success radius r mr-5 f-r"
+						class="Hui-iconfont">&#xe68f;</i> </a><a
+						class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:history.go(-1);" title="返回"><i
-						class="Hui-iconfont">&#xe66b;</i>
-					</a>
+						class="Hui-iconfont">&#xe66b;</i> </a>
 					</nav>
 					<p
 						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
-						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：<s:property value="areaVO.areaName"/>
-						<span class="pipe">|</span>【项目总数 <s:property value="areaVO.projectNumberTotal" /> 建筑面积 <s:property value="areaVO.buildingAreaTotal" />
+						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
+						<s:property value="areaVO.areaName" />
+						<span class="pipe">|</span>【项目总数
+						<s:property value="areaVO.projectNumberTotal" />
+						建筑面积
+						<s:property value="areaVO.buildingAreaTotal" />
 						<sup>
 							2
 						</sup>
 						造价
-						<s:property value="areaVO.buildingCostTotal" />万 】
+						<s:property value="areaVO.buildingCostTotal" />
+						万 】
 						<a href="yxareaAction!list"><span
-							class="label label-warning radius">片区切换</span>
-						</a>
+							class="label label-warning radius">片区切换</span> </a>
 					</p>
 				</div>
 			</div>
 			<div class="xmconbox pd-20">
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<p>
-						<i class="Hui-iconfont">&#xe623;</i> <s:property value= "project.name"/>- 设备管理
+						<i class="Hui-iconfont">&#xe623;</i>
+						<s:property value="project.name" />
+						- 设备管理
 					</p>
 				</div>
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<div class="row cl box-shadow pd-10  bk-gray radius"
 						style="background-color: #FFF;">
 						<div class="cl pd-5 bg-1 bk-gray mb-20">
-							<span class="l"> <a href="javascript:;"
-								onClick="deleteAllCheckedDevices();"
-								class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-									批量删除</a> <a class="btn btn-primary radius"
-								href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i class="Hui-iconfont">&#xe600;</i>
-									新增设备</a>
-							</span>
-							<span class="r">共有数据：<strong><s:property value="totalCount"/></strong> 条</span>
+							<span class="l"> <s:if
+									test="#session.userSession.userLimit==0">
+									<a href="javascript:;" onClick="deleteAllCheckedDevices();"
+										class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+										批量删除</a>
+									<a class="btn btn-primary radius"
+										href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i
+										class="Hui-iconfont">&#xe600;</i> 新增设备</a>
+								</s:if> <s:elseif test="#session.userSession.userLimit==1">
+									<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
+										<a href="javascript:;" onClick="deleteAllCheckedDevices();"
+											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+											批量删除</a>
+										<a class="btn btn-primary radius"
+											href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i
+											class="Hui-iconfont">&#xe600;</i> 新增设备</a>
+									</s:if>
+								</s:elseif> <s:elseif test="#session.userSession.userLimit==2">
+									<s:if test="#session.userSession.id==project.id">
+										<a href="javascript:;" onClick="deleteAllCheckedDevices();"
+											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+											批量删除</a>
+										<a class="btn btn-primary radius"
+											href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i
+											class="Hui-iconfont">&#xe600;</i> 新增设备</a>
+									</s:if>
+								</s:elseif> </span>
+							<span class="r">共有数据：<strong><s:property
+										value="totalCount" /> </strong> 条</span>
 						</div>
 						<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
-						<div class="text-c">
-							<form name="deviceListForm" method="post"
-								action="deviceAction!list" target="_self">
-								<s:hidden name="areaIndex"></s:hidden>
-								<s:hidden name="projectId"></s:hidden>
-								<table width="100%" border="0" cellspacing="0" cellpadding="0"
-									style="line-height: 35px;">
-									<tr height="35">
-										<td width="21%" align="right" style="padding-right: 50px;">
-											<s:select list="#{0:'选择类型',1:'设备名称',2:'设备产权证号'}"
-												cssClass="input-text" name="con" listKey="key"
-												listValue="value" cssStyle="width:180px"></s:select>
-										</td>
-										<td width="310px;">
-											<s:textfield name="convalue" id="convalue"
-												cssClass="input-text"></s:textfield>
-										</td>
-										<td align="left" style="padding-left: 172px;">
-											<button type="submit" class="btn btn-success" id="button2"
-												name="" onClick="">
-												<i class="Hui-iconfont">&#xe665;</i> 查询
-											</button>
-										</td>
-									</tr>
-								</table>
-							</form>
+							<div class="text-c">
+								<form name="deviceListForm" method="post"
+									action="deviceAction!list" target="_self">
+									<s:hidden name="areaIndex"></s:hidden>
+									<s:hidden name="projectId"></s:hidden>
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										style="line-height: 35px;">
+										<tr height="35">
+											<td width="21%" align="right" style="padding-right: 50px;">
+												<s:select list="#{0:'选择类型',1:'设备名称',2:'设备产权证号'}"
+													cssClass="input-text" name="con" listKey="key"
+													listValue="value" cssStyle="width:180px"></s:select>
+											</td>
+											<td width="310px;">
+												<s:textfield name="convalue" id="convalue"
+													cssClass="input-text"></s:textfield>
+											</td>
+											<td align="left" style="padding-left: 172px;">
+												<button type="submit" class="btn btn-success" id="button2"
+													name="" onClick="">
+													<i class="Hui-iconfont">&#xe665;</i> 查询
+												</button>
+											</td>
+										</tr>
+									</table>
+								</form>
+							</div>
 						</div>
-					</div>
 						<div class="mt-20">
 							<table
 								class="table table-border table-bordered table-bg table-hover table-sort">
@@ -181,8 +207,7 @@
 											<td>
 												<a
 													onClick="xmsb_show('设备','deviceAction!view?id=<s:property value="id"/>','10001')"
-													href="javascript:;"><s:property value="name" />
-												</a>
+													href="javascript:;"><s:property value="name" /> </a>
 											</td>
 											<td>
 												<s:property value="propertyCardNumber" />
@@ -208,16 +233,54 @@
 												<s:property value="removeTime" />
 											</td>
 											<td class="f-14 td-manage">
-												<a style="text-decoration: none" class="ml-5"
-													onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
-													href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
-												</a>
 
-												<a style="text-decoration: none" class="ml-5"
-													onClick="return confirm('你确定删除该信息吗？')" title="删除"
-													href="deviceAction!delete?id=<s:property value="id"/>"
-													title="删除"><i class="Hui-iconfont">&#xe6e2;</i>
-												</a>
+												<s:if test="#session.userSession.userLimit==0">
+
+													<a style="text-decoration: none" class="ml-5"
+														onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+														href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
+													</a>
+
+													<a style="text-decoration: none" class="ml-5"
+														onClick="return confirm('你确定删除该信息吗？')" title="删除"
+														href="deviceAction!delete?id=<s:property value="id"/>"
+														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+												</s:if>
+
+												<s:elseif test="#session.userSession.userLimit==1">
+													<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
+
+														<a style="text-decoration: none" class="ml-5"
+															onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+															href="javascript:;" title="编辑"><i
+															class="Hui-iconfont">&#xe6df;</i> </a>
+
+														<a style="text-decoration: none" class="ml-5"
+															onClick="return confirm('你确定删除该信息吗？')" title="删除"
+															href="deviceAction!delete?id=<s:property value="id"/>"
+															title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+													</s:if>
+												</s:elseif>
+
+												<s:elseif test="#session.userSession.userLimit==2">
+													<s:if test="#session.userSession.id==project.uid">
+														<a style="text-decoration: none" class="ml-5"
+															onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+															href="javascript:;" title="编辑"><i
+															class="Hui-iconfont">&#xe6df;</i> </a>
+
+														<a style="text-decoration: none" class="ml-5"
+															onClick="return confirm('你确定删除该信息吗？')" title="删除"
+															href="deviceAction!delete?id=<s:property value="id"/>"
+															title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+													</s:if>
+												</s:elseif>
+
+
+
+
+
+
 											</td>
 										</tr>
 									</s:iterator>

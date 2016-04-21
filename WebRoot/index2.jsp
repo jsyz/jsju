@@ -28,7 +28,7 @@ request.getContextPath(); String basePath = request.getScheme() + "://"
 		<div style="width: 200px; padding-top: 9px;">
 		</div>
 		<ul class="Hui-userbar">
-			<li class="mr-10">
+			<li class="mr-10" style="float: left">
 				你好，${session.userSession.realname}！
 			</li>
 			<li class="mr-10">

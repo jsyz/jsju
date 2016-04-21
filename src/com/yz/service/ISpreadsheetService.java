@@ -45,4 +45,6 @@ public interface ISpreadsheetService {
 	public abstract List<Spreadsheet> queryListByArrayRange(int pid,
 			Integer[] arrayRange);
 
+	public abstract List<Spreadsheet> queryListByPid(int pid);
+
 }

@@ -90,13 +90,36 @@
 					<div class="row cl box-shadow pd-10  bk-gray radius"
 						style="background-color: #FFF;">
 						<div class="cl pd-5 bg-1 bk-gray mb-20">
-							<span class="l"> <a href="javascript:;"
-								onclick="deleteAllCheckedPromans();"
-								class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-									批量删除</a> <a class="btn btn-primary radius"
-								onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
-								href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-									新增人员</a> </span>
+							<span class="l"> <s:if
+									test="#session.userSession.userLimit==0">
+									<a href="javascript:;" onclick="deleteAllCheckedPromans();"
+										class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+										批量删除</a>
+									<a class="btn btn-primary radius"
+										onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
+										href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
+										新增人员</a>
+								</s:if> <s:elseif test="#session.userSession.userLimit==1">
+									<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
+										<a href="javascript:;" onclick="deleteAllCheckedPromans();"
+											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+											批量删除</a>
+										<a class="btn btn-primary radius"
+											onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
+											href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
+											新增人员</a>
+									</s:if>
+								</s:elseif> <s:elseif test="#session.userSession.userLimit==2">
+									<s:if test="#session.userSession.id==project.uid">
+										<a href="javascript:;" onclick="deleteAllCheckedPromans();"
+											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+											批量删除</a>
+										<a class="btn btn-primary radius"
+											onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
+											href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
+											新增人员</a>
+									</s:if>
+								</s:elseif> </span>
 							<span class="r">共有数据：<strong><s:property
 										value="totalCount" /> </strong> 条 </span>
 							<title>人员信息</title>
@@ -230,14 +253,57 @@
 																		href="javascript:;"><s:property value="name" /> </a>
 																</td>
 																<td class="f-14 td-manage">
-																	<a style="text-decoration: none" class="ml-5"
-																		onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
-																		href="javascript:;" title="编辑"><i
-																		class="Hui-iconfont">&#xe6df;</i> </a>
-																	<a style="text-decoration: none" class="ml-5"
-																		onClick="return confirm('你确定删除该信息吗？')" title="删除"
-																		href="promanAction!delete?id=<s:property value="id"/>"
-																		title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+
+
+																	<s:if test="#session.userSession.userLimit==0">
+																		<a style="text-decoration: none" class="ml-5"
+																			onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																			href="javascript:;" title="编辑"><i
+																			class="Hui-iconfont">&#xe6df;</i> </a>
+																		<a style="text-decoration: none" class="ml-5"
+																			onClick="return confirm('你确定删除该信息吗？')" title="删除"
+																			href="promanAction!delete?id=<s:property value="id"/>"
+																			title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+																	</s:if>
+
+																	<s:elseif test="#session.userSession.userLimit==1">
+																		<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
+																			<a style="text-decoration: none" class="ml-5"
+																				onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																				href="javascript:;" title="编辑"><i
+																				class="Hui-iconfont">&#xe6df;</i> </a>
+																			<a style="text-decoration: none" class="ml-5"
+																				onClick="return confirm('你确定删除该信息吗？')" title="删除"
+																				href="promanAction!delete?id=<s:property value="id"/>"
+																				title="删除"><i class="Hui-iconfont">&#xe6e2;</i>
+																			</a>
+																		</s:if>
+																	</s:elseif>
+
+																	<s:elseif test="#session.userSession.userLimit==2">
+																		<s:if test="#session.userSession.id==project.uid">
+																			<a style="text-decoration: none" class="ml-5"
+																				onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																				href="javascript:;" title="编辑"><i
+																				class="Hui-iconfont">&#xe6df;</i> </a>
+																			<a style="text-decoration: none" class="ml-5"
+																				onClick="return confirm('你确定删除该信息吗？')" title="删除"
+																				href="promanAction!delete?id=<s:property value="id"/>"
+																				title="删除"><i class="Hui-iconfont">&#xe6e2;</i>
+																			</a>
+																		</s:if>
+																	</s:elseif>
+
+
+
+
+
+
+
+
+
+
+																</td>
 															</tr>
 														</s:iterator>
 														<!--  

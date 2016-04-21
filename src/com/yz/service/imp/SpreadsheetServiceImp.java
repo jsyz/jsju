@@ -227,4 +227,11 @@ public class SpreadsheetServiceImp implements ISpreadsheetService {
 		return spreadsheetDao.queryList(queryString);
 	}
 
+	public List<Spreadsheet> queryListByPid(int pid) {
+		// TODO Auto-generated method stub
+		String queryString = "from Spreadsheet mo where 1=1 and mo.project.id="
+			+ pid;
+	return spreadsheetDao.queryList(queryString);
+	}
+
 }

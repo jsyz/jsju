@@ -28,6 +28,7 @@ public class Project implements java.io.Serializable {
 
 	// Fields
 	private Integer id;// 项目id
+	private Integer uid;// 非关系型关联关系
 	private Yxarea yxarea;// 所属乡镇分类(0:未选择乡镇,1：宜城，2:环科园,3:开发区，4：丁蜀，5：和桥,6:官林,7:张渚,8:周铁,9:徐舍)
 	private Daymanage daymanage;// 日常监管
 	private Construction construction;// 文明施工
@@ -46,11 +47,11 @@ public class Project implements java.io.Serializable {
 	private String startDate;// 开工日期
 	private String planendDate;// 计划竣工日期
 	private String constructionUnit;// 施工单位?是否就是施工总包单位？
-	private String constructionUnitPrincipal;//施工单位负责人
-	private String constructionUnitPrincipalTelphone;//施工单位联系电话
+	private String constructionUnitPrincipal;// 施工单位负责人
+	private String constructionUnitPrincipalTelphone;// 施工单位联系电话
 	private String supervisionUnit;// 监理单位
-	private String supervisionUnitPrincipal;//监理单位负责人
-	private String supervisionUnitPrincipalTelphone;//监理单位负责人联系电话
+	private String supervisionUnitPrincipal;// 监理单位负责人
+	private String supervisionUnitPrincipalTelphone;// 监理单位负责人联系电话
 	private String projectManager;// 项目经理
 	private String engineeringDirector;// 工程总监(与监督员是否一致)
 	private String clearPrincipal;// 清欠负责人
@@ -92,28 +93,24 @@ public class Project implements java.io.Serializable {
 	public Project() {
 	}
 
-	/** minimal constructor */
-	public Project(Yxarea yxarea) {
-		this.yxarea = yxarea;
-	}
-
 	/** full constructor */
-	public Project(Yxarea yxarea, Daymanage daymanage,
+	public Project(Integer uid, Yxarea yxarea, Daymanage daymanage,
 			Construction construction, Integer projectType,
 			Integer engineeringType, Integer buildingType,
 			Integer graphicProgress, String buildUnit,
 			String buildUnitPrincipal, String buildUnittelphone, String name,
 			float buildingArea, float buildingCost, String structureLevel,
 			Integer buildingNumber, String startDate, String planendDate,
-			String constructionUnit,String constructionUnitPrincipal,String constructionUnitPrincipalTelphone, String supervisionUnit,
-			String supervisionUnitPrincipal,String supervisionUnitPrincipalTelphone,
-			String projectManager, String engineeringDirector,
-			String clearPrincipal, String clearPrincipalTelphone,
-			Integer isNewProjectMonth, String constructionPermitDate,
-			String premarks, String supervisor, String engineeringPlace,
-			String constructionPermitNumber, String sourcesOfInvestment,
-			String excellenceGoals, String reconnaissanceUnit,
-			String reconnaissanceUnitPrincipal,
+			String constructionUnit, String constructionUnitPrincipal,
+			String constructionUnitPrincipalTelphone, String supervisionUnit,
+			String supervisionUnitPrincipal,
+			String supervisionUnitPrincipalTelphone, String projectManager,
+			String engineeringDirector, String clearPrincipal,
+			String clearPrincipalTelphone, Integer isNewProjectMonth,
+			String constructionPermitDate, String premarks, String supervisor,
+			String engineeringPlace, String constructionPermitNumber,
+			String sourcesOfInvestment, String excellenceGoals,
+			String reconnaissanceUnit, String reconnaissanceUnitPrincipal,
 			String reconnaissanceUnitPrincipalTelphone, String designUnit,
 			String designUnitPrincipal, String designUnitPrincipalTelphone,
 			String detectionUnit, String detectionUnitPrincipal,
@@ -125,6 +122,7 @@ public class Project implements java.io.Serializable {
 			String constructionDrawingUnitPrincipalTelphone,
 			List<Spreadsheet> spreadsheets, List<Proman> promans,
 			List<Subunit> subunits, List<Device> devices) {
+		this.uid = uid;
 		this.yxarea = yxarea;
 		this.daymanage = daymanage;
 		this.construction = construction;
@@ -182,6 +180,11 @@ public class Project implements java.io.Serializable {
 		this.promans = promans;
 		this.subunits = subunits;
 		this.devices = devices;
+	}
+
+	/** minimal constructor */
+	public Project(Yxarea yxarea) {
+		this.yxarea = yxarea;
 	}
 
 	// Property accessors
@@ -474,6 +477,11 @@ public class Project implements java.io.Serializable {
 		return this.supervisor;
 	}
 
+	@Column(name = "uid")
+	public Integer getUid() {
+		return uid;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "aid", nullable = false)
 	public Yxarea getYxarea() {
@@ -718,10 +726,12 @@ public class Project implements java.io.Serializable {
 		this.supervisor = supervisor;
 	}
 
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
 	public void setYxarea(Yxarea yxarea) {
 		this.yxarea = yxarea;
 	}
-	
-	
 
 }

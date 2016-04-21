@@ -173,6 +173,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
+		
+		//设置当前添加项目的用户的uid
+		project.setUid(userSession.getId());
 
 		// 新增项目时，同时增加日常监管
 		Daymanage daymanage = new Daymanage();

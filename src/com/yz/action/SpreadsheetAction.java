@@ -812,7 +812,7 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 	public String archives() {
 		project = projectService.loadById(pid);
 		pageName = "档案管理";
-		spreadsheets = spreadsheetService.getSpreadsheets();// 默认所有表格
+		spreadsheets = spreadsheetService.queryListByPid(pid);// 默认所有表格
 		handleSheetNumber(spreadsheets);// 生成数量类
 		return "archives";
 	}
