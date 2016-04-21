@@ -36,7 +36,7 @@ body {
   <area shape="rect" coords="21,118,278,314" href="yxareaAction!list">
 <area shape="rect" coords="311,118,572,314" href="citylist.html">
 <area shape="rect" coords="610,118,866,314" href="query.html">
-<area shape="rect" coords="894,118,1159,314" href="xmlist_gl2.html">
+<area shape="rect" coords="894,118,1159,314" href="projectAction!count">
 
 </map></div>
 

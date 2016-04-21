@@ -2,6 +2,7 @@ package com.yz.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -31,8 +33,12 @@ import com.yz.service.IDaymanageService;
 import com.yz.service.IProjectService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
+import com.yz.util.DateTimeKit;
+import com.yz.util.ProjectClassifyExcel;
+import com.yz.util.ProjectExcel;
 import com.yz.vo.AjaxMsgVO;
 import com.yz.vo.AreaVO;
+import com.yz.vo.ProjectClassify;
 
 /**
  * @author lq
@@ -76,14 +82,19 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	// 单个对象
 	private Project project;
 	private AreaVO areaVO;
-	
 
 	// list对象
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
-	
+	private List<ProjectClassify> projectClassifys;
 
+	// 统计
+	private int projectNumberTotal;// 项目总数
+	private float buildingAreaTotal;// 总面积
+	private float buildingCostTotal;// 总造价
+
+	private int excelPageType;
 
 	/**
 	 * 项目管理
@@ -173,8 +184,8 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		
-		//设置当前添加项目的用户的uid
+
+		// 设置当前添加项目的用户的uid
 		project.setUid(userSession.getId());
 
 		// 新增项目时，同时增加日常监管
@@ -186,10 +197,10 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		daymanage.setIsEducationLaunch(0);
 		daymanage.setIsMortarQualified(0);
 		daymanage.setIsNameplateInstall(0);
-		
+
 		daymanageService.add(daymanage);
-		
-		//新增项目时，同时增加文明施工
+
+		// 新增项目时，同时增加文明施工
 		Construction construction = new Construction();
 		construction.setIsWashSet(0);
 		construction.setIsWaterClear(0);
@@ -203,7 +214,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		construction.setIsMeetFire(0);
 		construction.setIsMeasurePlace(0);
 		constructionService.add(construction);
-		
+
 		project.setDaymanage(daymanage);
 		project.setConstruction(construction);
 		projectService.add(project);
@@ -296,7 +307,6 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		return SUCCESS;
 	}
 
-
 	/**
 	 * 查看信息
 	 * 
@@ -325,21 +335,293 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		
+
 		session.put("areaVO", areaVO);
-		
+
 		project = projectService.loadById(id);
 		return "bench";
 	}
-	
+
 	/**
-	 * 项目评价
+	 * 综合统计
+	 * 
+	 * @throws UnsupportedEncodingException
 	 */
-	public String toProjectEvaluate()
-	{
+	public String count() throws UnsupportedEncodingException {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
+		}
+
+		if (excelPageType == 1) {
+			handleProjectClassifys();
+			return "excel1";
+		}
+		if (convalue != null && !convalue.equals("")) {
+			convalue = URLDecoder.decode(convalue, "utf-8");
+		}
+		if (page < 1) {
+			page = 1;
+		}
+
+		// 总记录数
+		totalCount = projectService.getTotalCount(status, con, convalue);
+		// 总页数
+		pageCount = projectService.getPageCount(totalCount, size);
+		if (page > pageCount && pageCount != 0) {
+			page = pageCount;
+		}
+		// 所有当前页记录对象
+		projects = projectService.queryList(status, con, convalue, page, size);
+
+		if (projects != null) {
+			projectNumberTotal = projects.size();
+
+			for (int i = 0; i < projects.size(); i++) {
+
+				buildingAreaTotal = buildingAreaTotal
+						+ projects.get(i).getBuildingArea();
+				buildingCostTotal = buildingCostTotal
+						+ projects.get(i).getBuildingCost();
+			}
+		}
+		return "excel";
+	}
+
+	/***************************************************************************
+	 * 导出excel表格
+	 * 
+	 * @throws UnsupportedEncodingException
+	 */
+	public String outputExcel() throws UnsupportedEncodingException {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
+		}
+		if (convalue != null && !convalue.equals("")) {
+			convalue = URLDecoder.decode(convalue, "utf-8");
+		}
+		// 所有当前页记录对象
+		projects = projectService.queryList(status, con, convalue);
+		if (projects.size() > 0) {
+			// 导出数据-------------------------------------
+			String filename = "output\\" + DateTimeKit.getDateRandom()
+					+ "_projects.xls";
+			String savePath = ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ filename;
+			System.out.println("[--------------------savePath=" + savePath);
+			boolean isexport = ProjectExcel.exportExcel(savePath, projects);
+			if (isexport) {
+				request.put("errorInfo", "导出数据成功,下载点<a href='" + filename
+						+ "'>-这里-</a>");
+				return "opexcel";
+			} else {
+				request.put("errorInfo", "导出数据失败！");
+				return "opexcel";
+			}
+		} else {
+			request.put("errorInfo", "查询失败，未导出数据！");
+			return "opexcel";
+		}
+	}
+
+	public String outputExcel1() throws UnsupportedEncodingException {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
+		}
+		handleProjectClassifys();
 		
-		return "evaluate";
-	}	
+		if (projectClassifys.size() > 0) {
+			// 导出数据-------------------------------------
+			String filename = "output\\" + DateTimeKit.getDateRandom()
+					+ "_projectClassifys.xls";
+			String savePath = ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ filename;
+			System.out.println("[--------------------savePath=" + savePath);
+			boolean isexport = ProjectClassifyExcel.exportExcel(savePath, projectClassifys);
+			if (isexport) {
+				request.put("errorInfo", "导出数据成功,下载点<a href='" + filename
+						+ "'>-这里-</a>");
+				return "opexcel";
+			} else {
+				request.put("errorInfo", "导出数据失败！");
+				return "opexcel";
+			}
+		} else {
+			request.put("errorInfo", "查询失败，未导出数据！");
+			return "opexcel";
+		}
+	}
+
+	private List<ProjectClassify> handleProjectClassifys() {
+		projects = projectService.getProjects();
+		if (projects != null && projects.size() > 0) {
+			projectClassifys = new ArrayList<ProjectClassify>();
+			for (int i = 0; i < 5; i++) {
+				ProjectClassify projectClassify = new ProjectClassify();
+				int projectNumber = 0;// 项目总数
+				float buildingArea = 0f;// 总面积
+				float buildingCost = 0f;// 总造价
+				projectClassify.setTotalClassifyName("项目分类");
+				switch (i) {
+				case 0:
+					projectClassify.setClassifyName("房地产开发");
+					break;
+				case 1:
+					projectClassify.setClassifyName("安置房");
+					break;
+				case 2:
+					projectClassify.setClassifyName("政府投资项目");
+					break;
+				case 3:
+					projectClassify.setClassifyName("一般项目");
+					break;
+				case 4:
+					projectClassify.setClassifyName("房地产开发");
+					break;
+				default:
+					break;
+				}
+				projects = projectService.loadByProjectType(i);
+				if (projects != null && projects.size() > 0) {
+					projectNumber = projects.size();
+					for (int j = 0; j < projects.size(); j++) {
+						buildingArea = buildingArea
+								+ projects.get(j).getBuildingArea();
+						buildingCost = buildingCost
+								+ projects.get(j).getBuildingCost();
+					}
+					projectClassify.setProjectNumberTotal(projectNumber);
+					projectClassify.setBuildingAreaTotal(buildingArea);
+					projectClassify.setBuildingCostTotal(buildingCost);
+				}
+				projectClassifys.add(projectClassify);
+			}
+
+			for (int i = 0; i < 5; i++) {
+				ProjectClassify projectClassify = new ProjectClassify();
+				int projectNumber = 0;// 项目总数
+				float buildingArea = 0f;// 总面积
+				float buildingCost = 0f;// 总造价
+				projectClassify.setTotalClassifyName("工程分类");
+				switch (i) {// engineeringType 0:土建,1：装饰，2:市政,3:绿化，4：照明亮化
+				case 0:
+					projectClassify.setClassifyName("土建");
+					break;
+				case 1:
+					projectClassify.setClassifyName("装饰");
+					break;
+				case 2:
+					projectClassify.setClassifyName("市政");
+					break;
+				case 3:
+					projectClassify.setClassifyName("绿化");
+					break;
+				case 4:
+					projectClassify.setClassifyName("照明亮化");
+					break;
+				default:
+					break;
+				}
+				projects = projectService.loadByEngineeringType(i);
+				if (projects != null && projects.size() > 0) {
+					projectNumber = projects.size();
+					for (int j = 0; j < projects.size(); j++) {
+						buildingArea = buildingArea
+								+ projects.get(j).getBuildingArea();
+						buildingCost = buildingCost
+								+ projects.get(j).getBuildingCost();
+					}
+					projectClassify.setProjectNumberTotal(projectNumber);
+					projectClassify.setBuildingAreaTotal(buildingArea);
+					projectClassify.setBuildingCostTotal(buildingCost);
+				}
+				projectClassifys.add(projectClassify);
+			}
+
+			// private Integer buildingType;// 建筑分类(0:住宅,1：公共建筑，2:工业建筑)
+			for (int i = 0; i < 3; i++) {
+				ProjectClassify projectClassify = new ProjectClassify();
+				int projectNumber = 0;// 项目总数
+				float buildingArea = 0f;// 总面积
+				float buildingCost = 0f;// 总造价
+				projectClassify.setTotalClassifyName("建筑分类");
+				switch (i) {
+				case 0:
+					projectClassify.setClassifyName("住宅");
+					break;
+				case 1:
+					projectClassify.setClassifyName("公共建筑");
+					break;
+				case 2:
+					projectClassify.setClassifyName("工业建筑");
+					break;
+				default:
+					break;
+				}
+				projects = projectService.loadByBuildingType(i);
+				if (projects != null && projects.size() > 0) {
+					projectNumber = projects.size();
+					for (int j = 0; j < projects.size(); j++) {
+						buildingArea = buildingArea
+								+ projects.get(j).getBuildingArea();
+						buildingCost = buildingCost
+								+ projects.get(j).getBuildingCost();
+					}
+					projectClassify.setProjectNumberTotal(projectNumber);
+					projectClassify.setBuildingAreaTotal(buildingArea);
+					projectClassify.setBuildingCostTotal(buildingCost);
+				}
+				projectClassifys.add(projectClassify);
+			}
+
+			// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
+			for (int i = 0; i < 5; i++) {
+				ProjectClassify projectClassify = new ProjectClassify();
+				int projectNumber = 0;// 项目总数
+				float buildingArea = 0f;// 总面积
+				float buildingCost = 0f;// 总造价
+				projectClassify.setTotalClassifyName("形象进度");
+				switch (i) {
+				case 0:
+					projectClassify.setClassifyName("基础");
+					break;
+				case 1:
+					projectClassify.setClassifyName("主体");
+					break;
+				case 2:
+					projectClassify.setClassifyName("装饰");
+					break;
+				case 3:
+					projectClassify.setClassifyName("完工待验");
+					break;
+				case 4:
+					projectClassify.setClassifyName("竣工");
+					break;
+				default:
+					break;
+				}
+				projects = projectService.loadByGraphicProgress(i);
+				if (projects != null && projects.size() > 0) {
+					projectNumber = projects.size();
+					for (int j = 0; j < projects.size(); j++) {
+						buildingArea = buildingArea
+								+ projects.get(j).getBuildingArea();
+						buildingCost = buildingCost
+								+ projects.get(j).getBuildingCost();
+					}
+					projectClassify.setProjectNumberTotal(projectNumber);
+					projectClassify.setBuildingAreaTotal(buildingArea);
+					projectClassify.setBuildingCostTotal(buildingCost);
+				}
+				projectClassifys.add(projectClassify);
+			}
+		}
+		return projectClassifys;
+	}
 
 	// get、set-------------------------------------------
 
@@ -542,10 +824,50 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	public IConstructionService getConstructionService() {
 		return constructionService;
 	}
+
 	@Resource
 	public void setConstructionService(IConstructionService constructionService) {
 		this.constructionService = constructionService;
 	}
 
-	
+	public int getProjectNumberTotal() {
+		return projectNumberTotal;
+	}
+
+	public void setProjectNumberTotal(int projectNumberTotal) {
+		this.projectNumberTotal = projectNumberTotal;
+	}
+
+	public float getBuildingAreaTotal() {
+		return buildingAreaTotal;
+	}
+
+	public void setBuildingAreaTotal(float buildingAreaTotal) {
+		this.buildingAreaTotal = buildingAreaTotal;
+	}
+
+	public float getBuildingCostTotal() {
+		return buildingCostTotal;
+	}
+
+	public void setBuildingCostTotal(float buildingCostTotal) {
+		this.buildingCostTotal = buildingCostTotal;
+	}
+
+	public List<ProjectClassify> getProjectClassifys() {
+		return projectClassifys;
+	}
+
+	public void setProjectClassifys(List<ProjectClassify> projectClassifys) {
+		this.projectClassifys = projectClassifys;
+	}
+
+	public int getExcelPageType() {
+		return excelPageType;
+	}
+
+	public void setExcelPageType(int excelPageType) {
+		this.excelPageType = excelPageType;
+	}
+
 }
