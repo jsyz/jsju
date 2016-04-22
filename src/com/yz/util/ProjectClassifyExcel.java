@@ -20,7 +20,7 @@ import com.yz.vo.ProjectClassify;
 
 public class ProjectClassifyExcel {
 	 //表头-up
-    public static final String[] tableHeader = {"     ","    ","项目数","面积（㎡）","造价（万元）"};
+    public static final String[] tableHeader = {"序号","     ","    ","项目数","面积（㎡）","造价（万元）"};
     //创建工作本
     public static HSSFWorkbook demoWorkBook = new HSSFWorkbook();
     //创建表-up

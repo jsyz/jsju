@@ -456,6 +456,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 	}
 
+	//// 项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
 	private List<ProjectClassify> handleProjectClassifys() {
 		projects = projectService.getProjects();
 		if (projects != null && projects.size() > 0) {
@@ -477,10 +478,10 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 					projectClassify.setClassifyName("政府投资项目");
 					break;
 				case 3:
-					projectClassify.setClassifyName("一般项目");
+					projectClassify.setClassifyName("重点项目");
 					break;
 				case 4:
-					projectClassify.setClassifyName("房地产开发");
+					projectClassify.setClassifyName("一般项目");
 					break;
 				default:
 					break;
