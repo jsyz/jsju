@@ -28,8 +28,13 @@ request.getContextPath(); String basePath = request.getScheme() + "://"
 		<div style="width: 200px; padding-top: 9px;">
 		</div>
 		<ul class="Hui-userbar">
-			<li class="mr-10">
+			<li class="mr-10" style="float: left">
 				你好，${session.userSession.realname}！
+			</li>
+			<li class="mr-10">
+				<a href="useroAction!index" class="btn btn-link  radius r mr-5 f-r"
+					title="返回主菜单">返回主菜单
+				</a>
 			</li>
 			<li class="mr-5">
 				<a href="javascript:;"

@@ -262,14 +262,11 @@
 
 			<result name="list">/spreadsheet_manage.jsp</result>
 			<result name="add">/spreadsheet_add.jsp</result>
-			
-			<result name="add_1">/sheet_1.jsp</result>
-			
-			
-			
 			<result name="load">/spreadsheet_update.jsp</result>
 			<result name="view">/spreadsheet_view.jsp</result>
-
+			<result name="evaluate">/spreadsheet_evaluate.jsp</result>
+			<result name="archives">/spreadsheet_archives.jsp</result>
+			
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">

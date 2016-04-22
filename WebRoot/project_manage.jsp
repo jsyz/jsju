@@ -74,22 +74,54 @@
 			<div class="xmconbox pd-20">
 				<div class="row cl box-shadow pd-10  bk-gray radius"
 					style="background-color: #FFF;">
+
 					<div class="cl pd-5 bg-1 bk-gray mb-20">
-						<span class="l"> <a href="javascript:;"
-							onClick="deleteAllCheckedProjects();"
-							class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-								批量删除</a> <a class="btn btn-primary radius"
-							href="projectAction!goToAdd?areaIndex=<s:property value="areaIndex"/>"><i
-								class="Hui-iconfont">&#xe600;</i> 新增项目</a> </span>
-						<span class="r">共有数据：<strong><s:property
-									value="totalCount" /> </strong> 条</span>
+						<s:if test="#session.userSession.userLimit==0">
+							<span class="l"> <a href="javascript:;"
+								onClick="deleteAllCheckedProjects();"
+								class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+									批量删除</a> <a class="btn btn-primary radius"
+								href="projectAction!goToAdd?areaIndex=<s:property value="areaIndex"/>"><i
+									class="Hui-iconfont">&#xe600;</i> 新增项目</a> </span>
+							<span class="r">共有数据：<strong><s:property
+										value="totalCount" /> </strong> 条</span>
+						</s:if>
+
+						<s:elseif test="#session.userSession.userLimit==1">
+							<s:if test="#session.userSession.areaIndex==areaIndex">
+								<span class="l"> <a href="javascript:;"
+									onClick="deleteAllCheckedProjects();"
+									class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+										批量删除</a> <a class="btn btn-primary radius"
+									href="projectAction!goToAdd?areaIndex=<s:property value="areaIndex"/>"><i
+										class="Hui-iconfont">&#xe600;</i> 新增项目</a> </span>
+								<span class="r">共有数据：<strong><s:property
+											value="totalCount" /> </strong> 条</span>
+
+							</s:if>
+						</s:elseif>
+
+						<s:elseif test="#session.userSession.userLimit==2">
+							<s:if test="#session.userSession.areaIndex==areaIndex">
+								<span class="l"> <a class="btn btn-primary radius"
+									href="projectAction!goToAdd?areaIndex=<s:property value="areaIndex"/>"><i
+										class="Hui-iconfont">&#xe600;</i> 新增项目</a> </span>
+								<span class="r">共有数据：<strong><s:property
+											value="totalCount" /> </strong> 条</span>
+							</s:if>
+						</s:elseif>
+
+
+
 					</div>
+
+
 					<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
 						<div class="text-c">
 							<form name="projectListForm" method="post"
 								action="projectAction!list" target="_self">
 								<s:hidden name="areaIndex"></s:hidden>
-								
+
 								<table width="100%" border="0" cellspacing="0" cellpadding="0"
 									style="line-height: 35px;">
 									<tr height="35">
@@ -178,7 +210,7 @@
 												value="<s:property value="id"/>">
 										</td>
 										<td>
-												<s:property value="#status.index+1+(page-1)*10" />
+											<s:property value="#status.index+1+(page-1)*10" />
 										</td>
 										<td class="text-c">
 											<s:if test="projectType==0">房地产开发</s:if>
@@ -188,7 +220,9 @@
 											<s:elseif test="projectType==4">一般项目</s:elseif>
 										</td>
 										<td>
-											<a href="projectAction!bench?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"> <s:property value="name" /> </a>
+											<a
+												href="projectAction!bench?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>">
+												<s:property value="name" /> </a>
 										</td>
 										<td>
 											<s:property value="buildingArea" />
@@ -218,13 +252,50 @@
 											<s:property value="supervisor" />
 										</td>
 										<td class="f-14 td-manage">
-											<a style="text-decoration: none" class="ml-5"
-												href="projectAction!load?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
-												title="编辑"><i class="Hui-iconfont">&#xe6df;</i> </a>
-											<a style="text-decoration: none" class="ml-5" onclick="return confirm('你确定删除该项目吗？')"
-												href="projectAction!delete?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+											<s:if test="#session.userSession.userLimit==0">
+
+												<a style="text-decoration: none" class="ml-5"
+													href="projectAction!load?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+													title="编辑"><i class="Hui-iconfont">&#xe6df;</i> </a>
+												<a style="text-decoration: none" class="ml-5"
+													onclick="return confirm('你确定删除该项目吗？')"
+													href="projectAction!delete?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+													title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+
+											</s:if>
+											<s:elseif test="#session.userSession.userLimit==1">
+												<s:if test="#session.userSession.areaIndex==areaIndex">
+													<a style="text-decoration: none" class="ml-5"
+														href="projectAction!load?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+														title="编辑"><i class="Hui-iconfont">&#xe6df;</i> </a>
+													<a style="text-decoration: none" class="ml-5"
+														onclick="return confirm('你确定删除该项目吗？')"
+														href="projectAction!delete?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+												</s:if>
+											</s:elseif>
+
+											<s:elseif test="#session.userSession.userLimit==2">
+												<s:if test="#session.userSession.id==uid">
+													<a style="text-decoration: none" class="ml-5"
+														href="projectAction!load?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+														title="编辑"><i class="Hui-iconfont">&#xe6df;</i> </a>
+													<a style="text-decoration: none" class="ml-5"
+														onclick="return confirm('你确定删除该项目吗？')"
+														href="projectAction!delete?id=<s:property value="id"/>&areaIndex=<s:property value="areaIndex"/>"
+														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
+												</s:if>
+											</s:elseif>
+
+
 										</td>
+
+
+
+
+
+
+
 									</tr>
 								</s:iterator>
 							</tbody>

@@ -76,11 +76,14 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	// 单个对象
 	private Project project;
 	private AreaVO areaVO;
+	
 
 	// list对象
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
+	
+
 
 	/**
 	 * 项目管理
@@ -170,6 +173,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
+		
+		//设置当前添加项目的用户的uid
+		project.setUid(userSession.getId());
 
 		// 新增项目时，同时增加日常监管
 		Daymanage daymanage = new Daymanage();
@@ -284,9 +290,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		System.out.println(project.getDaymanage().getInstallTime());
 		projectService.update(project);
-		System.out.println(project.getDaymanage().getInstallTime());
 		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
 		arg[1] = "项目管理";
 		return SUCCESS;
@@ -327,6 +331,15 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		project = projectService.loadById(id);
 		return "bench";
 	}
+	
+	/**
+	 * 项目评价
+	 */
+	public String toProjectEvaluate()
+	{
+		
+		return "evaluate";
+	}	
 
 	// get、set-------------------------------------------
 
@@ -534,4 +547,5 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		this.constructionService = constructionService;
 	}
 
+	
 }

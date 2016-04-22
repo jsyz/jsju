@@ -68,25 +68,23 @@
 						<i class="Hui-iconfont">&#xe623;</i>
 						<s:property value="project.name" />
 						-
-						<s:property value="sheetName" />
+						<s:property value="pageName" />
 					</p>
 				</div>
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<div class="row cl bk-gray radius pd-10"
 						style="background-color: #FFF">
 						<!--表格内容-->
-						<form action="spreadsheetAction!add" method="post"
+						<form action="spreadsheetAction!update" method="post"
 							class="form form-horizontal" id="form-article-add"
 							enctype="multipart/form-data">
 							<s:hidden name="pid"></s:hidden>
 							<s:hidden name="sheetTypeStr"></s:hidden>
-							<s:hidden name="pageType"></s:hidden>
-							<input name="spreadsheet.project.id"
-								value="<s:property value="pid" />" type="hidden" />
-							<input name="spreadsheet.sheetName"
-								value="<s:property value="sheetName" />" type="hidden" />
-							<input name="spreadsheet.sheetType"
-								value="<s:property value="sheetType" />" type="hidden" />
+							<s:hidden name="spreadsheet.id"></s:hidden>
+							<s:hidden name="spreadsheet.sheetImg"></s:hidden>
+							<s:hidden name="spreadsheet.sheetType"></s:hidden>
+							<s:hidden name="spreadsheet.sheetName"></s:hidden>
+							<s:hidden name="spreadsheet.project.id"></s:hidden>
 							<div class="col-12 mb-0  f-16"
 								style="border-bottom: solid 2px #2DABF7; line-height: 43px;">
 								<s:property value="sheetName" />
@@ -99,10 +97,11 @@
 									class="formControls col-10"> <input type="text"
 											width="45%" class="input-text radius size-M Wdate"
 											name="spreadsheet.updateTime"
+											value="<s:property value="spreadsheet.updateTime"/>"
 											onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 											id="logmin" class="input-text Wdate" /> </span> </span>
 							</div>
-							<s:if test="sheetType==7">
+							<s:if test="spreadsheet.sheetType==7">
 								<div class="row cl" style="margin-top: 20px;">
 									<label class="form-label col-2">
 										<span class="c-red">*</span>检查日期：
@@ -111,6 +110,7 @@
 										class="formControls col-10"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
 												name="spreadsheet.checkTime"
+												value="<s:property value="spreadsheet.checkTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" /> </span> </span>
 								</div>
@@ -122,6 +122,7 @@
 										class="formControls col-10"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
 												name="spreadsheet.expireTime"
+												value="<s:property value="spreadsheet.expireTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" /> </span> </span>
 								</div>
@@ -143,6 +144,7 @@
 										class="formControls col-10"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
 												name="spreadsheet.closeTime"
+												value="<s:property value="spreadsheet.closeTime"/>"
 												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
 												id="logmin" class="input-text Wdate" /> </span> </span>
 								</div>
@@ -158,7 +160,8 @@
 										<tr>
 											<td align="center">
 												<img id="myimage1" class="img-responsive thumbnail"
-													width="400px" height="auto" />
+													src="<%=basePath%>${spreadsheet.sheetImg}" width="400px"
+													height="auto" />
 												<script type="text/javascript">
 															function change1() {
 															    var pic1 = document.getElementById("myimage1"),

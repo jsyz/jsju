@@ -67,7 +67,7 @@
 				<img src="images/xm.png" width="965" height="355" usemap="#Map">
 				<map name="Map">
 					<area shape="rect" coords="295,202,378,285" href="xm-jk.html">
-					<area shape="rect" coords="438,202,532,285" href="xm-map.html">
+					<area shape="rect" coords="438,202,532,285" href="map.html">
 					<area shape="rect" coords="582,202,660,283"
 						href="promanAction!list?pid=<s:property value="project.id"/>">
 					<area shape="rect" coords="39,21,167,151"
@@ -81,8 +81,8 @@
 						href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
 					<area shape="rect" coords="492,16,620,147"
 						href="constructionAction!view?pid=<s:property value="project.id"/>">
-					<area shape="rect" coords="647,18,775,153" href="xmpj.html">
-					<area shape="rect" coords="798,22,925,153" href="xm-da.html">
+					<area shape="rect" coords="647,18,775,153" href="spreadsheetAction!evaluate?pid=<s:property value="project.id"/>&sheetTypeStr=13,14,15,16,17,18">
+					<area shape="rect" coords="798,22,925,153" href="spreadsheetAction!archives?pid=<s:property value="project.id"/>">
 				</map>
 			</div>
 		</div>
