@@ -162,4 +162,93 @@ public class ProjectServiceImp implements IProjectService {
 		return projectDao.queryByNamedParam(queryString, paramNames, values);
 	}
 
+	public int getTotalCount(int status, int con, String convalue) {
+		String queryString = "select count(*) from Project mo where 1=1";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		if (status == 1) {
+			queryString += "and mo.graphicProgress != 4";
+		}
+		if (status == 2) {
+			queryString += "and mo.graphicProgress = 4";
+		}
+		return projectDao.getUniqueResult(queryString, p);
+	}
+
+	public List<Project> queryList(int status, int con, String convalue,
+			int page, int size) {
+		String queryString = "from Project mo where 1=1 ";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		if (status == 1) {
+			queryString += "and mo.graphicProgress != 4";
+		}
+		if (status == 2) {
+			queryString += "and mo.graphicProgress = 4";
+		}
+		return projectDao.pageList(queryString, p, page, size);
+	}
+
+	public List<Project> queryList(int status, int con, String convalue) {
+		// TODO Auto-generated method stub
+		String queryString = "from Project mo where 1=1";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		if (status == 1) {
+			queryString += "and mo.graphicProgress != 4";
+		}
+		if (status == 2) {
+			queryString += "and mo.graphicProgress = 4";
+		}
+		return projectDao.getObjectsByCondition(queryString, p);
+	}
+
+	public List<Project> loadByProjectType(int i) {
+		// TODO Auto-generated method stub
+		String queryString = "from Project mo where 1=1 and mo.projectType="+i;
+		return projectDao.queryList(queryString);
+	}
+	
+	public List<Project> loadByEngineeringType(int i) {
+		// TODO Auto-generated method stub
+		String queryString = "from Project mo where 1=1 and mo.engineeringType="+i;
+		return projectDao.queryList(queryString);
+	}
+	
+	public List<Project> loadByBuildingType(int i) {
+		// TODO Auto-generated method stub
+		String queryString = "from Project mo where 1=1 and mo.buildingType="+i;
+		return projectDao.queryList(queryString);
+	}
+	
+	public List<Project> loadByGraphicProgress(int i) {
+		// TODO Auto-generated method stub
+		String queryString = "from Project mo where 1=1 and mo.graphicProgress="+i;
+		return projectDao.queryList(queryString);
+	}
+
 }

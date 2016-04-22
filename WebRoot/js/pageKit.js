@@ -67,6 +67,32 @@ function jumpCommonPage(url,page,con,convalue){
 	window.location=url;
 }
 
+
+
+//统计分页显示
+function jumpProjectCountPage(url,page,con,convalue,status){
+	
+	var page=page;
+	if(isNaN(page)){
+		var page2=document.getElementById(page).value;
+		page=parseInt(page2);
+	}
+	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&status='+status;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+
+
+//跳转到打印页面
+function jumpProjectOutput(url,con,convalue,status){
+	
+	var url=url+'?con='+con+'&convalue='+convalue+'&status='+status;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+
 //分页显示
 function jumpProjectPage(url,page,con,convalue,areaIndex){
 	

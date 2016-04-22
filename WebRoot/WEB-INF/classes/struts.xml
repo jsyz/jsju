@@ -98,7 +98,11 @@
 			<result name="load">/project_update.jsp</result>
 			<result name="view">/project_view.jsp</result>
 			<result name="bench">/project_bench.jsp</result>
-
+			
+			<result name="excel">/project_excel.jsp</result>
+			<result name="excel1">/project_excel1.jsp</result>
+			<result name="opexcel">/op_excel.jsp</result>
+			
 			<result name="invalid.token">/op_failure.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
