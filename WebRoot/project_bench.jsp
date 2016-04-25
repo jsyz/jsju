@@ -75,10 +75,10 @@
 					<area shape="rect" coords="187,15,320,151"
 						href="daymanageAction!view?pid=<s:property value="project.id"/>">
 					<area shape="rect" coords="340,16,470,147"
-						href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"">
+						href="deviceAction!list?pid=<s:property value="project.id"/>">
 					<area shape="rect" coords="187,15,320,151" href="xm-rcjg_gl.html">
 					<area shape="rect" coords="340,16,470,147"
-						href="deviceAction!list?projectId=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>">
+						href="deviceAction!list?pid=<s:property value="project.id"/>">
 					<area shape="rect" coords="492,16,620,147"
 						href="constructionAction!view?pid=<s:property value="project.id"/>">
 					<area shape="rect" coords="647,18,775,153" href="spreadsheetAction!evaluate?pid=<s:property value="project.id"/>&sheetTypeStr=13,14,15,16,17,18">

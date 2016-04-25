@@ -796,9 +796,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 				File photofile1 = new File(ServletActionContext.getServletContext()
 						.getRealPath("/")
 						+ construction.getWashSetImg());
-				System.out.println(ServletActionContext.getServletContext()
-						.getRealPath("/")
-						+ construction.getWashSetImg());
 				photofile1.delete();
 				construction.setWashSetImg(null);
 				break;
@@ -957,17 +954,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		return null;
 	}
 	
-	public String updateCurrentConstruction() throws Exception {
-		Construction construction = (Construction) session.get("construction");
-		if (construction == null) {
-			return "opsessiongo";
-		}
-		constructionService.update(construction);
-		arg[0] = "constructionAction!currentConstruction";
-		arg[1] = "设备资料";
-		return "success";
-	}
-
 	// 文件上传
 	public void upload(String fileName, String imageName, File picture)
 			throws Exception {
@@ -1121,7 +1107,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 				constructionService.update(construction);
 	}
 
-	public File getPicture1() {
+	public File get() {
 		return picture1;
 	}
 

@@ -65,20 +65,21 @@
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:history.go(-1);" title="返回"><i
 						class="Hui-iconfont">&#xe66b;</i> </a>
+						
 					</nav>
 					<p
 						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
 						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
-						<s:property value="areaVO.areaName" />
+						<s:property value="#session.areaVO.areaName" />
 						<span class="pipe">|</span>【项目总数
-						<s:property value="areaVO.projectNumberTotal" />
+						<s:property value="#session.areaVO.projectNumberTotal" />
 						建筑面积
-						<s:property value="areaVO.buildingAreaTotal" />
+						<s:property value="#session.areaVO.buildingAreaTotal" />
 						<sup>
 							2
 						</sup>
 						造价
-						<s:property value="areaVO.buildingCostTotal" />
+						<s:property value="#session.areaVO.buildingCostTotal" />
 						万 】
 						<a href="yxareaAction!list"><span
 							class="label label-warning radius">片区切换</span> </a>
@@ -103,7 +104,7 @@
 										class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 										批量删除</a>
 									<a class="btn btn-primary radius"
-										href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i
+										href="deviceAction!goToAdd?pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>"><i
 										class="Hui-iconfont">&#xe600;</i> 新增设备</a>
 								</s:if> <s:elseif test="#session.userSession.userLimit==1">
 									<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
@@ -111,7 +112,7 @@
 											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 											批量删除</a>
 										<a class="btn btn-primary radius"
-											href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i
+											href="deviceAction!goToAdd?pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>"><i
 											class="Hui-iconfont">&#xe600;</i> 新增设备</a>
 									</s:if>
 								</s:elseif> <s:elseif test="#session.userSession.userLimit==2">
@@ -120,7 +121,7 @@
 											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 											批量删除</a>
 										<a class="btn btn-primary radius"
-											href="deviceAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>"><i
+											href="deviceAction!goToAdd?pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>"><i
 											class="Hui-iconfont">&#xe600;</i> 新增设备</a>
 									</s:if>
 								</s:elseif> </span>
@@ -132,7 +133,7 @@
 								<form name="deviceListForm" method="post"
 									action="deviceAction!list" target="_self">
 									<s:hidden name="areaIndex"></s:hidden>
-									<s:hidden name="projectId"></s:hidden>
+									<s:hidden name="pid"></s:hidden>
 									<table width="100%" border="0" cellspacing="0" cellpadding="0"
 										style="line-height: 35px;">
 										<tr height="35">
@@ -237,7 +238,7 @@
 												<s:if test="#session.userSession.userLimit==0">
 
 													<a style="text-decoration: none" class="ml-5"
-														onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+														onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 														href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
 													</a>
 
@@ -251,7 +252,7 @@
 													<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
 
 														<a style="text-decoration: none" class="ml-5"
-															onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+															onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 															href="javascript:;" title="编辑"><i
 															class="Hui-iconfont">&#xe6df;</i> </a>
 
@@ -265,7 +266,7 @@
 												<s:elseif test="#session.userSession.userLimit==2">
 													<s:if test="#session.userSession.id==project.uid">
 														<a style="text-decoration: none" class="ml-5"
-															onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+															onClick="article_edit('编辑','deviceAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 															href="javascript:;" title="编辑"><i
 															class="Hui-iconfont">&#xe6df;</i> </a>
 

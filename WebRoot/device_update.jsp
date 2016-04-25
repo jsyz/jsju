@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
    <form action = "deviceAction!update" method="post">
    <s:hidden name = "device.id" />
-   <input hidden name = "device.project.id" value = "<s:property value="projectId"/>" />
+   <input hidden name = "device.project.id" value = "<s:property value="pid"/>" />
   	<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
       <div class="row cl mb-10">
@@ -61,11 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="row cl mb-10">
         <label class="form-label col-2 text-r " >安装告知日期：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input3" name="device.installTime" width="45%" />
+          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})" class="input-text Wdate" value="" placeholder="" id="input3" name="device.installTime" width="45%" />
           </span></span>
         <label class="form-label col-2 text-r " >检测日期：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})" id="datemin2" class="input-text Wdate"  width="45%" name ="device.checkTime"/>
+          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})" id="datemin2" class="input-text Wdate"  width="45%" name ="device.checkTime"/>
       </span></span></div>
         <div class="row cl mb-10">
         <label class="form-label col-2 text-r " >是否办理使用登记证：</label>
@@ -76,12 +76,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </span></span>
         <label class="form-label col-2 text-r " >拆卸告知日期：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})" id="datemin2" class="input-text Wdate"  width="45%" name ="device.removeTime"/>
+          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})" id="datemin2" class="input-text Wdate"  width="45%" name ="device.removeTime"/>
         </span></span></div>
 
  <label class="form-label col-2 text-r " ><span class="c-red"></span>使用登记证到期日期：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-          <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.usecardExpireTime" width="45%" />
+          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})" class="input-text Wdate" value="" placeholder="" id="input2" name="device.usecardExpireTime" width="45%" />
           </span></span>
     </div>
     <div class="row cl mb-10">

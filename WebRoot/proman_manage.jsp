@@ -38,17 +38,16 @@
 		<title>人员信息</title>
 	</head>
 	<body>
-		<div class="xmWraper ">
-			<div class="xmconbox pd-20">
-				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-					<nav>
+							<title>人员信息</title>
+							<div class="xmWraper ">
+								<div class="xmconbox pd-20">
+									<div
+										class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+										<nav>
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
 						target="_self" title="返回项目工作台">返回项目工作台 </a>
-					<input type="submit" value="保存"
-						style="line-height: 1.6em; margin-top: 3px"
-						class="btn btn-success radius r mr-5 f-r" />
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
@@ -58,85 +57,6 @@
 						href="javascript:history.go(-1);" title="返回"><i
 						class="Hui-iconfont">&#xe66b;</i> </a>
 					</nav>
-					<p
-						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
-						<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
-						<s:property value="areaVO.areaName" />
-						<span class="pipe">|</span>【项目总数
-						<s:property value="areaVO.projectNumberTotal" />
-						建筑面积
-						<s:property value="areaVO.buildingAreaTotal" />
-						m
-						<sup>
-							2
-						</sup>
-						造价
-						<s:property value="areaVO.buildingCostTotal" />
-						万 】
-						<a href="yxareaAction!list"><span
-							class="label label-warning radius">片区切换</span> </a>
-					</p>
-				</div>
-			</div>
-			<div class="xmconbox pd-20">
-				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-					<p>
-						<i class="Hui-iconfont">&#xe623;</i>
-						<s:property value="project.name" />
-						- 人员信息
-					</p>
-				</div>
-				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-					<div class="row cl box-shadow pd-10  bk-gray radius"
-						style="background-color: #FFF;">
-						<div class="cl pd-5 bg-1 bk-gray mb-20">
-							<span class="l"> <s:if
-									test="#session.userSession.userLimit==0">
-									<a href="javascript:;" onclick="deleteAllCheckedPromans();"
-										class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-										批量删除</a>
-									<a class="btn btn-primary radius"
-										onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
-										href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-										新增人员</a>
-								</s:if> <s:elseif test="#session.userSession.userLimit==1">
-									<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
-										<a href="javascript:;" onclick="deleteAllCheckedPromans();"
-											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-											批量删除</a>
-										<a class="btn btn-primary radius"
-											onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
-											href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-											新增人员</a>
-									</s:if>
-								</s:elseif> <s:elseif test="#session.userSession.userLimit==2">
-									<s:if test="#session.userSession.id==project.uid">
-										<a href="javascript:;" onclick="deleteAllCheckedPromans();"
-											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-											批量删除</a>
-										<a class="btn btn-primary radius"
-											onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
-											href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-											新增人员</a>
-									</s:if>
-								</s:elseif> </span>
-							<span class="r">共有数据：<strong><s:property
-										value="totalCount" /> </strong> 条 </span>
-							<title>人员信息</title>
-							<div class="xmWraper ">
-								<div class="xmconbox pd-20">
-									<div
-										class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-										<nav>
-										<a class="btn btn-success radius r mr-5 f-r"
-											style="line-height: 1.6em; margin-top: 3px"
-											href="javascript:location.replace(location.href);"
-											title="刷新当前页"><i class="Hui-iconfont">&#xe68f;</i> </a><a
-											class="btn btn-success radius r mr-5 f-r"
-											style="line-height: 1.6em; margin-top: 3px"
-											href="xmshow.html" title="返回"><i class="Hui-iconfont">&#xe66b;</i>
-										</a>
-										</nav>
 										<p
 											style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
 											<i class="Hui-iconfont">&#xe64b;</i> 当前片区：
@@ -175,7 +95,7 @@
 													onclick="deleteAllCheckedPromans();"
 													class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 														批量删除</a> <a class="btn btn-primary radius"
-													onclick="article_add('新增人员','promanAction!goToAdd?projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>')"
+													onclick="article_add('新增人员','promanAction!goToAdd?pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>')"
 													href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
 														新增人员</a> </span>
 												<span class="r">共有数据：<strong><s:property
@@ -188,7 +108,7 @@
 														<form name="promanListForm" method="post"
 															action="promanAction!list" target="_self">
 															<s:hidden name="areaIndex"></s:hidden>
-															<s:hidden name="projectId"></s:hidden>
+															<s:hidden name="pid"></s:hidden>
 															<table width="100%" border="0" cellspacing="0"
 																cellpadding="0" style="line-height: 35px;">
 																<tr height="35">
@@ -249,7 +169,7 @@
 																</td>
 																<td>
 																	<a
-																		onClick="xmsb_show('人员信息','promanAction!view?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																		onClick="xmsb_show('人员信息','promanAction!view?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 																		href="javascript:;"><s:property value="name" /> </a>
 																</td>
 																<td class="f-14 td-manage">
@@ -257,7 +177,7 @@
 
 																	<s:if test="#session.userSession.userLimit==0">
 																		<a style="text-decoration: none" class="ml-5"
-																			onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																			onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 																			href="javascript:;" title="编辑"><i
 																			class="Hui-iconfont">&#xe6df;</i> </a>
 																		<a style="text-decoration: none" class="ml-5"
@@ -269,7 +189,7 @@
 																	<s:elseif test="#session.userSession.userLimit==1">
 																		<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
 																			<a style="text-decoration: none" class="ml-5"
-																				onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																				onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 																				href="javascript:;" title="编辑"><i
 																				class="Hui-iconfont">&#xe6df;</i> </a>
 																			<a style="text-decoration: none" class="ml-5"
@@ -283,7 +203,7 @@
 																	<s:elseif test="#session.userSession.userLimit==2">
 																		<s:if test="#session.userSession.id==project.uid">
 																			<a style="text-decoration: none" class="ml-5"
-																				onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&projectId=<s:property value="projectId"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
+																				onClick="article_edit('编辑','promanAction!load?id=<s:property value="id"/>&pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>','10001')"
 																				href="javascript:;" title="编辑"><i
 																				class="Hui-iconfont">&#xe6df;</i> </a>
 																			<a style="text-decoration: none" class="ml-5"
@@ -293,49 +213,9 @@
 																			</a>
 																		</s:if>
 																	</s:elseif>
-
-
-
-
-
-
-
-
-
-
 																</td>
 															</tr>
 														</s:iterator>
-														<!--  
-            <tr class="text-c">
-              <td ><input type="checkbox" value="" name="input"></td>
-              <td>002</td>
-              <td>施工员</td>
-              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="javascript:;">吴丽</a></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-            </tr>
-                <tr class="text-c">
-              <td ><input type="checkbox" value="" name="input"></td>
-              <td>003</td>
-              <td>质检员</td>
-              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="javascript:;">吴xx</a></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-            </tr>
-                <tr class="text-c">
-              <td ><input type="checkbox" value="" name="input"></td>
-              <td>004</td>
-              <td>安全员</td>
-              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="javascript:;">吴xx</a></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-            </tr>
-            <tr class="text-c">
-              <td ><input type="checkbox" value="" name="input"></td>
-              <td>005</td>
-              <td>材料员</td>
-              <td><a onClick="xmsb_show('人员信息','xmryshow.html','10001')" href="javascript:;">吴xx</a></td>
-              <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','ry-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-            </tr>
-            -->
 													</tbody>
 												</table>
 											</div>

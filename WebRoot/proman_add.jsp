@@ -45,9 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
   <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
     <div class="row cl bk-gray radius pd-10" style="background-color:#FFF">
-        <form method="post" action="promanAction!add">
-        <input hidden name = "proman.project.id" value = "<s:property value="pid"/>" />
+        <form method="post" action="promanAction!add" enctype="multipart/form-data">
         <s:hidden name="pid" />
+        <input hidden name = "proman.project.id" value = "<s:property value="pid"/>" />
       <div class="row cl mb-10">
         <label class="form-label col-2 text-r " ><span class="c-red">*</span>姓名：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
@@ -62,7 +62,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </span></span>
         <label class="form-label col-2 text-r " >证书信息：</label>
         <span class="form-label col-3"> <span class="formControls col-12">
-<input type="text" class="input-text" value="" placeholder="" id="input3" name="proman.certificate" width="45%" />      </span></span></div>
+		<s:file name="picture"
+			accept="image/jpeg,image/png,image/jpg" id="myfile"></s:file> 
+		   </span></span></div>
     <div class="row cl mb-10">
       <div class="col-10 col-offset-5 pt-10 pb-10">
            <input class="btn btn-primary radius" type="submit" value = "保存"></input>

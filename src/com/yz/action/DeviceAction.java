@@ -68,7 +68,6 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	private int status;// 按状态
 	private int pid;// 按设备id
 	private int areaIndex;
-	private int projectId;
 //	// 登陆
 //	private String username;
 //	private String password;
@@ -126,113 +125,6 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		this.areaVOs = areaVOs;
 	}
 
-	/**
-//	 * 用户登陆
-//	 * 
-//	 * @throws Exception
-//	 */
-//	public String login() throws Exception {
-//
-//		if (checkDatebase())// 检查数据库
-//		{
-//			Usero useroTest = new Usero();
-//			useroTest.setNumber("测试人员");
-//			useroTest.setUsername("test");
-//			useroTest.setPassword("test");
-//			useroTest.setUserLimit(1);
-//			useroService.add(useroTest);
-//			session.put("usero", useroTest);
-//			return "loginSucc";
-//		}
-//		if (username == null || username.equals("") || password == null
-//				|| password.equals("")) {
-//			String loginfail = "用户名或密码不能为空";
-//			request.put("loginFail", loginfail);
-//			return "adminLogin";
-//		}
-//		Usero useroLogin = useroService.useroLogin(username, password);
-//		if (useroLogin == null) {
-//			String loginfail = "用户名或密码输入有误";
-//			request.put("loginFail", loginfail);
-//			return "adminLogin";
-//		} else {
-//			// 设置登陆时间
-//			if (session.get("usero") == null) {
-//				//setLoginTime(useroLogin);
-//				session.put("usero", useroLogin);
-//			}
-//			// checkIP();//检查IP地址
-//			return "loginSucc";
-//		}
-//	}
-//
-//	public String welcome() {
-//		// 登陆验证
-//		Usero usero = (Usero) session.get("usero");
-//		if (usero == null) {
-//			return "opsessiongo";
-//		}
-//		Usero useroWelcome = useroService.loadById(usero.getId());
-//		// 欢迎界面
-//		return "welcome";
-//	}
-//
-//	// 设置登陆时间
-	/**
-	 * 
-	 * private void setLoginTime(Usero useroLogin) { // TODO Auto-generated
-	 * method stub if (useroLogin.getBeforeLoginTime() == "" ||
-	 * useroLogin.getBeforeLoginTime() == null) {
-	 * useroLogin.setBeforeLoginTime(DateTimeKit.getLocalTime()); } else {
-	 * useroLogin.setBeforeLoginTime(useroLogin .getCurrentLoginTime()); }
-	 * useroLogin.setCurrentLoginTime(DateTimeKit.getLocalTime());
-	 * useroService.update(useroLogin); }
-	 */
-//	private boolean checkDatebase() {
-//		// TODO Auto-generated method stub
-//		useros = useroService.getUseros();
-//		if (useros.size() == 0) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
-
-	private void checkIP() {
-		// TODO Auto-generated method stub
-		// String ip = getIpAddr(req);
-	}
-
-	/*
-	 * 获取IP地址
-	 */
-	public String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
-
-	/**
-	 * 用户注销
-	 */
-//	public String logout() {
-//		session.clear();
-//		return "adminLogin";
-//	}
 
 	/**
 	 * 设备管理
@@ -255,11 +147,11 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		project = projectService.loadById(projectId);
+		project = projectService.loadById(pid);
 		//System.out.println("the device list projectId is"+projectId);
 		
 		// 总记录数
-		totalCount = deviceService.getTotalCount(con, convalue , projectId);
+		totalCount = deviceService.getTotalCount(con, convalue , pid);
 		// 总页数
 		pageCount = deviceService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
@@ -269,7 +161,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		
 		
 		
-		devices = deviceService.queryList(con, convalue, projectId, page, size);
+		devices = deviceService.queryList(con, convalue, pid, page, size);
 		//devices = deviceService.getDevices();
 		return "list";
 	}
@@ -313,7 +205,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		project = projectService.loadById(projectId);
+		project = projectService.loadById(pid);
 		return "add";
 	}
 
@@ -325,16 +217,16 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 
 	public String add() throws Exception {
-		// 判断会话是否失效
-//		Device device = (Device) session.get("device");
-//		if (device == null) {
-//			return "opsessiongo_child";
-//		}
-		
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}
 		
 		deviceService.add(device);
 
-		arg[0] = "deviceAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
+		arg[0] = "deviceAction!list?pid="+pid+"&areaIndex="+((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "设备管理";
 		return "success";
 	}
@@ -386,7 +278,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		deviceService.delete(device);
 
 		//deviceService.deleteById(id);
-		arg[0] = "deviceAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
+		arg[0] = "deviceAction!list?pid="+pid+"&areaIndex="+((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "设备管理";
 		return SUCCESS;
 	}
@@ -430,7 +322,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
-		project = projectService.loadById(projectId);
+		project = projectService.loadById(pid);
 		
 		
 		device = deviceService.loadById(id);
@@ -452,7 +344,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		
 		
 		deviceService.update(device);
-		arg[0] = "deviceAction!list?projectId="+projectId+"&areaIndex="+areaIndex;
+		arg[0] = "deviceAction!list?pid="+pid+"&areaIndex="+((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "设备管理";
 		return "success_child";
 	}
@@ -765,14 +657,6 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 
 	public void setAreaIndex(int areaIndex) {
 		this.areaIndex = areaIndex;
-	}
-
-	public int getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
 	}
 
 	public IProjectService getProjectService() {

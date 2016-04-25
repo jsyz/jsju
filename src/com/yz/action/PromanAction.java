@@ -35,6 +35,7 @@ import com.yz.service.IProjectService;
 import com.yz.service.IPromanService;
 import com.yz.service.IYxareaService;
 import com.yz.util.ConvertUtil;
+import com.yz.util.DateTimeKit;
 import com.yz.util.InitParam;
 import com.yz.vo.AjaxMsgVO;
 import com.yz.vo.AreaVO;
@@ -87,6 +88,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
 
+	
 
 //	/**
 //	 * 用户登陆
@@ -207,6 +209,14 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
+		
+		String imageName = DateTimeKit.getDateRandom()
+		+ pictureFileName.substring(pictureFileName
+				.indexOf("."));
+		
+		this.upload("/promanpic/"+pid, imageName, picture);
+	//	proman.setCertificate("promanpic/"+pid+ "/"+ imageName);
+		
 		promanService.add(proman);
 
 		arg[0] = "promanAction!list?pid="+pid+"&areaIndex="
@@ -645,6 +655,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	public void setAreaVOs(List<AreaVO> areaVOs) {
 		this.areaVOs = areaVOs;
 	}
+
 
 	
 	
