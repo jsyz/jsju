@@ -203,7 +203,7 @@
 
 											</td>
 											<td>
-												<s:property value="#status.index+1+(page-1)*10" />
+												<s:property value="#index.index+1" />
 											</td>
 											<td>
 												<a
