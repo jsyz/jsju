@@ -87,64 +87,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
-
 	
-
-//	/**
-//	 * 用户登陆
-//	 * 
-//	 * @throws Exception
-//	 */
-//	public String login() throws Exception {
-//
-//		if (checkDatebase())// 检查数据库
-//		{
-//			promanService.add(InitParam.getProman());
-//			session.put("proman", InitParam.getProman());
-//			return "loginSucc";
-//		}
-//		if (username == null || username.equals("") || password == null
-//				|| password.equals("")) {
-//			String loginfail = "用户名或密码不能为空";
-//			request.put("loginFail", loginfail);
-//			return "adminLogin";
-//		}
-//		Proman promanLogin = promanService.promanLogin(username, password);
-//		if (promanLogin == null) {
-//			String loginfail = "用户名或密码输入有误";
-//			request.put("loginFail", loginfail);
-//			return "adminLogin";
-//		} else {
-//			// 设置登陆时间
-//			if (session.get("proman") == null) {
-//				//setLoginTime(promanLogin);
-//				session.put("proman", promanLogin);
-//			}
-//			// checkIP();//检查IP地址
-//			return "loginSucc";
-//		}
-//	}
-//
-//	public String welcome() {
-//		// 登陆验证
-//		Proman proman = (Proman) session.get("proman");
-//		if (proman == null) {
-//			return "opsessiongo";
-//		}
-//		Proman promanWelcome = promanService.loadById(proman.getId());
-//		// 欢迎界面
-//		return "welcome";
-//	}
-
-	// 设置登陆时间
-	
-
-
-
-	
-	/**
-	 * 用户管理
-	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
 		/*Proman proman = (Proman) session.get("proman");
@@ -215,7 +158,10 @@ public class PromanAction extends ActionSupport implements RequestAware,
 				.indexOf("."));
 		
 		this.upload("/promanpic/"+pid, imageName, picture);
-	//	proman.setCertificate("promanpic/"+pid+ "/"+ imageName);
+		
+//		System.out.println("the certificate is"+"promanpic/"+pid+ "/"+ imageName);
+		
+		proman.setCertificate("promanpic/"+pid+ "/"+ imageName);
 		
 		promanService.add(proman);
 
@@ -224,7 +170,7 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		arg[1] = "人员管理";
 		return "success";
 	}
-
+	
 	// 上传照片
 	private File picture;
 	private String pictureContentType;
@@ -308,8 +254,9 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		return null;
 	}
 
+
 	/**
-	 * 跳转到修改页面
+	 * 修改
 	 * 
 	 * @return
 	 */
@@ -325,17 +272,21 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		return "load";
 	}
 
-	/**
-	 * 修改
-	 * 
-	 * @return
-	 */
+	
+	public String loadPic() throws Exception {
+		
+		proman = promanService.loadById(id);
+		
+		return "picview";
+		
+	}
 	public String update() throws Exception {
-		// 判断会话是否失效
-//		Proman proman = (Proman) session.get("proman");
-//		if (proman == null) {
-//			return "opsessiongo_child";
-//		}
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}
 
 		promanService.update(proman);
 		arg[0] = "promanAction!list?pid="+pid+"&areaIndex="
@@ -344,37 +295,6 @@ public class PromanAction extends ActionSupport implements RequestAware,
 		return "success";
 	}
 
-//	/**
-//	 * 跳转到修改秒页面
-//	 * 
-//	 * @return
-//	 */
-//	public String loadPassword() throws Exception {
-//		Proman proman = (Proman) session.get("proman");
-//		if (proman == null) {
-//			return "opsessiongo";
-//		}
-//		password = proman.getPassword();
-//		return "password";
-//	}
-//
-//	/**
-//	 * 修改密码
-//	 * 
-//	 * @return
-//	 */
-//	public String updatePassword() throws Exception {
-//		// 判断会话是否失效
-//		Proman proman = (Proman) session.get("proman");
-//		if (proman == null) {
-//			return "opsessiongo";
-//		}
-//		proman.setPassword(password);
-//		promanService.update(proman);
-//		arg[0] = "promanAction!list";
-//		arg[1] = "用户管理";
-//		return SUCCESS;
-//	}
 
 	/**
 	 * 查看信息
@@ -382,10 +302,12 @@ public class PromanAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String view() {
-//		Proman proman = (Proman) session.get("proman");
-//		if (proman == null) {
-//			return "opsessiongo";
-//		}
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			String loginfail = "登陆失效,信息提交失败.";
+			request.put("loginFail", loginfail);
+			return "opsessiongo";
+		}
 		proman = promanService.loadById(id);
 		return "view";
 	}

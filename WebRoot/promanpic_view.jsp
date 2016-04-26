@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>查看教育图片</title>
+		<title>查看证书信息</title>
 		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 		<link href="css/ncss.css" rel="stylesheet" type="text/css" />
@@ -31,43 +31,11 @@
 		<script type="text/javascript" src="js/pageKit.js"></script>
 		<script type="text/javascript" src="js/checkUtil.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
-		<title>查看教育图片</title>
+		<title>查看证书信息</title>
 	</head>
 	<body style="background: #fff;">
 	<div style="margin: 0 auto;padding: 0px;width: 600px;">
-		<s:if test="pic_row == 1">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.washSetImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 2">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.waterClearImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 3">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.doorConformImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 4">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.guardConformImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 5">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.adConformImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 6">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.roadHardenImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 7">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.roadClearImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 8">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.labelCompleteImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 9">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.layoutRationalImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 10">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.meetFireImg}"/> 
-		</s:if>
-		<s:if test="pic_row == 11">
-			<img width="640px;" height="320px;" src="<%=basePath%>${construction.measurePlaceImg}"/> 
-		</s:if>
+			<img width="640px;" height="320px;" src="<%=basePath%>${proman.certificate}"/> 
 	</div>
 	</body>
 </html>
