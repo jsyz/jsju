@@ -69,6 +69,8 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private int status;// 按状态
 	private int pid;// 按用户id
 	private int areaIndex;// 区域标示
+	private int engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化)
+	private int graphicProgress;// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
 
 	// 批量删除
 	private String checkedIDs;
@@ -365,14 +367,14 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 
 		// 总记录数
-		totalCount = projectService.getTotalCount(status, con, convalue);
+		totalCount = projectService.getTotalCount(status, con, convalue,areaIndex,engineeringType,graphicProgress);
 		// 总页数
 		pageCount = projectService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		projects = projectService.queryList(status, con, convalue, page, size);
+		projects = projectService.queryList(status, con, convalue,areaIndex,engineeringType,graphicProgress, page, size);
 
 		if (projects != null) {
 			projectNumberTotal = projects.size();
@@ -870,5 +872,23 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	public void setExcelPageType(int excelPageType) {
 		this.excelPageType = excelPageType;
 	}
+
+	public int getEngineeringType() {
+		return engineeringType;
+	}
+
+	public void setEngineeringType(int engineeringType) {
+		this.engineeringType = engineeringType;
+	}
+
+	public Integer getGraphicProgress() {
+		return graphicProgress;
+	}
+
+	public void setGraphicProgress(Integer graphicProgress) {
+		this.graphicProgress = graphicProgress;
+	}
+	
+	
 
 }

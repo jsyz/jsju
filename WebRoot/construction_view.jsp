@@ -15,13 +15,6 @@
 		<meta name="viewport"
 			content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<LINK rel="Bookmark" href="/favicon.ico">
-		<LINK rel="Shortcut Icon" href="/favicon.ico" />
-		<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
-<![endif]-->
 		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
@@ -42,10 +35,6 @@
 		<script type="text/javascript" src="js/pageKit.js"></script>
 		<script type="text/javascript" src="js/checkUtil.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
-		<!--[if IE 6]>
-<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
 		<title>文明施工</title>
 	</head>
 	<body>
@@ -62,8 +51,8 @@
 							style="line-height: 1.6em; margin-top: 3px"
 							href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
 							target="_self" title="返回项目工作台">返回项目工作台 </a>
-							
-							
+
+
 						<s:if test="#session.userSession.userLimit==0">
 							<input type="submit" value="保存"
 								style="line-height: 1.6em; margin-top: 3px"
@@ -71,7 +60,8 @@
 						</s:if>
 
 						<s:elseif test="#session.userSession.userLimit==1">
-							<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
+							<s:if
+								test="#session.userSession.areaIndex==#session.areaVO.index">
 								<input type="submit" value="保存"
 									style="line-height: 1.6em; margin-top: 3px"
 									class="btn btn-success radius r mr-5 f-r" />
@@ -85,19 +75,18 @@
 									class="btn btn-success radius r mr-5 f-r" />
 							</s:if>
 						</s:elseif>
-							
-							
-							
-							
+
+
+
+
 						<a class="btn btn-success radius r mr-5 f-r"
 							style="line-height: 1.6em; margin-top: 3px"
 							href="javascript:location.replace(location.href);" title="刷新当前页"><i
-							class="Hui-iconfont">&#xe68f;</i>
-						</a><a class="btn btn-success radius r mr-5 f-r"
+							class="Hui-iconfont">&#xe68f;</i> </a><a
+							class="btn btn-success radius r mr-5 f-r"
 							style="line-height: 1.6em; margin-top: 3px"
 							href="javascript:history.go(-1);" title="返回"><i
-							class="Hui-iconfont">&#xe66b;</i>
-						</a>
+							class="Hui-iconfont">&#xe66b;</i> </a>
 						</nav>
 						<p
 							style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
@@ -114,15 +103,14 @@
 							<s:property value="#session.areaVO.buildingCostTotal" />
 							万 】
 							<a href="yxareaAction!list"><span
-								class="label label-warning radius">片区切换</span>
-							</a>
+								class="label label-warning radius">片区切换</span> </a>
 						</p>
 					</div>
 				</div>
 
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-						<p>
+						<p style="font-size: 18px;">
 							<i class="Hui-iconfont">&#xe623;</i>
 							<s:property value="project.name" />
 							- 文明施工
@@ -135,50 +123,39 @@
 							style="background-color: #FFF">
 							<thead class="text-c">
 								<tr>
-									<th width="5%">
-										序号
+									<th width="5%"  style="font-size: 18px;">
+										序&nbsp;&nbsp;号
 									</th>
-									<th width="37%">
+									<th width="37%" style="font-size: 18px;">
 										文明施工内容
 									</th>
-									<th width="15%">
-										状态
+									<th width="15%" style="font-size: 18px;">
+										状&nbsp;&nbsp;态
 									</th>
-									<th width="10%">
+									<th width="10%" style="font-size: 18px;">
 										查看图片
 									</th>
-									<th width="10%">
-										操作
+									<th width="10%" style="font-size: 18px;">
+										操&nbsp;&nbsp;作
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										1
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										冲洗设备是否设置
 									</td>
 									<td>
 										<div class="formControls col-12">
-											<!--  	<div class="radio-box">
-					<input type="radio" id="r-1" name="r" datatype="*" checked="true">
-					<label for="r-1">是</label>
-				</div>
-				<div class="radio-box">
-					<input type="radio" id="r-2" name="r">
-					<label for="r-2">否</label>
-					
-				</div>
-				-->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isWashSet" value="construction.isWashSet" />
 										</div>
 
 									</td>
-									<!--   <td class="text-c"><input type="file" value="上传图片"></input></td> -->
 									<s:if test="%{construction.washSetImg == null}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture1"
@@ -203,24 +180,14 @@
 								</tr>
 
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										2
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										场内排水是否畅通
 									</td>
 									<td>
 										<div class="formControls col-12">
-											<!--  
-          <div class="radio-box">
-            <input type="radio" id="r-3" name="r1" datatype="*" checked="true">
-            <label for="r-3">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-4" name="r">
-            <label for="r-4">否</label>
-            </div>
-            -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isWaterClear"
 												value="construction.isWaterClear" />
@@ -251,25 +218,15 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										3
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										电动伸缩门是否符合要求
 									</td>
 									<td>
 										<br>
 										<div class="formControls col-12 skin-minimal ">
-											<!--  
-             <div class="radio-box">
-            <input type="radio" id="r-11" name="r2" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-         -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isDoorConform"
 												value="construction.isDoorConform" />
@@ -301,24 +258,14 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										4
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										门卫是否符合要求
 									</td>
 									<td>
 										<div class="formControls col-12 skin-minimal ">
-											<!--  
-          <div class="radio-box">
-            <input type="radio" id="r-11" name="r3" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-            -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isGuardConform"
 												value="construction.isGuardConform" />
@@ -347,24 +294,14 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										5
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										围挡及公益广告是否符合要求
 									</td>
 									<td>
 										<div class="formControls col-12">
-											<!-- 
-          <div class="radio-box">
-            <input type="radio" id="r-11" name="r5" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-             -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isAdConform"
 												value="construction.isAdConform" />
@@ -393,25 +330,16 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										6
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										主要道路是否硬化
 									</td>
 
 									<td>
 										<div class="">
 											<div class="radio-box">
-												<!--  
-            <input type="radio" id="r-11" name="r6" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-            -->
 												<s:radio list="#{'1':'是','0':'否'}"
 													name="construction.isRoadHarden"
 													value="construction.isRoadHarden" />
@@ -440,24 +368,14 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										7
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										主要道路是否通畅
 									</td>
 									<td>
 										<div class="formControls col-12 skin-minimal ">
-											<!--  
-          <div class="radio-box">
-            <input type="radio" id="r-11" name="r7" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-            -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isRoadClear"
 												value="construction.isRoadClear" />
@@ -486,24 +404,14 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										8
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										公示标牌内容是否齐全
 									</td>
 									<td>
 										<div class="formControls col-12 skin-minimal ">
-											<!-- 
-           <div class="radio-box">
-            <input type="radio" id="r-11" name="r8" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-            -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isLabelComplete"
 												value="construction.isLabelComplete" />
@@ -532,24 +440,14 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										9
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										作业区、工作区和生活区采取隔离措施，布局是否合理
 									</td>
 									<td>
 										<div class="formControls col-12 skin-minimal ">
-											<!--  
-           <div class="radio-box">
-            <input type="radio" id="r-11" name="r9" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-            -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isLayoutRational"
 												value="construction.isLayoutRational" />
@@ -578,25 +476,15 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										10
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										办公区、生活区临时建筑是否满足防火要求
 									</td>
 									<td>
 										<br>
 										<div class="formControls col-12 skin-minimal ">
-											<!-- 
-           <div class="radio-box">
-            <input type="radio" id="r-11" name="r10" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-             -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isMeetFire"
 												value="construction.isMeetFire" />
@@ -626,24 +514,14 @@
 									</s:else>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										11
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										建筑扬尘防治措施是否到位
 									</td>
 									<td>
 										<div class="formControls col-12 skin-minimal ">
-											<!--  
-           <div class="radio-box">
-            <input type="radio" id="r-11" name="r11" datatype="*" checked="true">
-            <label for="r-11">是</label>
-            </div>
-          <div class="radio-box">
-            <input type="radio" id="r-12" name="r">
-            <label for="r-12">否</label>
-            </div>
-         -->
 											<s:radio list="#{'1':'是','0':'否'}"
 												name="construction.isMeasurePlace"
 												value="construction.isMeasurePlace" />

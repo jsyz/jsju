@@ -251,4 +251,73 @@ public class ProjectServiceImp implements IProjectService {
 		return projectDao.queryList(queryString);
 	}
 
+	public int getTotalCount(int status, int con, String convalue,
+			int areaIndex, int engineeringType, int graphicProgress) {
+		String queryString = "select count(*) from Project mo where 1=1";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		if (status == 1) {
+			queryString += "and mo.graphicProgress != 4 ";
+		}
+		if (status == 2) {
+			queryString += "and mo.graphicProgress = 4 ";
+		}
+		if(areaIndex!=0)
+		{
+			queryString += " and mo.yxarea.areaIndex = "+areaIndex;
+		}
+		if(engineeringType!=0)
+		{
+			queryString += " and mo.engineeringType = "+(engineeringType-1);
+		}
+		if(graphicProgress!=0)
+		{
+			queryString += " and mo.graphicProgress = "+(graphicProgress-1);
+		}
+		return projectDao.getUniqueResult(queryString, p);
+	}
+
+	public List<Project> queryList(int status, int con, String convalue,
+			int areaIndex, int engineeringType, int graphicProgress, int page,
+			int size) {
+		String queryString = "from Project mo where 1=1";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		if (status == 1) {
+			queryString += "and mo.graphicProgress != 4";
+		}
+		if (status == 2) {
+			queryString += "and mo.graphicProgress = 4";
+		}
+		if(areaIndex!=0)
+		{
+			queryString += " and mo.yxarea.areaIndex = "+areaIndex;
+		}
+		if(engineeringType!=0)
+		{
+			queryString += " and mo.engineeringType = "+(engineeringType-1);
+		}
+		if(graphicProgress!=0)
+		{
+			queryString += " and mo.graphicProgress = "+(graphicProgress-1);
+		}
+		return projectDao.getObjectsByCondition(queryString, p);
+	}
+
 }

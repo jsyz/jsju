@@ -79,8 +79,8 @@
 						<div class="row cl box-shadow pd-10  bk-gray radius"
 							style="background-color: #FFF;">
 							<h1
-								style="font-size: 38px; line-height: 45px; width: 100%; margin-bottom: 15px; text-align: center;">
-								建筑工程项目概况
+								style="font-size: 38px; font-weight: 900; line-height: 45px; width: 100%; margin-bottom: 15px; text-align: center;">
+								工&nbsp;&nbsp;程&nbsp;&nbsp;项&nbsp;&nbsp;目&nbsp;&nbsp;概&nbsp;&nbsp;况
 							</h1>
 
 							<table id="gcgk" cellspacing="0"
@@ -88,13 +88,15 @@
 								<tbody>
 									<tr class="odd-row">
 
-										<th class="th2 first">
+										<th class="th2 first" style="font-weight: 800">
 											工程分类
 										</th>
 										<td>
-											<s:select list="#{0:'土建',1:'装饰',2:'绿化',3:'照明亮化'}"
+											<s:select
+												list="#{0:'土建',1:'市政',2:'装饰',3:'绿化',4:'照明亮化',5:'其他'}"
 												cssClass="select" name="project.engineeringType"
-												listKey="key" listValue="value" cssStyle="width:200px"></s:select>
+												listKey="key" listValue="value" id="enginType"
+												onchange="changeProgress();" cssStyle="width:200px"></s:select>
 										</td>
 										<th class="th2">
 											监督员
@@ -194,9 +196,23 @@
 											形象进度
 										</th>
 										<td class="last">
-											<span class="mini-textbox-border"><input
-													placeholder="" value="基础/0%" class="mini-textbox-input"
-													autocomplete="off" type="text"> </span>
+											<span class="mini-textbox-border" id="pr0">
+
+												<div id="pro0">
+													<s:select
+														list="#{0:'未开工',1:'基础',2:'主体',3:'装饰',4:'完工待验',5:'竣工'}"
+														cssClass="select" name="project.graphicProgress"
+														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
+												</div> 
+												<div id="pro1" style="display: none">
+													<s:select
+														list="#{0:'0%',1:'20%',2:'40%',3:'60%',4:'80%',5:'100%'}"
+														cssClass="select" name="project.graphicProgress"
+														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
+												</div> </span>
+
+
+
 										</td>
 									</tr>
 									<tr class="odd-row">

@@ -42,7 +42,7 @@
 					value="<s:property value="dayid"/>" />
 				<div class="row cl">
 					<label class="form-label col-2">
-						<span class="c-red">*</span>专家认证类型：
+						<span class="c-red">*</span>专家论证类型：
 					</label>
 					<span class="form-label col-3"><span
 						class="formControls col-10"> <s:textfield
@@ -51,7 +51,7 @@
 				</div>
 				<div class="row cl">
 					<label class="form-label col-2">
-						<span class="c-red">*</span>认证时间：
+						<span class="c-red">*</span>论证时间：
 					</label>
 					<span class="form-label col-3"><span
 						class="formControls col-10"> <input type="text" style="width:200px;"

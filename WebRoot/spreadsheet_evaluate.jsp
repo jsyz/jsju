@@ -79,7 +79,7 @@ taglib uri="/struts-tags" prefix="s"%>
 			</div>
 			<div class="xmconbox pd-20">
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-					<p>
+					<p style="font-size: 18px;">
 						<i class="Hui-iconfont">&#xe623;</i>
 						<s:property value="project.name" />
 						-
@@ -91,26 +91,26 @@ taglib uri="/struts-tags" prefix="s"%>
 						style="background-color: #FFF">
 						<thead class="text-c">
 							<tr>
-								<th width="5%">
-									序号
+								<th width="5%" style="font-size: 18px;">
+									序&nbsp;&nbsp;号
 								</th>
-								<th width="37%">
-									内容
+								<th width="37%" style="font-size: 18px;">
+									内&nbsp;&nbsp;容
 								</th>
-								<th width="33%">
-									状态
+								<th width="33%" style="font-size: 18px;">
+									状&nbsp;&nbsp;态
 								</th>
-								<th width="25%">
-									详情
+								<th width="25%" style="font-size: 18px;">
+									详&nbsp;&nbsp;情
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="text-c">
-								<td class="text-c">
+								<td class="text-c" style="font-weight: 800">
 									1
 								</td>
-								<td>
+								<td style="font-weight: 800">
 									工程质量不良行为记录表
 								</td>
 								<td>
@@ -123,10 +123,10 @@ taglib uri="/struts-tags" prefix="s"%>
 								</td>
 							</tr>
 							<tr class="text-c">
-								<td class="text-c">
+								<td class="text-c" style="font-weight: 800">
 									2
 								</td>
-								<td>
+								<td style="font-weight: 800">
 									项目经理扣分情况记录表
 								</td>
 								<td>
@@ -139,10 +139,10 @@ taglib uri="/struts-tags" prefix="s"%>
 								</td>
 							</tr>
 							<tr class="text-c">
-								<td class="text-c">
+								<td class="text-c" style="font-weight: 800">
 									3
 								</td>
-								<td>
+								<td style="font-weight: 800">
 									行政处罚情况记录表
 								</td>
 								<td>
@@ -155,10 +155,10 @@ taglib uri="/struts-tags" prefix="s"%>
 								</td>
 							</tr>
 							<tr class="text-c">
-								<td class="text-c">
+								<td class="text-c" style="font-weight: 800">
 									4
 								</td>
-								<td>
+								<td style="font-weight: 800">
 									奖惩情况记录表
 								</td>
 								<td>
@@ -171,10 +171,10 @@ taglib uri="/struts-tags" prefix="s"%>
 								</td>
 							</tr>
 							<tr class="text-c">
-								<td class="text-c">
+								<td class="text-c" style="font-weight: 800">
 									5
 								</td>
-								<td>
+								<td style="font-weight: 800">
 									民工工资投诉处理记录表
 								</td>
 								<td>
@@ -187,10 +187,10 @@ taglib uri="/struts-tags" prefix="s"%>
 								</td>
 							</tr>
 							<tr class="text-c">
-								<td class="text-c">
+								<td class="text-c" style="font-weight: 800">
 									6
 								</td>
-								<td>
+								<td style="font-weight: 800">
 									安全生产事故情况记录表
 								</td>
 								<td>

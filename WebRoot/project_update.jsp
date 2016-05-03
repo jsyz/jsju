@@ -117,7 +117,7 @@
 							style="background-color: #FFF;">
 							<h1
 								style="font-size: 38px; line-height: 45px; width: 100%; margin-bottom: 15px; text-align: center;">
-								建筑工程项目概况
+								工程项目概况
 							</h1>
 
 							<table id="gcgk" cellspacing="0"
@@ -129,7 +129,7 @@
 											工程分类
 										</th>
 										<td>
-											<s:select list="#{0:'土建',1:'装饰',2:'绿化',3:'照明亮化'}"
+											<s:select list="#{0:'土建',1:'市政',2:'装饰',3:'绿化',4:'照明亮化',5:'其他'}"
 												cssClass="select" name="project.engineeringType"
 												listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 										</td>
@@ -235,13 +235,13 @@
 										<td class="last">
 											<span class="mini-textbox-border"> <s:if
 													test="project.engineeringType==0">
-													<s:select list="#{0:'基础',1:'主体',2:'装饰',3:'完工待验',4:'竣工'}"
+													<s:select list="#{0:'未开工',1:'基础',2:'主体',3:'装饰',4:'完工待验',5:'竣工'}"
 														cssClass="select" name="project.graphicProgress"
 														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 
 												</s:if> <s:else>
 													<s:select
-														list="#{0:'20%',1:'40%',2:'60%',3:'80%',4:'100%'}"
+														list="#{0:'0%',1:'20%',2:'40%',3:'60%',4:'80%',5:'100%'}"
 														cssClass="select" name="project.graphicProgress"
 														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 												</s:else> </span>

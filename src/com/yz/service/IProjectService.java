@@ -55,4 +55,11 @@ public interface IProjectService {
 
 	public List<Project> loadByGraphicProgress(int i);
 
+	public abstract int getTotalCount(int status, int con, String convalue,
+			int areaIndex, int engineeringType, int graphicProgress);
+
+	public abstract List<Project> queryList(int status, int con,
+			String convalue, int areaIndex, int engineeringType,
+			int graphicProgress, int page, int size);
+
 }

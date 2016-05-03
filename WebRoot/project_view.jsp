@@ -71,14 +71,14 @@
 
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-						<p>
+						<p style="font-size: 18px;">
 							<i class="Hui-iconfont">&#xe606;</i>
 							<s:property value="project.name" />
-							进度 ：
+						<font style="font-size: 18px;">	进度 ：</font>
 						</p>
 						<s:if test="project.engineeringType==0">
 							<s:if test="project.graphicProgress==0">
-								<div class="five steps">
+								<div class="five steps" style="font-size: 18px;">
 									<span class="active step">基础</span>
 									<span class="disabled step">主体</span>
 									<span class="disabled step">装饰</span>
@@ -87,7 +87,7 @@
 								</div>
 							</s:if>
 							<s:elseif test="project.graphicProgress==1">
-								<div class="five steps">
+								<div class="five steps" style="font-size: 18px;">
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="disabled step">装饰</span>
@@ -166,7 +166,7 @@
 						style="background-color: #FFF;">
 						<h1
 							style="font-size: 38px; line-height: 45px; width: 100%; margin-bottom: 15px; text-align: center;">
-							建筑工程项目概况
+							工程项目概况
 						</h1>
 
 						<table id="gcgk" cellspacing="0" class="bk-gray radius box-shadow">
@@ -179,9 +179,10 @@
 									<td>
 										<s:if test="project.engineeringType==0">土建</s:if>
 										<s:elseif test="project.engineeringType==1">装饰</s:elseif>
-										<s:elseif test="project.engineeringType==2">政府投资项目</s:elseif>
+										<s:elseif test="project.engineeringType==2">市政</s:elseif>
 										<s:elseif test="project.engineeringType==3">绿化</s:elseif>
 										<s:elseif test="project.engineeringType==4">照明亮化</s:elseif>
+										<s:elseif test="project.engineeringType==5">其他</s:elseif>
 									</td>
 									<th class="th2">
 										监督员
@@ -200,8 +201,7 @@
 										<s:if test="project.projectType==0">房地产开发</s:if>
 										<s:elseif test="project.projectType==1">安置房</s:elseif>
 										<s:elseif test="project.projectType==2">政府投资项目</s:elseif>
-										<s:elseif test="project.projectType==3">政府投资项目</s:elseif>
-										<s:elseif test="project.projectType==4">一般项目</s:elseif>
+										<s:elseif test="project.projectType==3">一般项目</s:elseif>
 									</td>
 									<th class="th2 first">
 										建筑分类
@@ -275,18 +275,20 @@
 									<td class="last">
 										<span class="mini-textbox-border"> <s:if
 												test="project.engineeringType==0">
-												<s:if test="project.graphicProgress==0">基础</s:if>
-												<s:elseif test="project.graphicProgress==1">主体</s:elseif>
-												<s:elseif test="project.graphicProgress==2">装饰</s:elseif>
-												<s:elseif test="project.graphicProgress==3">完工待验</s:elseif>
-												<s:elseif test="project.graphicProgress==4">竣工</s:elseif>
+												<s:if test="project.graphicProgress==0">未开工</s:if>
+												<s:elseif test="project.graphicProgress==1">基础</s:elseif>
+												<s:elseif test="project.graphicProgress==2">主体</s:elseif>
+												<s:elseif test="project.graphicProgress==3">装饰</s:elseif>
+												<s:elseif test="project.graphicProgress==4">完工待验</s:elseif>
+												<s:elseif test="project.graphicProgress==5">竣工</s:elseif>
 
 											</s:if> <s:else>
-												<s:if test="project.graphicProgress==0">20%</s:if>
-												<s:elseif test="project.graphicProgress==1">40%</s:elseif>
-												<s:elseif test="project.graphicProgress==2">60%</s:elseif>
-												<s:elseif test="project.graphicProgress==3">80%</s:elseif>
-												<s:elseif test="project.graphicProgress==4">100%</s:elseif>
+												<s:if test="project.graphicProgress==0">0%</s:if>
+												<s:elseif test="project.graphicProgress==1">20%</s:elseif>
+												<s:elseif test="project.graphicProgress==2">40%</s:elseif>
+												<s:elseif test="project.graphicProgress==3">60%</s:elseif>
+												<s:elseif test="project.graphicProgress==4">80%</s:elseif>
+												<s:elseif test="project.graphicProgress==5">100%</s:elseif>
 											</s:else> </span>
 									</td>
 								</tr>

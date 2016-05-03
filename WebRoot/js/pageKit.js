@@ -70,14 +70,14 @@ function jumpCommonPage(url,page,con,convalue){
 
 
 //统计分页显示
-function jumpProjectCountPage(url,page,con,convalue,status){
+function jumpProjectCountPage(url,page,con,convalue,status,areaIndex,engineeringType,graphicProgress){
 	
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;
 		page=parseInt(page2);
 	}
-	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&status='+status;
+	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress;
 	url=encodeURI(url);
 	url=encodeURI(url);
 	window.location=url;
@@ -480,5 +480,22 @@ function checkNum2(){
         obj.value="";
         obj.focus();
     }
+}
+
+function changeProgress()
+{
+	var enginType = $("#enginType").val();
+	console.log(enginType);
+	if(enginType==0)
+	{
+		$("#pro0").show();
+		$("#pro1").hide();
+	}else
+	{
+		$("#pro0").hide();
+		$("#pro1").show();
+	}
+	
+	
 }
 

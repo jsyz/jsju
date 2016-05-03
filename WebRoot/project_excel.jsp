@@ -87,7 +87,6 @@
 
 					</div>
 
-
 					<div class="row" style="margin-top: 5px; margin-bottom: 5px;">
 						<div class="text-c">
 							<form name="projectListForm" method="post"
@@ -97,7 +96,7 @@
 									style="line-height: 35px;">
 									<tr height="35">
 										<td width="21%" align="right" style="padding-right: 50px;">
-											<s:select list="#{0:'选择类型',1:'项目名称',2:'监督员'}"
+											<s:select list="#{0:'选择类型',1:'项目名称'}"
 												cssClass="input-text" name="con" listKey="key"
 												listValue="value" cssStyle="width:180px"></s:select>
 										</td>
@@ -116,9 +115,27 @@
 												<i class="Hui-iconfont">&#xe665;</i> 查询
 											</button>
 											<button type="button" class="btn btn-success" id="button2"
-												name="" onClick="jumpProjectOutput('projectAction!outputExcel',<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>);">
+												name="" onClick="jumpProjectOutput('projectAction!outputExcel',<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);">
 												<i class="Hui-iconfont">&#xe665;</i> 导出
 											</button>
+										</td>
+									</tr>
+									<tr height="35">
+										<td width="21%" align="right" style="padding-right: 50px;">
+											<s:select list="#{0:'未选乡镇',1:'宜城',2:'环科园',3:'开发区',4:'丁蜀',5:'和桥',6:'官林',7:'张渚',8:'周铁',9:'徐舍'}"
+												cssClass="input-text" name="areaIndex" listKey="key"
+												listValue="value" cssStyle="width:180px"></s:select>
+										</td>
+										
+										<td width="21%" align="right" style="padding-right: 50px;">
+											<s:select list="#{0:'未选工程分类',1:'土建',2:'装饰',3:'市政',4:'绿化',5:'照明亮化'}"
+												cssClass="input-text" name="engineeringType" listKey="key"
+												listValue="value" cssStyle="width:180px"></s:select>
+										</td>
+										<td width="21%" align="right" style="padding-right: 50px;">
+											<s:select list="#{0:'未选择形象进度',1:'未开工/0%',2:'基础/20%',3:'主体/40%',4:'装饰/60%',5:'完工待验/80%',6:'竣工/100%'}"
+												cssClass="input-text" name="graphicProgress" listKey="key"
+												listValue="value" cssStyle="width:180px"></s:select>
 										</td>
 									</tr>
 								</table>
@@ -244,19 +261,19 @@
 									</td>
 									<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
 											target="rightFrame">首页</a>&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
 											target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
 											target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
 											target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
 										<input type='button' class="btn btn-primary radius size-S"
-											onclick="jumpProjectCountPage('projectAction!count',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>);"
+											onclick="jumpProjectCountPage('projectAction!count',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
 											value='转到' />
 										&nbsp; 当前页：
 										<input onpaste="return false"

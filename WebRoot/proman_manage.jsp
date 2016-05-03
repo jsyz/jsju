@@ -80,7 +80,7 @@
 								<div class="xmconbox pd-20">
 									<div
 										class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-										<p>
+										<p style="font-size: 18px;"> 
 											<i class="Hui-iconfont">&#xe623;</i>
 											<s:property value="project.name" />
 											- 人员信息

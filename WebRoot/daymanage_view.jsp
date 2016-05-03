@@ -107,7 +107,7 @@
 				</div>
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-						<p>
+						<p style="font-size: 18px;">
 							<i class="Hui-iconfont">&#xe623;</i>
 							<s:property value="project.name" />
 							- 日常监管
@@ -118,26 +118,26 @@
 							style="background-color: #FFF">
 							<thead class="text-c">
 								<tr>
-									<th width="5%">
-										序号
+									<th width="5%" style="font-size: 18px;" >
+										序&nbsp;&nbsp;号
 									</th>
-									<th width="37%">
-										内容
+									<th width="37%" style="font-size: 18px;">
+										内&nbsp;&nbsp;容
 									</th>
-									<th width="33%">
-										状态
+									<th width="33%" style="font-size: 18px;">
+										状&nbsp;&nbsp;态
 									</th>
-									<th width="25%">
-										详情
+									<th width="25%" style="font-size: 18px;">
+										详&nbsp;&nbsp;情
 									</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="text-c">
-									<td class="text-c">
+								<tr class="text-c" >
+									<td class="text-c" style="font-weight: 800;">
 										1
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										五方责任书是否签订
 									</td>
 									<td>
@@ -159,10 +159,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										2
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										质量安全告知
 									</td>
 									<td>
@@ -183,10 +183,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										3
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										三级教育开展情况
 									</td>
 									<td>
@@ -265,10 +265,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										4
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										行为监督抽查
 									</td>
 									<td>
@@ -283,18 +283,14 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										5
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										超过一定规模危险性较大分部分项工程专家论证情况
 									</td>
 									<td>
-										<div class="formControls col-12">
-											<s:radio theme="simple" id="isDangerArgument"
-												cssStyle="width:36px" cssClass="check-box"
-												list='#{0:"未论证",1:"已论证"}' name="daymanage.isDangerArgument" />
-										</div>
+										合计：<s:property value="daymanage.dangerarguments.size"/>
 									</td>
 									<td>
 										<button type="button" class="btn btn-success radius"
@@ -313,10 +309,10 @@
 											class="table table-bordered table-striped table-hover col-12">
 											<tr>
 												<td width="20%">
-													专家认证类型
+													专家论证类型
 												</td>
 												<td width="20%">
-													认证时间
+													论证时间
 												</td>
 												<td width="20%">
 													实施时间
@@ -367,10 +363,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										6
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										日常巡查
 									</td>
 									<td>
@@ -385,10 +381,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										7
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										检查及整改情况
 									</td>
 									<td>
@@ -403,10 +399,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										8
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										抽测抽查
 									</td>
 									<td>
@@ -421,22 +417,22 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										9
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										永久性铭牌安装落实情况
 									</td>
 									<td>
 										<div class="formControls col-12">
 											<s:radio theme="simple" id="isNameplateInstall"
 												cssStyle="width:36px" cssClass="check-box"
-												list='#{0:"未落实",1:"已落实"}'
+												list='#{0:"未安装",1:"已安装"}'
 												name="daymanage.isNameplateInstall" />
 										</div>
 									</td>
 									<td>
-										<span class="formControls col-4">落实日期：</span>
+										<span class="formControls col-4">安装日期：</span>
 										<span class="formControls col-8"> <input type="text"
 												width="45%" class="input-text radius size-M Wdate"
 												name="daymanage.installTime"
@@ -446,10 +442,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										10
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										预拌砂浆用量是否达标
 									</td>
 									<td>
@@ -464,10 +460,10 @@
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800;">
 										11
 									</td>
-									<td>
+									<td style="font-weight: 800;">
 										竣工验收情况
 									</td>
 									<td>

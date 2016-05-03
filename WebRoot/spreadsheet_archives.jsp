@@ -66,7 +66,7 @@ taglib uri="/struts-tags" prefix="s"%>
 		</div>
 		<div class="xmconbox pd-20">
 			<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-				<p>
+				<p style="font-size: 18px;">
 					<i class="Hui-iconfont">&#xe623;</i>
 					<s:property value="project.name" />
 					-
@@ -84,26 +84,26 @@ taglib uri="/struts-tags" prefix="s"%>
 							style="background-color: #FFF">
 							<thead class="text-c">
 								<tr>
-									<th width="5%">
-										序号
+									<th width="5%" style="font-size: 18px;">
+										序&nbsp;&nbsp;号
 									</th>
-									<th width="37%">
-										内容
+									<th width="37%" style="font-size: 18px;">
+										内&nbsp;&nbsp;容
 									</th>
-									<th width="33%">
-										状态
+									<th width="33%" style="font-size: 18px;">
+										状&nbsp;&nbsp;态
 									</th>
-									<th width="25%">
-										详情
+									<th width="25%" style="font-size: 18px;">
+										详&nbsp;&nbsp;情
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										1
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量监督工作计划
 									</td>
 									<td>
@@ -118,10 +118,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										2
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量行为资料监督抽查记录
 									</td>
 									<td>
@@ -136,10 +136,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										3
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量监督抽查（巡查）记录
 									</td>
 									<td>
@@ -154,10 +154,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										4
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程实体质量抽测记录
 									</td>
 									<td>
@@ -170,10 +170,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										5
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量监督抽检通知书
 									</td>
 									<td>
@@ -186,10 +186,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										6
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量整改完成报告
 									</td>
 									<td>
@@ -202,10 +202,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										7
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程局部停工（暂停）通知书
 									</td>
 									<td>
@@ -218,10 +218,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										8
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程复工申请报告
 									</td>
 									<td>
@@ -234,10 +234,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										9
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程复工通知书
 									</td>
 									<td>
@@ -250,10 +250,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										10
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量不良行为记录表
 									</td>
 									<td>
@@ -266,10 +266,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										11
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量事故处理监督记录
 									</td>
 									<td>
@@ -282,10 +282,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										12
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程质量申请行政处罚报告
 									</td>
 									<td>
@@ -298,10 +298,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										13
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										单位（子单位）工程质量竣工验收监督记录
 									</td>
 									<td>
@@ -314,10 +314,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										14
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程质量监督报告
 									</td>
 									<td>
@@ -330,10 +330,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										15
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										工程质量监督人员情况一览表
 									</td>
 									<td>
@@ -346,10 +346,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										16
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										其它资料
 									</td>
 									<td>
@@ -362,10 +362,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										17
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										中止施工申请书
 									</td>
 									<td>
@@ -378,10 +378,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										18
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										恢复施工安全监督申请书
 									</td>
 									<td>
@@ -399,28 +399,28 @@ taglib uri="/struts-tags" prefix="s"%>
 					<div class="tabCon">
 						<table class="table table-border table-bordered radius table-bg "
 							style="background-color: #FFF">
-							<thead class="text-c">
+							<thead class="text-c" >
 								<tr>
-									<th width="5%">
-										序号
+									<th width="5%" style="font-size: 18px;">
+										序&nbsp;&nbsp;号
 									</th>
-									<th width="37%">
-										内容
+									<th width="37%" style="font-size: 18px;">
+										内&nbsp;&nbsp;容
 									</th>
-									<th width="33%">
-										状态
+									<th width="33%" style="font-size: 18px;">
+										状&nbsp;&nbsp;态
 									</th>
-									<th width="25%">
-										详情
+									<th width="25%" style="font-size: 18px;">
+										详&nbsp;&nbsp;情
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										1
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全监督通知书
 									</td>
 									<td>
@@ -433,10 +433,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										2
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全生产监督告知书
 									</td>
 									<td>
@@ -449,10 +449,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										3
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全监督交底记录
 									</td>
 									<td>
@@ -465,10 +465,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										4
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设单位安全生产行为监督检查表
 									</td>
 									<td>
@@ -481,10 +481,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										5
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										监理单位安全生产行为监督检查表
 									</td>
 									<td>
@@ -497,10 +497,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										6
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										施工单位安全生产行为监督检查表
 									</td>
 									<td>
@@ -513,10 +513,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										7
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全生产监督抽查记录表
 									</td>
 									<td>
@@ -529,10 +529,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										8
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全生产约谈记录
 									</td>
 									<td>
@@ -545,10 +545,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										9
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程施工安全隐患整改通知书
 									</td>
 									<td>
@@ -561,10 +561,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										10
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程施工安全隐患整改完成报告书
 									</td>
 									<td>
@@ -577,10 +577,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										11
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程施工复工申请书
 									</td>
 									<td>
@@ -593,10 +593,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										12
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程施工复工通知书
 									</td>
 									<td>
@@ -609,10 +609,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										13
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程施工阶段安全自检评定表
 									</td>
 									<td>
@@ -625,10 +625,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										14
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										行政处罚记录表
 									</td>
 									<td>
@@ -641,10 +641,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										15
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全事故快报表
 									</td>
 									<td>
@@ -657,10 +657,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										16
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										建设工程安全监督报告
 									</td>
 									<td>
@@ -673,10 +673,10 @@ taglib uri="/struts-tags" prefix="s"%>
 									</td>
 								</tr>
 								<tr class="text-c">
-									<td class="text-c">
+									<td class="text-c" style="font-weight: 800">
 										17
 									</td>
-									<td>
+									<td style="font-weight: 800">
 										其它资料
 									</td>
 									<td>
