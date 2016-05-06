@@ -201,13 +201,13 @@
 												<div id="pro0">
 													<s:select
 														list="#{0:'未开工',1:'基础',2:'主体',3:'装饰',4:'完工待验',5:'竣工'}"
-														cssClass="select" name="project.graphicProgress"
+														cssClass="select" name="graphicProgress1"
 														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 												</div> 
 												<div id="pro1" style="display: none">
 													<s:select
 														list="#{0:'0%',1:'20%',2:'40%',3:'60%',4:'80%',5:'100%'}"
-														cssClass="select" name="project.graphicProgress"
+														cssClass="select" name="graphicProgress2"
 														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 												</div> </span>
 

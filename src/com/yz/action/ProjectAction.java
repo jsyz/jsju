@@ -71,6 +71,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private int areaIndex;// 区域标示
 	private int engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化)
 	private int graphicProgress;// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
+	
+	private int graphicProgress1;
+	private int graphicProgress2;
 
 	// 批量删除
 	private String checkedIDs;
@@ -219,6 +222,15 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 
 		project.setDaymanage(daymanage);
 		project.setConstruction(construction);
+		
+		if(project.getEngineeringType()==0)
+		{
+			project.setGraphicProgress(graphicProgress1);
+		}else
+		{
+			project.setGraphicProgress(graphicProgress2);
+		}
+		
 		projectService.add(project);
 
 		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
@@ -888,6 +900,23 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	public void setGraphicProgress(Integer graphicProgress) {
 		this.graphicProgress = graphicProgress;
 	}
+
+	public int getGraphicProgress1() {
+		return graphicProgress1;
+	}
+
+	public void setGraphicProgress1(int graphicProgress1) {
+		this.graphicProgress1 = graphicProgress1;
+	}
+
+	public int getGraphicProgress2() {
+		return graphicProgress2;
+	}
+
+	public void setGraphicProgress2(int graphicProgress2) {
+		this.graphicProgress2 = graphicProgress2;
+	}
+	
 	
 	
 

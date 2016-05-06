@@ -78,7 +78,7 @@
 						</p>
 						<s:if test="project.engineeringType==0">
 							<s:if test="project.graphicProgress==0">
-								<div class="five steps" style="font-size: 18px;">
+								<div class="five steps" >
 									<span class="active step">基础</span>
 									<span class="disabled step">主体</span>
 									<span class="disabled step">装饰</span>
@@ -87,7 +87,7 @@
 								</div>
 							</s:if>
 							<s:elseif test="project.graphicProgress==1">
-								<div class="five steps" style="font-size: 18px;">
+								<div class="five steps" >
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="disabled step">装饰</span>
