@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 
 import com.yz.dao.IUseroDao;
-import com.yz.model.UserRole;
 import com.yz.model.Usero;
 import com.yz.service.IUseroService;
 @Component("userRoleService")

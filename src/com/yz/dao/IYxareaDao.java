@@ -2,7 +2,6 @@ package com.yz.dao;
 
 import java.util.List;
 
-import com.yz.model.UserRole;
 import com.yz.model.Yxarea;
 
 public interface IYxareaDao {

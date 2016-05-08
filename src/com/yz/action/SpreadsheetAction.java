@@ -614,15 +614,15 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 				&& !picture2FileName.replace(" ", "").equals("")) {
 			String imageName = DateTimeKit.getDateRandom()
 					+ picture2FileName.substring(picture2FileName.indexOf("."));
-			this.upload("/sheet", imageName, picture2);
-			spreadsheet.setSheetImg1("sheet" + "/" + imageName);
+			this.upload("/sheet" + spreadsheet.getSheetType(), imageName, picture2);
+			spreadsheet.setSheetImg1("sheet"+ spreadsheet.getSheetType() + "/" + imageName);
 		}
 		if (picture3 != null && picture3FileName != null
 				&& !picture3FileName.replace(" ", "").equals("")) {
 			String imageName = DateTimeKit.getDateRandom()
 					+ picture3FileName.substring(picture3FileName.indexOf("."));
-			this.upload("/sheet", imageName, picture3);
-			spreadsheet.setSheetImg2("sheet" + "/" + imageName);
+			this.upload("/sheet" + spreadsheet.getSheetType(), imageName, picture3);
+			spreadsheet.setSheetImg2("sheet"+ spreadsheet.getSheetType() + "/" + imageName);
 		}
 		spreadsheetService.add(spreadsheet);
 		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
@@ -845,35 +845,35 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 				&& !picture1FileName.replace(" ", "").equals("")) {
 			String imageName = DateTimeKit.getDateRandom()
 					+ picture1FileName.substring(picture1FileName.indexOf("."));
-			this.upload("/sheet", imageName, picture1);
+			this.upload("/sheet" + spreadsheet.getSheetType(), imageName, picture1);
 			File photofile = new File(ServletActionContext.getServletContext()
 					.getRealPath("/")
 					+ spreadsheet.getSheetImg());
 			photofile.delete();
-			spreadsheet.setSheetImg("sheet" + "/" + imageName);
+			spreadsheet.setSheetImg("sheet"+ spreadsheet.getSheetType() + "/" + imageName);
 		}
 		if (picture2 != null && picture2FileName != null
 				&& !picture2FileName.replace(" ", "").equals("")) {
 			String imageName = DateTimeKit.getDateRandom()
 					+ picture2FileName.substring(picture2FileName.indexOf("."));
-			this.upload("/sheet", imageName, picture2);
+			this.upload("/sheet" + spreadsheet.getSheetType(), imageName, picture2);
 			File photofile = new File(ServletActionContext.getServletContext()
 					.getRealPath("/")
 					+ spreadsheet.getSheetImg1());
 			photofile.delete();
-			spreadsheet.setSheetImg1("sheet" + "/" + imageName);
+			spreadsheet.setSheetImg1("sheet"+ spreadsheet.getSheetType() + "/" + imageName);
 		}
 
 		if (picture3 != null && picture3FileName != null
 				&& !picture3FileName.replace(" ", "").equals("")) {
 			String imageName = DateTimeKit.getDateRandom()
 					+ picture3FileName.substring(picture3FileName.indexOf("."));
-			this.upload("/sheet", imageName, picture3);
+			this.upload("/sheet" + spreadsheet.getSheetType(), imageName, picture3);
 			File photofile = new File(ServletActionContext.getServletContext()
 					.getRealPath("/")
 					+ spreadsheet.getSheetImg2());
 			photofile.delete();
-			spreadsheet.setSheetImg2("sheet" + "/" + imageName);
+			spreadsheet.setSheetImg2("sheet"+ spreadsheet.getSheetType() + "/" + imageName);
 		}
 		spreadsheetService.update(spreadsheet);
 		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
