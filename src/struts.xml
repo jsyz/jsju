@@ -116,8 +116,9 @@
 	<package name="project_json" extends="json-default">
 		<action name="deleteProjects" class="projectAction"
 			method="deleteProjects" />
-		<action name="checkUsername" class="projectAction"
-			method="checkUsername" />
+		<action name="changeUpload" class="projectAction"
+			method="changeUpload" />
+			
 	</package>
 
 

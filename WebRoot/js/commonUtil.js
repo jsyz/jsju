@@ -274,3 +274,36 @@ function deleteAllCheckedSpreadsheets()
 					});
 		}
 }
+
+
+function changeUpload(pid,uploadState)
+{
+		var msg = "";
+		if(uploadState==1)
+		{
+			msg = "你确定上传该项目吗？";
+		}else
+		{
+			msg = "你确定撤销该项目吗？";
+		}
+		
+		if(confirm(msg))
+		{
+			$.ajax({   
+			            url:'changeUpload',//这里是你的action或者servlert的路径地址   
+			            type:'post', //数据发送方式   
+			            async:false,
+			            data:{"pid":pid,"uploadState":uploadState},
+			            dataType:'json',
+			            error: function(msg)
+			            { //失败   
+			            	alert('上传失败.');   
+			            },   
+			            success: function(msg)
+			            { //成功
+			            	alert(msg.message);
+			            	location.replace(location.href);
+						}
+					});
+		}
+}

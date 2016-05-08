@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -67,11 +68,11 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 	private int status;// 按状态
-	private int pid;// 按用户id
+	private int pid;// 按项目id
 	private int areaIndex;// 区域标示
 	private int engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化)
 	private int graphicProgress;// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
-	
+
 	private int graphicProgress1;
 	private int graphicProgress2;
 
@@ -100,6 +101,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private float buildingCostTotal;// 总造价
 
 	private int excelPageType;
+	
+	//上传状态
+	private int uploadState;
 
 	/**
 	 * 项目管理
@@ -122,7 +126,8 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
 		// 总记录数
-		totalCount = projectService.getTotalCount(con, convalue, areaIndex);
+		totalCount = projectService.getTotalCount(con, convalue, areaIndex,
+				userSession);
 		// 总页数
 		pageCount = projectService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
@@ -130,7 +135,8 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 		// 所有当前页记录对象
 		projects = projectService.queryList(con, convalue, areaIndex, page,
-				size);
+				size, userSession);
+
 		return "list";
 	}
 
@@ -148,7 +154,18 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			float costTotal = 0f;
 
 			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
+				// 处理已上传区域项目数量
+				projects = new ArrayList<Project>();
+				List<Project> pros = yxarea.getProjects();
+				if (pros != null && pros.size() > 0) {
+					for (Project project : pros) {
+						if (project.getIsUpload() != null
+								&& project.getIsUpload() == 1) {
+							projects.add(project);
+						}
+					}
+				}
+
 				numberTotal = projects.size();
 				for (int i = 0; i < projects.size(); i++) {
 					areaTotal += projects.get(i).getBuildingArea();
@@ -222,15 +239,13 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 
 		project.setDaymanage(daymanage);
 		project.setConstruction(construction);
-		
-		if(project.getEngineeringType()==0)
-		{
+
+		if (project.getEngineeringType() == 0) {
 			project.setGraphicProgress(graphicProgress1);
-		}else
-		{
+		} else {
 			project.setGraphicProgress(graphicProgress2);
 		}
-		
+
 		projectService.add(project);
 
 		arg[0] = "projectAction!list?areaIndex=" + areaIndex;
@@ -321,6 +336,33 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		return SUCCESS;
 	}
 
+	/*
+	 * 修改项目上传状态
+	 */
+	public String changeUpload() {
+		
+		project = projectService.loadById(pid);
+		if(project!=null)
+		{
+			project.setIsUpload(uploadState);
+			projectService.update(project);
+		}
+		AjaxMsgVO msgVO = new AjaxMsgVO();
+		msgVO.setMessage("操作成功.");
+		JSONObject jsonObj = JSONObject.fromObject(msgVO);
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=UTF-8");
+			out = response.getWriter();
+			out.print(jsonObj.toString());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/**
 	 * 查看信息
 	 * 
@@ -379,14 +421,16 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 
 		// 总记录数
-		totalCount = projectService.getTotalCount(status, con, convalue,areaIndex,engineeringType,graphicProgress);
+		totalCount = projectService.getTotalCount(status, con, convalue,
+				areaIndex, engineeringType, graphicProgress);
 		// 总页数
 		pageCount = projectService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		projects = projectService.queryList(status, con, convalue,areaIndex,engineeringType,graphicProgress, page, size);
+		projects = projectService.queryList(status, con, convalue, areaIndex,
+				engineeringType, graphicProgress, page, size);
 
 		if (projects != null) {
 			projectNumberTotal = projects.size();
@@ -416,7 +460,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
 		// 所有当前页记录对象
-		projects = projectService.queryList(status, con, convalue);
+		System.out.println("engineeringType:"+engineeringType);
+		projects = projectService.queryList(status, con, convalue,areaIndex, engineeringType, graphicProgress);
+		System.out.println(projects.size());
 		if (projects.size() > 0) {
 			// 导出数据-------------------------------------
 			String filename = "output\\" + DateTimeKit.getDateRandom()
@@ -446,7 +492,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 		handleProjectClassifys();
-		
+
 		if (projectClassifys.size() > 0) {
 			// 导出数据-------------------------------------
 			String filename = "output\\" + DateTimeKit.getDateRandom()
@@ -455,7 +501,8 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 					.getRealPath("/")
 					+ filename;
 			System.out.println("[--------------------savePath=" + savePath);
-			boolean isexport = ProjectClassifyExcel.exportExcel(savePath, projectClassifys);
+			boolean isexport = ProjectClassifyExcel.exportExcel(savePath,
+					projectClassifys);
 			if (isexport) {
 				request.put("errorInfo", "导出数据成功,下载点<a href='" + filename
 						+ "'>-这里-</a>");
@@ -470,7 +517,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 	}
 
-	//// 项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
+	// // 项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
 	private List<ProjectClassify> handleProjectClassifys() {
 		projects = projectService.getProjects();
 		if (projects != null && projects.size() > 0) {
@@ -522,7 +569,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 				float buildingArea = 0f;// 总面积
 				float buildingCost = 0f;// 总造价
 				projectClassify.setTotalClassifyName("工程分类");
-				switch (i) {// engineeringType 0:土建,1：装饰，2:市政,3:绿化，4：照明亮化
+				switch (i) {// engineeringType 0:土建,1：装饰，2:市政,3:绿化，4：照明亮化,5：其他
 				case 0:
 					projectClassify.setClassifyName("土建");
 					break;
@@ -537,6 +584,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 					break;
 				case 4:
 					projectClassify.setClassifyName("照明亮化");
+					break;
+				case 5:
+					projectClassify.setClassifyName("其他");
 					break;
 				default:
 					break;
@@ -593,7 +643,8 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 				projectClassifys.add(projectClassify);
 			}
 
-			// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
+			// 形象进度(0:未开工/0%,1:基础/30%,2：主体/50%，3:装饰/70%，4：完工待验/100%，5：竣工)
+			
 			for (int i = 0; i < 5; i++) {
 				ProjectClassify projectClassify = new ProjectClassify();
 				int projectNumber = 0;// 项目总数
@@ -602,18 +653,21 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 				projectClassify.setTotalClassifyName("形象进度");
 				switch (i) {
 				case 0:
-					projectClassify.setClassifyName("基础");
+					projectClassify.setClassifyName("未开工/0%");
 					break;
 				case 1:
-					projectClassify.setClassifyName("主体");
+					projectClassify.setClassifyName("基础/30%");
 					break;
 				case 2:
-					projectClassify.setClassifyName("装饰");
+					projectClassify.setClassifyName("主体/50%");
 					break;
 				case 3:
-					projectClassify.setClassifyName("完工待验");
+					projectClassify.setClassifyName("装饰/70%");
 					break;
 				case 4:
+					projectClassify.setClassifyName("完工待验/100%");
+					break;
+				case 5:
 					projectClassify.setClassifyName("竣工");
 					break;
 				default:
@@ -916,7 +970,14 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	public void setGraphicProgress2(int graphicProgress2) {
 		this.graphicProgress2 = graphicProgress2;
 	}
-	
+
+	public int getUploadState() {
+		return uploadState;
+	}
+
+	public void setUploadState(int uploadState) {
+		this.uploadState = uploadState;
+	}
 	
 	
 

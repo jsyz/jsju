@@ -78,8 +78,9 @@
 						</p>
 						<s:if test="project.engineeringType==0">
 							<s:if test="project.graphicProgress==0">
-								<div class="five steps" >
-									<span class="active step">基础</span>
+								<div class="six steps" >
+									<span class="active step">未开工</span>
+									<span class="disabled step">基础</span>
 									<span class="disabled step">主体</span>
 									<span class="disabled step">装饰</span>
 									<span class="disabled step">完工待验</span>
@@ -87,7 +88,18 @@
 								</div>
 							</s:if>
 							<s:elseif test="project.graphicProgress==1">
-								<div class="five steps" >
+								<div class="six steps" >
+									<span class="active step">未开工</span>
+									<span class="active step">基础</span>
+									<span class="disabled step">主体</span>
+									<span class="disabled step">装饰</span>
+									<span class="disabled step">完工待验</span>
+									<span class="disabled step">竣工</span>
+								</div>
+							</s:elseif>
+							<s:elseif test="project.graphicProgress==2">
+								<div class="six steps">
+									<span class="active step">未开工</span>
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="disabled step">装饰</span>
@@ -95,8 +107,9 @@
 									<span class="disabled step">竣工</span>
 								</div>
 							</s:elseif>
-							<s:elseif test="project.graphicProgress==2">
-								<div class="five steps">
+							<s:elseif test="project.graphicProgress==3">
+								<div class="six steps">
+									<span class="active step">未开工</span>
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
@@ -104,8 +117,9 @@
 									<span class="disabled step">竣工</span>
 								</div>
 							</s:elseif>
-							<s:elseif test="project.graphicProgress==3">
-								<div class="five steps">
+							<s:elseif test="project.graphicProgress==4">
+								<div class="six steps">
+									<span class="active step">未开工</span>
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
@@ -113,8 +127,9 @@
 									<span class="disabled step">竣工</span>
 								</div>
 							</s:elseif>
-							<s:elseif test="project.graphicProgress==4">
-								<div class="five steps">
+							<s:elseif test="project.graphicProgress==5">
+								<div class="six steps">
+									<span class="active step">未开工</span>
 									<span class="active step">基础</span>
 									<span class="active step">主体</span>
 									<span class="active step">装饰</span>
@@ -125,31 +140,38 @@
 						</s:if>
 						<s:else>
 							<div class="progress">
-								<s:if test="project.graphicProgress=0">
-									<div class="progress-bar" role="progressbar" aria-valuenow="20"
-										aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-										20%
+								<s:if test="project.graphicProgress==0">
+									<div class="progress-bar" role="progressbar" aria-valuenow="0"
+										aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+										0%
 									</div>
 								</s:if>
-								<s:elseif test="project.graphicProgress=1">
-									<div class="progress-bar" role="progressbar" aria-valuenow="40"
-										aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-										40%
+								<s:elseif test="project.graphicProgress==1">
+									<div class="progress-bar" role="progressbar" aria-valuenow="30"
+										aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+										30%
 									</div>
 								</s:elseif>
-								<s:elseif test="project.graphicProgress=2">
-									<div class="progress-bar" role="progressbar" aria-valuenow="60"
-										aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-										60%
+								<s:elseif test="project.graphicProgress==2">
+									<div class="progress-bar" role="progressbar" aria-valuenow="50"
+										aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+										50%
 									</div>
 								</s:elseif>
-								<s:elseif test="project.graphicProgress=3">
-									<div class="progress-bar" role="progressbar" aria-valuenow="80"
-										aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-										80%
+								<s:elseif test="project.graphicProgress==3">
+									<div class="progress-bar" role="progressbar" aria-valuenow="70"
+										aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+										70%
 									</div>
 								</s:elseif>
-								<s:elseif test="project.graphicProgress=3">
+								<s:elseif test="project.graphicProgress==4">
+									<div class="progress-bar" role="progressbar"
+										aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+										style="width: 100%;">
+										100%
+									</div>
+								</s:elseif>
+								<s:elseif test="project.graphicProgress==5">
 									<div class="progress-bar" role="progressbar"
 										aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
 										style="width: 100%;">
@@ -159,7 +181,7 @@
 							</div>
 						</s:else>
 					</div>
-				</div>
+				</div>	
 
 				<div class="xmconbox pd-20">
 					<div class="row cl box-shadow pd-10  bk-gray radius"
@@ -284,11 +306,11 @@
 
 											</s:if> <s:else>
 												<s:if test="project.graphicProgress==0">0%</s:if>
-												<s:elseif test="project.graphicProgress==1">20%</s:elseif>
-												<s:elseif test="project.graphicProgress==2">40%</s:elseif>
-												<s:elseif test="project.graphicProgress==3">60%</s:elseif>
-												<s:elseif test="project.graphicProgress==4">80%</s:elseif>
-												<s:elseif test="project.graphicProgress==5">100%</s:elseif>
+												<s:elseif test="project.graphicProgress==1">30%</s:elseif>
+												<s:elseif test="project.graphicProgress==2">50%</s:elseif>
+												<s:elseif test="project.graphicProgress==3">70%</s:elseif>
+												<s:elseif test="project.graphicProgress==4">100%</s:elseif>
+												<s:elseif test="project.graphicProgress==5">竣工</s:elseif>
 											</s:else> </span>
 									</td>
 								</tr>

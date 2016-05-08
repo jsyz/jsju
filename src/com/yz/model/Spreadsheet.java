@@ -36,6 +36,8 @@ public class Spreadsheet implements java.io.Serializable {
 	private String expireTime;//整改到期时间
 	private Integer isClose;//是否闭合
 	private String closeTime;//闭合时间
+	private String sheetImg1;//表格的上传图片
+	private String sheetImg2;//表格的上传图片
 
 	// Constructors
 
@@ -45,17 +47,34 @@ public class Spreadsheet implements java.io.Serializable {
 
 	/** full constructor */
 	public Spreadsheet(Project project, Integer sheetType, String sheetName,
-			String updateTime, String sheetImg, String checkTime,
+			String updateTime, String sheetImg,String sheetImg1,String sheetImg2, String checkTime,
 			String expireTime, Integer isClose, String closeTime) {
 		this.project = project;
 		this.sheetType = sheetType;
 		this.sheetName = sheetName;
 		this.updateTime = updateTime;
 		this.sheetImg = sheetImg;
+		this.sheetImg1 = sheetImg1;
+		this.sheetImg2 = sheetImg2;
 		this.checkTime = checkTime;
 		this.expireTime = expireTime;
 		this.isClose = isClose;
 		this.closeTime = closeTime;
+	}
+
+	@Column(name = "checkTime", length = 50)
+	public String getCheckTime() {
+		return this.checkTime;
+	}
+
+	@Column(name = "closeTime", length = 50)
+	public String getCloseTime() {
+		return this.closeTime;
+	}
+
+	@Column(name = "expireTime", length = 50)
+	public String getExpireTime() {
+		return this.expireTime;
 	}
 
 	// Property accessors
@@ -65,9 +84,12 @@ public class Spreadsheet implements java.io.Serializable {
 	public Integer getId() {
 		return this.id;
 	}
+	
+	
 
-	public void setId(Integer id) {
-		this.id = id;
+	@Column(name = "isClose")
+	public Integer getIsClose() {
+		return this.isClose;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,17 +98,19 @@ public class Spreadsheet implements java.io.Serializable {
 		return this.project;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	@Column(name = "sheetImg", length = 100)
+	public String getSheetImg() {
+		return this.sheetImg;
 	}
 
-	@Column(name = "sheetType")
-	public Integer getSheetType() {
-		return this.sheetType;
+	@Column(name = "sheetImg1", length = 100)
+	public String getSheetImg1() {
+		return sheetImg1;
 	}
 
-	public void setSheetType(Integer sheetType) {
-		this.sheetType = sheetType;
+	@Column(name = "sheetImg2", length = 100)
+	public String getSheetImg2() {
+		return sheetImg2;
 	}
 
 	@Column(name = "sheetName", length = 50)
@@ -94,8 +118,9 @@ public class Spreadsheet implements java.io.Serializable {
 		return this.sheetName;
 	}
 
-	public void setSheetName(String sheetName) {
-		this.sheetName = sheetName;
+	@Column(name = "sheetType")
+	public Integer getSheetType() {
+		return this.sheetType;
 	}
 
 	@Column(name = "updateTime", length = 50)
@@ -103,53 +128,52 @@ public class Spreadsheet implements java.io.Serializable {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	@Column(name = "sheetImg", length = 100)
-	public String getSheetImg() {
-		return this.sheetImg;
-	}
-
-	public void setSheetImg(String sheetImg) {
-		this.sheetImg = sheetImg;
-	}
-
-	@Column(name = "checkTime", length = 50)
-	public String getCheckTime() {
-		return this.checkTime;
-	}
-
 	public void setCheckTime(String checkTime) {
 		this.checkTime = checkTime;
 	}
 
-	@Column(name = "expireTime", length = 50)
-	public String getExpireTime() {
-		return this.expireTime;
+	public void setCloseTime(String closeTime) {
+		this.closeTime = closeTime;
 	}
 
 	public void setExpireTime(String expireTime) {
 		this.expireTime = expireTime;
 	}
 
-	@Column(name = "isClose")
-	public Integer getIsClose() {
-		return this.isClose;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setIsClose(Integer isClose) {
 		this.isClose = isClose;
 	}
 
-	@Column(name = "closeTime", length = 50)
-	public String getCloseTime() {
-		return this.closeTime;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
-	public void setCloseTime(String closeTime) {
-		this.closeTime = closeTime;
+	public void setSheetImg(String sheetImg) {
+		this.sheetImg = sheetImg;
+	}
+
+	public void setSheetImg1(String sheetImg1) {
+		this.sheetImg1 = sheetImg1;
+	}
+
+	public void setSheetImg2(String sheetImg2) {
+		this.sheetImg2 = sheetImg2;
+	}
+
+	public void setSheetName(String sheetName) {
+		this.sheetName = sheetName;
+	}
+
+	public void setSheetType(Integer sheetType) {
+		this.sheetType = sheetType;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }

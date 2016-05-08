@@ -95,6 +95,9 @@ public class ProjectExcel {
 				case 4:
 					list.add("照明亮化");
 					break;
+				case 5:
+					list.add("其他");
+					break;
 				default:
 					list.add("");
 					break;
@@ -115,51 +118,54 @@ public class ProjectExcel {
     			list.add(project.getEngineeringDirector()==null?"":project.getEngineeringDirector());//engineeringDirector
     			list.add(project.getClearPrincipal()==null?"":project.getClearPrincipal());//clearPrincipal
     			list.add(project.getClearPrincipalTelphone()==null?"":project.getClearPrincipalTelphone());
-    			switch (project.getGraphicProgress()) {//形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
-				case 0:
+    			switch (project.getGraphicProgress()) {//形象进度(0:未开工/0%,1:基础/30%,2：主体/50%，3:装饰/70%，4：完工待验/100%，5：竣工)
+    			case 0:
+					if(project.getEngineeringType()==0)
+					{
+						list.add("未开工");
+					}else
+					{
+						list.add("0%");
+					}
+					break;
+    			case 1:
 					if(project.getEngineeringType()==0)
 					{
 						list.add("基础");
 					}else
 					{
-						list.add("20%");
-					}
-					break;
-				case 1:
-					if(project.getEngineeringType()==0)
-					{
-						list.add("主体");
-					}else
-					{
-						list.add("40%");
+						list.add("30%");
 					}
 					break;
 				case 2:
 					if(project.getEngineeringType()==0)
 					{
-						list.add("装饰");
+						list.add("主体");
 					}else
 					{
-						list.add("60%");
+						list.add("50%");
 					}
 					break;
 				case 3:
 					if(project.getEngineeringType()==0)
 					{
-						list.add("完工待验");
+						list.add("装饰");
 					}else
 					{
-						list.add("80%");
+						list.add("70%");
 					}
 					break;
 				case 4:
 					if(project.getEngineeringType()==0)
 					{
-						list.add("竣工");
+						list.add("完工待验");
 					}else
 					{
 						list.add("100%");
 					}
+					break;
+				case 5:
+						list.add("竣工");
 					break;
 				default:
 					list.add("");

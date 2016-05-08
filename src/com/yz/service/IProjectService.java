@@ -3,6 +3,7 @@ package com.yz.service;
 import java.util.List;
 
 import com.yz.model.Project;
+import com.yz.model.Usero;
 
 public interface IProjectService {
 
@@ -61,5 +62,15 @@ public interface IProjectService {
 	public abstract List<Project> queryList(int status, int con,
 			String convalue, int areaIndex, int engineeringType,
 			int graphicProgress, int page, int size);
+
+	public abstract int getTotalCount(int con, String convalue, int areaIndex,
+			Usero userSession);
+
+	public abstract List<Project> queryList(int con, String convalue,
+			int areaIndex, int page, int size, Usero userSession);
+
+	public abstract List<Project> queryList(int status, int con,
+			String convalue, int areaIndex, int engineeringType,
+			int graphicProgress);
 
 }

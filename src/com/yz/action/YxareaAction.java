@@ -112,14 +112,24 @@ public class YxareaAction extends ActionSupport implements RequestAware,
 			float areaTotal = 0f;
 			float costTotal = 0f;
 
-			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
-				projects = yxarea.getProjects();
-				numberTotal = projects.size();
-				for (int i = 0; i < projects.size(); i++) {
-					areaTotal += projects.get(i).getBuildingArea();
-					costTotal += projects.get(i).getBuildingCost();
+			// 处理已上传区域项目数量
+			projects = new ArrayList<Project>();
+			List<Project> pros = yxarea.getProjects();
+			if (pros != null && pros.size() > 0) {
+				for (Project project : pros) {
+					if (project.getIsUpload() != null
+							&& project.getIsUpload() == 1) {
+						projects.add(project);
+					}
 				}
 			}
+
+			numberTotal = projects.size();
+			for (int i = 0; i < projects.size(); i++) {
+				areaTotal += projects.get(i).getBuildingArea();
+				costTotal += projects.get(i).getBuildingCost();
+			}
+
 			areaVO.setProjectNumberTotal(numberTotal);
 			areaVO.setBuildingAreaTotal(areaTotal);
 			areaVO.setBuildingCostTotal(costTotal);

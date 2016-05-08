@@ -93,7 +93,7 @@
 										</th>
 										<td>
 											<s:select
-												list="#{0:'土建',1:'市政',2:'装饰',3:'绿化',4:'照明亮化',5:'其他'}"
+												list="#{0:'土建',1:'装饰',2:'市政',3:'绿化',4:'照明亮化',5:'其他'}"
 												cssClass="select" name="project.engineeringType"
 												listKey="key" listValue="value" id="enginType"
 												onchange="changeProgress();" cssStyle="width:200px"></s:select>
@@ -206,10 +206,12 @@
 												</div> 
 												<div id="pro1" style="display: none">
 													<s:select
-														list="#{0:'0%',1:'20%',2:'40%',3:'60%',4:'80%',5:'100%'}"
+														list="#{0:'0%',1:'30%',2:'50%',3:'70%',4:'100%',5:'竣工'}"
 														cssClass="select" name="graphicProgress2"
 														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
-												</div> </span>
+												</div> 
+												
+												</span>
 
 
 

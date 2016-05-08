@@ -361,38 +361,6 @@ taglib uri="/struts-tags" prefix="s"%>
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
-								<tr class="text-c">
-									<td class="text-c" style="font-weight: 800">
-										17
-									</td>
-									<td style="font-weight: 800">
-										中止施工申请书
-									</td>
-									<td>
-										合计：<s:property value="sheetNumber.sheet33" />次
-									</td>
-									<td>
-										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=33"
-											class="btn btn-success radius">详细内容</a>
-									</td>
-								</tr>
-								<tr class="text-c">
-									<td class="text-c" style="font-weight: 800">
-										18
-									</td>
-									<td style="font-weight: 800">
-										恢复施工安全监督申请书
-									</td>
-									<td>
-										合计：<s:property value="sheetNumber.sheet34" />次
-									</td>
-									<td>
-										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=34"
-											class="btn btn-success radius">详细内容</a>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -677,14 +645,30 @@ taglib uri="/struts-tags" prefix="s"%>
 										17
 									</td>
 									<td style="font-weight: 800">
-										其它资料
+										中止施工申请书
 									</td>
 									<td>
-										合计：<s:property value="sheetNumber.sheet46" />次
+										合计：<s:property value="sheetNumber.sheet33" />次
 									</td>
 									<td>
 										<a
-											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=46"
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=33"
+											class="btn btn-success radius">详细内容</a>
+									</td>
+								</tr>
+								<tr class="text-c">
+									<td class="text-c" style="font-weight: 800">
+										18
+									</td>
+									<td style="font-weight: 800">
+										恢复施工安全监督申请书
+									</td>
+									<td>
+										合计：<s:property value="sheetNumber.sheet34" />次
+									</td>
+									<td>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=34"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>

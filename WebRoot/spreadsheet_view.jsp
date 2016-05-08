@@ -34,8 +34,19 @@
 		<title>查看长传图片</title>
 	</head>
 	<body style="background: #fff;">
-	<div style="margin: 0 auto;padding: 0px;width: 600px;">
-		<img width="640px;" height="320px;" src="<%=basePath%>${spreadsheet.sheetImg}"/> 
-	</div>
+		<div style="margin: 0 auto; padding: 0px; width: 600px;">
+			<s:if test="spreadsheet.sheetImg!=null">
+				<img width="640px;" height="320px;"
+					src="<%=basePath%>${spreadsheet.sheetImg}" />
+			</s:if>
+			<s:if test="spreadsheet.sheetImg!=null">
+				<img width="640px;" height="320px;"
+					src="<%=basePath%>${spreadsheet.sheetImg1}" />
+			</s:if>
+			<s:if test="spreadsheet.sheetImg!=null">
+				<img width="640px;" height="320px;"
+					src="<%=basePath%>${spreadsheet.sheetImg2}" />
+			</s:if>
+		</div>
 	</body>
 </html>

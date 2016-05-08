@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.yz.dao.IProjectDao;
 import com.yz.model.Project;
+import com.yz.model.Usero;
 import com.yz.service.IProjectService;
 
 @Component("projectService")
@@ -229,25 +230,29 @@ public class ProjectServiceImp implements IProjectService {
 
 	public List<Project> loadByProjectType(int i) {
 		// TODO Auto-generated method stub
-		String queryString = "from Project mo where 1=1 and mo.projectType="+i;
+		String queryString = "from Project mo where 1=1  and mo.isUpload=1 and mo.projectType="
+				+ i;
 		return projectDao.queryList(queryString);
 	}
-	
+
 	public List<Project> loadByEngineeringType(int i) {
 		// TODO Auto-generated method stub
-		String queryString = "from Project mo where 1=1 and mo.engineeringType="+i;
+		String queryString = "from Project mo where 1=1 and mo.isUpload=1 and mo.engineeringType="
+				+ i;
 		return projectDao.queryList(queryString);
 	}
-	
+
 	public List<Project> loadByBuildingType(int i) {
 		// TODO Auto-generated method stub
-		String queryString = "from Project mo where 1=1 and mo.buildingType="+i;
+		String queryString = "from Project mo where 1=1 and mo.isUpload=1 and mo.buildingType="
+				+ i;
 		return projectDao.queryList(queryString);
 	}
-	
+
 	public List<Project> loadByGraphicProgress(int i) {
 		// TODO Auto-generated method stub
-		String queryString = "from Project mo where 1=1 and mo.graphicProgress="+i;
+		String queryString = "from Project mo where 1=1 and mo.isUpload=1 and mo.graphicProgress="
+				+ i;
 		return projectDao.queryList(queryString);
 	}
 
@@ -270,17 +275,14 @@ public class ProjectServiceImp implements IProjectService {
 		if (status == 2) {
 			queryString += "and mo.graphicProgress = 4 ";
 		}
-		if(areaIndex!=0)
-		{
-			queryString += " and mo.yxarea.areaIndex = "+areaIndex;
+		if (areaIndex != 0) {
+			queryString += " and mo.yxarea.areaIndex = " + areaIndex;
 		}
-		if(engineeringType!=0)
-		{
-			queryString += " and mo.engineeringType = "+(engineeringType-1);
+		if (engineeringType != 0) {
+			queryString += " and mo.engineeringType = " + (engineeringType - 1);
 		}
-		if(graphicProgress!=0)
-		{
-			queryString += " and mo.graphicProgress = "+(graphicProgress-1);
+		if (graphicProgress != 0) {
+			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
 		}
 		return projectDao.getUniqueResult(queryString, p);
 	}
@@ -288,7 +290,7 @@ public class ProjectServiceImp implements IProjectService {
 	public List<Project> queryList(int status, int con, String convalue,
 			int areaIndex, int engineeringType, int graphicProgress, int page,
 			int size) {
-		String queryString = "from Project mo where 1=1";
+		String queryString = "from Project mo where 1=1 and mo.isUpload=1";
 		Object[] p = null;
 		if (con != 0 && convalue != null && !convalue.equals("")) {
 			if (con == 1) {
@@ -305,17 +307,83 @@ public class ProjectServiceImp implements IProjectService {
 		if (status == 2) {
 			queryString += "and mo.graphicProgress = 4";
 		}
-		if(areaIndex!=0)
-		{
-			queryString += " and mo.yxarea.areaIndex = "+areaIndex;
+		if (areaIndex != 0) {
+			queryString += " and mo.yxarea.areaIndex = " + areaIndex;
 		}
-		if(engineeringType!=0)
-		{
-			queryString += " and mo.engineeringType = "+(engineeringType-1);
+		if (engineeringType != 0) {
+			queryString += " and mo.engineeringType = " + (engineeringType - 1);
 		}
-		if(graphicProgress!=0)
-		{
-			queryString += " and mo.graphicProgress = "+(graphicProgress-1);
+		if (graphicProgress != 0) {
+			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
+		}
+		return projectDao.getObjectsByCondition(queryString, p);
+	}
+
+	public int getTotalCount(int con, String convalue, int areaIndex,
+			Usero userSession) {
+		String queryString = "select count(*) from Project mo where 1=1 and mo.yxarea.areaIndex="
+				+ areaIndex
+				+ " and (mo.isUpload=1 or mo.uid="
+				+ userSession.getId() + ")";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		return projectDao.getUniqueResult(queryString, p);
+	}
+
+	public List<Project> queryList(int con, String convalue, int areaIndex,
+			int page, int size, Usero userSession) {
+		String queryString = "from Project mo where 1=1 and mo.yxarea.areaIndex="
+				+ areaIndex
+				+ " and (mo.isUpload=1 or mo.uid="
+				+ userSession.getId() + ")";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		return projectDao.pageList(queryString, p, page, size);
+	}
+
+	public List<Project> queryList(int status, int con, String convalue,
+			int areaIndex, int engineeringType, int graphicProgress) {
+		String queryString = "from Project mo where 1=1 and mo.isUpload=1 ";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.name like ? ";
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisor like ? ";
+			}
+			p = new Object[] { '%' + convalue + '%' };
+		}
+		if (status == 1) {
+			queryString += "and mo.graphicProgress != 4";
+		}
+		if (status == 2) {
+			queryString += "and mo.graphicProgress = 4";
+		}
+		if (areaIndex != 0) {
+			queryString += " and mo.yxarea.areaIndex = " + areaIndex;
+		}
+		if (engineeringType != 0) {
+			queryString += " and mo.engineeringType = " + (engineeringType - 1);
+		}
+		if (graphicProgress != 0) {
+			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
 		}
 		return projectDao.getObjectsByCondition(queryString, p);
 	}

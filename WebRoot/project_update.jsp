@@ -38,6 +38,8 @@
 		<form action="projectAction!update" method="post"
 			class="form form-horizontal" onsubmit="return checkProject();">
 			<s:hidden name="project.id"></s:hidden>
+			<s:hidden name="project.uid"></s:hidden>
+			<s:hidden name="project.isUpload"></s:hidden>
 			<s:hidden name="project.yxarea.id"></s:hidden>
 			<s:hidden name="areaIndex"></s:hidden>
 			
@@ -82,6 +84,14 @@
 				<div class="xmconbox pd-20">
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 						<nav>
+						<s:if test="project.isUpload==1">
+							<input type="button" onclick="changeUpload(<s:property value="project.id"/>,0);" class="btn btn-success radius r mr-5 f-r"
+							style="line-height: 1.6em; margin-top: 3px" value="撤销项目" />
+						</s:if>
+						<s:else>
+							<input type="button" onclick="changeUpload(<s:property value="project.id"/>,1);" class="btn btn-success radius r mr-5 f-r"
+							style="line-height: 1.6em; margin-top: 3px" value="上传项目" />
+						</s:else>
 						<input type="submit" class="btn btn-success radius r mr-5 f-r"
 							style="line-height: 1.6em; margin-top: 3px" value="保存项目" />
 						<a class="btn btn-success radius r mr-5 f-r"
@@ -129,7 +139,7 @@
 											工程分类
 										</th>
 										<td>
-											<s:select list="#{0:'土建',1:'市政',2:'装饰',3:'绿化',4:'照明亮化',5:'其他'}"
+											<s:select list="#{0:'土建',1:'装饰',2:'市政',3:'绿化',4:'照明亮化',5:'其他'}"
 												cssClass="select" name="project.engineeringType"
 												listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 										</td>
@@ -241,7 +251,7 @@
 
 												</s:if> <s:else>
 													<s:select
-														list="#{0:'0%',1:'20%',2:'40%',3:'60%',4:'80%',5:'100%'}"
+														list="#{0:'0%',1:'30%',2:'50%',3:'70%',4:'100%',5:'竣工'}"
 														cssClass="select" name="project.graphicProgress"
 														listKey="key" listValue="value" cssStyle="width:200px"></s:select>
 												</s:else> </span>
@@ -595,7 +605,7 @@
 										status="status">
 										<tr>
 											<th class="th2 first">
-											</th>
+											<br></th>
 											<td colspan="3">
 												<div class="row">
 													<div class="col-md-2">

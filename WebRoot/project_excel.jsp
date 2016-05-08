@@ -128,12 +128,12 @@
 										</td>
 										
 										<td width="21%" align="right" style="padding-right: 50px;">
-											<s:select list="#{0:'未选工程分类',1:'土建',2:'装饰',3:'市政',4:'绿化',5:'照明亮化'}"
+											<s:select list="#{0:'未选工程分类',1:'土建',2:'装饰',3:'市政',4:'绿化',5:'照明亮化',6:'其他'}"
 												cssClass="input-text" name="engineeringType" listKey="key"
 												listValue="value" cssStyle="width:180px"></s:select>
 										</td>
 										<td width="21%" align="right" style="padding-right: 50px;">
-											<s:select list="#{0:'未选择形象进度',1:'未开工/0%',2:'基础/20%',3:'主体/40%',4:'装饰/60%',5:'完工待验/80%',6:'竣工/100%'}"
+											<s:select list="#{0:'未选择形象进度',1:'未开工/0%',2:'基础/30%',3:'主体/50%',4:'装饰/70%',5:'完工待验/80%',6:'竣工'}"
 												cssClass="input-text" name="graphicProgress" listKey="key"
 												listValue="value" cssStyle="width:180px"></s:select>
 										</td>

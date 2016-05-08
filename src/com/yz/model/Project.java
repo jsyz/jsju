@@ -33,9 +33,9 @@ public class Project implements java.io.Serializable {
 	private Daymanage daymanage;// 日常监管
 	private Construction construction;// 文明施工
 	private Integer projectType;// 项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
-	private Integer engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化)
+	private Integer engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化,5:其他)
 	private Integer buildingType;// 建筑分类(0:住宅,1：公共建筑，2:工业建筑)
-	private Integer graphicProgress;// 形象进度(0:基础/20%,1：主体/40%，2:装饰/60%，3：完工待验/80%，4：竣工/100%)
+	private Integer graphicProgress;// 形象进度(0:未开工/0%,1:基础/30%,2：主体/50%，3:装饰/70%，4：完工待验/100%，5：竣工)
 	private String buildUnit;// 建设单位
 	private String buildUnitPrincipal;// 建设单位负责人
 	private String buildUnittelphone;// 建设单位负责人联系电话
@@ -82,6 +82,7 @@ public class Project implements java.io.Serializable {
 	private String constructionDrawingUnit;// 施工图审查机构
 	private String constructionDrawingUnitPrincipal;// 施工图审查机构负责人
 	private String constructionDrawingUnitPrincipalTelphone;// 施工图审查机构联系电话
+	private Integer isUpload;// 是否上传
 	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
 	private List<Proman> promans = new ArrayList<Proman>();
 	private List<Subunit> subunits = new ArrayList<Subunit>();
@@ -119,7 +120,7 @@ public class Project implements java.io.Serializable {
 			String mortarUnit, String mortarUnitPrincipal,
 			String mortarUnitPrincipalTelphone, String constructionDrawingUnit,
 			String constructionDrawingUnitPrincipal,
-			String constructionDrawingUnitPrincipalTelphone,
+			String constructionDrawingUnitPrincipalTelphone, Integer isUpload,
 			List<Spreadsheet> spreadsheets, List<Proman> promans,
 			List<Subunit> subunits, List<Device> devices) {
 		this.uid = uid;
@@ -370,6 +371,11 @@ public class Project implements java.io.Serializable {
 	@Column(name = "isNewProjectMonth")
 	public Integer getIsNewProjectMonth() {
 		return this.isNewProjectMonth;
+	}
+
+	@Column(name = "isUpload")
+	public Integer getIsUpload() {
+		return isUpload;
 	}
 
 	@Column(name = "mortarUnit", length = 50)
@@ -636,6 +642,10 @@ public class Project implements java.io.Serializable {
 
 	public void setIsNewProjectMonth(Integer isNewProjectMonth) {
 		this.isNewProjectMonth = isNewProjectMonth;
+	}
+
+	public void setIsUpload(Integer isUpload) {
+		this.isUpload = isUpload;
 	}
 
 	public void setMortarUnit(String mortarUnit) {

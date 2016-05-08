@@ -192,6 +192,9 @@
 									<th width="68">
 										监督员
 									</th>
+									<th width="68">
+										上传状态
+									</th>
 									<th width="103">
 										操作
 									</th>
@@ -199,7 +202,7 @@
 							</thead>
 							<tbody>
 								<s:if test="%{projects.size()==0}">
-									<td colspan="14" align="center">
+									<td colspan="15" align="center">
 										暂无任何项目
 									</td>
 								</s:if>
@@ -251,7 +254,11 @@
 										<td>
 											<s:property value="supervisor" />
 										</td>
-										<td class="f-14 td-manage">
+										<td>
+											<s:if test="isUpload==1">已上传</s:if>
+											<s:else>未上传</s:else>
+										</td>
+										<td class="f-15 td-manage">
 											<s:if test="#session.userSession.userLimit==0">
 
 												<a style="text-decoration: none" class="ml-5"

@@ -85,9 +85,8 @@ function jumpProjectCountPage(url,page,con,convalue,status,areaIndex,engineering
 
 
 //跳转到打印页面
-function jumpProjectOutput(url,con,convalue,status){
-	
-	var url=url+'?con='+con+'&convalue='+convalue+'&status='+status;
+function jumpProjectOutput(url,con,convalue,status,areaIndex,engineeringType,graphicProgress){
+	var url=url+'?con='+con+'&convalue='+convalue+'&status='+status+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress;
 	url=encodeURI(url);
 	url=encodeURI(url);
 	window.location=url;
@@ -95,7 +94,6 @@ function jumpProjectOutput(url,con,convalue,status){
 
 //分页显示
 function jumpProjectPage(url,page,con,convalue,areaIndex){
-	
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;

@@ -389,6 +389,7 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		case 1:
 			// pageName = "日常监管-行为监督抽查-工程质量行为资料监督抽查记录";
 			sheetName = "工程质量行为资料监督抽查记录";
+			break;
 		case 2:
 			// pageName = "日常监管-行为监督抽查-施工单位安全生产行为监督检查表";
 			sheetName = "施工单位安全生产行为监督检查表";
@@ -609,6 +610,20 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			spreadsheet.setSheetImg("/sheet" + spreadsheet.getSheetType() + "/"
 					+ imageName);
 		}
+		if (picture2 != null && picture2FileName != null
+				&& !picture2FileName.replace(" ", "").equals("")) {
+			String imageName = DateTimeKit.getDateRandom()
+					+ picture2FileName.substring(picture2FileName.indexOf("."));
+			this.upload("/sheet", imageName, picture2);
+			spreadsheet.setSheetImg1("sheet" + "/" + imageName);
+		}
+		if (picture3 != null && picture3FileName != null
+				&& !picture3FileName.replace(" ", "").equals("")) {
+			String imageName = DateTimeKit.getDateRandom()
+					+ picture3FileName.substring(picture3FileName.indexOf("."));
+			this.upload("/sheet", imageName, picture3);
+			spreadsheet.setSheetImg2("sheet" + "/" + imageName);
+		}
 		spreadsheetService.add(spreadsheet);
 		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
 				+ sheetTypeStr + "&pageType=" + pageType;
@@ -620,6 +635,12 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 	private File picture1;
 	private String picture1ContentType;
 	private String picture1FileName;
+	private File picture2;
+	private String picture2ContentType;
+	private String picture2FileName;
+	private File picture3;
+	private String picture3ContentType;
+	private String picture3FileName;
 
 	// 文件上传
 	public void upload(String fileName, String imageName, File picture)
@@ -669,6 +690,20 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 					+ spreadsheet.getSheetImg());
 			photofile.delete();
 		}
+		if (spreadsheet.getSheetImg1() != null
+				&& !spreadsheet.getSheetImg1().replace(" ", "").equals("")) {
+			File photofile = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ spreadsheet.getSheetImg1());
+			photofile.delete();
+		}
+		if (spreadsheet.getSheetImg2() != null
+				&& !spreadsheet.getSheetImg2().replace(" ", "").equals("")) {
+			File photofile = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ spreadsheet.getSheetImg2());
+			photofile.delete();
+		}
 		spreadsheetService.delete(spreadsheet);
 		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
 				+ sheetTypeStr + "&pageType=" + pageType;
@@ -690,6 +725,20 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 				File photofile = new File(ServletActionContext
 						.getServletContext().getRealPath("/")
 						+ spreadsheet.getSheetImg());
+				photofile.delete();
+			}
+			if (spreadsheet.getSheetImg1() != null
+					&& !spreadsheet.getSheetImg1().replace(" ", "").equals("")) {
+				File photofile = new File(ServletActionContext
+						.getServletContext().getRealPath("/")
+						+ spreadsheet.getSheetImg1());
+				photofile.delete();
+			}
+			if (spreadsheet.getSheetImg2() != null
+					&& !spreadsheet.getSheetImg2().replace(" ", "").equals("")) {
+				File photofile = new File(ServletActionContext
+						.getServletContext().getRealPath("/")
+						+ spreadsheet.getSheetImg2());
 				photofile.delete();
 			}
 			spreadsheetService.delete(spreadsheet);
@@ -791,6 +840,40 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			String loginfail = "登陆失效,信息提交失败.";
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
+		}
+		if (picture1 != null && picture1FileName != null
+				&& !picture1FileName.replace(" ", "").equals("")) {
+			String imageName = DateTimeKit.getDateRandom()
+					+ picture1FileName.substring(picture1FileName.indexOf("."));
+			this.upload("/sheet", imageName, picture1);
+			File photofile = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ spreadsheet.getSheetImg());
+			photofile.delete();
+			spreadsheet.setSheetImg("sheet" + "/" + imageName);
+		}
+		if (picture2 != null && picture2FileName != null
+				&& !picture2FileName.replace(" ", "").equals("")) {
+			String imageName = DateTimeKit.getDateRandom()
+					+ picture2FileName.substring(picture2FileName.indexOf("."));
+			this.upload("/sheet", imageName, picture2);
+			File photofile = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ spreadsheet.getSheetImg1());
+			photofile.delete();
+			spreadsheet.setSheetImg1("sheet" + "/" + imageName);
+		}
+
+		if (picture3 != null && picture3FileName != null
+				&& !picture3FileName.replace(" ", "").equals("")) {
+			String imageName = DateTimeKit.getDateRandom()
+					+ picture3FileName.substring(picture3FileName.indexOf("."));
+			this.upload("/sheet", imageName, picture3);
+			File photofile = new File(ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ spreadsheet.getSheetImg2());
+			photofile.delete();
+			spreadsheet.setSheetImg2("sheet" + "/" + imageName);
 		}
 		spreadsheetService.update(spreadsheet);
 		arg[0] = "spreadsheetAction!list?pid=" + pid + "&sheetTypeStr="
@@ -1351,6 +1434,54 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 
 	public void setPageType(int pageType) {
 		this.pageType = pageType;
+	}
+
+	public File getPicture2() {
+		return picture2;
+	}
+
+	public void setPicture2(File picture2) {
+		this.picture2 = picture2;
+	}
+
+	public String getPicture2ContentType() {
+		return picture2ContentType;
+	}
+
+	public void setPicture2ContentType(String picture2ContentType) {
+		this.picture2ContentType = picture2ContentType;
+	}
+
+	public String getPicture2FileName() {
+		return picture2FileName;
+	}
+
+	public void setPicture2FileName(String picture2FileName) {
+		this.picture2FileName = picture2FileName;
+	}
+
+	public File getPicture3() {
+		return picture3;
+	}
+
+	public void setPicture3(File picture3) {
+		this.picture3 = picture3;
+	}
+
+	public String getPicture3ContentType() {
+		return picture3ContentType;
+	}
+
+	public void setPicture3ContentType(String picture3ContentType) {
+		this.picture3ContentType = picture3ContentType;
+	}
+
+	public String getPicture3FileName() {
+		return picture3FileName;
+	}
+
+	public void setPicture3FileName(String picture3FileName) {
+		this.picture3FileName = picture3FileName;
 	}
 
 }
