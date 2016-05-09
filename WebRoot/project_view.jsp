@@ -518,11 +518,11 @@
 									</td>
 									<td>
 										<span class="mini-textbox-border"> <s:property
-												value="project.detectionUnit" /> </span>
+												value="project.detectionUnitPrincipal" /> </span>
 									</td>
 									<td class="last">
 										<span class="mini-textbox-border"> <s:property
-												value="project.detectionUnits" /> </span>
+												value="project.detectionUnitPrincipalTelphone" /> </span>
 									</td>
 								</tr>
 								<tr>
@@ -539,7 +539,7 @@
 									</td>
 									<td class="last">
 										<span class="mini-textbox-border"> <s:property
-												value="project.concreteUnitPrincipal" /> </span>
+												value="project.concreteUnitPrincipalTelphone" /> </span>
 									</td>
 								</tr>
 								<tr class="odd-row">
@@ -548,7 +548,7 @@
 									</th>
 									<td>
 										<span class="mini-textbox-border"> <s:property
-												value="project.concreteUnitPrincipal" /> </span>
+												value="project.mortarUnit" /> </span>
 									</td>
 									<td>
 										<span class="mini-textbox-border"> <s:property

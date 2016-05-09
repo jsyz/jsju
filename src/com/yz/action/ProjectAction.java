@@ -645,7 +645,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 
 			// 形象进度(0:未开工/0%,1:基础/30%,2：主体/50%，3:装饰/70%，4：完工待验/100%，5：竣工)
 			
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				ProjectClassify projectClassify = new ProjectClassify();
 				int projectNumber = 0;// 项目总数
 				float buildingArea = 0f;// 总面积

@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFooter;
 import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 
 import com.yz.model.Project;
 import com.yz.vo.ProjectClassify;
@@ -50,16 +52,24 @@ public class ProjectClassifyExcel {
      * @param cells
      * @param rowIndex
      */
-    public static void createTableRow(List<String> cells,short rowIndex)
+    public static void createTableRow(List<String> cells,short rowIndex,short color)
     {
         //创建第rowIndex行
         HSSFRow row = demoSheet.createRow((short) rowIndex);
         for(short i = 0;i < cells.size();i++)
         {
             //创建第i个单元格
+        	
+        	HSSFCellStyle style = demoWorkBook.createCellStyle();
+        	
+        	
+        	style.setFillForegroundColor(color);
+    		style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        	
             HSSFCell cell = row.createCell((short) i);
             cell.setCellType(HSSFCell.CELL_TYPE_STRING);
             cell.setCellValue(cells.get(i));
+            cell.setCellStyle(style);
         }
     }
     
@@ -84,7 +94,44 @@ public class ProjectClassifyExcel {
     			list.add(projectClassify.getProjectNumberTotal()+"");
     			list.add(projectClassify.getBuildingAreaTotal()+"");
     			list.add(projectClassify.getBuildingCostTotal()+"");
-    			createTableRow(list,(short)(k+1));
+    			
+    			short color = 1;
+    			switch (k) {
+    		      case 0:
+    		      case 1:
+    		      case 2:
+    		      case 3:
+    		      case 4:
+    		    	  color = HSSFColor.AQUA.index;
+    		        break;
+    		      case 5:
+    		      case 6:
+    		      case 7:
+    		      case 8:
+    		      case 9:
+    		    	  color = HSSFColor.GREEN.index;
+    		        break;
+    		      case 10:
+    		      case 11:
+    		      case 12:
+    		    	  color = HSSFColor.TURQUOISE.index;
+    		        break;
+    		      case 13:
+    		      case 14:
+    		      case 15:
+    		      case 16:
+    		      case 17:
+    		      case 18:
+    		    	  color = HSSFColor.CORNFLOWER_BLUE.index;
+    		        break;
+    		      default:
+    		        break;
+    		      }
+    			
+    			createTableRow(list,(short)(k+1),color);
+    			
+    			
+    			
     		}
 		} catch (Exception e) {
 			e.printStackTrace();
