@@ -92,7 +92,7 @@
 								</label>
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
-											class="input-text" value="<s:property value="device.name"/>" placeholder="" id="input2"
+											class="input-text" value="<s:property value="device.name"/>" placeholder=""
 											name="device.name" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
@@ -159,7 +159,7 @@
 							<span class="form-label col-3"> <span
 								class="formControls col-12"> <input type="text"
 										onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})"
-										class="input-text Wdate" value="<s:property value="device.usecardExpireTime"/>" placeholder="" id="input2"
+										class="input-text Wdate" value="<s:property value="device.usecardExpireTime"/>" placeholder=""
 										name="device.usecardExpireTime" width="45%" /> </span> </span>
 						</div>
 						<div class="row cl mb-10">

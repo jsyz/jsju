@@ -153,16 +153,16 @@ public class PromanAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 		
-		String imageName = DateTimeKit.getDateRandom()
-		+ pictureFileName.substring(pictureFileName
-				.indexOf("."));
 		
-		this.upload("/promanpic/"+pid, imageName, picture);
-		
-//		System.out.println("the certificate is"+"promanpic/"+pid+ "/"+ imageName);
-		
-		proman.setCertificate("promanpic/"+pid+ "/"+ imageName);
-		
+		if(picture!=null&&pictureFileName!=null&&pictureFileName.contains("."))
+		{
+			String imageName = DateTimeKit.getDateRandom()
+			+ pictureFileName.substring(pictureFileName
+					.indexOf("."));
+			
+			this.upload("/promanpic/"+pid, imageName, picture);
+			proman.setCertificate("promanpic/"+pid+ "/"+ imageName);
+		}
 		promanService.add(proman);
 
 		arg[0] = "promanAction!list?pid="+pid+"&areaIndex="
