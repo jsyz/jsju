@@ -246,7 +246,7 @@
 
 													<a style="text-decoration: none" class="ml-5"
 														onClick="return confirm('你确定删除该信息吗？')" title="删除"
-														href="deviceAction!delete?id=<s:property value="id"/>"
+														href="deviceAction!delete?id=<s:property value="id"/>&pid=<s:property value="pid"/>"
 														title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
 												</s:if>
 

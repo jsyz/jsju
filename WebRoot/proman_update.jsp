@@ -115,7 +115,7 @@
 								<label class="form-label col-2 text-r ">
 									证书信息：
 								</label>
-							<s:hidden name="construction.washSetImg" />
+							<s:hidden name="proman.certificate" />
 							<a href="javascript:void(0);"
 												onClick="addPage('查看图片','promanAction!loadPic?id=<s:property value = "proman.id"/>','650','300')"><img
 													width="45px;" height="35px;" src="images/picture.png"></img>

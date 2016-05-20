@@ -91,7 +91,7 @@ public class Proman implements java.io.Serializable {
 		this.telphone = telphone;
 	}
 
-	@Column(name = "certificate", length = 30)
+	@Column(name = "certificate", length = 100)
 	public String getCertificate() {
 		return this.certificate;
 	}
