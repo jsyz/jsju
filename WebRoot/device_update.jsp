@@ -92,7 +92,7 @@
 								</label>
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
-											class="input-text" value="" placeholder="" id="input2"
+											class="input-text" value="<s:property value="device.name"/>" placeholder="" id="input2"
 											name="device.name" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
@@ -102,7 +102,7 @@
 
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
-											class="input-text" value="" placeholder="" id="input2"
+											class="input-text" value="<s:property value="device.propertyCardNumber"/>" placeholder="" id="input2"
 											name="device.propertyCardNumber" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
@@ -112,7 +112,7 @@
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
 											onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})"
-											class="input-text Wdate" value="" placeholder="" id="input3"
+											class="input-text Wdate" value="<s:property value="device.installTime"/>" placeholder="" id="input3"
 											name="device.installTime" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
@@ -122,17 +122,25 @@
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
 											onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})"
-											id="datemin2" class="input-text Wdate" width="45%"
+											id="datemin2" class="input-text Wdate" value ="<s:property value="device.checkTime"/>" width="45%"
 											name="device.checkTime" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
 								<label class="form-label col-2 text-r ">
 									是否办理使用登记证：
 								</label>
+								<s:if test= "device.isDealUsecard == 1">
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <!--  <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" /> -->
-										<s:radio list="#{'1':'是','0':'否'}" name="evice.isDealUsecard"
+										<s:radio list="#{'1':'是','0':'否'}" name="device.isDealUsecard"
 											value="1" /> </span> </span>
+								</s:if>
+								<s:else>
+								<span class="form-label col-3"> <span
+									class="formControls col-12"> <!--  <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" /> -->
+										<s:radio list="#{'1':'是','0':'否'}" name="device.isDealUsecard"
+											value="0" /> </span> </span>
+											</s:else>
 							</div>
 							<div class="row cl mb-10">
 								<label class="form-label col-2 text-r ">
@@ -141,7 +149,7 @@
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
 											onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})"
-											id="datemin2" class="input-text Wdate" width="45%"
+											id="datemin2" class="input-text Wdate" value="<s:property value="device.removeTime"/>" width="45%"
 											name="device.removeTime" /> </span> </span>
 							</div>
 
@@ -151,7 +159,7 @@
 							<span class="form-label col-3"> <span
 								class="formControls col-12"> <input type="text"
 										onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'max\')||\'%y-%M-%d\'}'})"
-										class="input-text Wdate" value="" placeholder="" id="input2"
+										class="input-text Wdate" value="<s:property value="device.usecardExpireTime"/>" placeholder="" id="input2"
 										name="device.usecardExpireTime" width="45%" /> </span> </span>
 						</div>
 						<div class="row cl mb-10">

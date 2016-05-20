@@ -123,7 +123,7 @@
 							style="background-color: #FFF">
 							<thead class="text-c">
 								<tr>
-									<th width="5%"  style="font-size: 18px;">
+									<th width="5%" style="font-size: 18px;">
 										序&nbsp;&nbsp;号
 									</th>
 									<th width="37%" style="font-size: 18px;">

@@ -91,7 +91,7 @@
 								</label>
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
-											class="input-text" value="" placeholder="" id="input2"
+											class="input-text" value="<s:property value="proman.name"/>" placeholder="" id="input2"
 											name="proman.name" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
@@ -99,7 +99,7 @@
 								<span class="form-label col-2 text-r "><span
 									class="c-red">*</span>职务：</span><span class="form-label col-3">
 									<span class="formControls col-12"> <input type="text"
-											class="input-text" value="" placeholder="" id="input2"
+											class="input-text" value="<s:property value="proman.jobTitle"/>" placeholder="" id="input2"
 											name="proman.jobTitle" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
@@ -108,17 +108,18 @@
 								</label>
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <input type="text"
-											class="input-text" value="" placeholder="" id="input3"
+											class="input-text" value="<s:property value="proman.telphone"/>" placeholder="" id="input3"
 											name="proman.telphone" width="45%" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
 								<label class="form-label col-2 text-r ">
 									证书信息：
 								</label>
-								<span class="form-label col-3"> <span
-									class="formControls col-12"> <input type="text"
-											class="input-text" value="" placeholder="" id="input3"
-											name="proman.certificate" width="45%" /> </span> </span>
+							<s:hidden name="construction.washSetImg" />
+							<a href="javascript:void(0);"
+												onClick="addPage('查看图片','promanAction!loadPic?cid=<s:property value = "proman.id"/>','650','300')"><img
+													width="45px;" height="35px;" src="images/picture.png"></img>
+											</a>
 							</div>
 							<div class="row cl mb-10">
 								<div class="col-10 col-offset-5 pt-10 pb-10">

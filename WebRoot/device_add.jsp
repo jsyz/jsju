@@ -130,7 +130,7 @@
 								</label>
 								<span class="form-label col-3"> <span
 									class="formControls col-12"> <!--  <input type="text" class="input-text" value="" placeholder="" id="input2" name="device.isDealUsecard" width="45%" /> -->
-										<s:radio list="#{'1':'是','0':'否'}" name="evice.isDealUsecard"
+										<s:radio list="#{'1':'是','0':'否'}" name="device.isDealUsecard"
 											value="1" /> </span> </span>
 							</div>
 							<div class="row cl mb-10">
