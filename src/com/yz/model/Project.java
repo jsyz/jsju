@@ -35,7 +35,7 @@ public class Project implements java.io.Serializable {
 	private Integer projectType;// 项目分类(0:房地产开发,1：安置房，2:政府投资项目,3:重点项目，4：一般项目)
 	private Integer engineeringType;// 工程分类(0:土建,1：装饰，2:市政,3:绿化，4：照明亮化,5:其他)
 	private Integer buildingType;// 建筑分类(0:住宅,1：公共建筑，2:工业建筑)
-	private Integer graphicProgress;// 形象进度(0:未开工/0%,1:基础/30%,2：主体/50%，3:装饰/70%，4：完工待验/100%，5：竣工)
+	private Integer graphicProgress;// 形象进度(0:未开工/0%,1:基础/30%,2：主体/100%，3:装饰/70%，4：完工待验/100%，5：竣工)
 	private String buildUnit;// 建设单位
 	private String buildUnitPrincipal;// 建设单位负责人
 	private String buildUnittelphone;// 建设单位负责人联系电话
@@ -209,42 +209,42 @@ public class Project implements java.io.Serializable {
 		return this.buildingType;
 	}
 
-	@Column(name = "buildUnit", length = 50)
+	@Column(name = "buildUnit", length = 100)
 	public String getBuildUnit() {
 		return this.buildUnit;
 	}
 
-	@Column(name = "buildUnitPrincipal", length = 30)
+	@Column(name = "buildUnitPrincipal", length = 100)
 	public String getBuildUnitPrincipal() {
 		return this.buildUnitPrincipal;
 	}
 
-	@Column(name = "buildUnittelphone", length = 30)
+	@Column(name = "buildUnittelphone", length = 100)
 	public String getBuildUnittelphone() {
 		return this.buildUnittelphone;
 	}
 
-	@Column(name = "clearPrincipal", length = 30)
+	@Column(name = "clearPrincipal", length = 100)
 	public String getClearPrincipal() {
 		return this.clearPrincipal;
 	}
 
-	@Column(name = "clearPrincipalTelphone", length = 30)
+	@Column(name = "clearPrincipalTelphone", length = 100)
 	public String getClearPrincipalTelphone() {
 		return this.clearPrincipalTelphone;
 	}
 
-	@Column(name = "concreteUnit", length = 50)
+	@Column(name = "concreteUnit", length = 100)
 	public String getConcreteUnit() {
 		return this.concreteUnit;
 	}
 
-	@Column(name = "concreteUnitPrincipal", length = 30)
+	@Column(name = "concreteUnitPrincipal", length = 100)
 	public String getConcreteUnitPrincipal() {
 		return this.concreteUnitPrincipal;
 	}
 
-	@Column(name = "concreteUnitPrincipalTelphone", length = 30)
+	@Column(name = "concreteUnitPrincipalTelphone", length = 100)
 	public String getConcreteUnitPrincipalTelphone() {
 		return this.concreteUnitPrincipalTelphone;
 	}
@@ -255,22 +255,22 @@ public class Project implements java.io.Serializable {
 		return this.construction;
 	}
 
-	@Column(name = "constructionDrawingUnit", length = 50)
+	@Column(name = "constructionDrawingUnit", length = 100)
 	public String getConstructionDrawingUnit() {
 		return this.constructionDrawingUnit;
 	}
 
-	@Column(name = "constructionDrawingUnitPrincipal", length = 30)
+	@Column(name = "constructionDrawingUnitPrincipal", length = 100)
 	public String getConstructionDrawingUnitPrincipal() {
 		return this.constructionDrawingUnitPrincipal;
 	}
 
-	@Column(name = "constructionDrawingUnitPrincipalTelphone", length = 30)
+	@Column(name = "constructionDrawingUnitPrincipalTelphone", length = 100)
 	public String getConstructionDrawingUnitPrincipalTelphone() {
 		return this.constructionDrawingUnitPrincipalTelphone;
 	}
 
-	@Column(name = "constructionPermitDate", length = 50)
+	@Column(name = "constructionPermitDate", length = 100)
 	public String getConstructionPermitDate() {
 		return this.constructionPermitDate;
 	}
@@ -280,17 +280,17 @@ public class Project implements java.io.Serializable {
 		return this.constructionPermitNumber;
 	}
 
-	@Column(name = "constructionUnit", length = 50)
+	@Column(name = "constructionUnit", length = 100)
 	public String getConstructionUnit() {
 		return this.constructionUnit;
 	}
 
-	@Column(name = "constructionUnitPrincipal", length = 30)
+	@Column(name = "constructionUnitPrincipal", length = 100)
 	public String getConstructionUnitPrincipal() {
 		return constructionUnitPrincipal;
 	}
 
-	@Column(name = "constructionUnitPrincipalTelphone", length = 30)
+	@Column(name = "constructionUnitPrincipalTelphone", length = 100)
 	public String getConstructionUnitPrincipalTelphone() {
 		return constructionUnitPrincipalTelphone;
 	}
@@ -301,32 +301,32 @@ public class Project implements java.io.Serializable {
 		return this.daymanage;
 	}
 
-	@Column(name = "designUnit", length = 50)
+	@Column(name = "designUnit", length = 100)
 	public String getDesignUnit() {
 		return this.designUnit;
 	}
 
-	@Column(name = "designUnitPrincipal", length = 30)
+	@Column(name = "designUnitPrincipal", length = 100)
 	public String getDesignUnitPrincipal() {
 		return this.designUnitPrincipal;
 	}
 
-	@Column(name = "designUnitPrincipalTelphone", length = 30)
+	@Column(name = "designUnitPrincipalTelphone", length = 100)
 	public String getDesignUnitPrincipalTelphone() {
 		return this.designUnitPrincipalTelphone;
 	}
 
-	@Column(name = "detectionUnit", length = 50)
+	@Column(name = "detectionUnit", length = 100)
 	public String getDetectionUnit() {
 		return this.detectionUnit;
 	}
 
-	@Column(name = "detectionUnitPrincipal", length = 30)
+	@Column(name = "detectionUnitPrincipal", length = 100)
 	public String getDetectionUnitPrincipal() {
 		return this.detectionUnitPrincipal;
 	}
 
-	@Column(name = "detectionUnitPrincipalTelphone", length = 30)
+	@Column(name = "detectionUnitPrincipalTelphone", length = 100)
 	public String getDetectionUnitPrincipalTelphone() {
 		return this.detectionUnitPrincipalTelphone;
 	}
@@ -336,12 +336,12 @@ public class Project implements java.io.Serializable {
 		return this.devices;
 	}
 
-	@Column(name = "engineeringDirector", length = 50)
+	@Column(name = "engineeringDirector", length = 100)
 	public String getEngineeringDirector() {
 		return this.engineeringDirector;
 	}
 
-	@Column(name = "engineeringPlace", length = 50)
+	@Column(name = "engineeringPlace", length = 100)
 	public String getEngineeringPlace() {
 		return this.engineeringPlace;
 	}
@@ -378,27 +378,27 @@ public class Project implements java.io.Serializable {
 		return isUpload;
 	}
 
-	@Column(name = "mortarUnit", length = 50)
+	@Column(name = "mortarUnit", length = 100)
 	public String getMortarUnit() {
 		return this.mortarUnit;
 	}
 
-	@Column(name = "mortarUnitPrincipal", length = 30)
+	@Column(name = "mortarUnitPrincipal", length = 100)
 	public String getMortarUnitPrincipal() {
 		return this.mortarUnitPrincipal;
 	}
 
-	@Column(name = "mortarUnitPrincipalTelphone", length = 30)
+	@Column(name = "mortarUnitPrincipalTelphone", length = 100)
 	public String getMortarUnitPrincipalTelphone() {
 		return this.mortarUnitPrincipalTelphone;
 	}
 
-	@Column(name = "name", length = 50)
+	@Column(name = "name", length = 100)
 	public String getName() {
 		return this.name;
 	}
 
-	@Column(name = "planendDate", length = 50)
+	@Column(name = "planendDate", length = 100)
 	public String getPlanendDate() {
 		return this.planendDate;
 	}
@@ -408,7 +408,7 @@ public class Project implements java.io.Serializable {
 		return this.premarks;
 	}
 
-	@Column(name = "projectManager", length = 50)
+	@Column(name = "projectManager", length = 100)
 	public String getProjectManager() {
 		return this.projectManager;
 	}
@@ -423,17 +423,17 @@ public class Project implements java.io.Serializable {
 		return this.promans;
 	}
 
-	@Column(name = "reconnaissanceUnit", length = 50)
+	@Column(name = "reconnaissanceUnit", length = 100)
 	public String getReconnaissanceUnit() {
 		return this.reconnaissanceUnit;
 	}
 
-	@Column(name = "reconnaissanceUnitPrincipal", length = 30)
+	@Column(name = "reconnaissanceUnitPrincipal", length = 100)
 	public String getReconnaissanceUnitPrincipal() {
 		return this.reconnaissanceUnitPrincipal;
 	}
 
-	@Column(name = "reconnaissanceUnitPrincipalTelphone", length = 30)
+	@Column(name = "reconnaissanceUnitPrincipalTelphone", length = 100)
 	public String getReconnaissanceUnitPrincipalTelphone() {
 		return this.reconnaissanceUnitPrincipalTelphone;
 	}
@@ -448,12 +448,12 @@ public class Project implements java.io.Serializable {
 		return this.spreadsheets;
 	}
 
-	@Column(name = "startDate", length = 50)
+	@Column(name = "startDate", length = 100)
 	public String getStartDate() {
 		return this.startDate;
 	}
 
-	@Column(name = "structureLevel", length = 30)
+	@Column(name = "structureLevel", length = 100)
 	public String getStructureLevel() {
 		return this.structureLevel;
 	}
@@ -463,22 +463,22 @@ public class Project implements java.io.Serializable {
 		return this.subunits;
 	}
 
-	@Column(name = "supervisionUnit", length = 50)
+	@Column(name = "supervisionUnit", length = 100)
 	public String getSupervisionUnit() {
 		return this.supervisionUnit;
 	}
 
-	@Column(name = "supervisionUnitPrincipal", length = 30)
+	@Column(name = "supervisionUnitPrincipal", length = 100)
 	public String getSupervisionUnitPrincipal() {
 		return supervisionUnitPrincipal;
 	}
 
-	@Column(name = "supervisionUnitPrincipalTelphone", length = 30)
+	@Column(name = "supervisionUnitPrincipalTelphone", length = 100)
 	public String getSupervisionUnitPrincipalTelphone() {
 		return supervisionUnitPrincipalTelphone;
 	}
 
-	@Column(name = "supervisor", length = 50)
+	@Column(name = "supervisor", length = 100)
 	public String getSupervisor() {
 		return this.supervisor;
 	}

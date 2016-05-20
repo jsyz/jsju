@@ -157,7 +157,7 @@
 										<tr>
 											<td align="center">
 												<img id="myimage1" class="img-responsive thumbnail"
-													width="400px" height="auto" />
+													width="400px" height="180px;" alt="添加图片"/>
 												<script type="text/javascript">
 															function change1() {
 															    var pic1 = document.getElementById("myimage1"),
@@ -220,7 +220,7 @@
 										<tr>
 											<td align="center">
 												<img id="myimage2" class="img-responsive thumbnail"
-													width="400px" height="auto" />
+													width="400px" height="180px;" />
 												<script type="text/javascript">
 															function change2() {
 															    var pic2 = document.getElementById("myimage2"),
@@ -282,7 +282,7 @@
 										<tr>
 											<td align="center">
 												<img id="myimage3" class="img-responsive thumbnail"
-													width="400px" height="auto" />
+													width="400px" height="180px;" />
 												<script type="text/javascript">
 															function change3() {
 															    var pic3 = document.getElementById("myimage3"),

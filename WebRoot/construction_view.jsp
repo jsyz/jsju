@@ -156,7 +156,7 @@
 										</div>
 
 									</td>
-									<s:if test="%{construction.washSetImg == null}">
+									<s:if test="%{construction.washSetImg == null||construction.washSetImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture1"
 												accept="image/jpeg,image/png,image/jpg" id="myfile1"></s:file>
@@ -195,7 +195,7 @@
 
 
 									</td>
-									<s:if test="%{construction.waterClearImg == null}">
+									<s:if test="%{construction.waterClearImg == null||construction.waterClearImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture2"
 												accept="image/jpeg,image/png,image/jpg" id="myfile2"></s:file>
@@ -235,7 +235,7 @@
 
 										<br>
 									</td>
-									<s:if test="%{construction.doorConformImg == null}">
+									<s:if test="%{construction.doorConformImg == null||construction.doorConformImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture3"
 												accept="image/jpeg,image/png,image/jpg" id="myfile3"></s:file>
@@ -271,7 +271,7 @@
 												value="construction.isGuardConform" />
 										</div>
 									</td>
-									<s:if test="%{construction.guardConformImg == null}">
+									<s:if test="%{construction.guardConformImg == null||construction.guardConformImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture4"
 												accept="image/jpeg,image/png,image/jpg" id="myfile4"></s:file>
@@ -307,7 +307,7 @@
 												value="construction.isAdConform" />
 										</div>
 									</td>
-									<s:if test="%{construction.adConformImg == null}">
+									<s:if test="%{construction.adConformImg == null||construction.adConformImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture5"
 												accept="image/jpeg,image/png,image/jpg" id="myfile5"></s:file>
@@ -345,7 +345,7 @@
 													value="construction.isRoadHarden" />
 											</div>
 									</td>
-									<s:if test="%{construction.roadHardenImg == null}">
+									<s:if test="%{construction.roadHardenImg == null||construction.roadHardenImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture6"
 												accept="image/jpeg,image/png,image/jpg" id="myfile6"></s:file>
@@ -381,7 +381,7 @@
 												value="construction.isRoadClear" />
 										</div>
 									</td>
-									<s:if test="%{construction.roadClearImg == null}">
+									<s:if test="%{construction.roadClearImg == null||construction.roadClearImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture7"
 												accept="image/jpeg,image/png,image/jpg" id="myfile7"></s:file>
@@ -417,7 +417,7 @@
 												value="construction.isLabelComplete" />
 										</div>
 									</td>
-									<s:if test="%{construction.labelCompleteImg == null}">
+									<s:if test="%{construction.labelCompleteImg == null||construction.labelCompleteImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture8"
 												accept="image/jpeg,image/png,image/jpg" id="myfile8"></s:file>
@@ -453,7 +453,7 @@
 												value="construction.isLayoutRational" />
 										</div>
 									</td>
-									<s:if test="%{construction.layoutRationalImg == null}">
+									<s:if test="%{construction.layoutRationalImg == null||construction.layoutRationalImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture9"
 												accept="image/jpeg,image/png,image/jpg" id="myfile9"></s:file>
@@ -491,7 +491,7 @@
 										</div>
 										<br>
 									</td>
-									<s:if test="%{construction.meetFireImg == null}">
+									<s:if test="%{construction.meetFireImg == null||construction.meetFireImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture10"
 												accept="image/jpeg,image/png,image/jpg" id="myfile10"></s:file>
@@ -527,7 +527,7 @@
 												value="construction.isMeasurePlace" />
 										</div>
 									</td>
-									<s:if test="%{construction.measurePlaceImg == null}">
+									<s:if test="%{construction.measurePlaceImg == null||construction.measurePlaceImg ==''}">
 										<td class="text-c" colspan="3" align="center">
 											<s:file name="picture11"
 												accept="image/jpeg,image/png,image/jpg" id="myfile11"></s:file>

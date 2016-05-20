@@ -106,7 +106,8 @@
 									<a class="btn btn-primary radius"
 										href="deviceAction!goToAdd?pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>"><i
 										class="Hui-iconfont">&#xe600;</i> 新增设备</a>
-								</s:if> <s:elseif test="#session.userSession.userLimit==1">
+								</s:if>
+								 <s:elseif test="#session.userSession.userLimit==1">
 									<s:if test="#session.userSession.areaIndex==#session.areaVO.index">
 										<a href="javascript:;" onClick="deleteAllCheckedDevices();"
 											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
@@ -115,8 +116,9 @@
 											href="deviceAction!goToAdd?pid=<s:property value="pid"/>&areaIndex=<s:property value="areaIndex"/>"><i
 											class="Hui-iconfont">&#xe600;</i> 新增设备</a>
 									</s:if>
-								</s:elseif> <s:elseif test="#session.userSession.userLimit==2">
-									<s:if test="#session.userSession.id==project.id">
+								</s:elseif> 
+								<s:elseif test="#session.userSession.userLimit==2">
+									<s:if test="#session.userSession.id==project.uid">
 										<a href="javascript:;" onClick="deleteAllCheckedDevices();"
 											class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 											批量删除</a>

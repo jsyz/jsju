@@ -163,7 +163,7 @@
 											<td align="center">
 												<img id="myimage1" class="img-responsive thumbnail"
 													src="<%=basePath%>${spreadsheet.sheetImg}" width="400px"
-													height="auto" />
+													height="180px;" />
 												<script type="text/javascript">
 															function change1() {
 															    var pic1 = document.getElementById("myimage1"),
@@ -227,7 +227,7 @@
 											<td align="center">
 												<img id="myimage2" class="img-responsive thumbnail"
 													src="<%=basePath%>${spreadsheet.sheetImg1}" width="400px"
-													height="auto" />
+													height="180px;" />
 												<script type="text/javascript">
 															function change2() {
 															    var pic2 = document.getElementById("myimage2"),
@@ -292,7 +292,7 @@
 											<td align="center">
 												<img id="myimage3" class="img-responsive thumbnail"
 													src="<%=basePath%>${spreadsheet.sheetImg2}" width="400px"
-													height="auto" />
+													height="180px;" />
 												<script type="text/javascript">
 															function change3() {
 															    var pic3 = document.getElementById("myimage3"),

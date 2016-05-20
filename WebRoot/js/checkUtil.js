@@ -20,6 +20,7 @@ function checkUsero()
 {
 	var username = $("#username").val();
 	var booleanBack = true;
+	console.log(username);
 	$.ajax({   
 	            url:'checkUsername',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -37,12 +38,12 @@ function checkUsero()
 					 	alert(msg.message);
 				 		$(document).ready(function(){ 
 				 			$("#username").val('');
+				 			username = '';
 				 		});
 				 		booleanBack =false;
 					 }
 				}
 			});
-	
 	
 	
 	
