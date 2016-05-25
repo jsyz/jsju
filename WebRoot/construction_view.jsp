@@ -132,11 +132,8 @@
 									<th width="15%" style="font-size: 18px;">
 										状&nbsp;&nbsp;态
 									</th>
-									<th width="10%" style="font-size: 18px;">
+									<th width="20%" style="font-size: 18px;">
 										查看图片
-									</th>
-									<th width="10%" style="font-size: 18px;">
-										操&nbsp;&nbsp;作
 									</th>
 								</tr>
 							</thead>
@@ -156,27 +153,12 @@
 										</div>
 
 									</td>
-									<s:if test="%{construction.washSetImg == null||construction.washSetImg ==''}">
-										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture1"
-												accept="image/jpeg,image/png,image/jpg" id="myfile1"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.washSetImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "1"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteConstructionpic(<s:property value="1" />,<s:property value="construction.id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+
+									<td class="text-c" colspan="3" align="center">
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=1&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 
 								<tr class="text-c">
@@ -195,27 +177,11 @@
 
 
 									</td>
-									<s:if test="%{construction.waterClearImg == null||construction.waterClearImg ==''}">
-										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture2"
-												accept="image/jpeg,image/png,image/jpg" id="myfile2"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.waterClearImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "2"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+									<td class="text-c" colspan="3" align="center">
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=2&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -235,27 +201,11 @@
 
 										<br>
 									</td>
-									<s:if test="%{construction.doorConformImg == null||construction.doorConformImg ==''}">
-										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture3"
-												accept="image/jpeg,image/png,image/jpg" id="myfile3"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.doorConformImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "3"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+									<td class="text-c" colspan="3" align="center">
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=3&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -271,27 +221,11 @@
 												value="construction.isGuardConform" />
 										</div>
 									</td>
-									<s:if test="%{construction.guardConformImg == null||construction.guardConformImg ==''}">
 										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture4"
-												accept="image/jpeg,image/png,image/jpg" id="myfile4"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.guardConformImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "4"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=4&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -307,27 +241,11 @@
 												value="construction.isAdConform" />
 										</div>
 									</td>
-									<s:if test="%{construction.adConformImg == null||construction.adConformImg ==''}">
 										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture5"
-												accept="image/jpeg,image/png,image/jpg" id="myfile5"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.adConformImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "5"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=5&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -345,27 +263,11 @@
 													value="construction.isRoadHarden" />
 											</div>
 									</td>
-									<s:if test="%{construction.roadHardenImg == null||construction.roadHardenImg ==''}">
 										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture6"
-												accept="image/jpeg,image/png,image/jpg" id="myfile6"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.roadHardenImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "6"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=6&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -381,27 +283,11 @@
 												value="construction.isRoadClear" />
 										</div>
 									</td>
-									<s:if test="%{construction.roadClearImg == null||construction.roadClearImg ==''}">
 										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture7"
-												accept="image/jpeg,image/png,image/jpg" id="myfile7"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.roadClearImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "7"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=7&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -417,27 +303,11 @@
 												value="construction.isLabelComplete" />
 										</div>
 									</td>
-									<s:if test="%{construction.labelCompleteImg == null||construction.labelCompleteImg ==''}">
-										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture8"
-												accept="image/jpeg,image/png,image/jpg" id="myfile8"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.labelCompleteImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "8"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+									<td class="text-c" colspan="3" align="center">
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=8&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -453,27 +323,11 @@
 												value="construction.isLayoutRational" />
 										</div>
 									</td>
-									<s:if test="%{construction.layoutRationalImg == null||construction.layoutRationalImg ==''}">
 										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture9"
-												accept="image/jpeg,image/png,image/jpg" id="myfile9"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.layoutRationalImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "9"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=9&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -491,27 +345,11 @@
 										</div>
 										<br>
 									</td>
-									<s:if test="%{construction.meetFireImg == null||construction.meetFireImg ==''}">
-										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture10"
-												accept="image/jpeg,image/png,image/jpg" id="myfile10"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.meetFireImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "10"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+									<td class="text-c" colspan="3" align="center">
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=10&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 								</tr>
 								<tr class="text-c">
 									<td class="text-c" style="font-weight: 800;">
@@ -527,27 +365,11 @@
 												value="construction.isMeasurePlace" />
 										</div>
 									</td>
-									<s:if test="%{construction.measurePlaceImg == null||construction.measurePlaceImg ==''}">
-										<td class="text-c" colspan="3" align="center">
-											<s:file name="picture11"
-												accept="image/jpeg,image/png,image/jpg" id="myfile11"></s:file>
-										</td>
-									</s:if>
-									<s:else>
-										<td>
-											<s:hidden name="construction.measurePlaceImg" />
-											<a href="javascript:void(0);"
-												onClick="addPage('查看图片','constructionAction!loadPic?pic_row=<s:property value = "11"/>&cid=<s:property value = "construction.id"/>','650','300')"><img
-													width="45px;" height="35px;" src="images/picture.png"></img>
-											</a>
-										</td>
-										<td>
-											<a style="text-decoration: none" class="ml-5"
-												href="javascript:;"
-												onclick="deleteEducationpic(<s:property value="id" />);"
-												title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-										</td>
-									</s:else>
+									<td class="text-c" colspan="3" align="center">
+										<a style="text-decoration: none" class="btn btn-primary radius"
+											href="constructionpicAction!goToAdd?row=11&conid=<s:property value="construction.id" />">
+											 查看图片 </a>
+									</td>
 
 								</tr>
 

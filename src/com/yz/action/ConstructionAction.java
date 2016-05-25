@@ -771,7 +771,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 				picture9FileName, picture10FileName, picture11FileName };
 
 		for (int i = 0; i < 11; i++)
-			this.savePics(pictures[i], pictureFileNames[i], i, construction);
+			//this.savePics(pictures[i], pictureFileNames[i], i, construction);
 
 		constructionService.update(construction);
 		arg[0] = "constructionAction!view?pid=" + pid + "&areaIndex="
@@ -787,7 +787,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		return "picview";
 
 	}
-
+/*
 	public String deleteConstructionpic() throws Exception {
 
 		construction = constructionService.loadByCid(cid);
@@ -954,7 +954,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 
 		return null;
 	}
-
+*/
 	// 文件上传
 	public void upload(String fileName, String imageName, File picture)
 			throws Exception {
@@ -1009,7 +1009,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		}
 
 	}
-
+/*
 	public void checkImg(int cid) {
 		// TODO Auto-generated method stub
 		int flag = 0;
@@ -1108,7 +1108,7 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		if (flag != 0)
 			constructionService.update(construction);
 	}
-
+*/
 	public File get() {
 		return picture1;
 	}
