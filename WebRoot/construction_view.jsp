@@ -109,7 +109,7 @@
 				</div>
 
 				<div class="xmconbox pd-20">
-					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<div class="rowid cl Huialert-info box-shadow pd-5 bk-gray radius">
 						<p style="font-size: 18px;">
 							<i class="Hui-iconfont">&#xe623;</i>
 							<s:property value="project.name" />
@@ -117,7 +117,7 @@
 						</p>
 					</div>
 
-					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+					<div class="rowid cl Huialert-info box-shadow pd-5 bk-gray radius">
 
 						<table class="table table-border table-bordered radius table-bg "
 							style="background-color: #FFF">
@@ -156,7 +156,7 @@
 
 									<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=1&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=1&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -179,7 +179,7 @@
 									</td>
 									<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=2&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=2&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -203,7 +203,7 @@
 									</td>
 									<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=3&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=3&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -223,7 +223,7 @@
 									</td>
 										<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=4&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=4&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -243,7 +243,7 @@
 									</td>
 										<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=5&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=5&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -265,7 +265,7 @@
 									</td>
 										<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=6&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=6&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -285,7 +285,7 @@
 									</td>
 										<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=7&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=7&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -305,7 +305,7 @@
 									</td>
 									<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=8&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=8&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -325,7 +325,7 @@
 									</td>
 										<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=9&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=9&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -347,7 +347,7 @@
 									</td>
 									<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=10&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=10&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 								</tr>
@@ -367,7 +367,7 @@
 									</td>
 									<td class="text-c" colspan="3" align="center">
 										<a style="text-decoration: none" class="btn btn-primary radius"
-											href="constructionpicAction!goToAdd?row=11&conid=<s:property value="construction.id" />">
+											href="constructionpicAction!checkToView?rowid=11&conid=<s:property value="construction.id" />">
 											 查看图片 </a>
 									</td>
 
@@ -385,55 +385,5 @@
 				</div>
 			</form>
 		</div>
-		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
-		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-		<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
-		<script type="text/javascript"
-			src="lib/Validform/5.3.2/Validform.min.js"></script>
-		<script type="text/javascript"
-			src="lib/webuploader/0.1.5/webuploader.min.js"></script>
-		<script type="text/javascript" src="js/H-ui.js"></script>
-		<script type="text/javascript" src="js/H-ui.admin.js"></script>
-		<script type="text/javascript">
-															function change1() {
-															    var pic1 = document.getElementById("myimage1"),
-															        file1 = document.getElementById("myfile1");
-															    var ext1=file1.value.substring(file1.value.lastIndexOf(".")+1).toLowerCase();
-															     // gif在IE浏览器暂时无法显示
-															     if(ext1!='png'&&ext1!='jpg'&&ext1!='jpeg'){
-															         alert("图片的格式必须为png或者jpg或者jpeg格式！"); 
-															         return;
-															     }
-															     var isIE = navigator.userAgent.match(/MSIE/)!= null,
-															         isIE6 = navigator.userAgent.match(/MSIE 6.0/)!= null;
-															     if(isIE) {
-															        file1.select();
-															        var reallocalpath = document.selection.createRange().text;
-															 
-															        // IE6浏览器设置img的src为本地路径可以直接显示图片
-															         if (isIE6) {
-															            pic1.src = reallocalpath;
-															         }else {
-															            // 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
-															             pic1.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
-															             // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
-															             pic1.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
-															         }
-															     }else {
-															        html5Reader1(file1);
-															     }
-															     pic1.alt = '图片';
-															}
-															 function html5Reader1(file1){
-															     var file1 = file1.files[0];
-															     var reader1 = new FileReader();
-															     reader1.readAsDataURL(file1);
-															     reader1.onload = function(e){
-															         var pic1 = document.getElementById("myimage1");
-															         pic1.src=this.result;
-															     }
-															 }
-												</script>
 	</body>
 </html>

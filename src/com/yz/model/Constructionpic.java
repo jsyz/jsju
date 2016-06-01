@@ -21,24 +21,16 @@ public class Constructionpic implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
-	private Integer row;
+	private Integer rowid;// 行号
 	private Construction construction;
-	private String picName;
-	private String picDir;
+	private String picDir1;
+	private String picDir2;
+	private String picDir3;
 
 	// Constructors
 
 	/** default constructor */
 	public Constructionpic() {
-	}
-
-	/** full constructor */
-	public Constructionpic(int row, Construction construction, String picName,
-			String picDir) {
-		this.row = row;
-		this.construction = construction;
-		this.picName = picName;
-		this.picDir = picDir;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +39,7 @@ public class Constructionpic implements java.io.Serializable {
 		return construction;
 	}
 
-	// Property accessors
+	// P roperty accessors
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
@@ -55,19 +47,28 @@ public class Constructionpic implements java.io.Serializable {
 		return this.id;
 	}
 
-	@Column(name = "picDir", length = 50)
-	public String getPicDir() {
-		return this.picDir;
+	@Column(name = "picDir1", length = 100)
+	public String getPicDir1() {
+		return picDir1;
 	}
 
-	@Column(name = "picName", length = 50)
-	public String getPicName() {
-		return this.picName;
+	@Column(name = "picDir2", length = 100)
+	public String getPicDir2() {
+		return picDir2;
 	}
 
-	@Column(name = "row")
-	public Integer getRow() {
-		return row;
+	@Column(name = "rowid", length = 11)
+	public Integer getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(Integer rowid) {
+		this.rowid = rowid;
+	}
+
+	@Column(name = "picDir3", length = 100)
+	public String getPicDir3() {
+		return picDir3;
 	}
 
 	public void setConstruction(Construction construction) {
@@ -78,16 +79,16 @@ public class Constructionpic implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public void setPicDir(String picDir) {
-		this.picDir = picDir;
+	public void setPicDir1(String picDir1) {
+		this.picDir1 = picDir1;
 	}
 
-	public void setPicName(String picName) {
-		this.picName = picName;
+	public void setPicDir2(String picDir2) {
+		this.picDir2 = picDir2;
 	}
 
-	public void setRow(Integer row) {
-		this.row = row;
+	public void setPicDir3(String picDir3) {
+		this.picDir3 = picDir3;
 	}
 
 }

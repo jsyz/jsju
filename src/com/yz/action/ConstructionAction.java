@@ -202,10 +202,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		return "success_child";
 	}
 
-	private void checkIP() {
-		// TODO Auto-generated method stub
-		// String ip = getIpAddr(req);
-	}
 
 	/**
 	 * 设备资料
@@ -355,28 +351,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		return installTime;
 	}
 
-	/*
-	 * 获取IP地址
-	 */
-	public String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
 
 	public Integer getIsDealUsecard() {
 		return isDealUsecard;
@@ -480,81 +454,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		return "add";
 	}
 
-	/**
-	 * // * 用户登陆 // * // *
-	 * 
-	 * @throws Exception //
-	 */
-	// public String login() throws Exception {
-	//
-	// if (checkDatebase())// 检查数据库
-	// {
-	// Usero useroTest = new Usero();
-	// useroTest.setNumber("测试人员");
-	// useroTest.setUsername("test");
-	// useroTest.setPassword("test");
-	// useroTest.setUserLimit(1);
-	// useroService.add(useroTest);
-	// session.put("usero", useroTest);
-	// return "loginSucc";
-	// }
-	// if (username == null || username.equals("") || password == null
-	// || password.equals("")) {
-	// String loginfail = "用户名或密码不能为空";
-	// request.put("loginFail", loginfail);
-	// return "adminLogin";
-	// }
-	// Usero useroLogin = useroService.useroLogin(username, password);
-	// if (useroLogin == null) {
-	// String loginfail = "用户名或密码输入有误";
-	// request.put("loginFail", loginfail);
-	// return "adminLogin";
-	// } else {
-	// // 设置登陆时间
-	// if (session.get("usero") == null) {
-	// //setLoginTime(useroLogin);
-	// session.put("usero", useroLogin);
-	// }
-	// // checkIP();//检查IP地址
-	// return "loginSucc";
-	// }
-	// }
-	//
-	// public String welcome() {
-	// // 登陆验证
-	// Usero usero = (Usero) session.get("usero");
-	// if (usero == null) {
-	// return "opsessiongo";
-	// }
-	// Usero useroWelcome = useroService.loadById(usero.getId());
-	// // 欢迎界面
-	// return "welcome";
-	// }
-	//
-	// // 设置登陆时间
-	/**
-	 * 
-	 * private void setLoginTime(Usero useroLogin) { // TODO Auto-generated
-	 * method stub if (useroLogin.getBeforeLoginTime() == "" ||
-	 * useroLogin.getBeforeLoginTime() == null) {
-	 * useroLogin.setBeforeLoginTime(DateTimeKit.getLocalTime()); } else {
-	 * useroLogin.setBeforeLoginTime(useroLogin .getCurrentLoginTime()); }
-	 * useroLogin.setCurrentLoginTime(DateTimeKit.getLocalTime());
-	 * useroService.update(useroLogin); }
-	 */
-	// private boolean checkDatebase() {
-	// // TODO Auto-generated method stub
-	// useros = useroService.getUseros();
-	// if (useros.size() == 0) {
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// }
-
-	/**
-	 * 设备管理
-	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
 		Usero userSession = (Usero) session.get("userSession");
@@ -756,22 +655,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 	 * @return
 	 */
 	public String update() throws Exception {
-		// 判断会话是否失效
-		// Construction construction = (Construction)
-		// session.get("construction");
-		// if (construction == null) {
-		// return "opsessiongo_child";
-		// }
-
-		File pictures[] = { picture1, picture2, picture3, picture4, picture5,
-				picture6, picture7, picture8, picture9, picture10, picture11 };
-		String pictureFileNames[] = { picture1FileName, picture2FileName,
-				picture3FileName, picture4FileName, picture5FileName,
-				picture6FileName, picture7FileName, picture8FileName,
-				picture9FileName, picture10FileName, picture11FileName };
-
-		for (int i = 0; i < 11; i++)
-			//this.savePics(pictures[i], pictureFileNames[i], i, construction);
 
 		constructionService.update(construction);
 		arg[0] = "constructionAction!view?pid=" + pid + "&areaIndex="
@@ -780,181 +663,6 @@ public class ConstructionAction extends ActionSupport implements RequestAware,
 		return SUCCESS;
 	}
 
-	public String loadPic() throws Exception {
-
-		construction = constructionService.loadById(cid);
-
-		return "picview";
-
-	}
-/*
-	public String deleteConstructionpic() throws Exception {
-
-		construction = constructionService.loadByCid(cid);
-
-		switch (pic_row) {
-		case 1:
-			File photofile1 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile1.delete();
-			construction.setWashSetImg(null);
-			break;
-		case 2:
-			File photofile2 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile2.delete();
-			construction.setWaterClearImg("");
-			break;
-		case 3:
-			File photofile3 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile3.delete();
-			construction.setWashSetImg("");
-			break;
-		case 4:
-			File photofile4 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile4.delete();
-			construction.setWashSetImg("");
-			break;
-		case 5:
-			File photofile5 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile5.delete();
-			construction.setWashSetImg("");
-			break;
-		case 6:
-			File photofile6 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile6.delete();
-			construction.setWashSetImg("");
-			break;
-		case 7:
-			File photofile7 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile7.delete();
-			construction.setWashSetImg("");
-			break;
-		case 8:
-			File photofile8 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile8.delete();
-			construction.setWashSetImg("");
-			break;
-		case 9:
-			File photofile9 = new File(ServletActionContext.getServletContext()
-					.getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile9.delete();
-			construction.setWashSetImg("");
-			break;
-		case 10:
-			File photofile10 = new File(ServletActionContext
-					.getServletContext().getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile10.delete();
-			construction.setWashSetImg("");
-			break;
-		case 11:
-			File photofile11 = new File(ServletActionContext
-					.getServletContext().getRealPath("/")
-					+ construction.getWashSetImg());
-			photofile11.delete();
-			construction.setWashSetImg("");
-			break;
-		}
-		// File photofile = new File(ServletActionContext.getServletContext()
-		// .getRealPath("/")
-		// + construction.getWashSetImg());
-		// photofile.delete();
-
-		constructionService.update(construction);
-		AjaxMsgVO msgVO = new AjaxMsgVO();
-		msgVO.setMessage("删除成功.");
-		JSONObject jsonObj = JSONObject.fromObject(msgVO);
-		PrintWriter out;
-		try {
-			response.setContentType("text/html;charset=UTF-8");
-			out = response.getWriter();
-			out.print(jsonObj.toString());
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public String savePics(File picture, String picturefilename, int pic_row,
-			Construction construction) throws Exception {
-		if (picture != null) {
-			String imageName = DateTimeKit.getDateRandom()
-					+ picturefilename.substring(picturefilename.indexOf("."));
-			this.upload("/constructionpic/" + pid, imageName, picture);
-			switch (pic_row) {
-			case 0:
-				construction.setWashSetImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 1:
-				construction.setWaterClearImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 2:
-				construction.setDoorConformImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 3:
-				construction.setDoorConformImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 4:
-				construction.setGuardConformImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 5:
-				construction.setAdConformImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 6:
-				construction.setRoadHardenImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 7:
-				construction.setRoadClearImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 8:
-				construction.setLabelCompleteImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 9:
-				construction.setLayoutRationalImg("constructionpic/" + pid
-						+ "/" + imageName);
-				break;
-			case 10:
-				construction.setMeetFireImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			case 11:
-				construction.setMeasurePlaceImg("constructionpic/" + pid + "/"
-						+ imageName);
-				break;
-			}
-
-		}
-
-		return null;
-	}
-*/
 	// 文件上传
 	public void upload(String fileName, String imageName, File picture)
 			throws Exception {

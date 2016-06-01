@@ -118,5 +118,11 @@ public class ConstructionpicServiceImp implements IConstructionpicService {
 		}
 		return constructionpicDao.pageList(queryString,p,page,size);
 	}
+	public Constructionpic loadByConidAndRow(int conid, int rowid) {
+		String queryString="from Constructionpic mo where mo.construction.id=:conid and mo.rowid=:rowid";
+		String[] paramNames=new String[]{"conid","rowid"};
+		Object[] values=new Object[]{conid,rowid};
+		return constructionpicDao.queryByNamedParam(queryString,paramNames,values);
+	}
 	
 }

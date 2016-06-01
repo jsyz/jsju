@@ -100,11 +100,11 @@
 			<result name="load">/project_update.jsp</result>
 			<result name="view">/project_view.jsp</result>
 			<result name="bench">/project_bench.jsp</result>
-			
+
 			<result name="excel">/project_excel.jsp</result>
 			<result name="excel1">/project_excel1.jsp</result>
 			<result name="opexcel">/op_excel.jsp</result>
-			
+
 			<result name="invalid.token">/op_failure.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
@@ -120,7 +120,7 @@
 			method="deleteProjects" />
 		<action name="changeUpload" class="projectAction"
 			method="changeUpload" />
-			
+
 	</package>
 
 
@@ -216,16 +216,15 @@
 		<action name="deleteDangerargument" class="dangerargumentAction"
 			method="deleteDangerargument" />
 	</package>
-	
-	
-	
+
+
+
 	<package name="educationpic" extends="struts-default">
 		<global-results>
 			<result name="adminLogin">/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
-		<action name="educationpicAction"
-			class="educationpicAction">
+		<action name="educationpicAction" class="educationpicAction">
 			<result name="sessiongo">/op_sessiongo.jsp</result>
 			<result name="success_child">/op_success_child.jsp</result>
 			<result name="success">/op_success.jsp</result>
@@ -251,16 +250,15 @@
 		<action name="deleteEducationpic" class="educationpicAction"
 			method="deleteEducationpic" />
 	</package>
-	
-	
-	
+
+
+
 	<package name="spreadsheet" extends="struts-default">
 		<global-results>
 			<result name="adminLogin">/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
-		<action name="spreadsheetAction"
-			class="spreadsheetAction">
+		<action name="spreadsheetAction" class="spreadsheetAction">
 			<result name="sessiongo">/op_sessiongo.jsp</result>
 			<result name="success_child">/op_success_child.jsp</result>
 			<result name="success">/op_success.jsp</result>
@@ -273,7 +271,7 @@
 			<result name="view">/spreadsheet_view.jsp</result>
 			<result name="evaluate">/spreadsheet_evaluate.jsp</result>
 			<result name="archives">/spreadsheet_archives.jsp</result>
-			
+
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
@@ -312,7 +310,6 @@
 			<result name="add">/device_add.jsp</result>
 			<result name="load">/device_update.jsp</result>
 			<result name="view">/device_view.jsp</result>
-			<result name="welcome">/welcome.jsp</result>
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
@@ -349,8 +346,7 @@
 			<result name="add">/construction_add.jsp</result>
 			<result name="load">/construction_update.jsp</result>
 			<result name="view">/construction_view.jsp</result>
-			<result name="picview">/constructionpic_view.jsp</result>
-			<result name="welcome">/welcome.jsp</result>
+
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
@@ -386,8 +382,7 @@
 			<result name="add">/proman_add.jsp</result>
 			<result name="load">/proman_update.jsp</result>
 			<result name="view">/proman_view.jsp</result>
-			<result name="picview">/promanpic_view.jsp</result>
-			<result name="welcome">/welcome.jsp</result>
+
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">
@@ -402,31 +397,28 @@
 		<action name="deletePromans" class="promanAction"
 			method="deletePromans" />
 	</package>
-	
+
 	<package name="constructionpic" extends="struts-default">
 		<global-results>
 			<result name="adminLogin">/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
-		<action name="constructionpicAction" class="constructionpicAction">
+		<action name="constructionpicAction"
+			class="constructionpicAction">
 			<result name="loginSucc">/index.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 			<result name="opfailure_child">
 				/op_failure_child.jsp
 			</result>
+			
 			<result name="success">/op_success.jsp</result>
 			<result name="success_child">/op_success_child.jsp</result>
 			<result name="fail">/op_failure.jsp</result>
 			<result name="operror">/op_error.jsp</result>
 
-			<result name="list">/usero_manage.jsp</result>
 			<result name="add">/constructionpic_add.jsp</result>
-			<result name="load">/usero_update.jsp</result>
-			<result name="view">/usero_view.jsp</result>
-			<result name="password">/useropassword_update.jsp</result>
-			<result name="currentUserRole">/currentUserRole.jsp</result>
-			<result name="index2">/index2.jsp</result>
-			<result name="index">/index.jsp</result>
+			<result name="load">/constructionpic_update.jsp</result>
+
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">

@@ -393,6 +393,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 
 		session.put("areaVO", areaVO);
+		session.put("pid", id);
 
 		project = projectService.loadById(id);
 		return "bench";

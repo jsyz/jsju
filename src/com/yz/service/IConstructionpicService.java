@@ -36,4 +36,6 @@ public interface IConstructionpicService {
 
 	public abstract Constructionpic getConstructionpicByConstructionpicname(String constructionpicname);
 
+	public abstract Constructionpic loadByConidAndRow(int conid, int rowid);
+
 }

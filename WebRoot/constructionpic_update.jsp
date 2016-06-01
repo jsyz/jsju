@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
 		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
 		<script type="text/javascript" src="js/pageKit.js"></script>
-		<title>增加文明施工图片信息</title>
+		<title>修改文明施工图片信息</title>
 	</head>
 	<body>
 		<div class="xmWraper ">
@@ -37,6 +37,7 @@
 						style="line-height: 1.6em; margin-top: 3px"
 						href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
 						target="_self" title="返回项目工作台">返回项目工作台 </a>
+
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
@@ -71,22 +72,21 @@
 					<p>
 						<i class="Hui-iconfont">&#xe623;</i>
 						<s:property value="construction.project.name" />
-						- 新增文明施工图片
+						- 修改文明施工图片
 					</p>
 				</div>
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<div class="row cl bk-gray radius pd-10"
 						style="background-color: #FFF">
-						<!--表格内容-->
-						<form action="constructionpicAction!add" method="post"
+						<form action="constructionpicAction!update" method="post"
 							class="form form-horizontal" id="form-article-add"
 							enctype="multipart/form-data">
-							<input type="hidden" name="constructionpic.conid"
-								value="${conid }" />
-							<input type="hidden" name="constructionpic.rowid"
-								value="${rowid }" />
-							<input name="constructionpic.construction.id"
-								value="<s:property value="conid" />" type="hidden" />
+							<s:hidden name="constructionpic.id"></s:hidden>
+							<s:hidden name="constructionpic.construction.id"></s:hidden>
+							<s:hidden name="constructionpic.rowid"></s:hidden>
+							<s:hidden name="constructionpic.picDir1"></s:hidden>
+							<s:hidden name="constructionpic.picDir2"></s:hidden>
+							<s:hidden name="constructionpic.picDir3"></s:hidden>
 
 							<div class="row cl">
 								<label class="form-label col-2">
@@ -97,7 +97,8 @@
 										<tr>
 											<td align="center">
 												<img id="myimage1" class="img-responsive thumbnail"
-													width="400px" height="180px;" alt="添加图片" />
+													width="400px" height="180px;"
+													src="<%=basePath%>${constructionpic.picDir1}" alt="添加图片" />
 												<script type="text/javascript">
 															function change1() {
 															    var pic1 = document.getElementById("myimage1"),
@@ -160,7 +161,8 @@
 										<tr>
 											<td align="center">
 												<img id="myimage2" class="img-responsive thumbnail"
-													width="400px" height="180px;" />
+													src="<%=basePath%>${constructionpic.picDir2}" width="400px"
+													height="180px;" />
 												<script type="text/javascript">
 															function change2() {
 															    var pic2 = document.getElementById("myimage2"),
@@ -222,7 +224,8 @@
 										<tr>
 											<td align="center">
 												<img id="myimage3" class="img-responsive thumbnail"
-													width="400px" height="180px;" />
+													src="<%=basePath%>${constructionpic.picDir3}" width="400px"
+													height="180px;" />
 												<script type="text/javascript">
 															function change3() {
 															    var pic3 = document.getElementById("myimage3"),
