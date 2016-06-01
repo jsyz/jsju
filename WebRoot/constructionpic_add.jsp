@@ -81,72 +81,12 @@
 							<s:hidden name="pid"></s:hidden>
 							<s:hidden name="sheetTypeStr"></s:hidden>
 							<s:hidden name="pageType"></s:hidden>
-							<input name="spreadsheet.project.id"
-								value="<s:property value="pid" />" type="hidden" />
-							<input name="spreadsheet.sheetName"
-								value="<s:property value="sheetName" />" type="hidden" />
-							<input name="spreadsheet.sheetType"
-								value="<s:property value="sheetType" />" type="hidden" />
+							<input name="constructionpic.construction.id"
+								value="<s:property value="conid" />" type="hidden" />
 							<div class="col-12 mb-0  f-16"
 								style="border-bottom: solid 2px #2DABF7; line-height: 43px;">
 								<s:property value="sheetName" />
 							</div>
-							<div class="row cl" style="margin-top: 20px;">
-								<label class="form-label col-2">
-									<span class="c-red">*</span>上传日期：
-								</label>
-								<span class="form-label col-3"><span
-									class="formControls col-10"> <input type="text"
-											width="45%" class="input-text radius size-M Wdate"
-											name="spreadsheet.updateTime"
-											onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-											id="logmin" class="input-text Wdate" /> </span> </span>
-							</div>
-							<s:if test="sheetType==7">
-								<div class="row cl" style="margin-top: 20px;">
-									<label class="form-label col-2">
-										<span class="c-red">*</span>检查日期：
-									</label>
-									<span class="form-label col-3"><span
-										class="formControls col-10"> <input type="text"
-												width="45%" class="input-text radius size-M Wdate"
-												name="spreadsheet.checkTime"
-												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" /> </span> </span>
-								</div>
-								<div class="row cl" style="margin-top: 20px;">
-									<label class="form-label col-2">
-										<span class="c-red">*</span>整改到期时间：
-									</label>
-									<span class="form-label col-3"><span
-										class="formControls col-10"> <input type="text"
-												width="45%" class="input-text radius size-M Wdate"
-												name="spreadsheet.expireTime"
-												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" /> </span> </span>
-								</div>
-								<div class="row cl" style="margin-top: 20px;">
-									<label class="form-label col-2">
-										<span class="c-red">*</span>是否闭合：
-									</label>
-									<span class="form-label col-3"> <span
-										class="formControls col-10"> <s:select
-												list="#{0:'否',1:'是'}" cssClass="input-text"
-												name="spreadsheet.isClose" listKey="key" listValue="value"
-												width="45%"></s:select> </span> </span>
-								</div>
-								<div class="row cl" style="margin-top: 20px;">
-									<label class="form-label col-2">
-										<span class="c-red">*</span>闭合时间：
-									</label>
-									<span class="form-label col-3"><span
-										class="formControls col-10"> <input type="text"
-												width="45%" class="input-text radius size-M Wdate"
-												name="spreadsheet.closeTime"
-												onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"
-												id="logmin" class="input-text Wdate" /> </span> </span>
-								</div>
-							</s:if>
 
 							<div class="row cl">
 								<label class="form-label col-2">

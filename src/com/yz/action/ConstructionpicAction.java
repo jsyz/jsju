@@ -62,38 +62,17 @@ public class ConstructionpicAction extends ActionSupport implements RequestAware
 	private String picture1ContentType;
 	private String picture1FileName;
 	
+	private File picture2;
+	private String picture2ContentType;
+	private String picture2FileName;
 	
-	// 文件上传
-	public void upload(String fileName, String imageName, File picture)
-			throws Exception {
-		File saved = new File(ServletActionContext.getServletContext()
-				.getRealPath(fileName), imageName);
-		InputStream ins = null;
-		OutputStream ous = null;
-		try {
-			saved.getParentFile().mkdirs();
-			ins = new FileInputStream(picture);
-			ous = new FileOutputStream(saved);
-			byte[] b = new byte[1024];
-			int len = 0;
-			while ((len = ins.read(b)) != -1) {
-				ous.write(b, 0, len);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (ous != null)
-				ous.close();
-			if (ins != null)
-				ins.close();
-		}
-	}
-
-	public String goToAdd() {
-		return "add";
-	}
-
-	public String add() throws Exception {
+	private File picture3;
+	private String picture3ContentType;
+	private String picture3FileName;
+	private int row;
+	private int conid;
+	
+	public String add() throws Exception { 
 
 		if (picture1 != null && picture1FileName != null
 				&& !picture1FileName.replace(" ", "").equals("")) {
@@ -105,6 +84,8 @@ public class ConstructionpicAction extends ActionSupport implements RequestAware
 					+ imageName);
 		}
 		constructionpicService.add(constructionpic);
+		
+		
 		return "success_child";
 	}
 
@@ -137,106 +118,106 @@ public class ConstructionpicAction extends ActionSupport implements RequestAware
 		return null;
 	}
 
-	public String load() {
-		constructionpic = constructionpicService.loadById(edid);
-		return "load";
+	public String[] getArg() {
+		return arg;
 	}
 
-	public String update() {
-		constructionpicService.update(constructionpic);
-		return "success_child";
-	}
-	
-	public String view() {
-		constructionpic = constructionpicService.loadById(id);
-		return "view";
+	public int getConid() {
+		return conid;
 	}
 
-	// get、set-------------------------------------------
-
-	// 获得HttpServletResponse对象
-	public void setServletResponse(HttpServletResponse response) {
-		this.response = response;
+	public Constructionpic getConstructionpic() {
+		return constructionpic;
 	}
 
-	public void setServletRequest(HttpServletRequest req) {
-		this.req = req;
+	public IConstructionpicService getConstructionpicService() {
+		return constructionpicService;
 	}
 
-	public Map<String, Object> getRequest() {
-		return request;
+	public int getDayid() {
+		return dayid;
 	}
 
-	public void setRequest(Map<String, Object> request) {
-		this.request = request;
-	}
-
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
+	public int getEdid() {
+		return edid;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getPage() {
 		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
 	}
 
 	public int getPageCount() {
 		return pageCount;
 	}
-
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
+	
+	public File getPicture1() {
+		return picture1;
 	}
 
-	public int getTotalCount() {
-		return totalCount;
+	// get、set-------------------------------------------
+
+	public String getPicture1ContentType() {
+		return picture1ContentType;
 	}
 
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
-
-	public String[] getArg() {
-		return arg;
-	}
-
-	public void setArg(String[] arg) {
-		this.arg = arg;
-	}
-
-	public javax.servlet.http.HttpServletResponse getResponse() {
-		return response;
-	}
-
-	public void setResponse(javax.servlet.http.HttpServletResponse response) {
-		this.response = response;
+	public String getPicture1FileName() {
+		return picture1FileName;
 	}
 
 	public javax.servlet.http.HttpServletRequest getReq() {
 		return req;
 	}
 
-	public void setReq(javax.servlet.http.HttpServletRequest req) {
-		this.req = req;
+	public Map<String, Object> getRequest() {
+		return request;
 	}
 
-	public IConstructionpicService getConstructionpicService() {
-		return constructionpicService;
+	public javax.servlet.http.HttpServletResponse getResponse() {
+		return response;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public String goToAdd() {
+		
+		System.out.println("the row is "+row+"and conid is "+conid);
+		
+		return "add";
+	}
+
+	public String load() {
+		constructionpic = constructionpicService.loadById(edid);
+		return "load";
+	}
+
+	public void setArg(String[] arg) {
+		this.arg = arg;
+	}
+
+	public void setConid(int conid) {
+		this.conid = conid;
+	}
+
+	public void setConstructionpic(Constructionpic constructionpic) {
+		this.constructionpic = constructionpic;
 	}
 
 	@Resource
@@ -244,52 +225,153 @@ public class ConstructionpicAction extends ActionSupport implements RequestAware
 		this.constructionpicService = constructionpicService;
 	}
 
-	public Constructionpic getConstructionpic() {
-		return constructionpic;
-	}
-
-	public void setConstructionpic(Constructionpic constructionpic) {
-		this.constructionpic = constructionpic;
-	}
-
-	public int getDayid() {
-		return dayid;
-	}
-
 	public void setDayid(int dayid) {
 		this.dayid = dayid;
-	}
-
-	public int getEdid() {
-		return edid;
 	}
 
 	public void setEdid(int edid) {
 		this.edid = edid;
 	}
 
-	public File getPicture1() {
-		return picture1;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
 	}
 
 	public void setPicture1(File picture1) {
 		this.picture1 = picture1;
 	}
 
-	public String getPicture1ContentType() {
-		return picture1ContentType;
-	}
-
 	public void setPicture1ContentType(String picture1ContentType) {
 		this.picture1ContentType = picture1ContentType;
 	}
 
-	public String getPicture1FileName() {
-		return picture1FileName;
-	}
-
 	public void setPicture1FileName(String picture1FileName) {
 		this.picture1FileName = picture1FileName;
+	}
+
+	public void setReq(javax.servlet.http.HttpServletRequest req) {
+		this.req = req;
+	}
+
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+
+	public void setResponse(javax.servlet.http.HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public void setServletRequest(HttpServletRequest req) {
+		this.req = req;
+	}
+
+	// 获得HttpServletResponse对象
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public String update() {
+		constructionpicService.update(constructionpic);
+		return "success_child";
+	}
+
+	// 文件上传
+	public void upload(String fileName, String imageName, File picture)
+			throws Exception {
+		File saved = new File(ServletActionContext.getServletContext()
+				.getRealPath(fileName), imageName);
+		InputStream ins = null;
+		OutputStream ous = null;
+		try {
+			saved.getParentFile().mkdirs();
+			ins = new FileInputStream(picture);
+			ous = new FileOutputStream(saved);
+			byte[] b = new byte[1024];
+			int len = 0;
+			while ((len = ins.read(b)) != -1) {
+				ous.write(b, 0, len);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ous != null)
+				ous.close();
+			if (ins != null)
+				ins.close();
+		}
+	}
+
+	public String view() {
+		constructionpic = constructionpicService.loadById(id);
+		return "view";
+	}
+
+	public File getPicture2() {
+		return picture2;
+	}
+
+	public void setPicture2(File picture2) {
+		this.picture2 = picture2;
+	}
+
+	public String getPicture2ContentType() {
+		return picture2ContentType;
+	}
+
+	public void setPicture2ContentType(String picture2ContentType) {
+		this.picture2ContentType = picture2ContentType;
+	}
+
+	public String getPicture2FileName() {
+		return picture2FileName;
+	}
+
+	public void setPicture2FileName(String picture2FileName) {
+		this.picture2FileName = picture2FileName;
+	}
+
+	public File getPicture3() {
+		return picture3;
+	}
+
+	public void setPicture3(File picture3) {
+		this.picture3 = picture3;
+	}
+
+	public String getPicture3ContentType() {
+		return picture3ContentType;
+	}
+
+	public void setPicture3ContentType(String picture3ContentType) {
+		this.picture3ContentType = picture3ContentType;
+	}
+
+	public String getPicture3FileName() {
+		return picture3FileName;
+	}
+
+	public void setPicture3FileName(String picture3FileName) {
+		this.picture3FileName = picture3FileName;
 	}
 
 }
