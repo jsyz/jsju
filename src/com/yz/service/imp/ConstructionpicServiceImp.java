@@ -116,6 +116,7 @@ public class ConstructionpicServiceImp implements IConstructionpicService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return constructionpicDao.pageList(queryString,p,page,size);
 	}
 	public Constructionpic loadByConidAndRow(int conid, int rowid) {

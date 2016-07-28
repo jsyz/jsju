@@ -155,6 +155,7 @@ public class SpreadsheetServiceImp implements ISpreadsheetService {
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
+		queryString += " order by mo.id desc";
 		return spreadsheetDao.pageList(queryString, p, page, size);
 	}
 
@@ -209,7 +210,7 @@ public class SpreadsheetServiceImp implements ISpreadsheetService {
 			queryStr = queryStr.substring(0, queryStr.length() - 1);
 			queryString += " and mo.sheetType in(" + queryStr + ")";
 		}
-		System.out.println(queryString);
+		queryString += " order by mo.id desc";
 		return spreadsheetDao.pageList(queryString, p, page, size);
 	}
 
@@ -224,6 +225,7 @@ public class SpreadsheetServiceImp implements ISpreadsheetService {
 			queryStr = queryStr.substring(0, queryStr.length() - 1);
 			queryString += " and mo.sheetType in(" + queryStr + ")";
 		}
+		queryString += " order by mo.id desc";
 		return spreadsheetDao.queryList(queryString);
 	}
 
@@ -231,6 +233,7 @@ public class SpreadsheetServiceImp implements ISpreadsheetService {
 		// TODO Auto-generated method stub
 		String queryString = "from Spreadsheet mo where 1=1 and mo.project.id="
 				+ pid;
+		queryString += " order by mo.id desc";
 		return spreadsheetDao.queryList(queryString);
 	}
 

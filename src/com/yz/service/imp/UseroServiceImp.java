@@ -107,6 +107,7 @@ public class UseroServiceImp implements IUseroService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return useroDao.pageList(queryString,p,page,size);
 	}
 	//用户登录

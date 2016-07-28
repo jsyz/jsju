@@ -116,6 +116,7 @@ public class SubunitServiceImp implements ISubunitService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return subunitDao.pageList(queryString,p,page,size);
 	}
 	

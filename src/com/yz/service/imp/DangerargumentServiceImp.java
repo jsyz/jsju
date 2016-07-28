@@ -116,6 +116,7 @@ public class DangerargumentServiceImp implements IDangerargumentService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return dangerargumentDao.pageList(queryString,p,page,size);
 	}
 	

@@ -116,6 +116,7 @@ public class ConstructionServiceImp implements IConstructionService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return constructionDao.pageList(queryString,p,page,size);
 	}
 	//用户登录

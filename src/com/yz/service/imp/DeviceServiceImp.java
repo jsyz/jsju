@@ -163,6 +163,7 @@ public class DeviceServiceImp implements IDeviceService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return deviceDao.pageList(queryString,p,page,size);
 	}
 	

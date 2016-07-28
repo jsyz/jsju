@@ -119,6 +119,7 @@ public class PromanServiceImp implements IPromanService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return promanDao.pageList(queryString,p,page,size);
 	}
 	public int getPageCount(int totalCount, int size) {

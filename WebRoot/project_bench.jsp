@@ -66,7 +66,7 @@
 				</h1>
 				<img src="images/xm.png" width="965" height="355" usemap="#Map">
 				<map name="Map">
-					<area shape="rect" coords="295,202,378,285" href="test.html">
+					<area shape="rect" coords="295,202,378,285" href="http://221.227.68.87:8080/xcjk/jk.html" target="_blank">
 					<area shape="rect" coords="438,202,532,285" href="map.html">
 					<area shape="rect" coords="582,202,660,283"
 						href="promanAction!list?pid=<s:property value="project.id"/>">

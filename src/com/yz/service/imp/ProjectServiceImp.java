@@ -147,6 +147,7 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
+		queryString += " order by mo.id desc";
 		return projectDao.pageList(queryString, p, page, size);
 	}
 
@@ -203,6 +204,7 @@ public class ProjectServiceImp implements IProjectService {
 		if (status == 2) {
 			queryString += "and mo.graphicProgress = 4";
 		}
+		queryString += " order by mo.id desc";
 		return projectDao.pageList(queryString, p, page, size);
 	}
 
@@ -225,6 +227,7 @@ public class ProjectServiceImp implements IProjectService {
 		if (status == 2) {
 			queryString += "and mo.graphicProgress = 4";
 		}
+		queryString += " order by mo.id desc";
 		return projectDao.getObjectsByCondition(queryString, p);
 	}
 
@@ -232,6 +235,7 @@ public class ProjectServiceImp implements IProjectService {
 		// TODO Auto-generated method stub
 		String queryString = "from Project mo where 1=1  and mo.isUpload=1 and mo.projectType="
 				+ i;
+		queryString += " order by mo.id desc";
 		return projectDao.queryList(queryString);
 	}
 
@@ -239,6 +243,7 @@ public class ProjectServiceImp implements IProjectService {
 		// TODO Auto-generated method stub
 		String queryString = "from Project mo where 1=1 and mo.isUpload=1 and mo.engineeringType="
 				+ i;
+		queryString += " order by mo.id desc";
 		return projectDao.queryList(queryString);
 	}
 
@@ -246,6 +251,7 @@ public class ProjectServiceImp implements IProjectService {
 		// TODO Auto-generated method stub
 		String queryString = "from Project mo where 1=1 and mo.isUpload=1 and mo.buildingType="
 				+ i;
+		queryString += " order by mo.id desc";
 		return projectDao.queryList(queryString);
 	}
 
@@ -253,6 +259,7 @@ public class ProjectServiceImp implements IProjectService {
 		// TODO Auto-generated method stub
 		String queryString = "from Project mo where 1=1 and mo.isUpload=1 and mo.graphicProgress="
 				+ i;
+		queryString += " order by mo.id desc";
 		return projectDao.queryList(queryString);
 	}
 
@@ -316,6 +323,7 @@ public class ProjectServiceImp implements IProjectService {
 		if (graphicProgress != 0) {
 			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
 		}
+		queryString += " order by mo.id desc";
 		return projectDao.getObjectsByCondition(queryString, p);
 	}
 
@@ -354,6 +362,7 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
+		queryString += " order by mo.id desc";
 		return projectDao.pageList(queryString, p, page, size);
 	}
 
@@ -385,6 +394,7 @@ public class ProjectServiceImp implements IProjectService {
 		if (graphicProgress != 0) {
 			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
 		}
+		queryString += " order by mo.id desc";
 		return projectDao.getObjectsByCondition(queryString, p);
 	}
 

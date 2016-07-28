@@ -116,6 +116,7 @@ public class EducationpicServiceImp implements IEducationpicService {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
+		queryString += " order by mo.id desc";
 		return educationpicDao.pageList(queryString,p,page,size);
 	}
 	

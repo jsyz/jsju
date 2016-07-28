@@ -155,6 +155,7 @@ public class DaymanageServiceImp implements IDaymanageService {
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
+		queryString += " order by mo.id desc";
 		return daymanageDao.pageList(queryString, p, page, size);
 	}
 
