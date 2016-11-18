@@ -83,10 +83,9 @@ function jumpProjectCountPage(url,page,con,convalue,status,areaIndex,engineering
 	window.location=url;
 }
 
-
-//跳转到打印页面
-function jumpProjectOutput(url,con,convalue,status,areaIndex,engineeringType,graphicProgress){
-	var url=url+'?con='+con+'&convalue='+convalue+'&status='+status+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress;
+//报表导出数据
+function jumpInjurycaseOutput(url,starttime,endtime,con,convalue,itype,queryState){
+	var url=url+'?starttime='+starttime+'&endtime='+endtime+'&con='+con+'&convalue='+convalue+'&itype='+itype+'&queryState='+queryState;
 	url=encodeURI(url);
 	url=encodeURI(url);
 	window.location=url;

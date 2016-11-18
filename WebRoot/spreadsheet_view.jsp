@@ -36,13 +36,17 @@
 	<body style="background: #fff;">
 		<div style="margin: 0 auto; padding: 0px; width: 600px;">
 			<s:if test="spreadsheet.sheetImg!=null">
-				<img width="640px;" height="320px;"
+				<img width="50%" height="320px;"
 					src="<%=basePath%>${spreadsheet.sheetImg}" />
 			</s:if>
+			
+			<br>
 			<s:if test="spreadsheet.sheetImg!=null">
 				<img width="640px;" height="320px;"
 					src="<%=basePath%>${spreadsheet.sheetImg1}" />
 			</s:if>
+			
+			<br>
 			<s:if test="spreadsheet.sheetImg!=null">
 				<img width="640px;" height="320px;"
 					src="<%=basePath%>${spreadsheet.sheetImg2}" />
