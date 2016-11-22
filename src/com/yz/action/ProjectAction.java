@@ -101,9 +101,12 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	private float buildingCostTotal;// 总造价
 
 	private int excelPageType;
-	
-	//上传状态
+
+	// 上传状态
 	private int uploadState;
+
+	private String starttime;
+	private String endtime;
 
 	/**
 	 * 项目管理
@@ -340,10 +343,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	 * 修改项目上传状态
 	 */
 	public String changeUpload() {
-		
+
 		project = projectService.loadById(pid);
-		if(project!=null)
-		{
+		if (project != null) {
 			project.setIsUpload(uploadState);
 			projectService.update(project);
 		}
@@ -417,13 +419,21 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
+		if (starttime != null && !starttime.equals("")) {
+			starttime = URLDecoder.decode(starttime, "utf-8");
+			starttime = starttime.replace(" ", "");
+		}
+		if (endtime != null && !endtime.equals("")) {
+			endtime = URLDecoder.decode(endtime, "utf-8");
+			endtime = endtime.replace(" ", "");
+		}
 		if (page < 1) {
 			page = 1;
 		}
 
 		// 总记录数
 		totalCount = projectService.getTotalCount(status, con, convalue,
-				areaIndex, engineeringType, graphicProgress);
+				areaIndex, engineeringType, graphicProgress,starttime, endtime);
 		// 总页数
 		pageCount = projectService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
@@ -431,7 +441,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		}
 		// 所有当前页记录对象
 		projects = projectService.queryList(status, con, convalue, areaIndex,
-				engineeringType, graphicProgress, page, size);
+				engineeringType, graphicProgress, page, size,starttime, endtime);
 
 		if (projects != null) {
 			projectNumberTotal = projects.size();
@@ -461,8 +471,9 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
 		// 所有当前页记录对象
-		System.out.println("engineeringType:"+engineeringType);
-		projects = projectService.queryList(status, con, convalue,areaIndex, engineeringType, graphicProgress);
+		System.out.println("engineeringType:" + engineeringType);
+		projects = projectService.queryList(status, con, convalue, areaIndex,
+				engineeringType, graphicProgress);
 		System.out.println(projects.size());
 		if (projects.size() > 0) {
 			// 导出数据-------------------------------------
@@ -645,7 +656,7 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 			}
 
 			// 形象进度(0:未开工/0%,1:基础/30%,2：主体/50%，3:装饰/70%，4：完工待验/100%，5：竣工)
-			
+
 			for (int i = 0; i < 6; i++) {
 				ProjectClassify projectClassify = new ProjectClassify();
 				int projectNumber = 0;// 项目总数
@@ -979,7 +990,21 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 	public void setUploadState(int uploadState) {
 		this.uploadState = uploadState;
 	}
-	
-	
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
 
 }

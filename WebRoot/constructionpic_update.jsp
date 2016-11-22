@@ -35,7 +35,7 @@
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
-						href="projectAction!bench?id=<s:property value="project.id"/>&areaIndex=<s:property value="project.yxarea.areaIndex"/>"
+						href="projectAction!bench?id=<s:property value="#session.pid"/>&areaIndex=<s:property value="#session.areaVO.index"/>"
 						target="_self" title="返回项目工作台">返回项目工作台 </a>
 
 					<a class="btn btn-success radius r mr-5 f-r"

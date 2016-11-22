@@ -210,7 +210,7 @@
 									</tr>
 									<tr class="odd-row">
 										<th class="th2 first">
-											开工日期
+											计划开工日期
 										</th>
 										<td>
 											<input type="text" class="mini-textbox-input"
@@ -220,7 +220,7 @@
 												class="input-text Wdate">
 										</td>
 										<th class="th2">
-											竣工日期
+											计划竣工日期
 										</th>
 										<td class="last">
 											<span class="mini-textbox-border"><input type="text"

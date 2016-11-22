@@ -1,6 +1,7 @@
 package com.yz.util;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestMain {
@@ -11,14 +12,30 @@ public class TestMain {
 	private static String infoExtractionMsg;
 	public static void main(String[] args) {
 		
-		int[] sheetTypes = {7};
-		// TODO Auto-generated method stub
-		Arrays.sort(sheetTypes); //排序数组
-
-		if(Arrays.binarySearch(sheetTypes,7) >= 0){ //若找不到，则当前企业不在任何填报期内
-			System.out.println("have");
-		}
+		List<String> list = new ArrayList<String>();
+		list.add("123");
+		list.add("123");
+		list.add("123");
+		System.out.println(listToString(list));
 		
+	}
+	
+	
+	public static String listToString(List<String> stringList) {
+		if (stringList == null||stringList.size()<1) {
+			return "";
+		}
+		StringBuilder result = new StringBuilder();
+		boolean flag = false;
+		for (String string : stringList) {
+			if (flag) {
+				result.append(",");
+			} else {
+				flag = true;
+			}
+			result.append("/"+string);
+		}
+		return result.toString();
 	}
 	
 	/*private static void handleInfoExtractionMsg(String infoExtraction) {

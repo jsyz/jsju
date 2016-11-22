@@ -156,10 +156,6 @@
 						<div class="row cl mb-10">
 							<div class="col-10 col-offset-5 pt-10 pb-10">
 								<input class="btn btn-primary radius" type="submit" value="保存"></input>
-								<button onClick="layer_close();"
-									class="btn btn-secondary radius" type="button">
-									&nbsp;&nbsp;取消&nbsp;&nbsp;
-								</button>
 							</div>
 
 						</div>

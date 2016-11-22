@@ -96,7 +96,7 @@
 									style="line-height: 35px;">
 									<tr height="35">
 										<td width="21%" align="right" style="padding-right: 50px;">
-											<s:select list="#{0:'选择类型',1:'项目名称'}"
+											<s:select list="#{0:'选择类型',1:'项目名称',2:'监督员',3:'施工许可证证号'}"
 												cssClass="input-text" name="con" listKey="key"
 												listValue="value" cssStyle="width:180px"></s:select>
 										</td>
@@ -137,6 +137,18 @@
 												cssClass="input-text" name="graphicProgress" listKey="key"
 												listValue="value" cssStyle="width:180px"></s:select>
 										</td>
+										<td >
+								计划竣工日期：
+								<input type="text" name="starttime"
+									value="<s:property value="starttime"/>"
+									onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endtime\')||\'%y-%M-%d\'}'})"
+									id="logmin" class="input-text Wdate" style="width: 150px;">
+								-
+								<input type="text" name="endtime"
+									value="<s:property value="endtime"/>"
+									onFocus="WdatePicker({minDate:'#F{$dp.$D(\'starttime\')}',maxDate:'%y-%M-%d'})"
+									id="endtime" class="input-text Wdate" style="width: 150px;">
+							</td>
 									</tr>
 								</table>
 							</form>
@@ -261,19 +273,19 @@
 									</td>
 									<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
 											target="rightFrame">首页</a>&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
 											target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
 											target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
+											href="javascript:jumpProjectCountPage('projectAction!count',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
 											target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
 										<input type='button' class="btn btn-primary radius size-S"
-											onclick="jumpProjectCountPage('projectAction!count',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);"
+											onclick="jumpProjectCountPage('projectAction!count',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');"
 											value='转到' />
 										&nbsp; 当前页：
 										<input onpaste="return false"

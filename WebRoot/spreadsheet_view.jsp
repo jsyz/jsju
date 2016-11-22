@@ -36,19 +36,19 @@
 	<body style="background: #fff;">
 		<div style="margin: 0 auto; padding: 0px; width: 600px;">
 			<s:if test="spreadsheet.sheetImg!=null">
-				<img width="50%" height="320px;"
+				<img width="80%" height="80%"
 					src="<%=basePath%>${spreadsheet.sheetImg}" />
 			</s:if>
 			
-			<br>
+			<hr width="1px;">
 			<s:if test="spreadsheet.sheetImg!=null">
-				<img width="640px;" height="320px;"
+				<img width="80%" height="80%"
 					src="<%=basePath%>${spreadsheet.sheetImg1}" />
 			</s:if>
 			
-			<br>
+			<hr width="1px;">
 			<s:if test="spreadsheet.sheetImg!=null">
-				<img width="640px;" height="320px;"
+				<img  width="80%" height="80%"
 					src="<%=basePath%>${spreadsheet.sheetImg2}" />
 			</s:if>
 		</div>

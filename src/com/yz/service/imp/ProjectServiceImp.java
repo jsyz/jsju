@@ -114,6 +114,9 @@ public class ProjectServiceImp implements IProjectService {
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
 			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
+			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
 		return projectDao.getUniqueResult(queryString, p);
@@ -145,6 +148,9 @@ public class ProjectServiceImp implements IProjectService {
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
 			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
+			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
 		queryString += " order by mo.id desc";
@@ -174,6 +180,9 @@ public class ProjectServiceImp implements IProjectService {
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
 			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
+			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
 		if (status == 1) {
@@ -195,6 +204,9 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
+			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
@@ -218,6 +230,9 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
+			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
@@ -264,7 +279,8 @@ public class ProjectServiceImp implements IProjectService {
 	}
 
 	public int getTotalCount(int status, int con, String convalue,
-			int areaIndex, int engineeringType, int graphicProgress) {
+			int areaIndex, int engineeringType, int graphicProgress,
+			String starttime, String endtime) {
 		String queryString = "select count(*) from Project mo where 1=1";
 		Object[] p = null;
 		if (con != 0 && convalue != null && !convalue.equals("")) {
@@ -273,6 +289,9 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
+			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
@@ -291,12 +310,18 @@ public class ProjectServiceImp implements IProjectService {
 		if (graphicProgress != 0) {
 			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
 		}
+		if (starttime != null && !starttime.equals("")) {
+			queryString += " and mo.planendDate>='" + starttime + "'";
+		}
+		if (endtime != null && !endtime.equals("")) {
+			queryString += " and mo.planendDate<='" + endtime + "'";
+		}
 		return projectDao.getUniqueResult(queryString, p);
 	}
 
 	public List<Project> queryList(int status, int con, String convalue,
 			int areaIndex, int engineeringType, int graphicProgress, int page,
-			int size) {
+			int size, String starttime, String endtime) {
 		String queryString = "from Project mo where 1=1 and mo.isUpload=1";
 		Object[] p = null;
 		if (con != 0 && convalue != null && !convalue.equals("")) {
@@ -305,6 +330,9 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
+			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
@@ -323,6 +351,12 @@ public class ProjectServiceImp implements IProjectService {
 		if (graphicProgress != 0) {
 			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
 		}
+		if (starttime != null && !starttime.equals("")) {
+			queryString += " and mo.planendDate>='" + starttime + "'";
+		}
+		if (endtime != null && !endtime.equals("")) {
+			queryString += " and mo.planendDate<='" + endtime + "'";
+		}
 		queryString += " order by mo.id desc";
 		return projectDao.getObjectsByCondition(queryString, p);
 	}
@@ -340,6 +374,9 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
+			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
@@ -360,6 +397,9 @@ public class ProjectServiceImp implements IProjectService {
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
 			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
+			}
 			p = new Object[] { '%' + convalue + '%' };
 		}
 		queryString += " order by mo.id desc";
@@ -376,6 +416,9 @@ public class ProjectServiceImp implements IProjectService {
 			}
 			if (con == 2) {
 				queryString += "and mo.supervisor like ? ";
+			}
+			if (con == 3) {
+				queryString += "and mo.constructionPermitNumber like ? ";
 			}
 			p = new Object[] { '%' + convalue + '%' };
 		}

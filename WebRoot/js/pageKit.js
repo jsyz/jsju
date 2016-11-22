@@ -69,15 +69,14 @@ function jumpCommonPage(url,page,con,convalue){
 
 
 
-//统计分页显示
-function jumpProjectCountPage(url,page,con,convalue,status,areaIndex,engineeringType,graphicProgress){
+function jumpProjectCountPage(url,page,con,convalue,status,areaIndex,engineeringType,graphicProgress,starttime,endtime){
 	
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;
 		page=parseInt(page2);
 	}
-	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress;
+	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress+'&starttime='+starttime+'&endtime='+endtime;
 	url=encodeURI(url);
 	url=encodeURI(url);
 	window.location=url;
