@@ -579,8 +579,10 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		case 45:
 			// pageName = "档案管理-建设工程安全事故快报表";
 			sheetName = "建设工程安全监督报告";
+			break;
 		case 46:
 			sheetName = "其他资料";
+			break;
 		default:
 			break;
 		}
