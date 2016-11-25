@@ -9,7 +9,7 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   
-  <servlet>
+ <!--  <servlet>
     <servlet-name>CXFServlet</servlet-name>
     <servlet-class>
 			org.apache.cxf.transport.servlet.CXFServlet
@@ -20,7 +20,7 @@
     <servlet-name>CXFServlet</servlet-name>
     <url-pattern>/cxf/*</url-pattern>
   </servlet-mapping>
-  
+   -->
   <listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
