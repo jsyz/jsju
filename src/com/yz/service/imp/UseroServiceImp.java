@@ -3,11 +3,6 @@ package com.yz.service.imp;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 
@@ -143,7 +138,7 @@ public class UseroServiceImp implements IUseroService {
 	}*/
 	/**
 	 * 用户修改密码
-	 */
+	
 	@GET
 	@Path("/updatepwd/{useroname}/{oldpwd}/{newpwd}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -154,7 +149,7 @@ public class UseroServiceImp implements IUseroService {
 		logined=useroDao.updateUseroByhql(queryString,p);
 		return logined;
 		
-	}
+	} */
 
 	public Usero useroLogin(String username, String password) {
 		String queryString="from Usero mo where mo.username=:username and mo.password=:password";

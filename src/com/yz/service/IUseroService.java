@@ -2,12 +2,6 @@ package com.yz.service;
 
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import com.yz.model.Usero;
 
 public interface IUseroService {
@@ -53,12 +47,12 @@ public interface IUseroService {
 	*/
 	/**
 	 * 用户修改密码
-	 */
+	 
 	@GET
 	@Path("/updatepwd/{useroname}/{oldpwd}/{newpwd}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public int updatePwd(@PathParam("useroname") String useroname,@PathParam("oldpwd") String oldpwd,@PathParam("newpwd") String newpwd);
-
+*/
 	public abstract Usero getUseroByUseroname(String useroname);
 
 	public abstract int saveAndReturn(Usero usero);
