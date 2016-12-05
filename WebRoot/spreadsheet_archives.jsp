@@ -361,6 +361,38 @@ taglib uri="/struts-tags" prefix="s"%>
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>
+								<tr class="text-c">
+									<td class="text-c" style="font-weight: 800">
+										17
+									</td>
+									<td style="font-weight: 800">
+										工程质量监督抽检通知书
+									</td>
+									<td>
+										合计：<s:property value="sheetNumber.sheet47" />次
+									</td>
+									<td>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=47"
+											class="btn btn-success radius">详细内容</a>
+									</td>
+								</tr>
+								<tr class="text-c">
+									<td class="text-c" style="font-weight: 800">
+										18
+									</td>
+									<td style="font-weight: 800">
+										工程质量监督抽查整改通知书
+									</td>
+									<td>
+										合计：<s:property value="sheetNumber.sheet49" />次
+									</td>
+									<td>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=49"
+											class="btn btn-success radius">详细内容</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -669,6 +701,22 @@ taglib uri="/struts-tags" prefix="s"%>
 									<td>
 										<a
 											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=34"
+											class="btn btn-success radius">详细内容</a>
+									</td>
+								</tr>
+								<tr class="text-c">
+									<td class="text-c" style="font-weight: 800">
+										19
+									</td>
+									<td style="font-weight: 800">
+										建设工程施工局部停工整改通知书
+									</td>
+									<td>
+										合计：<s:property value="sheetNumber.sheet51" />次
+									</td>
+									<td>
+										<a
+											href="spreadsheetAction!list?pid=<s:property value="pid"/>&sheetTypeStr=51"
 											class="btn btn-success radius">详细内容</a>
 									</td>
 								</tr>

@@ -115,7 +115,7 @@
 												<i class="Hui-iconfont">&#xe665;</i> 查询
 											</button>
 											<button type="button" class="btn btn-success" id="button2"
-												name="" onClick="jumpProjectOutput('projectAction!outputExcel',<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>);">
+												name="" onClick="jumpProjectOutput('projectAction!outputExcel',<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="status"/>,<s:property value="areaIndex"/>,<s:property value="engineeringType"/>,<s:property value="graphicProgress"/>,'<s:property value="starttime"/>','<s:property value="endtime"/>');">
 												<i class="Hui-iconfont">&#xe665;</i> 导出
 											</button>
 										</td>

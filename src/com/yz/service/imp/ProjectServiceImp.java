@@ -281,7 +281,7 @@ public class ProjectServiceImp implements IProjectService {
 	public int getTotalCount(int status, int con, String convalue,
 			int areaIndex, int engineeringType, int graphicProgress,
 			String starttime, String endtime) {
-		String queryString = "select count(*) from Project mo where 1=1";
+		String queryString = "select count(*) from Project mo where 1=1 and mo.isUpload=1";
 		Object[] p = null;
 		if (con != 0 && convalue != null && !convalue.equals("")) {
 			if (con == 1) {
@@ -407,7 +407,7 @@ public class ProjectServiceImp implements IProjectService {
 	}
 
 	public List<Project> queryList(int status, int con, String convalue,
-			int areaIndex, int engineeringType, int graphicProgress) {
+			int areaIndex, int engineeringType, int graphicProgress,String starttime,String endtime) {
 		String queryString = "from Project mo where 1=1 and mo.isUpload=1 ";
 		Object[] p = null;
 		if (con != 0 && convalue != null && !convalue.equals("")) {
@@ -436,6 +436,12 @@ public class ProjectServiceImp implements IProjectService {
 		}
 		if (graphicProgress != 0) {
 			queryString += " and mo.graphicProgress = " + (graphicProgress - 1);
+		}
+		if (starttime != null && !starttime.equals("")) {
+			queryString += " and mo.planendDate>='" + starttime + "'";
+		}
+		if (endtime != null && !endtime.equals("")) {
+			queryString += " and mo.planendDate<='" + endtime + "'";
 		}
 		queryString += " order by mo.id desc";
 		return projectDao.getObjectsByCondition(queryString, p);

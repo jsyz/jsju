@@ -470,11 +470,17 @@ public class ProjectAction extends ActionSupport implements RequestAware,
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
+		if (starttime != null && !starttime.equals("")) {
+			starttime = URLDecoder.decode(starttime, "utf-8");
+			starttime = starttime.replace(" ", "");
+		}
+		if (endtime != null && !endtime.equals("")) {
+			endtime = URLDecoder.decode(endtime, "utf-8");
+			endtime = endtime.replace(" ", "");
+		}
 		// 所有当前页记录对象
-		System.out.println("engineeringType:" + engineeringType);
 		projects = projectService.queryList(status, con, convalue, areaIndex,
-				engineeringType, graphicProgress);
-		System.out.println(projects.size());
+				engineeringType, graphicProgress,starttime, endtime);
 		if (projects.size() > 0) {
 			// 导出数据-------------------------------------
 			String filename = "output\\" + DateTimeKit.getDateRandom()

@@ -77,8 +77,6 @@
 							href="projectAction!count?excelPageType=0"> 项目列表格式1</a> <a
 							class="btn btn-primary radius"
 							href="projectAction!count?excelPageType=1"> 项目列表格式2</a> </span>
-						<span class="r">共有数据：<strong><s:property
-									value="totalCount" /> </strong> 条</span>
 
 					</div>
 					<a href="projectAction!outputExcel1" class="btn btn-success">导出</a>

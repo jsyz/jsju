@@ -366,6 +366,31 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 				sheet.setSheetType(types[i]);
 				sheet.setSheetName("其它资料");
 				break;
+				
+			case 47:
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("工程质量监督抽检通知书");
+				break;
+			case 48:
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("");
+				break;
+			case 49:
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("工程质量监督抽查整改通知书");
+				break;
+			case 50:
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("");
+				break;
+			case 51:
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("建设工程施工局部停工整改通知书");
+				break;
+			case 52:
+				sheet.setSheetType(types[i]);
+				sheet.setSheetName("");
+				break;
 			default:
 				break;
 			}
@@ -582,6 +607,15 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			break;
 		case 46:
 			sheetName = "其他资料";
+			break;
+		case 47:
+			sheetName = "工程质量监督抽检通知书";
+			break;
+		case 49:
+			sheetName = "工程质量监督抽查整改通知书";
+			break;
+		case 51:
+			sheetName = "建设工程施工局部停工整改通知书";
 			break;
 		default:
 			break;
@@ -946,6 +980,12 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		int _44 = 0;
 		int _45 = 0;
 		int _46 = 0;
+		int _47 = 0;
+		int _48 = 0;
+		int _49 = 0;
+		int _50 = 0;
+		int _51 = 0;
+		int _52 = 0;
 		for (int i = 0; i < sheets.size(); i++) {
 			Spreadsheet sheet = sheets.get(i);
 			switch (sheet.getSheetType()) {
@@ -1072,6 +1112,24 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 			case 46:
 				_46 = _46 + 1;
 				break;
+			case 47:
+				_47 = _47 + 1;
+				break;
+			case 48:
+				_48 = _42 + 1;
+				break;
+			case 49:
+				_49 = _49 + 1;
+				break;
+			case 50:
+				_50 = _50 + 1;
+				break;
+			case 51:
+				_51 = _51 + 1;
+				break;
+			case 52:
+				_52 = _52 + 1;
+				break;
 			default:
 				break;
 			}
@@ -1118,6 +1176,12 @@ public class SpreadsheetAction extends ActionSupport implements RequestAware,
 		sheetNumber.setSheet44(_44);
 		sheetNumber.setSheet45(_45);
 		sheetNumber.setSheet46(_46);
+		sheetNumber.setSheet47(_47);
+		sheetNumber.setSheet48(_48);
+		sheetNumber.setSheet49(_49);
+		sheetNumber.setSheet50(_50);
+		sheetNumber.setSheet51(_51);
+		sheetNumber.setSheet52(_52);
 	}
 
 	// get、set-------------------------------------------

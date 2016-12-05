@@ -79,14 +79,16 @@ function jumpProjectCountPage(url,page,con,convalue,status,areaIndex,engineering
 	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress+'&starttime='+starttime+'&endtime='+endtime;
 	url=encodeURI(url);
 	url=encodeURI(url);
+	
 	window.location=url;
 }
 
 //报表导出数据
-function jumpInjurycaseOutput(url,starttime,endtime,con,convalue,itype,queryState){
-	var url=url+'?starttime='+starttime+'&endtime='+endtime+'&con='+con+'&convalue='+convalue+'&itype='+itype+'&queryState='+queryState;
+function jumpProjectOutput(url,con,convalue,status,areaIndex,engineeringType,graphicProgress,starttime,endtime){
+	var url=url+'?con='+con+'&convalue='+convalue+'&areaIndex='+areaIndex+'&engineeringType='+engineeringType+'&graphicProgress='+graphicProgress+'&starttime='+starttime+'&endtime='+endtime;
 	url=encodeURI(url);
 	url=encodeURI(url);
+	alert(url);
 	window.location=url;
 }
 

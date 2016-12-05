@@ -44,6 +44,14 @@ public class SheetNumber {
 	private int sheet44;//建设工程安全事故快报表
 	private int sheet45;//建设工程安全监督报告
 	private int sheet46;//其它资料
+	
+	private int sheet47;//工程质量监督抽检通知书
+	private int sheet48;//
+	private int sheet49;//工程质量监督抽查整改通知书
+	private int sheet50;//
+	private int sheet51;//建设工程施工局部停工整改通知书
+	private int sheet52;//
+	
 
 	public int getSheet41() {
 		return sheet41;
@@ -380,5 +388,55 @@ public class SheetNumber {
 	public void setSheet40(int sheet40) {
 		this.sheet40 = sheet40;
 	}
+
+	public int getSheet47() {
+		return sheet47;
+	}
+
+	public void setSheet47(int sheet47) {
+		this.sheet47 = sheet47;
+	}
+
+	public int getSheet48() {
+		return sheet48;
+	}
+
+	public void setSheet48(int sheet48) {
+		this.sheet48 = sheet48;
+	}
+
+	public int getSheet49() {
+		return sheet49;
+	}
+
+	public void setSheet49(int sheet49) {
+		this.sheet49 = sheet49;
+	}
+
+	public int getSheet50() {
+		return sheet50;
+	}
+
+	public void setSheet50(int sheet50) {
+		this.sheet50 = sheet50;
+	}
+
+	public int getSheet51() {
+		return sheet51;
+	}
+
+	public void setSheet51(int sheet51) {
+		this.sheet51 = sheet51;
+	}
+
+	public int getSheet52() {
+		return sheet52;
+	}
+
+	public void setSheet52(int sheet52) {
+		this.sheet52 = sheet52;
+	}
+	
+	
 
 }
