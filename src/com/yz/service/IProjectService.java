@@ -69,6 +69,8 @@ public interface IProjectService {
 	public abstract List<Project> queryList(int con, String convalue,
 			int areaIndex, int page, int size, Usero userSession);
 
+	public abstract List<Project> queryList(int con, String convalue, int integratedQuertyType);
+	
 	public abstract List<Project> queryList(int status, int con,
 			String convalue, int areaIndex, int engineeringType,
 			int graphicProgress);

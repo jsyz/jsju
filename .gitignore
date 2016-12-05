@@ -65,3 +65,5 @@ bin/log4j.properties
 WebRoot/WEB-INF/web.xml
 WebRoot/WEB-INF/classes/jdbc.properties
 src/jdbc.properties
+src/beans.xml
+WebRoot/WEB-INF/classes/beans.xml

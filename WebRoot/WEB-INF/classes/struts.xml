@@ -123,6 +123,39 @@
 
 	</package>
 
+	<package name="integratedQuery" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="integratedQueryAction" class="integratedQueryAction">
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+
+
+			<result name="excel">/integratedQuery_excel.jsp</result>
+			<result name="excel1">/integratedQuery_excel1.jsp</result>
+			<result name="opexcel">/op_excel.jsp</result>
+
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+
+
+	<package name="integratedQuery_json" extends="json-default">
+		<action name="deleteintegratedQuerys" class="integratedQueryAction"
+			method="deleteintegratedQuerys" />
+		<action name="changeUpload" class="integratedQueryAction"
+			method="changeUpload" />
+
+	</package>
 
 	<package name="subunit" extends="struts-default">
 		<global-results>
@@ -323,6 +356,40 @@
 	<package name="device_json" extends="json-default">
 		<action name="deleteDevices" class="deviceAction"
 			method="deleteDevices" />
+	</package>
+
+<package name="enterpriseLibrary" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="enterpriseLibraryAction" class="enterpriseLibraryAction">
+			<result name="loginSucc">/index.jsp</result>
+
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="opsessiongo_child">
+				/op_sessiongo_child.jsp
+			</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="success_child">/op_success_child.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+
+			<result name="list">/enterpriselibrary_manage.jsp</result>
+			
+			<result name="invalid.token">/op_failure_child.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+
+
+	<package name="enterpriselibrary_json" extends="json-default">
+		<action name="deletEenterpriseLibrarys" class="enterpriseLibraryAction"
+			method="deleteEnterpriseLibrarys" />
 	</package>
 
 	<package name="construction" extends="struts-default">

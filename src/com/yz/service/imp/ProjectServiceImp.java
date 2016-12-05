@@ -441,4 +441,30 @@ public class ProjectServiceImp implements IProjectService {
 		return projectDao.getObjectsByCondition(queryString, p);
 	}
 
+	public List<Project> queryList(int con, String convalue, int integratedQuertyType
+			) {
+		// TODO Auto-generated method stub
+		String queryString = "from Project mo where 1=1 and mo.isUpload=1 ";
+		Object[] p = null;
+		if (con != 0 && convalue != null && !convalue.equals("")) {
+			if (con == 1) {
+				queryString += "and mo.constructionUnit = ?"; //施工单位
+			}
+			if (con == 2) {
+				queryString += "and mo.supervisionUnit like ? "; //监理单位
+			}
+			if (con == 3) {
+				queryString += "and mo.engineeringDirector like ? "; //项目总监
+			}
+			if (con == 4) {
+				queryString += "and mo.projectManager like ? "; //项目经理
+			}
+			p = new Object[] {convalue};
+		}
+//		
+//		
+//		queryString += " order by mo.id desc";
+		return projectDao.getObjectsByCondition(queryString, p);
+	}
+
 }
