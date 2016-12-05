@@ -50,11 +50,10 @@
 						<form name="enterpriselibraryListForm" method="post"
 							action="enterpriseLibraryAction!list" target="_self">
 
-							<s:textfield name="convalue" id="convalue" cssClass="input-text"></s:textfield>
+							<s:textfield name="convalue" id="convalue" placeholder=" 请输入关键字" style="width:380px" cssClass="input-text"></s:textfield>
 
 
-							<button name="" id="input" class="btn btn-success btn1"
-								type="submit">
+							<button name="" id="input" class="btn btn-success" type="submit">
 								<i class="Hui-iconfont">&#xe665;</i> 搜索
 							</button>
 
@@ -63,7 +62,7 @@
 					</div>
 					<div class="mt-20">
 						<table
-							class="table table-border table-bordered table-hover table-bg tt">
+							class="table table-border table-bordered table-hover table-bg">
 							<thead>
 								<tr class="text-c">
 

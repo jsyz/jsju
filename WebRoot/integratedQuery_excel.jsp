@@ -54,9 +54,7 @@
 				<div class="row cl box-shadow pd-10  bk-gray radius"
 					style="background-color: #FFF;">
 					<div class="cl pd-5 bg-1 bk-gray mb-20">
-						<span class="l"> <a href="javascript:;" onClick="datadel()"
-							class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-								导出word表格</a> <a class="btn btn-primary radius"
+						<span class="l">  <a class="btn btn-primary radius"
 							onClick="article_add('新增项目','xm-add.html')" href="javascript:;"><i
 								class="Hui-iconfont">&#xe600;</i> 导出excl表格</a> </span>
 						
@@ -241,9 +239,7 @@
 									<th width="68">
 										备注
 									</th>
-									<th width="103">
-										操作
-									</th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -255,24 +251,16 @@
 										001
 									</td>
 									<td class="text-c">
-										政府投资
+										
 									</td>
 									<td>
-										<a href="xmshow.html">官林市某中心</a>
+										
 									</td>
 									<td>
-										2010
+										
 									</td>
 									<td></td>
-									<td class="f-14 td-manage">
-										<a style="text-decoration: none" class="ml-5"
-											onClick="article_edit('项目编辑','xm-add.html','10001')"
-											href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
-										</a>
-										<a style="text-decoration: none" class="ml-5"
-											onClick="article_del(this,'10001')" href="javascript:;"
-											title="删除"><i class="Hui-iconfont">&#xe6e2;</i> </a>
-									</td>
+									
 								</tr>
 							</tbody>
 						</table>
