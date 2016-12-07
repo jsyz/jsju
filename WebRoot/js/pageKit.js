@@ -92,6 +92,15 @@ function jumpProjectOutput(url,con,convalue,status,areaIndex,engineeringType,gra
 	window.location=url;
 }
 
+//综合查询报表导出数据
+function jumpIntegratedQueryOutput(url,con,convalue){
+	var url=url+'?con='+con+'&convalue='+convalue;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	alert(url);
+	window.location=url;
+}
+
 //分页显示
 function jumpProjectPage(url,page,con,convalue,areaIndex){
 	var page=page;
@@ -119,6 +128,8 @@ function jumpSheetPage(url,page,con,convalue,pid,sheetTypeStr){
 	url=encodeURI(url);
 	window.location=url;
 }
+
+
 
 //人员 分页显示
 function jumpPersonPage(url,page,con,convalue,type,queryState,starttime,endtime){

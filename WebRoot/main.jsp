@@ -36,7 +36,7 @@ body {
 <area shape="rect" coords="19,6,276,202" href="yxareaAction!list">
 <area shape="rect" coords="312,220,568,413" href="integratedQuery_excel.jsp">
 <area shape="rect" coords="608,220,863,412" href="projectAction!count">
-<area shape="rect" coords="310,6,571,202" href="citylist.html">
+<area shape="rect" coords="310,6,571,202" href="Supervisor.html">
 
 </map></div>
 

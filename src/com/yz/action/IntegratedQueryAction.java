@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -20,6 +21,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Project;
 import com.yz.model.Usero;
 import com.yz.service.IProjectService;
+import com.yz.util.DateTimeKit;
+import com.yz.util.IntegratedQueryExcel;
+import com.yz.util.ProjectExcel;
 
 @Component("integratedQueryAction")
 @Scope("prototype")
@@ -60,24 +64,25 @@ public class IntegratedQueryAction extends ActionSupport implements
 	// 表格条件
 	private int integratedQuertyType; // 1:总合查询
 
-	public void setRequest(Map<String, Object> arg0) {
+	public void setRequest(Map<String, Object> request) {
 		// TODO Auto-generated method stub
-
+		this.request = request;
+			
 	}
 
-	public void setSession(Map<String, Object> arg0) {
+	public void setSession(Map<String, Object> session) {
 		// TODO Auto-generated method stub
-
+		this.session = session;
 	}
 
-	public void setServletResponse(HttpServletResponse arg0) {
+	public void setServletResponse(HttpServletResponse response) {
 		// TODO Auto-generated method stub
-
+		this.response = response;
 	}
 
-	public void setServletRequest(HttpServletRequest arg0) {
+	public void setServletRequest(HttpServletRequest req) {
 		// TODO Auto-generated method stub
-
+		this.req = req;
 	}
 
 	/**
@@ -87,10 +92,10 @@ public class IntegratedQueryAction extends ActionSupport implements
 	 */
 	public String count() throws UnsupportedEncodingException {
 
-		// Usero userSession = (Usero) session.get("userSession");
-		// if (userSession == null) {
-		// return "opsessiongo";
-		// }
+		 Usero userSession = (Usero) session.get("userSession");
+		 if (userSession == null) {
+		 return "opsessiongo";
+		 }
 
 //		if (con == 1 && input.length() > 0) {
 //			if (input1.length() == 0) {
@@ -187,6 +192,52 @@ public class IntegratedQueryAction extends ActionSupport implements
 		// return "excel";
 	}
 
+	/***************************************************************************
+	 * 导出excel表格
+	 * 
+	 * @throws UnsupportedEncodingException
+	 */
+	public String outputExcel() throws UnsupportedEncodingException {
+		Usero userSession = (Usero) session.get("userSession");
+		if (userSession == null) {
+			return "opsessiongo";
+		}
+		if (convalue != null && !convalue.equals("")) {
+			convalue = URLDecoder.decode(convalue, "utf-8");
+		}
+
+		// 所有当前页记录对象
+		projects = projectService.queryList(con, convalue,integratedQuertyType);
+		if (projects.size() > 0) {
+			// 导出数据-------------------------------------
+			String filename = "output\\" + DateTimeKit.getDateRandom()
+					+ "_projects.xls";
+			String savePath = ServletActionContext.getServletContext()
+					.getRealPath("/")
+					+ filename;
+			System.out.println("[--------------------savePath=" + savePath);
+			int type = 0;
+			if(con == 1){
+				type = 0;
+			}else{
+				type = 1;
+			}
+			boolean isexport = IntegratedQueryExcel.exportExcel(savePath, projects,type,(short)projects.size(),convalue);
+			if (isexport) {
+				request.put("errorInfo", "导出数据成功,下载点<a href='" + filename
+						+ "'>-这里-</a>");
+				return "opexcel";
+			} else {
+				request.put("errorInfo", "导出数据失败！");
+				return "opexcel";
+			}
+		} else {
+			request.put("errorInfo", "查询失败，未导出数据！");
+			return "opexcel";
+		}
+	}
+	
+	
 	public int getId() {
 		return id;
 	}

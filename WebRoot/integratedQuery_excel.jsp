@@ -27,6 +27,18 @@
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
 			type="text/css" />
 		<link href="css/city.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript"
+			src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+		<script type="text/javascript"
+			src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+		<script type="text/javascript" src="js/H-ui.js"></script>
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/pageKit.js"></script>
+		<script type="text/javascript" src="js/checkUtil.js"></script>
+		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -54,9 +66,10 @@
 				<div class="row cl box-shadow pd-10  bk-gray radius"
 					style="background-color: #FFF;">
 					<div class="cl pd-5 bg-1 bk-gray mb-20">
-						<span class="l">  <a class="btn btn-primary radius"
-							onClick="article_add('新增项目','xm-add.html')" href="javascript:;"><i
-								class="Hui-iconfont">&#xe600;</i> 导出excl表格</a> </span>
+						<span class="l">  <button type="button" class="btn btn-success" id="button2"
+												name="" onClick="jumpIntegratedQueryOutput('integratedQueryAction!outputExcel',<s:property value="con"/>,'<s:property value="convalue"/>');">
+												<i class="Hui-iconfont">&#xe665;</i> 导出
+											</button> </span>
 						
 					</div>
 					<form name="integratedQueryListForm" method="post"
@@ -248,7 +261,7 @@
 										<input type="checkbox" value="" name="">
 									</td>
 									<td>
-										001
+										
 									</td>
 									<td class="text-c">
 										
