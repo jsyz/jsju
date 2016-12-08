@@ -465,6 +465,47 @@
 			method="deletePromans" />
 	</package>
 
+	<package name="concreterecord" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="concreterecordAction" class="concreterecordAction">
+			<result name="loginSucc">/index.jsp</result>
+
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="opsessiongo_child">
+				/op_sessiongo_child.jsp
+			</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="success_child">/op_success_child.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+			
+			<result name="picview">/concreterecordpic_view.jsp</result>
+			<result name="list">/concreterecord_manage.jsp</result>
+			<result name="add">/concreterecord_add.jsp</result>
+			<result name="load">/concreterecord_update.jsp</result>
+			<result name="addcontractrecordform">/concreterecord_addcontractrecordform.jsp</result>
+			
+			
+
+
+			<result name="invalid.token">/op_failure_child.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+
+
+	<package name="concreterecord_json" extends="json-default">
+		<action name="deleteConcreterecord" class="concreterecordAction"
+			method="deleteConcreterecords" />
+	</package>
+
 	<package name="constructionpic" extends="struts-default">
 		<global-results>
 			<result name="adminLogin">/login.jsp</result>

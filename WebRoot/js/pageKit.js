@@ -92,6 +92,15 @@ function jumpProjectOutput(url,con,convalue,status,areaIndex,engineeringType,gra
 	window.location=url;
 }
 
+//报表导出数据
+function selectconcreterecord(url,type){
+	var url=url+'?concreterecordType='+type;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	alert(url);
+	window.location=url;
+}
+
 //综合查询报表导出数据
 function jumpIntegratedQueryOutput(url,con,convalue){
 	var url=url+'?con='+con+'&convalue='+convalue;
