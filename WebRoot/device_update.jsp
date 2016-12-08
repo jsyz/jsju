@@ -80,6 +80,8 @@
 				</div>
 				<form action="deviceAction!update" method="post">
 					<s:hidden name="device.id" />
+					<s:hidden name="device.devType" />
+					<s:hidden name="device.number" />
 					<input hidden name="device.project.id"
 						value="<s:property value="pid"/>" />
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">

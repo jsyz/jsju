@@ -20,14 +20,16 @@ public class Device implements java.io.Serializable {
 
 	// Fields
 	private Integer id;
-	private Project project;//所属项目
-	private String name;//设备名称
-	private String propertyCardNumber;//产权证号
-	private String installTime;//安装告知时间
-	private String checkTime;//检测时间
-	private Integer isDealUsecard;//是否办理使用登记证
-	private String usecardExpireTime;//登记证到期时间
-	private String removeTime;//拆卸告知日期
+	private Project project;// 所属项目
+	private String name;// 设备名称
+	private String propertyCardNumber;// 产权证号
+	private String installTime;// 安装告知时间
+	private String checkTime;// 检测时间
+	private Integer isDealUsecard;// 是否办理使用登记证
+	private String usecardExpireTime;// 登记证到期时间
+	private String removeTime;// 拆卸告知日期
+	private Integer devType;// 设备类型 (0:其他设备 1：摄像头设备)
+	private String number;// 设备编号
 
 	// Constructors
 
@@ -38,7 +40,8 @@ public class Device implements java.io.Serializable {
 	/** full constructor */
 	public Device(Project project, String name, String propertyCardNumber,
 			String installTime, String checkTime, Integer isDealUsecard,
-			String usecardExpireTime, String removeTime) {
+			String usecardExpireTime, String removeTime, Integer devType,
+			String number) {
 		this.project = project;
 		this.name = name;
 		this.propertyCardNumber = propertyCardNumber;
@@ -47,6 +50,8 @@ public class Device implements java.io.Serializable {
 		this.isDealUsecard = isDealUsecard;
 		this.usecardExpireTime = usecardExpireTime;
 		this.removeTime = removeTime;
+		this.devType = devType;
+		this.number = number;
 	}
 
 	// Property accessors
@@ -54,7 +59,12 @@ public class Device implements java.io.Serializable {
 	public String getCheckTime() {
 		return this.checkTime;
 	}
-	
+
+	@Column(name = "devType")
+	public Integer getDevType() {
+		return devType;
+	}
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
@@ -75,6 +85,11 @@ public class Device implements java.io.Serializable {
 	@Column(name = "name", length = 30)
 	public String getName() {
 		return this.name;
+	}
+
+	@Column(name = "number", length = 50)
+	public String getNumber() {
+		return number;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -102,6 +117,10 @@ public class Device implements java.io.Serializable {
 		this.checkTime = checkTime;
 	}
 
+	public void setDevType(Integer devType) {
+		this.devType = devType;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -116,6 +135,10 @@ public class Device implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public void setProject(Project project) {

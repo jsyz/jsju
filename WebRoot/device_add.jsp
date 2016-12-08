@@ -82,6 +82,9 @@
 					<input hidden name="device.project.id"
 						value="<s:property value="pid"/>" />
 					<s:hidden name="pid" />
+					
+					<s:hidden name="device.devType"  value="0"/>
+					
 					<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
 						<div class="row cl bk-gray radius pd-10"
 							style="background-color: #FFF">

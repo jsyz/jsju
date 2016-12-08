@@ -152,9 +152,6 @@
 	<package name="integratedQuery_json" extends="json-default">
 		<action name="deleteintegratedQuerys" class="integratedQueryAction"
 			method="deleteintegratedQuerys" />
-		<action name="changeUpload" class="integratedQueryAction"
-			method="changeUpload" />
-
 	</package>
 
 	<package name="subunit" extends="struts-default">

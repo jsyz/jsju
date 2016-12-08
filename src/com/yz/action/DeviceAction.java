@@ -60,7 +60,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	private final int size = 10;
 	private int pageCount;
 	private int totalCount;
-	
+
 	// 条件
 	private int id;
 	private int con;
@@ -68,24 +68,24 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	private int status;// 按状态
 	private int pid;// 按设备id
 	private int areaIndex;
-//	// 登陆
-//	private String username;
-//	private String password;
+	// // 登陆
+	// private String username;
+	// private String password;
 
-	private String name;				//设备名称
-	private String propertyCardNumber;//产权证号
-	private String installTime;//安装告知时间
-	private String checkTime;//检测时间
-	private Integer isDealUsecard;//是否办理使用登记证
-	private String usecardExpireTime;//登记证到期时间
-	private String removeTime;//拆卸告知日期
+	private String name; // 设备名称
+	private String propertyCardNumber;// 产权证号
+	private String installTime;// 安装告知时间
+	private String checkTime;// 检测时间
+	private Integer isDealUsecard;// 是否办理使用登记证
+	private String usecardExpireTime;// 登记证到期时间
+	private String removeTime;// 拆卸告知日期
 	// 批量删除
 	private String checkedIDs;
 
 	// service层对象
 	private IDeviceService deviceService;
 	private IProjectService projectService;
-	private IYxareaService  yxareaService;
+	private IYxareaService yxareaService;
 	// 单个对象
 	private Device device;
 	private Project project;
@@ -97,33 +97,9 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	private List<Project> projects;
 	private List<Yxarea> yxareas;
 	private List<AreaVO> areaVOs;
-//	// 个人资料新旧密码
-//	private String password1;
-//	private String password2;
 
-	public List<Project> getProjects() {
-		return projects;
-	}
-
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
-
-	public List<Yxarea> getYxareas() {
-		return yxareas;
-	}
-
-	public void setYxareas(List<Yxarea> yxareas) {
-		this.yxareas = yxareas;
-	}
-
-	public List<AreaVO> getAreaVOs() {
-		return areaVOs;
-	}
-
-	public void setAreaVOs(List<AreaVO> areaVOs) {
-		this.areaVOs = areaVOs;
-	}
+	// 设备类型
+	private Integer devType;
 
 
 	/**
@@ -131,42 +107,39 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 	public String list() throws Exception {
 		// 判断会话是否失效
-		/*Usero usero = (Usero) session.get("usero");
-		if (usero == null) {
-			return "opsessiongo";
-		}*/
+		/*
+		 * Usero usero = (Usero) session.get("usero"); if (usero == null) {
+		 * return "opsessiongo"; }
+		 */
 		if (convalue != null && !convalue.equals("")) {
 			convalue = URLDecoder.decode(convalue, "utf-8");
 		}
 		if (page < 1) {
 			page = 1;
 		}
-		
+
 		initAreas();
-		
+
 		if (areaIndex > 0 && areaIndex < 10) {
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
 		project = projectService.loadById(pid);
-		//System.out.println("the device list projectId is"+projectId);
-		
+		// System.out.println("the device list projectId is"+projectId);
+
 		// 总记录数
-		totalCount = deviceService.getTotalCount(con, convalue , pid);
+		totalCount = deviceService.getTotalCount(con, convalue, pid);
 		// 总页数
 		pageCount = deviceService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		
-		
-		
+
 		devices = deviceService.queryList(con, convalue, pid, page, size);
-		//devices = deviceService.getDevices();
+		// devices = deviceService.getDevices();
 		return "list";
 	}
-	
-	
+
 	private void initAreas() {
 		areaVOs = new ArrayList<AreaVO>();
 		yxareas = yxareaService.getYxareas();
@@ -178,8 +151,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 			int numberTotal = 0;
 			float areaTotal = 0f;
 			float costTotal = 0f;
-			
-			
+
 			if (yxarea.getProjects() != null && yxarea.getProjects().size() > 0) {
 				// 处理已上传区域项目数量
 				projects = new ArrayList<Project>();
@@ -204,7 +176,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 			areaVOs.add(areaVO);
 		}
 	}
-	
+
 	/**
 	 * 跳转到添加页面
 	 * 
@@ -233,10 +205,11 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 			request.put("loginFail", loginfail);
 			return "opsessiongo";
 		}
-		
+
 		deviceService.add(device);
 
-		arg[0] = "deviceAction!list?pid="+pid+"&areaIndex="+((AreaVO) session.get("areaVO")).getIndex();
+		arg[0] = "deviceAction!list?pid=" + pid + "&areaIndex="
+				+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "设备管理";
 		return "success";
 	}
@@ -279,16 +252,17 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 	public String delete() {
 		// 判断会话是否失效
-//		Device device = (Device) session.get("device");
-//		if (device == null) {
-//			return "opsessiongo";
-//		}
+		// Device device = (Device) session.get("device");
+		// if (device == null) {
+		// return "opsessiongo";
+		// }
 		device = deviceService.loadById(id);
 
 		deviceService.delete(device);
 
-		//deviceService.deleteById(id);
-		arg[0] = "deviceAction!list?pid="+pid+"&areaIndex="+((AreaVO) session.get("areaVO")).getIndex();
+		// deviceService.deleteById(id);
+		arg[0] = "deviceAction!list?pid=" + pid + "&areaIndex="
+				+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "设备管理";
 		return SUCCESS;
 	}
@@ -333,8 +307,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 			areaVO = areaVOs.get(areaIndex - 1);
 		}
 		project = projectService.loadById(pid);
-		
-		
+
 		device = deviceService.loadById(id);
 		return "load";
 	}
@@ -346,15 +319,14 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 */
 	public String update() throws Exception {
 		// 判断会话是否失效
-//		Device device = (Device) session.get("device");
-//		if (device == null) {
-//			return "opsessiongo_child";
-//		}
+		// Device device = (Device) session.get("device");
+		// if (device == null) {
+		// return "opsessiongo_child";
+		// }
 
-		
-		
 		deviceService.update(device);
-		arg[0] = "deviceAction!list?pid="+pid+"&areaIndex="+((AreaVO) session.get("areaVO")).getIndex();
+		arg[0] = "deviceAction!list?pid=" + pid + "&areaIndex="
+				+ ((AreaVO) session.get("areaVO")).getIndex();
 		arg[1] = "设备管理";
 		return "success_child";
 	}
@@ -364,46 +336,42 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	 * 
 	 * @return
 	 */
-//	public String loadPassword() throws Exception {
-//		Device device = (Device) session.get("device");
-//		if (device == null) {
-//			return "opsessiongo";
-//		}
-//		password = device.getPassword();
-//		return "password";
-//	}
-
+	// public String loadPassword() throws Exception {
+	// Device device = (Device) session.get("device");
+	// if (device == null) {
+	// return "opsessiongo";
+	// }
+	// password = device.getPassword();
+	// return "password";
+	// }
 	/**
 	 * 修改密码
 	 * 
 	 * @return
 	 */
-//	public String updatePassword() throws Exception {
-//		// 判断会话是否失效
-//		Device device = (Device) session.get("device");
-//		if (device == null) {
-//			return "opsessiongo";
-//		}
-//		device.setPassword(password);
-//		deviceService.update(device);
-//		arg[0] = "deviceAction!list";
-//		arg[1] = "用户管理";
-//		return SUCCESS;
-//	}
-
+	// public String updatePassword() throws Exception {
+	// // 判断会话是否失效
+	// Device device = (Device) session.get("device");
+	// if (device == null) {
+	// return "opsessiongo";
+	// }
+	// device.setPassword(password);
+	// deviceService.update(device);
+	// arg[0] = "deviceAction!list";
+	// arg[1] = "用户管理";
+	// return SUCCESS;
+	// }
 	/**
 	 * 查看信息
 	 * 
 	 * @return
 	 */
 	public String view() {
-//		Device device = (Device) session.get("device");
-//		if (device == null) {
-//			return "opsessiongo";
-//		}
-		
-		
-		
+		// Device device = (Device) session.get("device");
+		// if (device == null) {
+		// return "opsessiongo";
+		// }
+
 		device = deviceService.loadById(id);
 		return "view";
 	}
@@ -417,7 +385,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 			return "opsessiongo";
 		}
 		device = deviceService.loadById(device.getId());
-		
+
 		return "currentDevice";
 	}
 
@@ -556,7 +524,6 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		this.devices = devices;
 	}
 
-
 	public javax.servlet.http.HttpServletResponse getResponse() {
 		return response;
 	}
@@ -672,6 +639,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	public IProjectService getProjectService() {
 		return projectService;
 	}
+
 	@Resource
 	public void setProjectService(IProjectService projectService) {
 		this.projectService = projectService;
@@ -680,6 +648,7 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 	public IYxareaService getYxareaService() {
 		return yxareaService;
 	}
+
 	@Resource
 	public void setYxareaService(IYxareaService yxareaService) {
 		this.yxareaService = yxareaService;
@@ -701,6 +670,36 @@ public class DeviceAction extends ActionSupport implements RequestAware,
 		this.areaVO = areaVO;
 	}
 
+	public Integer getDevType() {
+		return devType;
+	}
 
+	public void setDevType(Integer devType) {
+		this.devType = devType;
+	}
 
+	
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public List<Yxarea> getYxareas() {
+		return yxareas;
+	}
+
+	public void setYxareas(List<Yxarea> yxareas) {
+		this.yxareas = yxareas;
+	}
+
+	public List<AreaVO> getAreaVOs() {
+		return areaVOs;
+	}
+
+	public void setAreaVOs(List<AreaVO> areaVOs) {
+		this.areaVOs = areaVOs;
+	}
 }
