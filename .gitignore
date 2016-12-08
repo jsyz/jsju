@@ -67,3 +67,5 @@ WebRoot/WEB-INF/classes/jdbc.properties
 src/jdbc.properties
 src/beans.xml
 WebRoot/WEB-INF/classes/beans.xml
+src/jdbc.properties
+WebRoot/WEB-INF/classes/jdbc.properties

@@ -264,6 +264,9 @@
 								</s:iterator>
 							</tbody>
 						</table>
+						
+						<!--  
+						
 						<ul class="forminfo" style="line-height: 40px; font-size: 14px;">
 							<table width="98%" border="0" align="center" cellpadding="2"
 								cellspacing="1" bgcolor="#93CDF3" style="margin-top: 8px">
@@ -300,6 +303,9 @@
 								</tr>
 							</table>
 						</ul>
+						-->
+						
+						
 					</div>
 				</div>
 	</body>
