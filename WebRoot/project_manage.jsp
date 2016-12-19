@@ -317,16 +317,14 @@
 									<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 										<a
 											href="javascript:jumpProjectPage('projectAction!list',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
-											target="rightFrame">首页</a>&nbsp;&nbsp;
+											 >首页</a>&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectPage('projectAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
-											target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
+											href="javascript:jumpProjectPage('projectAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);">上一页</a>&nbsp;&nbsp;&nbsp;
 										<a
-											href="javascript:jumpProjectPage('projectAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
-											target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
+											href="javascript:jumpProjectPage('projectAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);">下一页</a>&nbsp;&nbsp;&nbsp;
 										<a
 											href="javascript:jumpProjectPage('projectAction!list',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
-											target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
+											 >尾页</a>&nbsp;&nbsp;&nbsp;
 										<input type='button' class="btn btn-primary radius size-S"
 											onclick="jumpProjectPage('projectAction!list',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="areaIndex"/>);"
 											value='转到' />

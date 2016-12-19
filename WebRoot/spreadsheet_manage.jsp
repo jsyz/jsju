@@ -319,16 +319,16 @@
 										<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 											<a
 												href="javascript:jumpSheetPage('spreadsheetAction!list',1,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="pid"/>,'<s:property value="sheetTypeStr"/>');"
-												target="rightFrame">首页</a>&nbsp;&nbsp;
+												 >首页</a>&nbsp;&nbsp;
 											<a
 												href="javascript:jumpSheetPage('spreadsheetAction!list',<s:property value="page-1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="pid"/>,'<s:property value="sheetTypeStr"/>');"
-												target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
+												 >上一页</a>&nbsp;&nbsp;&nbsp;
 											<a
 												href="javascript:jumpSheetPage('spreadsheetAction!list',<s:property value="page+1"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="pid"/>,'<s:property value="sheetTypeStr"/>');"
-												target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
+												 >下一页</a>&nbsp;&nbsp;&nbsp;
 											<a
 												href="javascript:jumpSheetPage('spreadsheetAction!list',<s:property value="pageCount"/>,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="pid"/>,'<s:property value="sheetTypeStr"/>');"
-												target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
+												 >尾页</a>&nbsp;&nbsp;&nbsp;
 											<input type='button' class="btn btn-primary radius size-S"
 												onclick="jumpSheetPage('spreadsheetAction!list',document.getElementById('page').value,<s:property value="con"/>,'<s:property value="convalue"/>',<s:property value="pid"/>,'<s:property value="sheetTypeStr"/>');"
 												value='转到' />

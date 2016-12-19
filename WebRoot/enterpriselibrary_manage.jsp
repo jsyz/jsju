@@ -103,10 +103,10 @@
 								<tr align="right" bgcolor="#EEF4EA">
 
 									<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
-										<a href="" target="rightFrame">首页</a>&nbsp;&nbsp;
-										<a href="" target="rightFrame">上一页</a>&nbsp;&nbsp;&nbsp;
-										<a href="" target="rightFrame">下一页</a>&nbsp;&nbsp;&nbsp;
-										<a href="" target="rightFrame">尾页</a>&nbsp;&nbsp;&nbsp;
+										<a href="" >首页</a>&nbsp;&nbsp;
+										<a href="" >上一页</a>&nbsp;&nbsp;&nbsp;
+										<a href=""  >下一页</a>&nbsp;&nbsp;&nbsp;
+										<a href=""  >尾页</a>&nbsp;&nbsp;&nbsp;
 										<input type='button' class="btn btn-primary radius size-S"
 											onclick="" value='转到' />
 										&nbsp; 当前页：
