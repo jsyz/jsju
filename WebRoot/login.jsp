@@ -21,7 +21,7 @@
 		<link href="css/miniui.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
 			type="text/css" />
-		<title>宜兴市建设局</title>
+		<title>宜兴市建设局工程建设管理平台</title>
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 	</head>
